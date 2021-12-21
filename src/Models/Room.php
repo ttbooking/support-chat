@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models;
 
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +22,7 @@ use TTBooking\SupportChat\Contracts\Personifiable;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property Model|null $subject
- * @property Collection|User[]|Personifiable[] $users
+ * @property Collection|Model[]|Personifiable[] $users
  * @property Collection|Message[] $messages
  */
 class Room extends Model
@@ -46,7 +45,7 @@ class Room extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(config('support-chat.user_model'));
     }
 
     public function messages(): HasMany

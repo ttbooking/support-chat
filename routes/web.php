@@ -7,8 +7,8 @@ use TTBooking\SupportChat\Http\Controllers\RoomController;
 Route::prefix('api/v1')->group(function () {
 
     Route::apiResources([
-        'rooms' => RoomController::class,
-        'rooms.messages' => MessageController::class,
+        'rooms' => class_basename(RoomController::class),
+        'rooms.messages' => class_basename(MessageController::class),
     ], ['shallow' => true]);
 
 });

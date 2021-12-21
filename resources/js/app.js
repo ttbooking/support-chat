@@ -1,14 +1,13 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import BootstrapVue from 'bootstrap-vue'
 import Base from './base'
 import Echo from 'laravel-echo'
 import axios from 'axios'
-import api from './api/index'
+import api from './api'
 import Routes from './routes'
 import VueRouter from 'vue-router'
 import 'bootstrap'
-import store from './store/index'
+import store from './store'
 
 let token = document.head.querySelector('meta[name="csrf-token"]')
 
@@ -18,7 +17,6 @@ if (token) {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
 }
 
-Vue.use(Vuex)
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
 
