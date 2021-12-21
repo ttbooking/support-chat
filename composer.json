@@ -1,0 +1,57 @@
+{
+    "name": "ttbooking/support-chat",
+    "description": "Support Chat.",
+    "type": "library",
+    "keywords": ["support", "chat", "support chat"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/ttbooking/support-chat/issues",
+        "source": "https://github.com/ttbooking/support-chat"
+    },
+    "authors": [
+        {
+            "name": "Sergey Danilchenko",
+            "email": "s.danilchenko@ttbooking.ru"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "laravel/framework": "^8.23",
+        "spatie/data-transfer-object": "^3.5"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.14",
+        "mockery/mockery": "^1.4",
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0",
+        "vimeo/psalm": "^4.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "TTBooking\\SupportChat\\": "src/",
+            "TTBooking\\SupportChat\\Database\\Factories\\": "database/factories/",
+            "TTBooking\\SupportChat\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TTBooking\\SupportChat\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TTBooking\\SupportChat\\SupportChatServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
