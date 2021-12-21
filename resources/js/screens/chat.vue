@@ -4,8 +4,12 @@
         :rooms="rooms"
         :rooms-loaded="roomsLoaded"
         :messages="messages"
+        :room-actions="menuActions"
+        :menu-actions="menuActions"
         @fetch-more-rooms="fetchRooms"
         @add-room="addRoom"
+        @room-action-handler="menuActionHandler"
+        @menu-action-handler="menuActionHandler"
     />
 </template>
 
@@ -24,6 +28,10 @@ export default {
             //rooms: [],
             messages: [],
             currentUserId: 1234,
+            menuActions: [{
+                name: 'deleteRoom',
+                title: 'Delete Room',
+            }],
         }
     },
 
@@ -32,7 +40,14 @@ export default {
     },
 
     methods: {
-        ...mapActions(['fetchRooms', 'addRoom']),
+        menuActionHandler({ roomId, action }) {
+            switch (action.name) {
+                case 'deleteRoom':
+                    this.deleteRoom(roomId)
+            }
+        },
+
+        ...mapActions(['fetchRooms', 'addRoom', 'deleteRoom']),
     },
 
     computed: mapState(['rooms', 'roomsLoaded']),

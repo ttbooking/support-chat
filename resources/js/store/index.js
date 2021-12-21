@@ -30,6 +30,10 @@ export default new Vuex.Store({
         [ADD_ROOM](state, room) {
             state.rooms = [...state.rooms, room]
         },
+
+        [DELETE_ROOM](state, roomId) {
+            state.rooms = state.rooms.filter(room => room.roomId !== roomId)
+        },
     },
 
     actions: {
