@@ -19,6 +19,18 @@ class StoreMessageRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'sender_id' => $this->senderId,
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -26,7 +38,8 @@ class StoreMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'content' => 'required|string',
+            'sender_id' => 'required|integer',
         ];
     }
 }

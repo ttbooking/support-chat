@@ -38,6 +38,8 @@ class Message extends Model
 
     protected $touches = ['room'];
 
+    protected $fillable = ['sender_id', 'content'];
+
     protected static function booted(): void
     {
         static::deleting(function (self $message) {

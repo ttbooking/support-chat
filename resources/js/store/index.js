@@ -6,6 +6,7 @@ import {
     ADD_ROOM,
     DELETE_ROOM,
     SET_MESSAGES,
+    ADD_MESSAGE,
 } from './mutation-types'
 import api from '../api'
 
@@ -14,6 +15,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        currentUserId: 5088,
         rooms: [],
         roomsLoaded: false,
         messages: [],
@@ -49,6 +51,10 @@ export default new Vuex.Store({
         [SET_MESSAGES](state, messages) {
             state.messages = messages
         },
+
+        [ADD_MESSAGE](state, message) {
+            state.messages = [...state.messages, message]
+        },
     },
 
     actions: {
@@ -72,6 +78,14 @@ export default new Vuex.Store({
         async fetchMessages({ commit }, { room, options }) {
             const response = await this.$api.messages.index(room.roomId)
             commit(SET_MESSAGES, response.data.data)
+        },
+
+        async sendMessage({ commit, state }, { roomId, content, files, replyMessage, usersTag }) {
+            const response = await this.$api.messages.store(roomId, {
+                content,
+                senderId: state.currentUserId,
+            })
+            commit(ADD_MESSAGE, response.data.data)
         },
     },
 })
