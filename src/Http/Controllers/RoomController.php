@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
@@ -28,13 +27,13 @@ class RoomController extends Controller
      * Store a newly created room in storage.
      *
      * @param  StoreRoomRequest  $request
-     * @return JsonResponse
+     * @return RoomResource
      */
-    public function store(StoreRoomRequest $request): JsonResponse
+    public function store(StoreRoomRequest $request): RoomResource
     {
         $room = Room::query()->create($request->validated());
 
-        return Response::json($room, JsonResponse::HTTP_CREATED);
+        return new RoomResource($room);
     }
 
     /**
@@ -53,13 +52,13 @@ class RoomController extends Controller
      *
      * @param  StoreRoomRequest  $request
      * @param  Room  $room
-     * @return JsonResponse
+     * @return RoomResource
      */
-    public function update(StoreRoomRequest $request, Room $room): JsonResponse
+    public function update(StoreRoomRequest $request, Room $room): RoomResource
     {
         $room->update($request->validated());
 
-        return Response::json($room);
+        return new RoomResource($room);
     }
 
     /**

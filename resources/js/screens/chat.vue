@@ -5,6 +5,7 @@
         :rooms-loaded="roomsLoaded"
         :messages="messages"
         @fetch-more-rooms="fetchRooms"
+        @add-room="addRoom"
     />
 </template>
 
@@ -31,7 +32,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(['fetchRooms']),
+        ...mapActions(['fetchRooms', 'addRoom']),
     },
 
     computed: mapState(['rooms', 'roomsLoaded']),

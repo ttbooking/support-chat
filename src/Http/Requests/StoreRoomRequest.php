@@ -19,6 +19,18 @@ class StoreRoomRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => $this->roomName,
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -26,7 +38,7 @@ class StoreRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'string|max:255',
         ];
     }
 }

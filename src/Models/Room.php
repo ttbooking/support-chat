@@ -29,6 +29,8 @@ class Room extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['name'];
+
     protected static function booted(): void
     {
         static::deleting(function (self $room) {
@@ -36,6 +38,11 @@ class Room extends Model
                 ? $room->messages()->forceDelete()
                 : $room->messages()->delete();
         });
+    }
+
+    public function getNameAttribute(?string $name): string
+    {
+        return $name ?? 'Room '.$this->getKey();
     }
 
     public function subject(): MorphTo

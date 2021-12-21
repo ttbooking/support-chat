@@ -40,7 +40,7 @@ export default new Vuex.Store({
             commit(SET_ROOMS_LOADED_STATE, true)
         },
 
-        async createRoom({ commit }, room) {
+        async addRoom({ commit }, room = {}) {
             const response = await this.$api.rooms.store(room)
             commit(ADD_ROOM, response.data.data)
         },
