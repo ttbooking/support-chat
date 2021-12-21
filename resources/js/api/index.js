@@ -6,5 +6,5 @@ const $http = axios.create()
 
 export default {
     rooms: rooms($http),
-    messages,
+    messages: messages($http),
 }

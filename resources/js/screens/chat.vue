@@ -6,6 +6,7 @@
         :messages="messages"
         :room-actions="menuActions"
         :menu-actions="menuActions"
+        @fetch-messages="fetchMessages"
         @fetch-more-rooms="fetchRooms"
         @add-room="addRoom"
         @room-action-handler="menuActionHandler"
@@ -26,7 +27,7 @@ export default {
     data() {
         return {
             //rooms: [],
-            messages: [],
+            //messages: [],
             currentUserId: 1234,
             menuActions: [{
                 name: 'deleteRoom',
@@ -47,9 +48,9 @@ export default {
             }
         },
 
-        ...mapActions(['fetchRooms', 'addRoom', 'deleteRoom']),
+        ...mapActions(['fetchRooms', 'addRoom', 'deleteRoom', 'fetchMessages']),
     },
 
-    computed: mapState(['rooms', 'roomsLoaded']),
+    computed: mapState(['rooms', 'roomsLoaded', 'messages']),
 }
 </script>

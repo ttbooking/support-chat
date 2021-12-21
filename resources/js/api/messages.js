@@ -1,21 +1,23 @@
-export default {
+const baseUrl = window.SupportChat.path + '/api/v1'
+
+export default $http => ({
     index(roomId) {
-        return this.$http.get(`/rooms/${roomId}/messages`)
+        return $http.get(`${baseUrl}/rooms/${roomId}/messages`)
     },
 
     store(roomId, message) {
-        return this.$http.post(`/rooms/${roomId}/messages`, message)
+        return $http.post(`${baseUrl}/rooms/${roomId}/messages`, message)
     },
 
     show(messageId) {
-        return this.$http.get(`/messages/${messageId}`)
+        return $http.get(`${baseUrl}/messages/${messageId}`)
     },
 
     update(messageId, message) {
-        return this.$http.put(`/messages/${messageId}`, message)
+        return $http.put(`${baseUrl}/messages/${messageId}`, message)
     },
 
     destroy(messageId) {
-        return this.$http.delete(`/messages/${messageId}`)
+        return $http.delete(`${baseUrl}/messages/${messageId}`)
     },
-}
+})

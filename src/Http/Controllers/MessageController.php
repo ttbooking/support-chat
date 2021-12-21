@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
@@ -31,13 +30,13 @@ class MessageController extends Controller
      *
      * @param  StoreMessageRequest  $request
      * @param  Room  $room
-     * @return JsonResponse
+     * @return MessageResource
      */
-    public function store(StoreMessageRequest $request, Room $room): JsonResponse
+    public function store(StoreMessageRequest $request, Room $room): MessageResource
     {
         $message = $room->messages()->create($request->validated());
 
-        return Response::json($message, JsonResponse::HTTP_CREATED);
+        return new MessageResource($message);
     }
 
     /**
@@ -56,13 +55,13 @@ class MessageController extends Controller
      *
      * @param  StoreMessageRequest  $request
      * @param  Message  $message
-     * @return JsonResponse
+     * @return MessageResource
      */
-    public function update(StoreMessageRequest $request, Message $message): JsonResponse
+    public function update(StoreMessageRequest $request, Message $message): MessageResource
     {
         $message->update($request->validated());
 
-        return Response::json($message);
+        return new MessageResource($message);
     }
 
     /**
