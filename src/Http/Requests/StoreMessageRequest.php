@@ -27,6 +27,7 @@ class StoreMessageRequest extends FormRequest
     {
         $this->merge([
             'sender_id' => $this->senderId,
+            'parent_id' => $this->replyMessage['_id'] ?? null,
         ]);
     }
 
@@ -40,6 +41,7 @@ class StoreMessageRequest extends FormRequest
         return [
             'content' => 'required|string',
             'sender_id' => 'required|integer',
+            'parent_id' => 'sometimes|nullable|integer',
         ];
     }
 }

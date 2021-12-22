@@ -35,6 +35,7 @@ class MessageResource extends JsonResource
             'disableActions' => false,
             'disableReactions' => false,
             'files' => MessageFileResource::collection($this->files),
+            'replyMessage' => new static($this->parent),
         ];
     }
 }

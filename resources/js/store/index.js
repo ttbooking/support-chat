@@ -96,6 +96,7 @@ export default new Vuex.Store({
             const response = await this.$api.messages.store(roomId, {
                 content,
                 senderId: state.currentUserId,
+                replyMessage,
             })
             commit(ADD_MESSAGE, response.data.data)
         },

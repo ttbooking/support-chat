@@ -38,7 +38,7 @@ class Message extends Model
 
     protected $touches = ['room'];
 
-    protected $fillable = ['sender_id', 'content'];
+    protected $fillable = ['sender_id', 'parent_id', 'content'];
 
     protected static function booted(): void
     {
