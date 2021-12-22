@@ -17,8 +17,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "laravel/framework": "^8.23",
-        "spatie/data-transfer-object": "^3.5"
+        "laravel/framework": "^8.77"
     },
     "require-dev": {
         "fakerphp/faker": "^1.14",

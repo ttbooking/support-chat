@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -40,9 +41,11 @@ class Room extends Model
         });
     }
 
-    public function getNameAttribute(?string $name): string
+    protected function name(): Attribute
     {
-        return $name ?? 'Room '.$this->getKey();
+        return new Attribute(
+            get: fn (?string $name): string => $name ?? 'Room '.$this->getKey()
+        );
     }
 
     public function subject(): MorphTo
