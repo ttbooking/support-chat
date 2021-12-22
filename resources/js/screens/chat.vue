@@ -4,11 +4,14 @@
         :rooms="rooms"
         :rooms-loaded="roomsLoaded"
         :messages="messages"
+        :messages-loaded="true"
         :room-actions="menuActions"
         :menu-actions="menuActions"
         @fetch-messages="fetchMessages"
         @fetch-more-rooms="fetchRooms"
         @send-message="sendMessage"
+        @edit-message="editMessage"
+        @delete-message="deleteMessage"
         @add-room="addRoom"
         @room-action-handler="menuActionHandler"
         @menu-action-handler="menuActionHandler"
@@ -49,7 +52,10 @@ export default {
             }
         },
 
-        ...mapActions(['fetchRooms', 'addRoom', 'deleteRoom', 'fetchMessages', 'sendMessage']),
+        ...mapActions([
+            'fetchRooms', 'addRoom', 'deleteRoom',
+            'fetchMessages', 'sendMessage', 'editMessage', 'deleteMessage',
+        ]),
     },
 
     computed: mapState(['currentUserId', 'rooms', 'roomsLoaded', 'messages']),

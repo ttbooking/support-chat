@@ -25,6 +25,15 @@ class MessageResource extends JsonResource
             '_id' => $this->getKey(),
             'content' => $this->content,
             'senderId' => $this->sender_id,
+            'username' => 'System John',
+            'system' => false,
+            'saved' => true,
+            'distributed' => true,
+            'seen' => true,
+            'deleted' => false,
+            'failure' => false,
+            'disableActions' => false,
+            'disableReactions' => false,
             'files' => MessageFileResource::collection($this->files),
         ];
     }
