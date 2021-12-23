@@ -51,10 +51,10 @@ abstract class Event implements ShouldBroadcast
     /**
      * Get the data to broadcast.
      *
-     * @return MessageResource
+     * @return array
      */
-    public function broadcastWith(): MessageResource
+    public function broadcastWith(): array
     {
-        return new MessageResource($this->message);
+        return (new MessageResource($this->message))->resolve();
     }
 }
