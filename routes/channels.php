@@ -1,6 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
-use TTBooking\SupportChat\Http\Controllers\BroadcastController;
+use TTBooking\SupportChat\Broadcasting\RoomChannel;
 
-Broadcast::channel('support-chat.room.{room}', [BroadcastController::class, 'userPresentInRoom']);
+Broadcast::channel('support-chat.room.{room}', RoomChannel::class);

@@ -24,13 +24,9 @@ export default new Vuex.Store({
     },
 
     getters: {
-        /*rooms: state => {
-            return state.rooms
+        joinedRooms: state => {
+            return state.rooms.filter(room => room.users.some(user => user._id === state.currentUserId))
         },
-
-        messages: state => {
-            return state.messages
-        },*/
     },
 
     mutations: {
@@ -70,11 +66,27 @@ export default new Vuex.Store({
     },
 
     actions: {
-        async fetchRooms({ commit }) {
+        async fetchRooms({ commit, getters }) {
             commit(SET_ROOMS_LOADED_STATE, false)
             const response = await this.$api.rooms.index()
             commit(SET_ROOMS, response.data.data)
             commit(SET_ROOMS_LOADED_STATE, true)
+
+            for (const room of getters.joinedRooms) {
+                window.Echo.join(`support-chat.room.${room.roomId}`)
+                    .here(users => {
+                        console.log(users)
+                    })
+                    .joining(user => {
+                        console.log(user.username)
+                    })
+                    .leaving(user => {
+                        console.log(user.username)
+                    })
+                    .error(error => {
+                        console.error(error)
+                    })
+            }
         },
 
         async addRoom({ commit }, room = {}) {
