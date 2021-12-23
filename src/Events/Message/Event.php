@@ -57,4 +57,14 @@ abstract class Event implements ShouldBroadcast
     {
         return (new MessageResource($this->message))->resolve();
     }
+
+    /**
+     * Get the tags that should be assigned to the job.
+     *
+     * @return array
+     */
+    public function tags(): array
+    {
+        return ['support-chat', 'room:'.$this->message->room_id, 'message:'.$this->message->getKey()];
+    }
 }
