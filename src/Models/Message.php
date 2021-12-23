@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\SupportChat\Contracts\Personifiable;
+use TTBooking\SupportChat\Observers\MessageObserver;
 
 /**
  * @property int $id
@@ -40,6 +41,15 @@ class Message extends Model
 
     protected $fillable = ['sender_id', 'parent_id', 'content'];
 
+    const STATE_SAVED = 0;
+    const STATE_DISTRIBUTED = 1;
+    const STATE_SEEN = 2;
+    const STATE_FAILURE = 3;
+
+    const FLAG_SYSTEM = 0b0001;
+    const FLAG_DISABLE_ACTIONS = 0b0010;
+    const FLAG_DISABLE_REACTIONS = 0b0100;
+
     protected static function booted(): void
     {
         static::deleting(function (self $message) {
@@ -48,6 +58,8 @@ class Message extends Model
                 $message->files()->forceDelete();
             }
         });
+
+        static::observe(MessageObserver::class);
     }
 
     public function room(): BelongsTo
