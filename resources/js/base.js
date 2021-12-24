@@ -5,10 +5,6 @@ export default {
         SupportChat() {
             return SupportChat
         },
-
-        $echo() {
-            return Echo.channel('support-chat')
-        },
     },
 
     methods: {

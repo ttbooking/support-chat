@@ -16,7 +16,6 @@ import {
 } from './mutation-types'
 import api from '../api'
 
-Vuex.Store.prototype.$api = api
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -96,7 +95,7 @@ export default new Vuex.Store({
     actions: {
         async fetchRooms({ commit, getters, state }) {
             commit(SET_ROOMS_LOADED_STATE, false)
-            const response = await this.$api.rooms.index()
+            const response = await api.rooms.index()
             commit(SET_ROOMS, response.data.data)
             commit(SET_ROOMS_LOADED_STATE, true)
 
@@ -127,23 +126,23 @@ export default new Vuex.Store({
         },
 
         async addRoom({ commit }, room = {}) {
-            const response = await this.$api.rooms.store(room)
+            const response = await api.rooms.store(room)
             commit(ADD_ROOM, response.data.data)
         },
 
         async deleteRoom({ commit }, roomId) {
-            const response = await this.$api.rooms.destroy(roomId)
+            const response = await api.rooms.destroy(roomId)
             commit(DELETE_ROOM, roomId)
         },
 
         async fetchMessages({ commit }, { room, options }) {
             commit(SET_ROOM_ID, room.roomId)
-            const response = await this.$api.messages.index(room.roomId)
+            const response = await api.messages.index(room.roomId)
             commit(SET_MESSAGES, response.data.data)
         },
 
         async sendMessage({ commit, state }, { roomId, content, files, replyMessage, usersTag }) {
-            const response = await this.$api.messages.store(roomId, {
+            const response = await api.messages.store(roomId, {
                 content,
                 senderId: state.currentUserId,
                 replyMessage,
@@ -152,7 +151,7 @@ export default new Vuex.Store({
         },
 
         async editMessage({ commit, state }, { roomId, messageId, newContent, files, replyMessage, usersTag }) {
-            const response = await this.$api.messages.update(messageId, {
+            const response = await api.messages.update(messageId, {
                 content: newContent,
                 senderId: state.currentUserId,
             })
@@ -160,7 +159,7 @@ export default new Vuex.Store({
         },
 
         async deleteMessage({ commit }, { roomId, message }) {
-            const response = await this.$api.messages.destroy(message._id)
+            const response = await api.messages.destroy(message._id)
             commit(DELETE_MESSAGE, message._id)
         },
     },

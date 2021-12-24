@@ -2,26 +2,17 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import Base from './base'
 import Echo from 'laravel-echo'
-import axios from 'axios'
-import api from './api'
 import Routes from './routes'
 import VueRouter from 'vue-router'
 import 'bootstrap'
 import store from './store'
 
-let token = document.head.querySelector('meta[name="csrf-token"]')
-
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-
+window.axios = require('axios')
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+const token = document.head.querySelector('meta[name="csrf-token"]')
 if (token) {
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
 }
-
-Vue.use(BootstrapVue)
-Vue.use(VueRouter)
-
-Vue.prototype.$http = axios.create()
-Vue.prototype.$api = api
 
 window.Pusher = require('pusher-js')
 window.Echo = new Echo({
@@ -30,6 +21,9 @@ window.Echo = new Echo({
     cluster: window.SupportChat.pusher.cluster ?? 'eu',
     forceTLS: window.SupportChat.pusher.useTLS ?? true,
 })
+
+Vue.use(BootstrapVue)
+Vue.use(VueRouter)
 
 window.SupportChat.basePath = '/' + window.SupportChat.path
 

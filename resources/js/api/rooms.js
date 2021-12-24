@@ -1,23 +1,23 @@
 const baseUrl = window.SupportChat.path + '/api/v1'
 
-export default $http => ({
+export default {
     index() {
-        return $http.get(baseUrl + '/rooms')
+        return axios.get(baseUrl + '/rooms')
     },
 
     store(room) {
-        return $http.post(baseUrl + '/rooms', room)
+        return axios.post(baseUrl + '/rooms', room)
     },
 
     show(roomId) {
-        return $http.get(baseUrl + '/rooms/' + roomId)
+        return axios.get(baseUrl + '/rooms/' + roomId)
     },
 
     update(roomId, room) {
-        return $http.put(baseUrl + '/rooms/' + roomId, room)
+        return axios.put(baseUrl + '/rooms/' + roomId, room)
     },
 
     destroy(roomId) {
-        return $http.delete(baseUrl + '/rooms/' + roomId)
+        return axios.delete(baseUrl + '/rooms/' + roomId)
     },
-})
+}
