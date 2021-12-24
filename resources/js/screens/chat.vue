@@ -3,6 +3,7 @@
         :current-user-id="currentUserId"
         :rooms="rooms"
         :rooms-loaded="roomsLoaded"
+        :room-id="roomId"
         :messages="messages"
         :messages-loaded="true"
         :room-actions="menuActions"
@@ -22,6 +23,7 @@
 import { mapActions, mapState } from 'vuex'
 import ChatWindow from 'vue-advanced-chat'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
+import { SET_ROOM_ID } from '../store/mutation-types'
 
 export default {
     components: {
@@ -58,6 +60,17 @@ export default {
         ]),
     },
 
-    computed: mapState(['currentUserId', 'rooms', 'roomsLoaded', 'messages']),
+    computed: {
+        roomId: {
+            get() {
+                return this.$store.state.roomId
+            },
+            set(roomId) {
+                this.$store.commit(SET_ROOM_ID, roomId)
+            }
+        },
+
+        ...mapState(['currentUserId', 'rooms', 'roomsLoaded', 'messages']),
+    },
 }
 </script>

@@ -5,6 +5,10 @@ import {
     SET_ROOMS,
     ADD_ROOM,
     DELETE_ROOM,
+    SET_ROOM_ID,
+    ROOM_SET_USERS,
+    ROOM_JOIN_USER,
+    ROOM_LEAVE_USER,
     SET_MESSAGES,
     ADD_MESSAGE,
     EDIT_MESSAGE,
@@ -20,6 +24,7 @@ export default new Vuex.Store({
         currentUserId: 5088,
         rooms: [],
         roomsLoaded: false,
+        roomId: null,
         messages: [],
     },
 
@@ -44,6 +49,29 @@ export default new Vuex.Store({
 
         [DELETE_ROOM](state, roomId) {
             state.rooms = state.rooms.filter(room => room.roomId !== roomId)
+        },
+
+        [SET_ROOM_ID](state, roomId) {
+            state.roomId = roomId
+        },
+
+        [ROOM_SET_USERS](state, { roomId, users }) {
+            const roomIndex = state.rooms.findIndex(currentRoom => currentRoom.roomId === roomId)
+            state.rooms[roomIndex].users = users
+            state.rooms = [...state.rooms]
+        },
+
+        [ROOM_JOIN_USER](state, { roomId, user }) {
+            const roomIndex = state.rooms.findIndex(currentRoom => currentRoom.roomId === roomId)
+            state.rooms[roomIndex].users = [...state.rooms[roomIndex].users, user]
+            state.rooms = [...state.rooms]
+        },
+
+        [ROOM_LEAVE_USER](state, { roomId, user }) {
+            const roomIndex = state.rooms.findIndex(currentRoom => currentRoom.roomId === roomId)
+            const users = state.rooms[roomIndex].users.filter(currentUser => currentUser._id !== user._id)
+            state.rooms[roomIndex].users = [...users]
+            state.rooms = [...state.rooms]
         },
 
         [SET_MESSAGES](state, messages) {
@@ -75,16 +103,25 @@ export default new Vuex.Store({
             for (const room of getters.joinedRooms) {
                 window.Echo.join(`support-chat.room.${room.roomId}`)
                     .here(users => {
-                        console.log(users)
+                        commit(ROOM_SET_USERS, { roomId: room.roomId, users })
                     })
                     .joining(user => {
-                        console.log(user.username)
+                        commit(ROOM_JOIN_USER, { roomId: room.roomId, user })
                     })
                     .leaving(user => {
-                        console.log(user.username)
+                        commit(ROOM_LEAVE_USER, { roomId: room.roomId, user })
                     })
                     .error(error => {
                         console.error(error)
+                    })
+                    .listen('.message.posted', message => {
+                        commit(ADD_MESSAGE, message)
+                    })
+                    .listen('.message.edited', message => {
+                        commit(EDIT_MESSAGE, message)
+                    })
+                    .listen('.message.deleted', message => {
+                        commit(DELETE_MESSAGE, message)
                     })
             }
         },
