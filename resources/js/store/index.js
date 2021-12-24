@@ -94,7 +94,7 @@ export default new Vuex.Store({
     },
 
     actions: {
-        async fetchRooms({ commit, getters }) {
+        async fetchRooms({ commit, getters, state }) {
             commit(SET_ROOMS_LOADED_STATE, false)
             const response = await this.$api.rooms.index()
             commit(SET_ROOMS, response.data.data)
@@ -115,13 +115,13 @@ export default new Vuex.Store({
                         console.error(error)
                     })
                     .listen('.message.posted', message => {
-                        commit(ADD_MESSAGE, message)
+                        room.roomId === state.roomId && commit(ADD_MESSAGE, message)
                     })
                     .listen('.message.edited', message => {
-                        commit(EDIT_MESSAGE, message)
+                        room.roomId === state.roomId && commit(EDIT_MESSAGE, message)
                     })
                     .listen('.message.deleted', message => {
-                        commit(DELETE_MESSAGE, message)
+                        room.roomId === state.roomId && commit(DELETE_MESSAGE, message)
                     })
             }
         },
@@ -137,6 +137,7 @@ export default new Vuex.Store({
         },
 
         async fetchMessages({ commit }, { room, options }) {
+            commit(SET_ROOM_ID, room.roomId)
             const response = await this.$api.messages.index(room.roomId)
             commit(SET_MESSAGES, response.data.data)
         },

@@ -3,7 +3,6 @@
         :current-user-id="currentUserId"
         :rooms="rooms"
         :rooms-loaded="roomsLoaded"
-        :room-id="roomId"
         :messages="messages"
         :messages-loaded="true"
         :room-actions="menuActions"
@@ -32,9 +31,6 @@ export default {
 
     data() {
         return {
-            //rooms: [],
-            //messages: [],
-            //currentUserId: 1234,
             menuActions: [{
                 name: 'deleteRoom',
                 title: 'Delete Room',
@@ -60,17 +56,6 @@ export default {
         ]),
     },
 
-    computed: {
-        roomId: {
-            get() {
-                return this.$store.state.roomId
-            },
-            set(roomId) {
-                this.$store.commit(SET_ROOM_ID, roomId)
-            }
-        },
-
-        ...mapState(['currentUserId', 'rooms', 'roomsLoaded', 'messages']),
-    },
+    computed: mapState(['currentUserId', 'rooms', 'roomsLoaded', 'messages']),
 }
 </script>
