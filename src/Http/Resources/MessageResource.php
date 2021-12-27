@@ -25,7 +25,7 @@ class MessageResource extends JsonResource
             '_id' => $this->getKey(),
             'content' => $this->content,
             'senderId' => $this->sender_id,
-            'username' => 'System John',
+            'username' => $this->sender->getPersonInfo()->name,
             'system' => false,
             'saved' => true,
             'distributed' => true,
