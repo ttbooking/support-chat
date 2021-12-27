@@ -30,7 +30,7 @@ export default new Vuex.Store({
 
     getters: {
         joinedRooms: state => {
-            return state.rooms.filter(room => room.users.some(user => user._id === state.currentUserId))
+            return state.rooms.filter(room => room.users.some(user => String(user._id) === String(state.currentUserId)))
         },
     },
 
