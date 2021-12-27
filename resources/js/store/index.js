@@ -30,13 +30,13 @@ export default new Vuex.Store({
 
     getters: {
         joinedRooms: state => {
-            return state.rooms.filter(room => room.users.some(user => String(user._id) === String(state.currentUserId)))
+            return state.rooms.filter(room => room.users.some(user => user._id === state.currentUserId))
         },
     },
 
     mutations: {
         [SET_USER_ID](state, userId) {
-            state.currentUserId = userId
+            state.currentUserId = +userId
         },
 
         [SET_ROOMS_LOADED_STATE](state, roomsLoaded) {

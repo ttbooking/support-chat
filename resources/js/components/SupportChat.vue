@@ -1,6 +1,6 @@
 <template>
-    <chat-window
-        :current-user-id="userId"
+    <chat-window v-if="currentUserId"
+        :current-user-id="currentUserId"
         :rooms="rooms"
         :rooms-loaded="roomsLoaded"
         :messages="messages"
