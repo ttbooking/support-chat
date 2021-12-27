@@ -11,8 +11,6 @@
     },
     "devDependencies": {
         "axios": "^0.24.0",
-        "bootstrap-vue": "^2.21.2",
-        "jquery": "^3.6.0",
         "laravel-echo": "^1.11.3",
         "laravel-mix": "^6.0.39",
         "moment": "^2.29.1",
@@ -23,7 +21,6 @@
         "vue": "^2.6.14",
         "vue-advanced-chat": "^1.4.3",
         "vue-loader": "^15.9.8",
-        "vue-router": "^3.5.3",
         "vue-template-compiler": "^2.6.14",
         "vuex": "^3.6.2"
     }

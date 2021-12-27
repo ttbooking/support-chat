@@ -1,6 +1,6 @@
 <template>
     <chat-window
-        :current-user-id="currentUserId"
+        :current-user-id="userId"
         :rooms="rooms"
         :rooms-loaded="roomsLoaded"
         :messages="messages"
@@ -19,15 +19,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapMutations, mapActions, mapState } from 'vuex'
+import { SET_USER_ID } from '../store/mutation-types'
 import ChatWindow from 'vue-advanced-chat'
 import 'vue-advanced-chat/dist/vue-advanced-chat.css'
-import { SET_ROOM_ID } from '../store/mutation-types'
 
 export default {
     components: {
         ChatWindow,
     },
+
+    props: ['userId'],
 
     data() {
         return {
@@ -39,6 +41,7 @@ export default {
     },
 
     mounted() {
+        this.setUser(this.userId)
         this.fetchRooms()
     },
 
@@ -49,6 +52,10 @@ export default {
                     this.deleteRoom(roomId)
             }
         },
+
+        ...mapMutations({
+            setUser: SET_USER_ID,
+        }),
 
         ...mapActions([
             'fetchRooms', 'addRoom', 'deleteRoom',

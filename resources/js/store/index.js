@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {
+    SET_USER_ID,
     SET_ROOMS_LOADED_STATE,
     SET_ROOMS,
     ADD_ROOM,
@@ -20,7 +21,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        currentUserId: 5088,
+        currentUserId: null,
         rooms: [],
         roomsLoaded: false,
         roomId: null,
@@ -34,6 +35,10 @@ export default new Vuex.Store({
     },
 
     mutations: {
+        [SET_USER_ID](state, userId) {
+            state.currentUserId = userId
+        },
+
         [SET_ROOMS_LOADED_STATE](state, roomsLoaded) {
             state.roomsLoaded = roomsLoaded
         },

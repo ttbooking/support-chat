@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="support-chat" v-cloak>
-    <router-view></router-view>
+    <support-chat user-id="{{ auth()->id() }}"></support-chat>
 </div>
 
 <!-- Global Support Chat Object -->
