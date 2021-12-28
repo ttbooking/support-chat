@@ -29,6 +29,10 @@ export default new Vuex.Store({
     },
 
     getters: {
+        getMessage: state => id => {
+            const messageIndex = state.messages.findIndex(message => message._id === id)
+            return state.messages[messageIndex]
+        },
         joinedRooms: state => {
             return state.rooms.filter(room => room.users.some(user => user._id === state.currentUserId))
         },
@@ -98,7 +102,7 @@ export default new Vuex.Store({
     },
 
     actions: {
-        async fetchRooms({ commit, getters, state }) {
+        async fetchRooms({ commit, state, getters }) {
             commit(SET_ROOMS_LOADED_STATE, false)
             const response = await api.rooms.index()
             commit(SET_ROOMS, response.data.data)
@@ -155,10 +159,11 @@ export default new Vuex.Store({
             commit(ADD_MESSAGE, response.data.data)
         },
 
-        async editMessage({ commit, state }, { roomId, messageId, newContent, files, replyMessage, usersTag }) {
+        async editMessage({ commit, state, getters }, { roomId, messageId, newContent, files, replyMessage, usersTag }) {
             const response = await api.messages.update(messageId, {
                 content: newContent,
                 senderId: state.currentUserId,
+                replyMessage: replyMessage ?? getters.getMessage(messageId).replyMessage,
             })
             commit(EDIT_MESSAGE, response.data.data)
         },
