@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\MessageReaction;
 
@@ -24,7 +25,7 @@ class MessageReactionController extends Controller
     {
         $reaction = $message->reactions()->create([
             'user_id' => $request->user()->id,
-            'emoji' => $request->getContent()[0],
+            'emoji' => Str::substr($request->getContent(), 0, 1),
         ]);
 
         return Response::json($reaction, JsonResponse::HTTP_CREATED);
