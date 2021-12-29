@@ -14,10 +14,12 @@ class CreateMessageReactionsTable extends Migration
     public function up()
     {
         Schema::create('message_reactions', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('message_id')->constrained()->cascadeOnDelete();
             //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
             $table->char('emoji', 1);
+            $table->timestamp('created_at')->useCurrent();
             $table->index(['message_id', 'user_id']);
             $table->unique(['message_id', 'user_id', 'emoji']);
             $table->foreign('user_id')->references('id')->on('p2_users')->cascadeOnDelete();

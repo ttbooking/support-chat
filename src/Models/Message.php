@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\SupportChat\Contracts\Personifiable;
@@ -31,7 +30,7 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property Message|null $parent
  * @property Collection|Message[] $replies
  * @property Collection|MessageFile[] $files
- * @property Collection|Model[]|Personifiable[] $reactedUsers
+ * @property Collection|MessageReaction[] $reactions
  */
 class Message extends Model
 {
@@ -40,6 +39,8 @@ class Message extends Model
     protected $touches = ['room'];
 
     protected $fillable = ['sender_id', 'parent_id', 'content'];
+
+    protected $with = ['reactions'];
 
     const STATE_SAVED = 0;
     const STATE_DISTRIBUTED = 1;
@@ -87,8 +88,8 @@ class Message extends Model
         return $this->hasMany(MessageFile::class);
     }
 
-    public function reactedUsers(): BelongsToMany
+    public function reactions(): HasMany
     {
-        return $this->belongsToMany(config('support-chat.user_model'), 'message_reactions');
+        return $this->hasMany(MessageReaction::class);
     }
 }
