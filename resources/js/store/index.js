@@ -102,18 +102,18 @@ export default new Vuex.Store({
             state.messages = state.messages.filter(message => message._id !== messageId)
         },
 
-        [LEAVE_REACTION](state, { messageId, reaction }) {
+        [LEAVE_REACTION](state, { userId, messageId, reaction }) {
             const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === messageId)
             let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
-            reactionUsers.push(state.currentUserId)
+            reactionUsers.push(userId)
             state.messages[messageIndex].reactions[reaction] = [...new Set(reactionUsers)]
             state.messages = [...state.messages]
         },
 
-        [REMOVE_REACTION](state, { messageId, reaction }) {
+        [REMOVE_REACTION](state, { userId, messageId, reaction }) {
             const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === messageId)
             let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
-            const userIndex = reactionUsers.indexOf(state.currentUserId)
+            const userIndex = reactionUsers.indexOf(userId)
             if (userIndex > -1) {
                 reactionUsers.splice(userIndex, 1)
             }
@@ -151,6 +151,20 @@ export default new Vuex.Store({
                     })
                     .listen('.message.deleted', message => {
                         room.roomId === state.roomId && commit(DELETE_MESSAGE, message)
+                    })
+                    .listen('.message-reaction.left', reaction => {
+                        commit(LEAVE_REACTION, {
+                            userId: reaction.user_id,
+                            messageId: reaction.message_id,
+                            reaction: reaction.emoji
+                        })
+                    })
+                    .listen('.message-reaction.removed', reaction => {
+                        commit(REMOVE_REACTION, {
+                            userId: reaction.user_id,
+                            messageId: reaction.message_id,
+                            reaction: reaction.emoji
+                        })
                     })
             }
         },
@@ -194,9 +208,9 @@ export default new Vuex.Store({
             commit(DELETE_MESSAGE, message._id)
         },
 
-        async sendMessageReaction({ commit }, { roomId, messageId, reaction, remove }) {
+        async sendMessageReaction({ commit, state }, { roomId, messageId, reaction, remove }) {
             const response = await api.messageReactions[remove ? 'destroy' : 'store'](messageId, reaction.unicode)
-            commit(remove ? REMOVE_REACTION : LEAVE_REACTION, { messageId, reaction: reaction.unicode })
+            commit(remove ? REMOVE_REACTION : LEAVE_REACTION, { userId: state.currentUserId, messageId, reaction: reaction.unicode })
         },
     },
 })

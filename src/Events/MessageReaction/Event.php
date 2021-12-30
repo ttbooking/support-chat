@@ -54,7 +54,11 @@ abstract class Event implements ShouldBroadcast
      */
     public function broadcastWith(): array
     {
-        return $this->reaction->toArray();
+        return [
+            'emoji' => $this->reaction->emoji,
+            'message_id' => $this->reaction->message_id,
+            'user_id' => $this->reaction->user_id,
+        ];
     }
 
     /**
