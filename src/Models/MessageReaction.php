@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use TTBooking\SupportChat\Observers\MessageReactionObserver;
 
 /**
  * @property int $id
@@ -23,6 +24,11 @@ class MessageReaction extends Model
     protected $fillable = ['user_id', 'emoji'];
 
     const UPDATED_AT = null;
+
+    protected static function booted(): void
+    {
+        static::observe(MessageReactionObserver::class);
+    }
 
     /**
      * Get the route key for the model.

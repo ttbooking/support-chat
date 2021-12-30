@@ -57,6 +57,7 @@ class Message extends Model
     {
         static::deleting(function (self $message) {
             if ($message->isForceDeleting()) {
+                $message->reactions()->delete();
                 $message->replies()->forceDelete();
                 $message->files()->forceDelete();
             }
