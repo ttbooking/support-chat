@@ -14,6 +14,8 @@ import {
     ADD_MESSAGE,
     EDIT_MESSAGE,
     DELETE_MESSAGE,
+    LEAVE_REACTION,
+    REMOVE_REACTION,
 } from './mutation-types'
 import api from '../api'
 
@@ -99,6 +101,25 @@ export default new Vuex.Store({
         [DELETE_MESSAGE](state, messageId) {
             state.messages = state.messages.filter(message => message._id !== messageId)
         },
+
+        [LEAVE_REACTION](state, { messageId, reaction }) {
+            const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === messageId)
+            let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
+            reactionUsers.push(state.currentUserId)
+            state.messages[messageIndex].reactions[reaction] = [...new Set(reactionUsers)]
+            state.messages = [...state.messages]
+        },
+
+        [REMOVE_REACTION](state, { messageId, reaction }) {
+            const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === messageId)
+            let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
+            const userIndex = reactionUsers.indexOf(state.currentUserId)
+            if (userIndex > -1) {
+                reactionUsers.splice(userIndex, 1)
+            }
+            state.messages[messageIndex].reactions[reaction] = [...new Set(reactionUsers)]
+            state.messages = [...state.messages]
+        },
     },
 
     actions: {
@@ -171,6 +192,11 @@ export default new Vuex.Store({
         async deleteMessage({ commit }, { roomId, message }) {
             const response = await api.messages.destroy(message._id)
             commit(DELETE_MESSAGE, message._id)
+        },
+
+        async sendMessageReaction({ commit }, { roomId, messageId, reaction, remove }) {
+            const response = await api.messageReactions[remove ? 'destroy' : 'store'](messageId, reaction.unicode)
+            commit(remove ? REMOVE_REACTION : LEAVE_REACTION, { messageId, reaction: reaction.unicode })
         },
     },
 })

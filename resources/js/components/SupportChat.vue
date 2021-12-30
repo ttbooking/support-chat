@@ -15,6 +15,7 @@
         @add-room="addRoom"
         @room-action-handler="menuActionHandler"
         @menu-action-handler="menuActionHandler"
+        @send-message-reaction="sendMessageReaction"
     />
 </template>
 
@@ -60,6 +61,7 @@ export default {
         ...mapActions([
             'fetchRooms', 'addRoom', 'deleteRoom',
             'fetchMessages', 'sendMessage', 'editMessage', 'deleteMessage',
+            'sendMessageReaction',
         ]),
     },
 
