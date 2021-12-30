@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
@@ -19,16 +18,16 @@ class MessageReactionController extends Controller
      *
      * @param  Request  $request
      * @param  Message  $message
-     * @return JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Message $message): JsonResponse
+    public function store(Request $request, Message $message): \Illuminate\Http\Response
     {
-        $reaction = $message->reactions()->create([
+        $message->reactions()->firstOrCreate([
             'user_id' => $request->user()->id,
             'emoji' => Str::substr($request->getContent(), 0, 1),
         ]);
 
-        return Response::json($reaction, JsonResponse::HTTP_CREATED);
+        return Response::noContent();
     }
 
     /**
