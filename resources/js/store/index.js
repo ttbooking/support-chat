@@ -106,8 +106,7 @@ export default new Vuex.Store({
             const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === messageId)
             let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
             reactionUsers.push(userId)
-            state.messages[messageIndex].reactions[reaction] = [...new Set(reactionUsers)]
-            state.messages = [...state.messages]
+            Vue.set(state.messages[messageIndex].reactions, reaction, [...new Set(reactionUsers)])
         },
 
         [REMOVE_REACTION](state, { userId, messageId, reaction }) {
@@ -117,8 +116,7 @@ export default new Vuex.Store({
             if (userIndex > -1) {
                 reactionUsers.splice(userIndex, 1)
             }
-            state.messages[messageIndex].reactions[reaction] = [...new Set(reactionUsers)]
-            state.messages = [...state.messages]
+            Vue.set(state.messages[messageIndex].reactions, reaction, [...new Set(reactionUsers)])
         },
     },
 

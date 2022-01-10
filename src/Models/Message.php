@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models;
 
+use ArrayObject;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -32,7 +33,7 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property Collection|Message[] $replies
  * @property Collection|MessageFile[] $files
  * @property Collection|MessageReaction[] $reactions
- * @property Collection $reactionsWithUsers
+ * @property ArrayObject $reactionsWithUsers
  */
 class Message extends Model
 {
@@ -99,9 +100,9 @@ class Message extends Model
     public function reactionsWithUsers(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->reactions->mapToGroups(
+            get: fn () => new ArrayObject($this->reactions->mapToGroups(
                 static fn (MessageReaction $reaction) => [$reaction->emoji => $reaction->user_id]
-            )
+            )->toArray())
         );
     }
 }
