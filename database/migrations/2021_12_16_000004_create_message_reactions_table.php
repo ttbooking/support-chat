@@ -18,7 +18,7 @@ class CreateMessageReactionsTable extends Migration
             $table->foreignId('message_id')->constrained()->cascadeOnDelete();
             //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
-            $table->char('emoji', 1);
+            $table->char('emoji', 1)->collation('utf8mb4_bin');
             $table->timestamp('created_at')->useCurrent();
             $table->index(['message_id', 'user_id']);
             $table->unique(['message_id', 'user_id', 'emoji']);
