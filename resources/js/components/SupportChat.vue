@@ -12,6 +12,7 @@
         @send-message="sendMessage"
         @edit-message="editMessage"
         @delete-message="deleteMessage"
+        @open-file="openFile"
         @add-room="addRoom"
         @room-action-handler="menuActionHandler"
         @menu-action-handler="menuActionHandler"
@@ -47,6 +48,11 @@ export default {
     },
 
     methods: {
+        openFile({ message, file }) {
+            console.log(message)
+            console.log(file)
+        },
+
         menuActionHandler({ roomId, action }) {
             switch (action.name) {
                 case 'deleteRoom':

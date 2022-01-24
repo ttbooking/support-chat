@@ -10,16 +10,16 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.24.0",
+        "axios": "^0.25.0",
         "laravel-echo": "^1.11.3",
-        "laravel-mix": "^6.0.39",
+        "laravel-mix": "^6.0.41",
         "moment": "^2.29.1",
         "pusher-js": "^7.0.3",
-        "resolve-url-loader": "^4.0.0",
-        "sass": "^1.44.0",
-        "sass-loader": "^12.3.0",
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.49.0",
+        "sass-loader": "^12.4.0",
         "vue": "^2.6.14",
-        "vue-advanced-chat": "^1.4.3",
+        "vue-advanced-chat": "^1.5.2",
         "vue-loader": "^15.9.8",
         "vue-template-compiler": "^2.6.14",
         "vuex": "^3.6.2"

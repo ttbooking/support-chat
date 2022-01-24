@@ -6,11 +6,11 @@ namespace TTBooking\SupportChat\Events\MessageReaction;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Support\Str;
 use TTBooking\SupportChat\Models\MessageReaction;
 
-abstract class Event implements ShouldBroadcast
+abstract class Event implements ShouldBroadcastNow
 {
     use InteractsWithSockets;
 

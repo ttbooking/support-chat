@@ -6,13 +6,13 @@ namespace TTBooking\SupportChat\Events\Room;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Room;
 
-abstract class Event implements ShouldBroadcast
+abstract class Event implements ShouldBroadcastNow
 {
     use InteractsWithSockets, SerializesModels;
 

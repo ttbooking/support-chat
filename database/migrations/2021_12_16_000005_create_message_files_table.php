@@ -17,12 +17,13 @@ class CreateMessageFilesTable extends Migration
             $table->id();
             $table->foreignId('message_id')->constrained()->cascadeOnDelete();
             $table->string('name')->index();
+            $table->string('type')->index();
             $table->unsignedBigInteger('size');
-            $table->string('type', 16)->index();
             $table->boolean('audio')->default(false);
-            $table->unsignedFloat('duration');
-            $table->string('url');
-            $table->binary('preview');
+            $table->unsignedFloat('duration')->nullable();
+            $table->string('url')->nullable();
+            $table->binary('preview')->nullable();
+            $table->unique(['message_id', 'name']);
         });
     }
 

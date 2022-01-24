@@ -6,7 +6,7 @@ namespace TTBooking\SupportChat\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMessageRequest extends FormRequest
+class StoreAttachmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,7 @@ class StoreMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|string',
-            'parent_id' => 'sometimes|nullable|integer',
-            'attachments' => 'sometimes|array',
-            'attachments.*.name' => 'required|string|max:255',
-            'attachments.*.type' => 'required|string|max:255',
-            'attachments.*.size' => 'required|integer|min:0',
+            'attachment' => 'required|file',
         ];
     }
 }

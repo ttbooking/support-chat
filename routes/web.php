@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use TTBooking\SupportChat\Http\Controllers\MessageAttachmentController;
 use TTBooking\SupportChat\Http\Controllers\MessageController;
 use TTBooking\SupportChat\Http\Controllers\MessageReactionController;
 use TTBooking\SupportChat\Http\Controllers\RoomController;
@@ -10,6 +11,7 @@ Route::prefix('api/v1')->group(function () {
     Route::apiResources([
         'rooms' => class_basename(RoomController::class),
         'rooms.messages' => class_basename(MessageController::class),
+        'messages.attachments' => class_basename(MessageAttachmentController::class),
     ], ['shallow' => true]);
 
     Route::scopeBindings()->apiResource(

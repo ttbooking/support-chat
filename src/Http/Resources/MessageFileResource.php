@@ -22,8 +22,14 @@ class MessageFileResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'name' => $this->name,
-
+            'name' => pathinfo($this->name, PATHINFO_FILENAME),
+            'type' => pathinfo($this->name, PATHINFO_EXTENSION),
+            'size' => $this->size,
+            'audio' => $this->audio,
+            'duration' => $this->duration,
+            'url' => $this->url,
+            'preview' => $this->preview ? 'data:image/png;base64,'.base64_encode($this->preview) : null,
+            'progress' => 0,
         ];
     }
 }

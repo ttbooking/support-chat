@@ -4,13 +4,28 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Observers;
 
+use Exception;
 use TTBooking\SupportChat\Events\Message\Deleted;
 use TTBooking\SupportChat\Events\Message\Edited;
+use TTBooking\SupportChat\Events\Message\Event;
 use TTBooking\SupportChat\Events\Message\Posted;
 use TTBooking\SupportChat\Models\Message;
 
 class MessageObserver
 {
+    protected static function event(Event $event): void
+    {
+        try {
+            event($event->dontBroadcastToCurrentUser());
+            Message::withoutEvents(function () use ($event) {
+                $event->message->state = Message::STATE_DISTRIBUTED;
+                $event->message->save();
+            });
+        } catch (Exception $e) {
+            report($e);
+        }
+    }
+
     /**
      * Handle the Message "created" event.
      *
@@ -19,7 +34,7 @@ class MessageObserver
      */
     public function created(Message $message): void
     {
-        broadcast(new Posted($message))->toOthers();
+        static::event(new Posted($message));
     }
 
     /**
@@ -30,7 +45,7 @@ class MessageObserver
      */
     public function updated(Message $message): void
     {
-        broadcast(new Edited($message))->toOthers();
+        static::event(new Edited($message));
     }
 
     /**
@@ -41,7 +56,7 @@ class MessageObserver
      */
     public function deleted(Message $message): void
     {
-        broadcast(new Deleted($message))->toOthers();
+        static::event(new Deleted($message));
     }
 
     /**

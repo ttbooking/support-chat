@@ -6,13 +6,13 @@ namespace TTBooking\SupportChat\Events\Message;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 use TTBooking\SupportChat\Http\Resources\MessageResource;
 use TTBooking\SupportChat\Models\Message;
 
-abstract class Event implements ShouldBroadcast
+abstract class Event implements ShouldBroadcastNow
 {
     use InteractsWithSockets, SerializesModels;
 

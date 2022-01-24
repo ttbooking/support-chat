@@ -23,10 +23,12 @@ class MessageFile extends Model
 {
     protected $touches = ['message'];
 
+    protected $fillable = ['name', 'type', 'size'];
+
     public $timestamps = false;
 
     public function message(): BelongsTo
     {
-        $this->belongsTo(Message::class);
+        return $this->belongsTo(Message::class);
     }
 }

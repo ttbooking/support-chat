@@ -11,9 +11,15 @@ import {
     ROOM_JOIN_USER,
     ROOM_LEAVE_USER,
     SET_MESSAGES,
+    SET_NEXT_MSGID,
+    INC_NEXT_MSGID,
+    INIT_MESSAGE,
     ADD_MESSAGE,
+    UPDATE_MESSAGE,
     EDIT_MESSAGE,
     DELETE_MESSAGE,
+    ATTACH_FILE,
+    UPDATE_ATTACHMENT,
     LEAVE_REACTION,
     REMOVE_REACTION,
 } from './mutation-types'
@@ -27,6 +33,7 @@ export default new Vuex.Store({
         rooms: [],
         roomsLoaded: false,
         roomId: null,
+        nextMessageId: 1,
         messages: [],
     },
 
@@ -88,8 +95,55 @@ export default new Vuex.Store({
             state.messages = messages
         },
 
+        [SET_NEXT_MSGID](state, nextMessageId = null) {
+            state.nextMessageId = nextMessageId ?? Math.max.apply(Math, state.messages.map(message => message._id)) + 1
+        },
+
+        [INC_NEXT_MSGID](state) {
+            state.nextMessageId++
+        },
+
+        [INIT_MESSAGE](state, { _id, content, replyMessage, files }) {
+            let message = {
+                _id,
+                content,
+                senderId: state.currentUserId,
+                username: '',
+                system: false,
+                saved: false,
+                distributed: false,
+                seen: false,
+                deleted: false,
+                failure: false,
+                disableActions: false,
+                disableReactions: false,
+                files: [],
+                reactions: {},
+                replyMessage,
+            }
+            for (const file of files || []) {
+                message.files.push({
+                    name: file.name,
+                    size: file.size,
+                    type: file.extension,
+                    audio: false,
+                    duration: 0,
+                    url: file.localURL,
+                    preview: null,
+                    progress: 0,
+                })
+            }
+            state.messages = [...state.messages, message]
+        },
+
         [ADD_MESSAGE](state, message) {
             state.messages = [...state.messages, message]
+        },
+
+        [UPDATE_MESSAGE](state, message) {
+            const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === message._id)
+            state.messages[messageIndex] = message
+            state.messages = [...state.messages]
         },
 
         [EDIT_MESSAGE](state, message) {
@@ -99,7 +153,14 @@ export default new Vuex.Store({
         },
 
         [DELETE_MESSAGE](state, messageId) {
-            state.messages = state.messages.filter(message => message._id !== messageId)
+            //state.messages = state.messages.filter(message => message._id !== messageId)
+            const messageIndex = state.messages.findIndex(message => message._id === messageId)
+            state.messages[messageIndex] = { ...state.messages[messageIndex], deleted: true }
+            state.messages = [...state.messages]
+        },
+
+        [UPDATE_ATTACHMENT](state, messageId) {
+
         },
 
         [LEAVE_REACTION](state, { userId, messageId, reaction }) {
@@ -177,25 +238,52 @@ export default new Vuex.Store({
             commit(DELETE_ROOM, roomId)
         },
 
-        async fetchMessages({ commit }, { room, options }) {
+        async fetchMessages({ commit, state }, { room, options }) {
             commit(SET_ROOM_ID, room.roomId)
             const response = await api.messages.index(room.roomId)
             commit(SET_MESSAGES, response.data.data)
+            commit(SET_NEXT_MSGID)
         },
 
         async sendMessage({ commit, state }, { roomId, content, files, replyMessage, usersTag }) {
+            const _id = state.nextMessageId
+            commit(INC_NEXT_MSGID)
+            commit(INIT_MESSAGE, { _id, content, replyMessage, files })
             const response = await api.messages.store(roomId, {
                 content,
-                senderId: state.currentUserId,
-                replyMessage,
+                parent_id: replyMessage?._id,
+                attachments: files?.map(file => ({
+                    name: file.name + '.' + file.extension,
+                    type: file.type,
+                    size: file.size,
+                })) ?? [],
             })
-            commit(ADD_MESSAGE, response.data.data)
+            const message = response.data.data
+            commit(UPDATE_MESSAGE, { ...message, _id })
+
+            for (let file of files || []) {
+                //await this.uploadAttachment({ commit }, { messageId: message._id, file })
+            }
+        },
+
+        async syncAttachments({ commit, state }, { messageId, files }) {
+
+        },
+
+        async uploadAttachment({ commit }, { messageId, file }) {
+            let formData = new FormData
+            formData.append('attachment', file.blob, file.name + '.' + file.extension)
+            const response = await api.attachments.store(messageId, formData, {
+                onUploadProgress: e => {
+                    const progress = Math.round((e.loaded * 100) / e.total)
+                    //commit(UPDATE_ATTACHMENT, { _id:  })
+                },
+            })
         },
 
         async editMessage({ commit, state, getters }, { roomId, messageId, newContent, files, replyMessage, usersTag }) {
             const response = await api.messages.update(messageId, {
                 content: newContent,
-                senderId: state.currentUserId,
                 replyMessage: replyMessage ?? getters.getMessage(messageId).replyMessage,
             })
             commit(EDIT_MESSAGE, response.data.data)
