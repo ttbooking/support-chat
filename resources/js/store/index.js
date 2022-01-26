@@ -97,7 +97,8 @@ export default new Vuex.Store({
         },
 
         [SET_NEXT_MSGID](state, nextMessageId = null) {
-            state.nextMessageId = nextMessageId ?? Math.max.apply(Math, state.messages.map(message => message._id)) + 1
+            const lastMessageId = Math.max.apply(Math, [0, ...state.messages.map(message => message._id)])
+            state.nextMessageId = nextMessageId ?? lastMessageId + 1
         },
 
         [INC_NEXT_MSGID](state) {

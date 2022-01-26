@@ -59,10 +59,10 @@ class Message extends Model
     protected static function booted(): void
     {
         static::deleting(function (self $message) {
+            $message->attachments->each->delete();
             if ($message->isForceDeleting()) {
                 $message->reactions()->delete();
                 $message->replies()->forceDelete();
-                $message->files()->forceDelete();
             }
         });
 

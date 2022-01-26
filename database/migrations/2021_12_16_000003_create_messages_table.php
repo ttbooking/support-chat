@@ -20,7 +20,7 @@ class CreateMessagesTable extends Migration
             $table->unsignedInteger('sender_id');
             $table->foreignId('parent_id')->nullable()->constrained('messages')->cascadeOnDelete();
             $table->unsignedTinyInteger('type')->default(0)->index();
-            $table->text('content')->fulltext();
+            $table->text('content')->nullable()->fulltext();
             $table->unsignedTinyInteger('state')->default(0);
             $table->unsignedTinyInteger('flags')->default(0);
             $table->timestamp('created_at')->useCurrent();

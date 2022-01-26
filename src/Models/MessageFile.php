@@ -7,6 +7,7 @@ namespace TTBooking\SupportChat\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int $id
@@ -32,6 +33,13 @@ class MessageFile extends Model
     protected $fillable = ['name', 'type', 'size'];
 
     public $timestamps = false;
+
+    protected static function booted(): void
+    {
+        static::deleted(function (self $attachment) {
+            Storage::delete($attachment->attachmentPath);
+        });
+    }
 
     public function message(): BelongsTo
     {
