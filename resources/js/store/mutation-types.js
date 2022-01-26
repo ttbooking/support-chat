@@ -17,6 +17,7 @@ export const INIT_MESSAGE = 'INIT_MESSAGE'
 export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 export const EDIT_MESSAGE = 'EDIT_MESSAGE'
+export const FAIL_MESSAGE = 'FAIL_MESSAGE'
 export const DELETE_MESSAGE = 'DELETE_MESSAGE'
 
 export const ATTACH_FILE = 'ATTACH_FILE'

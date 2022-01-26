@@ -13,6 +13,7 @@
         @edit-message="editMessage"
         @delete-message="deleteMessage"
         @open-file="openFile"
+        @open-failed-message="trySendMessage"
         @add-room="addRoom"
         @room-action-handler="menuActionHandler"
         @menu-action-handler="menuActionHandler"
@@ -65,7 +66,7 @@ export default {
 
         ...mapActions([
             'fetchRooms', 'addRoom', 'deleteRoom',
-            'fetchMessages', 'sendMessage', 'editMessage', 'deleteMessage',
+            'fetchMessages', 'sendMessage', 'trySendMessage', 'editMessage', 'deleteMessage',
             'sendMessageReaction',
         ]),
     },

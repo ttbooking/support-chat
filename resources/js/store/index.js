@@ -17,6 +17,7 @@ import {
     ADD_MESSAGE,
     UPDATE_MESSAGE,
     EDIT_MESSAGE,
+    FAIL_MESSAGE,
     DELETE_MESSAGE,
     ATTACH_FILE,
     UPDATE_ATTACHMENT,
@@ -154,6 +155,12 @@ export default new Vuex.Store({
             state.messages = [...state.messages]
         },
 
+        [FAIL_MESSAGE](state, messageId) {
+            const messageIndex = state.messages.findIndex(message => message._id === messageId)
+            state.messages[messageIndex] = { ...state.messages[messageIndex], failure: true }
+            state.messages = [...state.messages]
+        },
+
         [DELETE_MESSAGE](state, messageId) {
             //state.messages = state.messages.filter(message => message._id !== messageId)
             const messageIndex = state.messages.findIndex(message => message._id === messageId)
@@ -258,26 +265,37 @@ export default new Vuex.Store({
         async sendMessage({ commit, state, dispatch }, { roomId, content, files, replyMessage, usersTag }) {
             const _id = state.nextMessageId
             commit(INC_NEXT_MSGID)
-            commit(INIT_MESSAGE, { _id, content, replyMessage, files })
-            const response = await api.messages.store(roomId, {
-                content,
-                parent_id: replyMessage?._id,
-                attachments: files?.map(file => ({
-                    name: file.name + '.' + file.extension,
-                    type: file.type,
-                    size: file.size,
-                })) ?? [],
-            })
-            const message = response.data.data
-            commit(UPDATE_MESSAGE, { ...message, _id })
 
-            for (let file of files || []) {
-                await dispatch('uploadAttachment', { messageId: message._id, file })
-                commit(UPLOAD_PROGRESS, {
-                    messageId: message._id,
-                    filename: file.name + '.' + file.extension,
-                    progress: -1,
+            const message = { _id, content, replyMessage, files }
+            commit(INIT_MESSAGE, message)
+
+            await dispatch('trySendMessage', { roomId, message })
+        },
+
+        async trySendMessage({ commit, dispatch }, { roomId, message }) {
+            try {
+                const response = await api.messages.store(roomId, {
+                    content: message.content,
+                    parent_id: message.replyMessage?._id,
+                    attachments: message.files?.map(file => ({
+                        name: file.name + '.' + file.extension,
+                        type: file.type,
+                        size: file.size,
+                    })) ?? [],
                 })
+                const savedMessage = response.data.data
+                commit(UPDATE_MESSAGE, { ...savedMessage, _id: message._id })
+
+                for (let file of savedMessage.files || []) {
+                    await dispatch('uploadAttachment', { messageId: savedMessage._id, file })
+                    commit(UPLOAD_PROGRESS, {
+                        messageId: savedMessage._id,
+                        filename: file.name + '.' + file.extension,
+                        progress: -1,
+                    })
+                }
+            } catch (error) {
+                commit(FAIL_MESSAGE, message._id)
             }
         },
 
