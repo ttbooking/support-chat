@@ -49,8 +49,7 @@ export default {
 
     methods: {
         openFile({ message, file }) {
-            console.log(message)
-            console.log(file)
+            window.location = file.file.url
         },
 
         menuActionHandler({ roomId, action }) {

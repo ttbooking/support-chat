@@ -20,6 +20,7 @@ import {
     DELETE_MESSAGE,
     ATTACH_FILE,
     UPDATE_ATTACHMENT,
+    UPLOAD_PROGRESS,
     LEAVE_REACTION,
     REMOVE_REACTION,
 } from './mutation-types'
@@ -159,8 +160,16 @@ export default new Vuex.Store({
             state.messages = [...state.messages]
         },
 
-        [UPDATE_ATTACHMENT](state, messageId) {
+        [UPDATE_ATTACHMENT](state, { messageId, file, att }) {
 
+        },
+
+        [UPLOAD_PROGRESS](state, { messageId, filename, progress }) {
+            const messageIndex = state.messages.findIndex(message => message._id === messageId)
+            const fileIndex = state.messages[messageIndex].files.findIndex(file => {
+                return file.name + '.' + file.type === filename
+            })
+            state.messages[messageIndex].files[fileIndex].progress = progress
         },
 
         [LEAVE_REACTION](state, { userId, messageId, reaction }) {
@@ -245,7 +254,7 @@ export default new Vuex.Store({
             commit(SET_NEXT_MSGID)
         },
 
-        async sendMessage({ commit, state }, { roomId, content, files, replyMessage, usersTag }) {
+        async sendMessage({ commit, state, dispatch }, { roomId, content, files, replyMessage, usersTag }) {
             const _id = state.nextMessageId
             commit(INC_NEXT_MSGID)
             commit(INIT_MESSAGE, { _id, content, replyMessage, files })
@@ -262,7 +271,12 @@ export default new Vuex.Store({
             commit(UPDATE_MESSAGE, { ...message, _id })
 
             for (let file of files || []) {
-                //await this.uploadAttachment({ commit }, { messageId: message._id, file })
+                await dispatch('uploadAttachment', { messageId: message._id, file })
+                commit(UPLOAD_PROGRESS, {
+                    messageId: message._id,
+                    filename: file.name + '.' + file.extension,
+                    progress: -1,
+                })
             }
         },
 
@@ -276,7 +290,11 @@ export default new Vuex.Store({
             const response = await api.attachments.store(messageId, formData, {
                 onUploadProgress: e => {
                     const progress = Math.round((e.loaded * 100) / e.total)
-                    //commit(UPDATE_ATTACHMENT, { _id:  })
+                    commit(UPLOAD_PROGRESS, {
+                        messageId,
+                        filename: file.name + '.' + file.extension,
+                        progress,
+                    })
                 },
             })
         },

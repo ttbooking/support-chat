@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -18,9 +19,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $url
  * @property string $preview
  * @property Message $message
+ * @property string $attachmentPath
  */
 class MessageFile extends Model
 {
+    protected $casts = [
+        'audio' => 'bool',
+    ];
+
     protected $touches = ['message'];
 
     protected $fillable = ['name', 'type', 'size'];
@@ -30,5 +36,12 @@ class MessageFile extends Model
     public function message(): BelongsTo
     {
         return $this->belongsTo(Message::class);
+    }
+
+    public function attachmentPath(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->message->attachmentPath.'/'.$this->name
+        );
     }
 }

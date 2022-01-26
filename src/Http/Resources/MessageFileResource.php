@@ -6,6 +6,7 @@ namespace TTBooking\SupportChat\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 use TTBooking\SupportChat\Models\MessageFile;
 
 /**
@@ -27,9 +28,9 @@ class MessageFileResource extends JsonResource
             'size' => $this->size,
             'audio' => $this->audio,
             'duration' => $this->duration,
-            'url' => $this->url,
+            'url' => route('messages.attachments.show', ['message' => $this->message_id, 'attachment' => $this->name]),
             'preview' => $this->preview ? 'data:image/png;base64,'.base64_encode($this->preview) : null,
-            'progress' => 0,
+            'progress' => Storage::exists($this->attachmentPath) ? -1 : 0,
         ];
     }
 }

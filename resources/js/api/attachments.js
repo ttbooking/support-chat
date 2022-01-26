@@ -5,11 +5,11 @@ export default {
         return axios.post(`${baseUrl}/messages/${messageId}/attachments`, attachment, config)
     },
 
-    show(attachmentId) {
-        return axios.get(`${baseUrl}/attachments/${attachmentId}`)
+    show(messageId, filename) {
+        return axios.get(`${baseUrl}/messages/${messageId}/attachments/${filename}`)
     },
 
-    destroy(attachmentId) {
-        return axios.delete(`${baseUrl}/attachments/${attachmentId}`)
+    destroy(messageId, filename) {
+        return axios.delete(`${baseUrl}/messages/${messageId}/attachments/${filename}`)
     },
 }

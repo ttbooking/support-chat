@@ -31,8 +31,10 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property Model|Personifiable $sender
  * @property Message|null $parent
  * @property Collection|Message[] $replies
+ * @property Collection|MessageFile[] $attachments
  * @property Collection|MessageFile[] $files
  * @property Collection|MessageReaction[] $reactions
+ * @property string $attachmentPath
  * @property ArrayObject $reactionsWithUsers
  */
 class Message extends Model
@@ -43,7 +45,7 @@ class Message extends Model
 
     protected $fillable = ['sender_id', 'parent_id', 'content'];
 
-    protected $with = ['reactions'];
+    protected $with = ['files', 'reactions'];
 
     const STATE_SAVED = 0;
     const STATE_DISTRIBUTED = 1;
@@ -87,6 +89,11 @@ class Message extends Model
         return $this->hasMany(static::class, 'parent_id');
     }
 
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(MessageFile::class);
+    }
+
     public function files(): HasMany
     {
         return $this->hasMany(MessageFile::class);
@@ -97,6 +104,13 @@ class Message extends Model
         return $this->hasMany(MessageReaction::class);
     }
 
+    public function attachmentPath(): Attribute
+    {
+        return new Attribute(
+            get: fn () => 'support-chat/room/'.$this->room_id.'/'.$this->getKey()
+        );
+    }
+
     public function reactionsWithUsers(): Attribute
     {
         return new Attribute(
@@ -104,5 +118,10 @@ class Message extends Model
                 static fn (MessageReaction $reaction) => [$reaction->emoji => $reaction->user_id]
             )->toArray())
         );
+    }
+
+    public function getAttachment(string $filename): MessageFile
+    {
+        return $this->files->where('name', $filename)->first();
     }
 }

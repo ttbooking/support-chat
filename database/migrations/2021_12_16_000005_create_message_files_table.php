@@ -17,7 +17,7 @@ class CreateMessageFilesTable extends Migration
             $table->id();
             $table->foreignId('message_id')->constrained()->cascadeOnDelete();
             $table->string('name')->index();
-            $table->string('type')->index();
+            $table->string('type')->nullable()->index();
             $table->unsignedBigInteger('size');
             $table->boolean('audio')->default(false);
             $table->unsignedFloat('duration')->nullable();

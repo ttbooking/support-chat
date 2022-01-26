@@ -35,7 +35,7 @@ class MessageResource extends JsonResource
             'failure' => $this->state === Message::STATE_FAILURE,
             'disableActions' => (bool) ($this->flags & Message::FLAG_DISABLE_ACTIONS),
             'disableReactions' => (bool) ($this->flags & Message::FLAG_DISABLE_REACTIONS),
-            'files' => MessageFileResource::collection($this->files),
+            'files' => ! $this->trashed() ? MessageFileResource::collection($this->files) : [],
             'reactions' => $this->reactionsWithUsers,
             'replyMessage' => $this->parent ? new static($this->parent) : null,
         ];

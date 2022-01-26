@@ -26,11 +26,11 @@ class StoreMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|string',
+            'content' => 'required_without:attachments|string',
             'parent_id' => 'sometimes|nullable|integer',
-            'attachments' => 'sometimes|array',
+            'attachments' => 'required_without:content|array',
             'attachments.*.name' => 'required|string|max:255',
-            'attachments.*.type' => 'required|string|max:255',
+            'attachments.*.type' => 'nullable|string|max:255',
             'attachments.*.size' => 'required|integer|min:0',
         ];
     }

@@ -52,7 +52,7 @@ class MessageController extends Controller
             $attachment->store('attachments');
         }*/
 
-        return new MessageResource($message);
+        return new MessageResource($message->load('files'));
     }
 
     /**

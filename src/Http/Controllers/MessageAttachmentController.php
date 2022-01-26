@@ -4,54 +4,55 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
-use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use TTBooking\SupportChat\Http\Requests\StoreAttachmentRequest;
-use TTBooking\SupportChat\Http\Resources\MessageResource;
+use TTBooking\SupportChat\Http\Resources\MessageFileResource;
 use TTBooking\SupportChat\Models\Message;
-use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\Models\MessageFile;
 
 class MessageAttachmentController extends Controller
 {
     /**
-     * Store a newly created message in storage.
+     * Store a newly created attachment in storage.
      *
      * @param  StoreAttachmentRequest  $request
-     * @param  Room  $room
-     * @return MessageResource
+     * @param  Message  $message
+     * @return MessageFileResource
      */
-    public function store(StoreAttachmentRequest $request, Message $message): MessageResource
+    public function store(StoreAttachmentRequest $request, Message $message): MessageFileResource
     {
-        $attachment = $request->file('attachment');
-        //$attachment->storeAs($attachment->);
+        $attachmentFile = $request->file('attachment');
+        $attachment = $message->getAttachment($attachmentFile->getClientOriginalName());
+        $attachmentFile->storeAs($message->attachmentPath, $attachment->name);
 
-        //$message->files()->create();
-
-        return new MessageResource($message);
+        return new MessageFileResource($attachment);
     }
 
     /**
-     * Display the specified message.
+     * Download the specified attachment.
      *
      * @param  Message  $message
-     * @return MessageResource
+     * @param  MessageFile  $attachment
+     * @return StreamedResponse
      */
-    public function show(Message $message): MessageResource
+    public function show(Message $message, MessageFile $attachment): StreamedResponse
     {
-        return new MessageResource($message);
+        return Storage::download($attachment->attachmentPath);
     }
 
     /**
-     * Remove the specified message from storage.
+     * Remove the specified attachment from storage.
      *
      * @param  Message  $message
+     * @param  MessageFile  $attachment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message): \Illuminate\Http\Response
+    public function destroy(Message $message, MessageFile $attachment): \Illuminate\Http\Response
     {
-        $message->delete();
+        $attachment->delete();
 
         return Response::noContent();
     }
