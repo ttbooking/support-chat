@@ -47,6 +47,10 @@ class Message extends Model
 
     protected $with = ['files', 'reactions'];
 
+    protected $attributes = [
+        'content' => '',
+    ];
+
     const STATE_SAVED = 0;
     const STATE_DISTRIBUTED = 1;
     const STATE_SEEN = 2;

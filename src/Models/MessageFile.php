@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Storage;
  * @property int $size
  * @property string $type
  * @property bool $audio
- * @property float $duration
- * @property string $url
- * @property string $preview
+ * @property float|null $duration
+ * @property string|null $url
+ * @property string|null $preview
  * @property Message $message
  * @property string $attachmentPath
  */

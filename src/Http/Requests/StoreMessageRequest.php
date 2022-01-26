@@ -19,6 +19,18 @@ class StoreMessageRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        if (empty($this['content'])) {
+            unset($this['content']);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

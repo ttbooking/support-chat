@@ -286,7 +286,7 @@ export default new Vuex.Store({
                 const savedMessage = response.data.data
                 commit(UPDATE_MESSAGE, { ...savedMessage, _id: message._id })
 
-                for (let file of savedMessage.files || []) {
+                for (let file of message.files || []) {
                     await dispatch('uploadAttachment', { messageId: savedMessage._id, file })
                     commit(UPLOAD_PROGRESS, {
                         messageId: savedMessage._id,
