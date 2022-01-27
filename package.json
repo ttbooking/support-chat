@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "axios": "^0.25.0",
+        "lamejs": "^1.2.1",
         "laravel-echo": "^1.11.3",
         "laravel-mix": "^6.0.41",
         "moment": "^2.29.1",

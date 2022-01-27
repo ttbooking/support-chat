@@ -16,7 +16,7 @@ class MessageObserver
     protected static function event(Event $event): void
     {
         try {
-            event($event->dontBroadcastToCurrentUser());
+            broadcast($event)->toOthers();
             Message::withoutEvents(function () use ($event) {
                 $event->message->state = Message::STATE_DISTRIBUTED;
                 $event->message->save();

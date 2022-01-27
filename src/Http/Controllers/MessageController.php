@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use TTBooking\SupportChat\Http\Requests\StoreMessageRequest;
 use TTBooking\SupportChat\Http\Resources\MessageResource;
@@ -36,21 +35,20 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request, Room $room): MessageResource
     {
-        $input = $request->validated();
+        $message = DB::transaction(static function () use ($request, $room) {
+            $input = $request->validated();
 
-        /** @var Message $message */
-        $message = $room->messages()->create($input + ['sender_id' => $request->user()->id]);
+            /** @var Message $message */
+            $message = $room->messages()->create($input + ['sender_id' => $request->user()->id]);
 
-        if ($input['attachments']) {
-            foreach ($input['attachments'] as $attachment) {
-                $message->files()->create($attachment);
+            if ($input['attachments']) {
+                foreach ($input['attachments'] as $attachment) {
+                    $message->files()->create($attachment);
+                }
             }
-        }
 
-        /** @var UploadedFile $attachment */
-        /*foreach (Arr::wrap($request->file('attachments')) as $attachment) {
-            $attachment->store('attachments');
-        }*/
+            return $message;
+        });
 
         return new MessageResource($message->load('files'));
     }

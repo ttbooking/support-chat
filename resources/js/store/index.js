@@ -221,6 +221,7 @@ export default new Vuex.Store({
                     })
                     .listen('.message.posted', message => {
                         room.roomId === state.roomId && commit(ADD_MESSAGE, message)
+                        commit(SET_NEXT_MSGID)
                     })
                     .listen('.message.edited', message => {
                         room.roomId === state.roomId && commit(EDIT_MESSAGE, message)
