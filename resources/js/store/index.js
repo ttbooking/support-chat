@@ -27,6 +27,8 @@ import api from '../api'
 
 Vue.use(Vuex)
 
+const throttle = require('lodash.throttle')
+
 export default new Vuex.Store({
     state: {
         currentUserId: null,
@@ -309,7 +311,7 @@ export default new Vuex.Store({
             formData.append('attachment', file.blob, file.name + '.' + file.extension)
             const messageIndex = getters.findMessageIndex(message)
             const response = await api.attachments.store(message.indexId, formData, {
-                onUploadProgress: e => {
+                onUploadProgress: throttle(e => {
                     const upload = {
                         messageIndexId: message.indexId,
                         filename: file.name + '.' + file.extension,
@@ -317,7 +319,7 @@ export default new Vuex.Store({
                     }
                     window.roomChannel.whisper('attachment.uploading', upload)
                     commit(UPLOAD_PROGRESS, { messageIndex, filename: upload.filename, progress: upload.progress })
-                },
+                }, 100),
             })
         },
 
