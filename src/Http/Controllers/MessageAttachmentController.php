@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use TTBooking\SupportChat\Events\MessageAttachment\UploadFinished;
+use TTBooking\SupportChat\Events\MessageAttachment\Uploaded;
 use TTBooking\SupportChat\Http\Requests\StoreAttachmentRequest;
 use TTBooking\SupportChat\Http\Resources\MessageFileResource;
 use TTBooking\SupportChat\Models\Message;
@@ -29,7 +29,7 @@ class MessageAttachmentController extends Controller
         $attachment = $message->getAttachment($attachmentFile->getClientOriginalName());
         $attachmentFile->storeAs($message->attachmentPath, $attachment->name);
 
-        broadcast(new UploadFinished($attachment))->toOthers();
+        broadcast(new Uploaded($attachment))->toOthers();
 
         return new MessageFileResource($attachment);
     }
