@@ -42,7 +42,7 @@ class SupportChatServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
 
-        $this->loadRoutesFrom(__DIR__.'/../routes/channels.php');
+        require __DIR__.'/../routes/channels.php';
     }
 
     /**
