@@ -339,8 +339,8 @@ export default new Vuex.Store({
             commit(EDIT_MESSAGE, { messageIndex, savedMessage })
         },
 
-        async deleteMessage({ commit }, { roomId, message }) {
-            const response = await api.messages.destroy(message._id)
+        async deleteMessage({ commit, getters }, { roomId, message }) {
+            const response = await api.messages.destroy(message.indexId)
             const messageIndex = getters.findMessageIndex(message)
             commit(DELETE_MESSAGE, messageIndex)
         },
