@@ -175,21 +175,19 @@ export default new Vuex.Store({
             state.messages[messageIndex].files[fileIndex].progress = progress
         },
 
-        [LEAVE_REACTION](state, { userId, messageId, reaction }) {
-            const messageIndex = getters.findMessageIndexByIndexId(messageId)
-            let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
+        [LEAVE_REACTION](state, { messageIndex, userId, emoji }) {
+            let reactionUsers = state.messages[messageIndex].reactions[emoji] ?? []
             reactionUsers.push(userId)
-            Vue.set(state.messages[messageIndex].reactions, reaction, [...new Set(reactionUsers)])
+            Vue.set(state.messages[messageIndex].reactions, emoji, [...new Set(reactionUsers)])
         },
 
-        [REMOVE_REACTION](state, { userId, messageId, reaction }) {
-            const messageIndex = getters.findMessageIndexByIndexId(messageId)
-            let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
+        [REMOVE_REACTION](state, { messageIndex, userId, emoji }) {
+            let reactionUsers = state.messages[messageIndex].reactions[emoji] ?? []
             const userIndex = reactionUsers.indexOf(userId)
             if (userIndex > -1) {
                 reactionUsers.splice(userIndex, 1)
             }
-            Vue.set(state.messages[messageIndex].reactions, reaction, [...new Set(reactionUsers)])
+            Vue.set(state.messages[messageIndex].reactions, emoji, [...new Set(reactionUsers)])
         },
     },
 
@@ -226,29 +224,23 @@ export default new Vuex.Store({
                         const messageIndex = getters.findMessageIndex(message)
                         room.roomId === state.roomId && commit(DELETE_MESSAGE, messageIndex)
                     })
-                    .listen('.message-reaction.left', reaction => {
-                        commit(LEAVE_REACTION, {
-                            userId: reaction.user_id,
-                            messageId: reaction.message_id,
-                            reaction: reaction.emoji
-                        })
+                    .listen('.reaction.left', ({ messageIndexId, userId, emoji }) => {
+                        const messageIndex = getters.findMessageIndexByIndexId(messageIndexId)
+                        commit(LEAVE_REACTION, { messageIndex, userId, emoji })
                     })
-                    .listen('.message-reaction.removed', reaction => {
-                        commit(REMOVE_REACTION, {
-                            userId: reaction.user_id,
-                            messageId: reaction.message_id,
-                            reaction: reaction.emoji
-                        })
+                    .listen('.reaction.removed', ({ messageIndexId, userId, emoji }) => {
+                        const messageIndex = getters.findMessageIndexByIndexId(messageIndexId)
+                        commit(REMOVE_REACTION, { messageIndex, userId, emoji })
                     })
-                    .listenForWhisper('.upload.progress', ({ messageIndexId, filename, progress }) => {
+                    .listenForWhisper('.attachment.uploading', ({ messageIndexId, filename, progress }) => {
                         const messageIndex = getters.findMessageIndexByIndexId(messageIndexId)
                         if (messageIndex > -1) {
                             commit(UPLOAD_PROGRESS, { messageIndex, filename, progress })
                         }
                     })
-                    .listen('.message-attachment.upload-finished', attachment => {
-                        const messageIndex = getters.findMessageIndexByIndexId(attachment.message_id)
-                        commit(UPLOAD_PROGRESS, { messageIndex, filename: attachment.filename, progress: -1 })
+                    .listen('.attachment.uploaded', ({ messageIndexId, filename }) => {
+                        const messageIndex = getters.findMessageIndexByIndexId(messageIndexId)
+                        commit(UPLOAD_PROGRESS, { messageIndex, filename, progress: -1 })
                     })
             }
         },
@@ -323,7 +315,7 @@ export default new Vuex.Store({
                         filename: file.name + '.' + file.extension,
                         progress: Math.round((e.loaded * 100) / e.total),
                     }
-                    window.roomChannel.whisper('.upload.progress', upload)
+                    window.roomChannel.whisper('.attachment.uploading', upload)
                     commit(UPLOAD_PROGRESS, { messageIndex, filename: upload.filename, progress: upload.progress })
                 },
             })
@@ -347,7 +339,11 @@ export default new Vuex.Store({
 
         async sendMessageReaction({ commit, state }, { roomId, messageId, reaction, remove }) {
             const response = await api.messageReactions[remove ? 'destroy' : 'store'](messageId, reaction.unicode)
-            commit(remove ? REMOVE_REACTION : LEAVE_REACTION, { userId: state.currentUserId, messageId, reaction: reaction.unicode })
+            commit(remove ? REMOVE_REACTION : LEAVE_REACTION, {
+                messageIndexId: messageId,
+                userId: state.currentUserId,
+                emoji: reaction.unicode
+            })
         },
     },
 })

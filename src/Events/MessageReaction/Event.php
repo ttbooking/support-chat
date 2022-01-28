@@ -33,7 +33,7 @@ abstract class Event implements ShouldBroadcastNow
      */
     public function broadcastAs(): string
     {
-        return 'message-reaction.'.($this->broadcastAs ?? Str::kebab(class_basename(static::class)));
+        return 'reaction.'.($this->broadcastAs ?? Str::kebab(class_basename(static::class)));
     }
 
     /**
@@ -54,9 +54,9 @@ abstract class Event implements ShouldBroadcastNow
     public function broadcastWith(): array
     {
         return [
+            'messageIndexId' => $this->reaction->message_id,
+            'userId' => $this->reaction->user_id,
             'emoji' => $this->reaction->emoji,
-            'message_id' => $this->reaction->message_id,
-            'user_id' => $this->reaction->user_id,
         ];
     }
 
