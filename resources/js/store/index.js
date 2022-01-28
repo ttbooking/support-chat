@@ -232,7 +232,7 @@ export default new Vuex.Store({
                         const messageIndex = getters.findMessageIndexByIndexId(messageIndexId)
                         commit(REMOVE_REACTION, { messageIndex, userId, emoji })
                     })
-                    .listenForWhisper('.attachment.uploading', ({ messageIndexId, filename, progress }) => {
+                    .listenForWhisper('attachment.uploading', ({ messageIndexId, filename, progress }) => {
                         const messageIndex = getters.findMessageIndexByIndexId(messageIndexId)
                         if (messageIndex > -1) {
                             commit(UPLOAD_PROGRESS, { messageIndex, filename, progress })
@@ -315,7 +315,7 @@ export default new Vuex.Store({
                         filename: file.name + '.' + file.extension,
                         progress: Math.round((e.loaded * 100) / e.total),
                     }
-                    window.roomChannel.whisper('.attachment.uploading', upload)
+                    window.roomChannel.whisper('attachment.uploading', upload)
                     commit(UPLOAD_PROGRESS, { messageIndex, filename: upload.filename, progress: upload.progress })
                 },
             })
