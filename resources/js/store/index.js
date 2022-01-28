@@ -19,8 +19,6 @@ import {
     EDIT_MESSAGE,
     FAIL_MESSAGE,
     DELETE_MESSAGE,
-    ATTACH_FILE,
-    UPDATE_ATTACHMENT,
     UPLOAD_PROGRESS,
     LEAVE_REACTION,
     REMOVE_REACTION,
@@ -40,6 +38,13 @@ export default new Vuex.Store({
     },
 
     getters: {
+        findMessageIndexById: state => _id => state.messages.findIndex(message => message._id === _id),
+        findMessageIndexByIndexId: state => indexId => state.messages.findIndex(message => message.indexId === indexId),
+        findMessageIndex: (state, getters) => message => {
+            return message.indexId !== null
+                ? getters.findMessageIndexByIndexId(message.indexId)
+                : getters.findMessageIndexById(message._id)
+        },
         getMessage: state => id => {
             const messageIndex = state.messages.findIndex(message => message._id === id)
             return state.messages[messageIndex]
@@ -143,37 +148,27 @@ export default new Vuex.Store({
             state.messages = [...state.messages, message]
         },
 
-        [UPDATE_MESSAGE](state, message) {
-            const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === message._id)
+        [UPDATE_MESSAGE](state, { messageIndex, message }) {
             state.messages[messageIndex] = message
             state.messages = [...state.messages]
         },
 
-        [EDIT_MESSAGE](state, message) {
-            const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === message._id)
+        [EDIT_MESSAGE](state, { messageIndex, message }) {
             state.messages[messageIndex] = message
             state.messages = [...state.messages]
         },
 
-        [FAIL_MESSAGE](state, messageId) {
-            const messageIndex = state.messages.findIndex(message => message._id === messageId)
+        [FAIL_MESSAGE](state, messageIndex) {
             state.messages[messageIndex] = { ...state.messages[messageIndex], failure: true }
             state.messages = [...state.messages]
         },
 
-        [DELETE_MESSAGE](state, messageId) {
-            //state.messages = state.messages.filter(message => message._id !== messageId)
-            const messageIndex = state.messages.findIndex(message => message._id === messageId)
+        [DELETE_MESSAGE](state, messageIndex) {
             state.messages[messageIndex] = { ...state.messages[messageIndex], deleted: true }
             state.messages = [...state.messages]
         },
 
-        [UPDATE_ATTACHMENT](state, { messageId, file, att }) {
-
-        },
-
-        [UPLOAD_PROGRESS](state, { messageId, filename, progress }) {
-            const messageIndex = state.messages.findIndex(message => message._id === messageId)
+        [UPLOAD_PROGRESS](state, { messageIndex, filename, progress }) {
             const fileIndex = state.messages[messageIndex].files.findIndex(file => {
                 return file.name + '.' + file.type === filename
             })
@@ -181,14 +176,14 @@ export default new Vuex.Store({
         },
 
         [LEAVE_REACTION](state, { userId, messageId, reaction }) {
-            const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === messageId)
+            const messageIndex = getters.findMessageIndexByIndexId(messageId)
             let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
             reactionUsers.push(userId)
             Vue.set(state.messages[messageIndex].reactions, reaction, [...new Set(reactionUsers)])
         },
 
         [REMOVE_REACTION](state, { userId, messageId, reaction }) {
-            const messageIndex = state.messages.findIndex(currentMessage => currentMessage._id === messageId)
+            const messageIndex = getters.findMessageIndexByIndexId(messageId)
             let reactionUsers = state.messages[messageIndex].reactions[reaction] ?? []
             const userIndex = reactionUsers.indexOf(userId)
             if (userIndex > -1) {
@@ -206,7 +201,7 @@ export default new Vuex.Store({
             commit(SET_ROOMS_LOADED_STATE, true)
 
             for (const room of getters.joinedRooms) {
-                window.Echo.join(`support-chat.room.${room.roomId}`)
+                window.roomChannel = window.Echo.join(`support-chat.room.${room.roomId}`)
                     .here(users => {
                         commit(ROOM_SET_USERS, { roomId: room.roomId, users })
                     })
@@ -224,10 +219,12 @@ export default new Vuex.Store({
                         commit(SET_NEXT_MSGID)
                     })
                     .listen('.message.edited', message => {
-                        room.roomId === state.roomId && commit(EDIT_MESSAGE, message)
+                        const messageIndex = getters.findMessageIndex(message)
+                        room.roomId === state.roomId && commit(EDIT_MESSAGE, { messageIndex, message })
                     })
                     .listen('.message.deleted', message => {
-                        room.roomId === state.roomId && commit(DELETE_MESSAGE, message)
+                        const messageIndex = getters.findMessageIndex(message)
+                        room.roomId === state.roomId && commit(DELETE_MESSAGE, messageIndex)
                     })
                     .listen('.message-reaction.left', reaction => {
                         commit(LEAVE_REACTION, {
@@ -242,6 +239,16 @@ export default new Vuex.Store({
                             messageId: reaction.message_id,
                             reaction: reaction.emoji
                         })
+                    })
+                    .listenForWhisper('.upload.progress', ({ messageIndexId, filename, progress }) => {
+                        const messageIndex = getters.findMessageIndexByIndexId(messageIndexId)
+                        if (messageIndex > -1) {
+                            commit(UPLOAD_PROGRESS, { messageIndex, filename, progress })
+                        }
+                    })
+                    .listen('.message-attachment.upload-finished', attachment => {
+                        const messageIndex = getters.findMessageIndexByIndexId(attachment.message_id)
+                        commit(UPLOAD_PROGRESS, { messageIndex, filename: attachment.filename, progress: -1 })
                     })
             }
         },
@@ -273,11 +280,12 @@ export default new Vuex.Store({
             await dispatch('trySendMessage', { roomId, message })
         },
 
-        async trySendMessage({ commit, dispatch }, { roomId, message }) {
+        async trySendMessage({ commit, dispatch, getters }, { roomId, message }) {
+            const messageIndex = getters.findMessageIndex(message)
             try {
                 const response = await api.messages.store(roomId, {
                     content: message.content,
-                    parent_id: message.replyMessage?._id,
+                    parent_id: message.replyMessage?.indexId,
                     attachments: message.files?.map(file => ({
                         name: file.name + '.' + file.extension,
                         type: file.type,
@@ -285,18 +293,18 @@ export default new Vuex.Store({
                     })) ?? [],
                 })
                 const savedMessage = response.data.data
-                commit(UPDATE_MESSAGE, { ...savedMessage, _id: message._id })
+                commit(UPDATE_MESSAGE, { messageIndex, message: { ...savedMessage, _id: message._id } })
 
                 for (let file of message.files || []) {
-                    await dispatch('uploadAttachment', { messageId: savedMessage._id, file })
+                    await dispatch('uploadAttachment', { message: savedMessage, file })
                     commit(UPLOAD_PROGRESS, {
-                        messageId: savedMessage._id,
+                        messageIndex,
                         filename: file.name + '.' + file.extension,
                         progress: -1,
                     })
                 }
             } catch (error) {
-                commit(FAIL_MESSAGE, message._id)
+                commit(FAIL_MESSAGE, messageIndex)
             }
         },
 
@@ -304,17 +312,19 @@ export default new Vuex.Store({
 
         },
 
-        async uploadAttachment({ commit }, { messageId, file }) {
+        async uploadAttachment({ commit, getters }, { message, file }) {
             let formData = new FormData
             formData.append('attachment', file.blob, file.name + '.' + file.extension)
-            const response = await api.attachments.store(messageId, formData, {
+            const messageIndex = getters.findMessageIndex(message)
+            const response = await api.attachments.store(message.indexId, formData, {
                 onUploadProgress: e => {
-                    const progress = Math.round((e.loaded * 100) / e.total)
-                    commit(UPLOAD_PROGRESS, {
-                        messageId,
+                    const upload = {
+                        messageIndexId: message.indexId,
                         filename: file.name + '.' + file.extension,
-                        progress,
-                    })
+                        progress: Math.round((e.loaded * 100) / e.total),
+                    }
+                    window.roomChannel.whisper('.upload.progress', upload)
+                    commit(UPLOAD_PROGRESS, { messageIndex, filename: upload.filename, progress: upload.progress })
                 },
             })
         },
@@ -324,12 +334,15 @@ export default new Vuex.Store({
                 content: newContent,
                 replyMessage: replyMessage ?? getters.getMessage(messageId).replyMessage,
             })
-            commit(EDIT_MESSAGE, response.data.data)
+            const savedMessage = response.data.data
+            const messageIndex = getters.findMessageIndex(savedMessage)
+            commit(EDIT_MESSAGE, { messageIndex, savedMessage })
         },
 
         async deleteMessage({ commit }, { roomId, message }) {
             const response = await api.messages.destroy(message._id)
-            commit(DELETE_MESSAGE, message._id)
+            const messageIndex = getters.findMessageIndex(message)
+            commit(DELETE_MESSAGE, messageIndex)
         },
 
         async sendMessageReaction({ commit, state }, { roomId, messageId, reaction, remove }) {
