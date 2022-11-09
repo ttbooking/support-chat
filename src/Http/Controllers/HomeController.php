@@ -20,7 +20,8 @@ class HomeController extends Controller
                 'path' => config('support-chat.path'),
                 'pusher' => [
                     'key' => config('broadcasting.connections.pusher.key'),
-                    'cluster' => config('broadcasting.connections.pusher.options.cluster', 'eu'),
+                    'host' => config('broadcasting.connections.pusher.options.host'),
+                    'port' => config('broadcasting.connections.pusher.options.port', 443),
                     'useTLS' => config('broadcasting.connections.pusher.options.useTLS', true),
                 ],
             ],

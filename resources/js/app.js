@@ -15,8 +15,11 @@ window.Pusher = require('pusher-js')
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: window.SupportChat.pusher.key,
-    cluster: window.SupportChat.pusher.cluster ?? 'eu',
+    wsHost: window.SupportChat.pusher.host,
+    wsPort: window.SupportChat.pusher.port ?? 80,
+    wssPort: window.SupportChat.pusher.port ?? 443,
     forceTLS: window.SupportChat.pusher.useTLS ?? true,
+    enabledTransports: ['ws', 'wss'],
 })
 
 Vue.mixin(Base)
