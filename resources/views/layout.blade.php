@@ -9,7 +9,13 @@
     <title>Support Chat{{ config('app.name') ? ' - ' . config('app.name') : '' }}</title>
 
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
-    <link href="{{ asset(mix('app.css', 'vendor/support-chat')) }}" rel="stylesheet" />
+
+    @vite('resources/js/app.js')
+    {{
+        Vite::useHotFile('vendor/support-chat/hot')
+            ->useBuildDirectory('vendor/support-chat/build')
+            ->withEntryPoints(['resources/js/app.js'])
+    }}
 </head>
 <body>
 <div id="support-chat" v-cloak>
@@ -21,8 +27,5 @@
     window.SupportChat = @json($supportChatScriptVariables);
 </script>
 
-<script type="text/javascript" src="{{ asset(mix('manifest.js', 'vendor/support-chat')) }}"></script>
-<script type="text/javascript" src="{{ asset(mix('vendor.js', 'vendor/support-chat')) }}"></script>
-<script type="text/javascript" src="{{ asset(mix('app.js', 'vendor/support-chat')) }}"></script>
 </body>
 </html>

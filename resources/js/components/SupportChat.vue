@@ -1,76 +1,55 @@
 <template>
-    <chat-window v-if="currentUserId"
-        :current-user-id="currentUserId"
-        :rooms="rooms"
-        :rooms-loaded="roomsLoaded"
-        :messages="messages"
+    <vue-advanced-chat v-if="store.currentUserId"
+        :current-user-id="store.currentUserId"
+        :rooms="store.rooms"
+        :rooms-loaded="store.roomsLoaded"
+        :messages="store.messages"
         :messages-loaded="true"
         :room-actions="menuActions"
         :menu-actions="menuActions"
-        @fetch-messages="fetchMessages"
-        @fetch-more-rooms="fetchRooms"
-        @send-message="sendMessage"
-        @edit-message="editMessage"
-        @delete-message="deleteMessage"
+        @fetch-messages="store.fetchMessages"
+        @fetch-more-rooms="store.fetchRooms"
+        @send-message="store.sendMessage"
+        @edit-message="store.editMessage"
+        @delete-message="store.deleteMessage"
         @open-file="openFile"
-        @open-failed-message="trySendMessage"
-        @add-room="addRoom"
+        @open-failed-message="store.trySendMessage"
+        @add-room="store.addRoom"
         @room-action-handler="menuActionHandler"
         @menu-action-handler="menuActionHandler"
-        @send-message-reaction="sendMessageReaction"
+        @send-message-reaction="store.sendMessageReaction"
     />
 </template>
 
-<script>
-import { mapMutations, mapActions, mapState } from 'vuex'
-import { SET_USER_ID } from '../store/mutation-types'
-import ChatWindow from 'vue-advanced-chat'
-import 'vue-advanced-chat/dist/vue-advanced-chat.css'
+<script setup>
+import { ref, onMounted } from 'vue'
+import { register } from 'vue-advanced-chat'
+import { useSupportChatStore } from '@/stores'
 
-export default {
-    components: {
-        ChatWindow,
-    },
+register()
 
-    props: ['userId'],
+defineProps(['userId'])
 
-    data() {
-        return {
-            menuActions: [{
-                name: 'deleteRoom',
-                title: 'Delete Room',
-            }],
-        }
-    },
+const store = useSupportChatStore()
 
-    mounted() {
-        this.setUser(this.userId)
-        this.fetchRooms()
-    },
+const menuActions = ref([{
+    name: 'deleteRoom',
+    title: 'Delete Room',
+}])
 
-    methods: {
-        openFile({ message, file }) {
-            window.location = file.file.url
-        },
+onMounted(() => {
+    this.store._setUserId(this.userId)
+    this.store.fetchRooms()
+})
 
-        menuActionHandler({ roomId, action }) {
-            switch (action.name) {
-                case 'deleteRoom':
-                    this.deleteRoom(roomId)
-            }
-        },
+function openFile({ message, file }) {
+    window.location = file.file.url
+}
 
-        ...mapMutations({
-            setUser: SET_USER_ID,
-        }),
-
-        ...mapActions([
-            'fetchRooms', 'addRoom', 'deleteRoom',
-            'fetchMessages', 'sendMessage', 'trySendMessage', 'editMessage', 'deleteMessage',
-            'sendMessageReaction',
-        ]),
-    },
-
-    computed: mapState(['currentUserId', 'rooms', 'roomsLoaded', 'messages']),
+function menuActionHandler({ roomId, action }) {
+    switch (action.name) {
+        case 'deleteRoom':
+            this.store.deleteRoom(roomId)
+    }
 }
 </script>

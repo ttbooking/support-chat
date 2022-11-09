@@ -18,12 +18,6 @@ class HomeController extends Controller
         return view('support-chat::layout', [
             'supportChatScriptVariables' => [
                 'path' => config('support-chat.path'),
-                'pusher' => [
-                    'key' => config('broadcasting.connections.pusher.key'),
-                    'host' => config('broadcasting.connections.pusher.options.host'),
-                    'port' => config('broadcasting.connections.pusher.options.port', 443),
-                    'useTLS' => config('broadcasting.connections.pusher.options.useTLS', true),
-                ],
             ],
         ]);
     }

@@ -1,9 +1,16 @@
 /vendor
 /node_modules
-/public/vendor.js.LICENSE.txt
 /phpunit.xml
 /.idea
 composer.phar
 composer.lock
 .phpunit.result.cache
 .DS_Store
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

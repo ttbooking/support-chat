@@ -1,0 +1,13 @@
+parameters:
+    paths:
+        - config
+        - database/factories
+        - database/seeders
+        - routes
+        - src
+        - tests
+
+    level: 9
+
+includes:
+    - vendor/nunomaduro/larastan/extension.neon
