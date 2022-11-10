@@ -27,8 +27,8 @@ export const useSupportChatStore = defineStore('support-chat', () => {
 
     const findMessageIndex = computed(() => message => {
         return message.indexId !== null
-            ? this.findMessageIndexByIndexId(message.indexId)
-            : this.findMessageIndexById(message._id)
+            ? findMessageIndexByIndexId.value(message.indexId)
+            : findMessageIndexById.value(message._id)
     })
 
     const getMessage = computed(() => id => {
@@ -43,7 +43,7 @@ export const useSupportChatStore = defineStore('support-chat', () => {
     /** Mutations **/
 
     function _setUserId(_userId) {
-        currentUserId.value = +_userId
+        currentUserId.value = _userId
     }
 
     function _setRoomsLoadedState(_roomsLoaded) {
@@ -90,7 +90,7 @@ export const useSupportChatStore = defineStore('support-chat', () => {
     }
 
     function _setNextMsgId(_nextMessageId = null) {
-        const lastMessageId = Math.max.apply(Math, [0, ...messages.value.map(message => message._id)])
+        const lastMessageId = Math.max.apply(Math, [0, ...messages.value.map(message => +message._id)])
         nextMessageId.value = _nextMessageId ?? lastMessageId + 1
     }
 
@@ -98,7 +98,7 @@ export const useSupportChatStore = defineStore('support-chat', () => {
         nextMessageId.value++
     }
 
-    function _initMessage(_id, content, replyMessage, files) {
+    function _initMessage({ _id, content, replyMessage, files }) {
         let message = {
             _id,
             content,
@@ -185,7 +185,7 @@ export const useSupportChatStore = defineStore('support-chat', () => {
         _setRooms(response.data.data)
         _setRoomsLoadedState(true)
 
-        for (const room of this.joinedRooms) {
+        for (const room of joinedRooms.value) {
             window.roomChannel = window.Echo.join(`support-chat.room.${room.roomId}`)
                 .here(users => {
                     _roomSetUsers(room.roomId, users)
@@ -204,29 +204,29 @@ export const useSupportChatStore = defineStore('support-chat', () => {
                     _setNextMsgId()
                 })
                 .listen('.message.edited', message => {
-                    const messageIndex = this.findMessageIndex(message)
+                    const messageIndex = findMessageIndex.value(message)
                     room.roomId === roomId.value && _editMessage(messageIndex, message)
                 })
                 .listen('.message.deleted', message => {
-                    const messageIndex = this.findMessageIndex(message)
+                    const messageIndex = findMessageIndex.value(message)
                     room.roomId === roomId.value && _deleteMessage(messageIndex)
                 })
                 .listen('.reaction.left', ({ messageIndexId, userId, emoji }) => {
-                    const messageIndex = this.findMessageIndexByIndexId(messageIndexId)
+                    const messageIndex = findMessageIndexByIndexId.value(messageIndexId)
                     _leaveReaction(messageIndex, userId, emoji)
                 })
                 .listen('.reaction.removed', ({ messageIndexId, userId, emoji }) => {
-                    const messageIndex = this.findMessageIndexByIndexId(messageIndexId)
+                    const messageIndex = findMessageIndexByIndexId.value(messageIndexId)
                     _removeReaction(messageIndex, userId, emoji)
                 })
                 .listenForWhisper('attachment.uploading', ({ messageIndexId, filename, progress }) => {
-                    const messageIndex = this.findMessageIndexByIndexId(messageIndexId)
+                    const messageIndex = findMessageIndexByIndexId.value(messageIndexId)
                     if (messageIndex > -1) {
                         _uploadProgress(messageIndex, filename, progress)
                     }
                 })
                 .listen('.attachment.uploaded', ({ messageIndexId, filename }) => {
-                    const messageIndex = this.findMessageIndexByIndexId(messageIndexId)
+                    const messageIndex = findMessageIndexByIndexId.value(messageIndexId)
                     _uploadProgress(messageIndex, filename, -1)
                 })
         }
@@ -250,7 +250,7 @@ export const useSupportChatStore = defineStore('support-chat', () => {
     }
 
     async function sendMessage({ roomId, content, files, replyMessage, usersTag }) {
-        const _id = nextMessageId.value
+        const _id = nextMessageId.value.toString()
         _incrementNextMsgId()
 
         const message = { _id, content, replyMessage, files }
@@ -260,7 +260,7 @@ export const useSupportChatStore = defineStore('support-chat', () => {
     }
 
     async function trySendMessage({ roomId, message }) {
-        const messageIndex = this.findMessageIndex(message)
+        const messageIndex = findMessageIndex.value(message)
         try {
             const response = await api.messages.store(roomId, {
                 content: message.content,
@@ -290,7 +290,7 @@ export const useSupportChatStore = defineStore('support-chat', () => {
     async function uploadAttachment({ message, file }) {
         let formData = new FormData
         formData.append('attachment', file.blob, file.name + '.' + file.extension)
-        const messageIndex = this.findMessageIndex(message)
+        const messageIndex = findMessageIndex.value(message)
         await api.attachments.store(message.indexId, formData, {
             onUploadProgress: throttle(e => {
                 const upload = {
@@ -307,22 +307,28 @@ export const useSupportChatStore = defineStore('support-chat', () => {
     async function editMessage({ roomId, messageId, newContent, files, replyMessage, usersTag }) {
         const response = await api.messages.update(messageId, {
             content: newContent,
-            replyMessage: replyMessage ?? this.getMessage(messageId).replyMessage,
+            replyMessage: replyMessage ?? getMessage.value(messageId).replyMessage,
         })
         const savedMessage = response.data.data
-        const messageIndex = this.findMessageIndex(savedMessage)
+        const messageIndex = findMessageIndex.value(savedMessage)
         _editMessage(messageIndex, savedMessage)
     }
 
     async function deleteMessage({ roomId, message }) {
         await api.messages.destroy(message.indexId)
-        const messageIndex = this.findMessageIndex(message)
+        const messageIndex = findMessageIndex.value(message)
         _deleteMessage(messageIndex)
     }
 
     async function sendMessageReaction({ roomId, messageId, reaction, remove }) {
-        await api.messageReactions[remove ? 'destroy' : 'store'](messageId, reaction.unicode)
-        (remove ? _removeReaction : _leaveReaction)(messageId, currentUserId.value, reaction.unicode)
+        const messageIndex = findMessageIndexById.value(messageId)
+        if (remove) {
+            await api.messageReactions.destroy(messageId, reaction.unicode)
+            _removeReaction(messageIndex, currentUserId.value, reaction.unicode)
+        } else {
+            await api.messageReactions.store(messageId, reaction.unicode)
+            _leaveReaction(messageIndex, currentUserId.value, reaction.unicode)
+        }
     }
 
     return {

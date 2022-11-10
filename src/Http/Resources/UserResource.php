@@ -27,7 +27,7 @@ class UserResource extends JsonResource
         $lastChanged = $person->lastChanged ? Carbon::createFromInterface($person->lastChanged) : Carbon::now();
 
         return [
-            '_id' => $this->getKey(),
+            '_id' => (string) $this->getKey(),
             'username' => $person->name,
             'avatar' => $person->avatar,
             'status' => [

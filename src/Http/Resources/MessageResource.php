@@ -22,10 +22,10 @@ class MessageResource extends JsonResource
     public function toArray($request = null): array
     {
         return [
-            '_id' => $this->getKey(),
+            '_id' => (string) $this->getKey(),
             'indexId' => $this->getKey(),
             'content' => ! $this->trashed() ? $this->content : '',
-            'senderId' => $this->sender_id,
+            'senderId' => (string) $this->sender_id,
             'username' => $this->sender->getPersonInfo()->name,
             'system' => (bool) ($this->flags & Message::FLAG_SYSTEM),
             'saved' => $this->exists,

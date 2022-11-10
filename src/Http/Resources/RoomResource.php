@@ -22,7 +22,7 @@ class RoomResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'roomId' => $this->getKey(),
+            'roomId' => (string) $this->getKey(),
             'roomName' => $this->name,
             'users' => UserResource::collection($this->users),
         ];
