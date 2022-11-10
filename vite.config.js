@@ -1,8 +1,17 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['vue-advanced-chat'],
+                },
+            },
+        },
+    },
     plugins: [
         laravel({
             input: 'resources/js/app.js',
@@ -11,7 +20,7 @@ export default defineConfig({
         vue({
             template: {
                 compilerOptions: {
-                    isCustomElement: tag => tag === 'vue-advanced-chat'
+                    isCustomElement: tag => tag === 'vue-advanced-chat',
                 },
                 transformAssetUrls: {
                     base: null,
@@ -20,4 +29,9 @@ export default defineConfig({
             },
         }),
     ],
-});
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler',
+        },
+    },
+})

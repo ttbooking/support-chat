@@ -4,6 +4,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import SupportChat from './components/SupportChat.vue'
 
-createApp(SupportChat)
+createApp({})
+    .component('support-chat', SupportChat)
     .use(createPinia())
     .mount('#support-chat')

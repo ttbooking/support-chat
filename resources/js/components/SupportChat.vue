@@ -1,23 +1,23 @@
 <template>
     <vue-advanced-chat v-if="store.currentUserId"
         :current-user-id="store.currentUserId"
-        :rooms="store.rooms"
+        :rooms.prop="store.rooms"
         :rooms-loaded="store.roomsLoaded"
-        :messages="store.messages"
+        :messages.prop="store.messages"
         :messages-loaded="true"
-        :room-actions="menuActions"
-        :menu-actions="menuActions"
-        @fetch-messages="store.fetchMessages"
-        @fetch-more-rooms="store.fetchRooms"
-        @send-message="store.sendMessage"
-        @edit-message="store.editMessage"
-        @delete-message="store.deleteMessage"
-        @open-file="openFile"
-        @open-failed-message="store.trySendMessage"
-        @add-room="store.addRoom"
-        @room-action-handler="menuActionHandler"
-        @menu-action-handler="menuActionHandler"
-        @send-message-reaction="store.sendMessageReaction"
+        :room-actions.prop="menuActions"
+        :menu-actions.prop="menuActions"
+        @fetch-messages="store.fetchMessages($event.detail[0])"
+        @fetch-more-rooms="store.fetchRooms($event.detail[0])"
+        @send-message="store.sendMessage($event.detail[0])"
+        @edit-message="store.editMessage($event.detail[0])"
+        @delete-message="store.deleteMessage($event.detail[0])"
+        @open-file="openFile($event.detail[0])"
+        @open-failed-message="store.trySendMessage($event.detail[0])"
+        @add-room="store.addRoom($event.detail[0])"
+        @room-action-handler="menuActionHandler($event.detail[0])"
+        @menu-action-handler="menuActionHandler($event.detail[0])"
+        @send-message-reaction="store.sendMessageReaction($event.detail[0])"
     />
 </template>
 
@@ -28,7 +28,7 @@ import { useSupportChatStore } from '@/stores'
 
 register()
 
-defineProps(['userId'])
+const props = defineProps(['userId'])
 
 const store = useSupportChatStore()
 
@@ -38,8 +38,8 @@ const menuActions = ref([{
 }])
 
 onMounted(() => {
-    this.store._setUserId(this.userId)
-    this.store.fetchRooms()
+    store._setUserId(props.userId)
+    store.fetchRooms()
 })
 
 function openFile({ message, file }) {
