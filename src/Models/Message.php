@@ -52,12 +52,17 @@ class Message extends Model
     ];
 
     const STATE_SAVED = 0;
+
     const STATE_DISTRIBUTED = 1;
+
     const STATE_SEEN = 2;
+
     const STATE_FAILURE = 3;
 
     const FLAG_SYSTEM = 0b0001;
+
     const FLAG_DISABLE_ACTIONS = 0b0010;
+
     const FLAG_DISABLE_REACTIONS = 0b0100;
 
     protected static function booted(): void

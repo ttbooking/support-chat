@@ -7,7 +7,6 @@ use TTBooking\SupportChat\Http\Controllers\MessageReactionController;
 use TTBooking\SupportChat\Http\Controllers\RoomController;
 
 Route::prefix('api/v1')->group(function () {
-
     Route::apiResources([
         'rooms' => '\\'.RoomController::class,
         'rooms.messages' => '\\'.MessageController::class,
@@ -25,7 +24,6 @@ Route::prefix('api/v1')->group(function () {
         '\\'.MessageReactionController::class,
         ['only' => ['store', 'destroy']]
     );
-
 });
 
 // Catch-all Route...
