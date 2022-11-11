@@ -24,34 +24,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import AdvancedChat, { register, CustomAction, Message, StringNumber } from 'vue-advanced-chat'
-import { useSupportChatStore } from '@/stores'
+import { ref, onMounted } from "vue";
+import AdvancedChat, {
+    register,
+    CustomAction,
+    Message,
+    StringNumber,
+} from "vue-advanced-chat";
+import { useSupportChatStore } from "@/stores";
 
-register()
+register();
 
-const props = defineProps<{ userId: StringNumber }>()
+const props = defineProps<{ userId: StringNumber }>();
 
-const store = useSupportChatStore()
+const store = useSupportChatStore();
 
-const menuActions = ref([{
-    name: 'deleteRoom',
-    title: 'Delete Room',
-}])
+const menuActions = ref([
+    {
+        name: "deleteRoom",
+        title: "Delete Room",
+    },
+]);
 
 onMounted(() => {
-    store._setUserId(props.userId)
-    store.fetchRooms()
-})
+    store._setUserId(props.userId);
+    store.fetchRooms();
+});
 
-function openFile({ file } : { message: Message, file: any }) {
-    window.location = file.file.url
+function openFile({ file }: { message: Message; file: any }) {
+    window.location = file.file.url;
 }
 
-function menuActionHandler({ roomId, action } : { roomId: string, action: CustomAction }) {
+function menuActionHandler({
+    roomId,
+    action,
+}: {
+    roomId: string;
+    action: CustomAction;
+}) {
     switch (action.name) {
-        case 'deleteRoom':
-            store.deleteRoom(roomId)
+        case "deleteRoom":
+            store.deleteRoom(roomId);
     }
 }
 </script>

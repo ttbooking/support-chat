@@ -2,7 +2,11 @@
     "name": "ttbooking/support-chat",
     "description": "Support Chat.",
     "type": "library",
-    "keywords": ["support", "chat", "support chat"],
+    "keywords": [
+        "support",
+        "chat",
+        "support chat"
+    ],
     "license": "MIT",
     "support": {
         "issues": "https://github.com/ttbooking/support-chat/issues",
