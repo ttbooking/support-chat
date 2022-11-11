@@ -59,19 +59,19 @@ class SupportChatServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/support-chat.php' => $this->app->configPath('support-chat.php'),
-        ], 'config');
+        ], ['support-chat-config', 'support-chat', 'config']);
 
         $this->publishes([
             __DIR__.'/../database/migrations' => $this->app->databasePath('migrations'),
-        ], 'migrations');
+        ], ['support-chat-migrations', 'support-chat', 'migrations']);
 
         $this->publishes([
             __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/support-chat'),
-        ], 'views');
+        ], ['support-chat-views', 'support-chat', 'views']);
 
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/support-chat'),
-        ], 'assets');
+        ], ['support-chat-assets', 'support-chat', 'assets']);
     }
 
     protected function registerMigrations(): void
