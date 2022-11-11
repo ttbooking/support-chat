@@ -1,5 +1,5 @@
 <template>
-    <advanced-chat
+    <vue-advanced-chat
         v-if="store.currentUserId"
         :current-user-id="store.currentUserId"
         :rooms.prop="store.rooms"
@@ -25,11 +25,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import AdvancedChat, {
+import {
     register,
     CustomAction,
     Message,
     StringNumber,
+    VueAdvancedChat,
 } from "vue-advanced-chat";
 import { useSupportChatStore } from "@/stores";
 

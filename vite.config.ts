@@ -20,7 +20,7 @@ export default defineConfig({
         vue({
             template: {
                 compilerOptions: {
-                    isCustomElement: (tag) => tag === "advanced-chat",
+                    isCustomElement: (tag) => tag === "vue-advanced-chat",
                 },
                 transformAssetUrls: {
                     base: null,
