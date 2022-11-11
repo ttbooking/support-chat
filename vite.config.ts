@@ -14,13 +14,13 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: 'resources/js/app.js',
+            input: 'resources/js/app.ts',
             refresh: true,
         }),
         vue({
             template: {
                 compilerOptions: {
-                    isCustomElement: tag => tag === 'vue-advanced-chat',
+                    isCustomElement: tag => tag === 'advanced-chat',
                 },
                 transformAssetUrls: {
                     base: null,

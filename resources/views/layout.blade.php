@@ -14,7 +14,7 @@
     {{
         Vite::useHotFile('vendor/support-chat/hot')
             ->useBuildDirectory('vendor/support-chat/build')
-            ->withEntryPoints(['resources/js/app.js'])
+            ->withEntryPoints(['resources/js/app.ts'])
     }}
 </head>
 <body>

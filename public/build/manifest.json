@@ -1,7 +1,7 @@
 {
-  "resources/js/app.js": {
-    "file": "assets/app.9d9c04ad.js",
-    "src": "resources/js/app.js",
+  "resources/js/app.ts": {
+    "file": "assets/app.de6082b7.js",
+    "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
       "_vendor.c810cbd3.js"
