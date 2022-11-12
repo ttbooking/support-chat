@@ -109,15 +109,10 @@ export const useSupportChatStore = defineStore("support-chat", () => {
     }
 
     function _setMessages(_messages: Messages) {
-        Object.assign(
-            messages,
-            new Map(
-                _messages.map((message) => [
-                    message.indexId ?? message._id,
-                    message,
-                ])
-            )
-        );
+        messages.clear();
+        for (const message of _messages) {
+            messages.set(message.indexId ?? message._id, message);
+        }
     }
 
     function _setNextMsgId(_nextMessageId = null) {
