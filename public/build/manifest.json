@@ -7,14 +7,14 @@
       "_vendor.c810cbd3.js"
     ],
     "css": [
-      "assets/app.ca079d71.css"
+      "assets/app.c683d47a.css"
     ]
   },
   "_vendor.c810cbd3.js": {
     "file": "assets/vendor.c810cbd3.js"
   },
   "resources/js/app.css": {
-    "file": "assets/app.ca079d71.css",
+    "file": "assets/app.c683d47a.css",
     "src": "resources/js/app.css"
   }
 }
