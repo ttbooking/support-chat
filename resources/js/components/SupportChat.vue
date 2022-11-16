@@ -25,13 +25,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import {
-    register,
-    CustomAction,
-    Message,
-    StringNumber,
-    VueAdvancedChat,
-} from "vue-advanced-chat";
+import { register, CustomAction, Message, StringNumber, VueAdvancedChat } from "vue-advanced-chat";
 import { useSupportChatStore } from "@/stores";
 
 register();
@@ -56,13 +50,7 @@ function openFile({ file }: { message: Message; file: any }) {
     window.location = file.file.url;
 }
 
-function menuActionHandler({
-    roomId,
-    action,
-}: {
-    roomId: string;
-    action: CustomAction;
-}) {
+function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
         case "deleteRoom":
             store.deleteRoom(roomId);

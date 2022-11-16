@@ -9,10 +9,7 @@ export default {
     },
 
     store(roomId: string, message: MessageStoreRequest) {
-        return window.axios.post(
-            `${baseUrl}/rooms/${roomId}/messages`,
-            message
-        );
+        return window.axios.post(`${baseUrl}/rooms/${roomId}/messages`, message);
     },
 
     show(messageId: StringNumber) {

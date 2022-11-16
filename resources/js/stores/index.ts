@@ -4,15 +4,7 @@ import { throttle } from "lodash";
 import api from "@/api";
 
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
-import {
-    Message,
-    Messages,
-    Room,
-    Rooms,
-    RoomUser,
-    RoomUsers,
-    StringNumber,
-} from "vue-advanced-chat";
+import { Message, Messages, Room, Rooms, RoomUser, RoomUsers, StringNumber } from "vue-advanced-chat";
 import {
     AttachmentCallbackArgs,
     DeleteMessageArgs,
@@ -50,9 +42,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
     });
 
     const joinedRooms = computed(() => {
-        return rooms.value.filter((room) =>
-            room.users.some((user) => user._id === currentUserId.value)
-        );
+        return rooms.value.filter((room) => room.users.some((user) => user._id === currentUserId.value));
     });
 
     /** Mutations **/
@@ -82,28 +72,20 @@ export const useSupportChatStore = defineStore("support-chat", () => {
     }
 
     function _roomSetUsers(_roomId: string, _users: RoomUsers) {
-        const roomIndex = rooms.value.findIndex(
-            (currentRoom) => currentRoom.roomId === _roomId
-        );
+        const roomIndex = rooms.value.findIndex((currentRoom) => currentRoom.roomId === _roomId);
         rooms.value[roomIndex].users = _users;
         rooms.value = [...rooms.value];
     }
 
     function _roomJoinUser(_roomId: string, _user: RoomUser) {
-        const roomIndex = rooms.value.findIndex(
-            (currentRoom) => currentRoom.roomId === _roomId
-        );
+        const roomIndex = rooms.value.findIndex((currentRoom) => currentRoom.roomId === _roomId);
         rooms.value[roomIndex].users = [...rooms.value[roomIndex].users, _user];
         rooms.value = [...rooms.value];
     }
 
     function _roomLeaveUser(_roomId: string, _user: RoomUser) {
-        const roomIndex = rooms.value.findIndex(
-            (currentRoom) => currentRoom.roomId === _roomId
-        );
-        const users = rooms.value[roomIndex].users.filter(
-            (currentUser) => currentUser._id !== _user._id
-        );
+        const roomIndex = rooms.value.findIndex((currentRoom) => currentRoom.roomId === _roomId);
+        const users = rooms.value[roomIndex].users.filter((currentUser) => currentUser._id !== _user._id);
         rooms.value[roomIndex].users = [...users];
         rooms.value = [...rooms.value];
     }
@@ -116,10 +98,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
     }
 
     function _setNextMsgId(_nextMessageId = null) {
-        const lastMessageId = Math.max(
-            0,
-            ...Array.from(messages.keys(), (k) => +k)
-        );
+        const lastMessageId = Math.max(0, ...Array.from(messages.keys(), (k) => +k));
         nextMessageId.value = _nextMessageId ?? lastMessageId + 1;
     }
 
@@ -127,12 +106,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         nextMessageId.value++;
     }
 
-    function _initMessage({
-        _id,
-        content,
-        replyMessage,
-        files,
-    }: InitMessageArgs) {
+    function _initMessage({ _id, content, replyMessage, files }: InitMessageArgs) {
         const message: Message = {
             _id,
             content,
@@ -167,45 +141,27 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         messages.set(message.indexId ?? message._id, message);
     }
 
-    function _uploadProgress(
-        _messageIndexId: StringNumber,
-        _filename: string,
-        _progress?: number
-    ) {
-        const fileIndex = messages
-            .get(_messageIndexId)
-            ?.files?.findIndex((file) => {
-                return file.name + "." + file.type === _filename;
-            });
+    function _uploadProgress(_messageIndexId: StringNumber, _filename: string, _progress?: number) {
+        const fileIndex = messages.get(_messageIndexId)?.files?.findIndex((file) => {
+            return file.name + "." + file.type === _filename;
+        });
 
         if (fileIndex !== undefined) {
-            messages.get(_messageIndexId)!.files![fileIndex].progress =
-                _progress ?? -1;
+            messages.get(_messageIndexId)!.files![fileIndex].progress = _progress ?? -1;
         }
     }
 
-    function _leaveReaction(
-        _messageId: StringNumber,
-        _userId: StringNumber,
-        _emoji: string
-    ) {
+    function _leaveReaction(_messageId: StringNumber, _userId: StringNumber, _emoji: string) {
         messages.get(_messageId)?.reactions![_emoji].push(_userId);
     }
 
-    function _removeReaction(
-        _messageId: StringNumber,
-        _userId: StringNumber,
-        _emoji: string
-    ) {
-        const reactionUsers =
-            messages.get(_messageId)?.reactions![_emoji] ?? [];
+    function _removeReaction(_messageId: StringNumber, _userId: StringNumber, _emoji: string) {
+        const reactionUsers = messages.get(_messageId)?.reactions![_emoji] ?? [];
         const userIndex = reactionUsers.indexOf(_userId);
         if (userIndex > -1) {
             reactionUsers.splice(userIndex, 1);
         }
-        messages.get(_messageId)!.reactions![_emoji] = [
-            ...new Set(reactionUsers),
-        ];
+        messages.get(_messageId)!.reactions![_emoji] = [...new Set(reactionUsers)];
     }
 
     /** Actions **/
@@ -217,9 +173,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         _setRoomsLoadedState(true);
 
         for (const room of joinedRooms.value) {
-            window.roomChannel = <PusherPresenceChannel>window.Echo.join(
-                `support-chat.room.${room.roomId}`
-            )
+            window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`)
                 .here((users: RoomUsers) => {
                     _roomSetUsers(room.roomId.toString(), users);
                 })
@@ -233,63 +187,34 @@ export const useSupportChatStore = defineStore("support-chat", () => {
                     console.error(error);
                 })
                 .listen(".message.posted", (message: Message) => {
-                    room.roomId === roomId.value &&
-                        messages.set(message.indexId ?? message._id, message);
+                    room.roomId === roomId.value && messages.set(message.indexId ?? message._id, message);
                     _setNextMsgId();
                 })
                 .listen(".message.edited", (message: Message) => {
-                    room.roomId === roomId.value &&
-                        messages.set(message.indexId ?? message._id, message);
+                    room.roomId === roomId.value && messages.set(message.indexId ?? message._id, message);
                 })
                 .listen(".message.deleted", (message: Message) => {
-                    room.roomId === roomId.value &&
-                        (messages.get(message.indexId ?? message._id)!.deleted =
-                            true);
+                    room.roomId === roomId.value && (messages.get(message.indexId ?? message._id)!.deleted = true);
                 })
-                .listen(
-                    ".reaction.left",
-                    ({
-                        messageIndexId,
-                        userId,
-                        emoji,
-                    }: ReactionCallbackArgs) => {
-                        _leaveReaction(messageIndexId, userId, emoji);
-                    }
-                )
-                .listen(
-                    ".reaction.removed",
-                    ({
-                        messageIndexId,
-                        userId,
-                        emoji,
-                    }: ReactionCallbackArgs) => {
-                        _removeReaction(messageIndexId, userId, emoji);
-                    }
-                )
+                .listen(".reaction.left", ({ messageIndexId, userId, emoji }: ReactionCallbackArgs) => {
+                    _leaveReaction(messageIndexId, userId, emoji);
+                })
+                .listen(".reaction.removed", ({ messageIndexId, userId, emoji }: ReactionCallbackArgs) => {
+                    _removeReaction(messageIndexId, userId, emoji);
+                })
                 .listenForWhisper(
                     "attachment.uploading",
-                    ({
-                        messageIndexId,
-                        filename,
-                        progress,
-                    }: AttachmentCallbackArgs) => {
+                    ({ messageIndexId, filename, progress }: AttachmentCallbackArgs) => {
                         if (messageIndexId > -1) {
                             _uploadProgress(messageIndexId, filename, progress);
                         }
                     }
                 )
-                .listen(
-                    ".attachment.uploaded",
-                    ({
-                        messageIndexId,
-                        filename,
-                        progress,
-                    }: AttachmentCallbackArgs) => {
-                        if (messageIndexId > -1) {
-                            _uploadProgress(messageIndexId, filename, progress);
-                        }
+                .listen(".attachment.uploaded", ({ messageIndexId, filename, progress }: AttachmentCallbackArgs) => {
+                    if (messageIndexId > -1) {
+                        _uploadProgress(messageIndexId, filename, progress);
                     }
-                );
+                });
         }
     }
 
@@ -310,12 +235,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         _setNextMsgId();
     }
 
-    async function sendMessage({
-        roomId,
-        content,
-        files,
-        replyMessage,
-    }: SendMessageArgs) {
+    async function sendMessage({ roomId, content, files, replyMessage }: SendMessageArgs) {
         const _id = nextMessageId.value.toString();
         _incrementNextMsgId();
 
@@ -329,8 +249,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         try {
             const response = await api.messages.store(roomId, {
                 content: message.content,
-                parent_id:
-                    message.replyMessage?.indexId ?? message.replyMessage?._id,
+                parent_id: message.replyMessage?.indexId ?? message.replyMessage?._id,
                 attachments:
                     message.files?.map((file) => ({
                         name: file.name + "." + file.extension,
@@ -352,11 +271,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
 
     async function uploadAttachment({ message, file }: UploadAttachmentArgs) {
         const formData = new FormData();
-        formData.append(
-            "attachment",
-            file.blob,
-            file.name + "." + file.extension
-        );
+        formData.append("attachment", file.blob, file.name + "." + file.extension);
         await api.attachments.store(message.indexId ?? message._id, formData, {
             onUploadProgress: throttle((e) => {
                 const upload = {
@@ -365,20 +280,12 @@ export const useSupportChatStore = defineStore("support-chat", () => {
                     progress: Math.round((e.loaded * 100) / e.total),
                 };
                 window.roomChannel.whisper("attachment.uploading", upload);
-                _uploadProgress(
-                    message.indexId ?? message._id,
-                    upload.filename,
-                    upload.progress
-                );
+                _uploadProgress(message.indexId ?? message._id, upload.filename, upload.progress);
             }, 100),
         });
     }
 
-    async function editMessage({
-        messageId,
-        newContent,
-        replyMessage,
-    }: EditMessageArgs) {
+    async function editMessage({ messageId, newContent, replyMessage }: EditMessageArgs) {
         replyMessage ??= getMessage.value(messageId)?.replyMessage;
         const response = await api.messages.update(messageId, {
             content: newContent,
@@ -393,11 +300,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         messages.delete(message.indexId ?? message._id);
     }
 
-    async function sendMessageReaction({
-        messageId,
-        reaction,
-        remove,
-    }: SendMessageReactionArgs) {
+    async function sendMessageReaction({ messageId, reaction, remove }: SendMessageReactionArgs) {
         if (remove) {
             await api.messageReactions.destroy(messageId, reaction.unicode);
             _removeReaction(messageId, currentUserId.value, reaction.unicode);
@@ -450,7 +353,5 @@ export const useSupportChatStore = defineStore("support-chat", () => {
 });
 
 if (import.meta.hot) {
-    import.meta.hot.accept(
-        acceptHMRUpdate(useSupportChatStore, import.meta.hot)
-    );
+    import.meta.hot.accept(acceptHMRUpdate(useSupportChatStore, import.meta.hot));
 }

@@ -16,7 +16,4 @@ declare global {
     }
 }
 
-createApp({})
-    .component("support-chat", SupportChat)
-    .use(createPinia())
-    .mount("#support-chat");
+createApp({}).component("support-chat", SupportChat).use(createPinia()).mount("#support-chat");
