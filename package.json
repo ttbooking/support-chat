@@ -10,10 +10,10 @@
         "axios": "^1.2.0",
         "laravel-echo": "^1.14.2",
         "lodash": "^4.17.21",
-        "pinia": "^2.0.26",
+        "pinia": "^2.0.27",
         "tailwindcss": "^3.2.4",
         "vue": "^3.2.45",
-        "vue-advanced-chat": "^2.0.4"
+        "vue-advanced-chat": "^2.0.5"
     },
     "devDependencies": {
         "@types/lodash": "^4.14.190",

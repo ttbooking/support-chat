@@ -130,10 +130,12 @@ export const useSupportChatStore = defineStore("support-chat", () => {
             (message.files ??= []).push({
                 name: file.name,
                 size: file.size,
-                type: file.extension,
+                type: file.type,
+                extension: file.extension,
                 audio: false,
                 duration: 0,
                 url: file.localURL,
+                localUrl: file.localURL,
                 preview: "",
                 progress: 0,
             });
