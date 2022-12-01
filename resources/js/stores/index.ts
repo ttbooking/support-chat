@@ -4,7 +4,7 @@ import { throttle } from "lodash";
 import api from "@/api";
 
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
-import { Message, Messages, Room, Rooms, RoomUser, RoomUsers, StringNumber } from "vue-advanced-chat";
+import { Message, Room, RoomUser, StringNumber } from "vue-advanced-chat";
 import {
     AttachmentCallbackArgs,
     DeleteMessageArgs,
@@ -23,7 +23,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
 
     const currentUserId = ref<string>("0");
 
-    const rooms = ref<Rooms>([]);
+    const rooms = ref<Room[]>([]);
 
     const roomsLoaded = ref(false);
 
@@ -55,7 +55,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         roomsLoaded.value = _roomsLoaded;
     }
 
-    function _setRooms(_rooms: Rooms) {
+    function _setRooms(_rooms: Room[]) {
         rooms.value = _rooms;
     }
 
@@ -71,7 +71,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         roomId.value = _roomId;
     }
 
-    function _roomSetUsers(_roomId: string, _users: RoomUsers) {
+    function _roomSetUsers(_roomId: string, _users: RoomUser[]) {
         const roomIndex = rooms.value.findIndex((currentRoom) => currentRoom.roomId === _roomId);
         rooms.value[roomIndex].users = _users;
         rooms.value = [...rooms.value];
@@ -90,7 +90,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
         rooms.value = [...rooms.value];
     }
 
-    function _setMessages(_messages: Messages) {
+    function _setMessages(_messages: Message[]) {
         messages.clear();
         for (const message of _messages) {
             messages.set(message.indexId ?? message._id, message);
@@ -176,7 +176,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
 
         for (const room of joinedRooms.value) {
             window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`)
-                .here((users: RoomUsers) => {
+                .here((users: RoomUser[]) => {
                     _roomSetUsers(room.roomId.toString(), users);
                 })
                 .joining((user: RoomUser) => {
