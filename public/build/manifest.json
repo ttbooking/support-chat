@@ -3,15 +3,15 @@
     "file": "assets/app-c683d47a.css",
     "src": "resources/js/app.css"
   },
-  "_vendor-fdc58028.js": {
-    "file": "assets/vendor-fdc58028.js"
+  "_vendor-a3a22c68.js": {
+    "file": "assets/vendor-a3a22c68.js"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-10bfdfa6.js",
+    "file": "assets/app-3a8560a5.js",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vendor-fdc58028.js"
+      "_vendor-a3a22c68.js"
     ],
     "css": [
       "assets/app-c683d47a.css"
