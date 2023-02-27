@@ -3,14 +3,14 @@
     "file": "assets/vendor-d4fc19d7.js"
   },
   "resources/js/app.css": {
-    "file": "assets/app-b2e3fba9.css",
+    "file": "assets/app-e23dfbac.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.ts": {
     "css": [
-      "assets/app-b2e3fba9.css"
+      "assets/app-e23dfbac.css"
     ],
-    "file": "assets/app-abca4751.js",
+    "file": "assets/app-eb6aaff3.js",
     "imports": [
       "_vendor-d4fc19d7.js"
     ],
