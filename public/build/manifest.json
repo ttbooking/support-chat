@@ -1,18 +1,18 @@
 {
-  "_vendor-d4fc19d7.js": {
-    "file": "assets/vendor-d4fc19d7.js"
+  "_vendor-8f1714b8.js": {
+    "file": "assets/vendor-8f1714b8.js"
   },
   "resources/js/app.css": {
-    "file": "assets/app-e23dfbac.css",
+    "file": "assets/app-5052fb02.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.ts": {
     "css": [
-      "assets/app-e23dfbac.css"
+      "assets/app-5052fb02.css"
     ],
-    "file": "assets/app-eb6aaff3.js",
+    "file": "assets/app-7691494b.js",
     "imports": [
-      "_vendor-d4fc19d7.js"
+      "_vendor-8f1714b8.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.ts"

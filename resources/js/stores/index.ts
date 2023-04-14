@@ -207,13 +207,13 @@ export const useSupportChatStore = defineStore("support-chat", () => {
                 .listenForWhisper(
                     "attachment.uploading",
                     ({ messageIndexId, filename, progress }: AttachmentCallbackArgs) => {
-                        if (messageIndexId > -1) {
+                        if (+messageIndexId > -1) {
                             _uploadProgress(messageIndexId, filename, progress);
                         }
                     }
                 )
                 .listen(".attachment.uploaded", ({ messageIndexId, filename, progress }: AttachmentCallbackArgs) => {
-                    if (messageIndexId > -1) {
+                    if (+messageIndexId > -1) {
                         _uploadProgress(messageIndexId, filename, progress);
                     }
                 });
@@ -355,5 +355,5 @@ export const useSupportChatStore = defineStore("support-chat", () => {
 });
 
 if (import.meta.hot) {
-    import.meta.hot.accept(acceptHMRUpdate(useSupportChatStore, import.meta.hot));
+    import.meta.hot.accept(acceptHMRUpdate(useSupportChatStore as any, import.meta.hot));
 }
