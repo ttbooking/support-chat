@@ -355,5 +355,5 @@ export const useSupportChatStore = defineStore("support-chat", () => {
 });
 
 if (import.meta.hot) {
-    import.meta.hot.accept(acceptHMRUpdate(useSupportChatStore as any, import.meta.hot));
+    import.meta.hot.accept(acceptHMRUpdate(useSupportChatStore, import.meta.hot));
 }

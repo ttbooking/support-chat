@@ -7,29 +7,29 @@
     },
     "dependencies": {
         "@tailwindcss/forms": "^0.5.3",
-        "axios": "^1.3.5",
+        "axios": "^1.3.6",
         "laravel-echo": "^1.15.0",
         "lodash": "^4.17.21",
-        "pinia": "^2.0.34",
+        "pinia": "^2.0.35",
         "tailwindcss": "^3.3.1",
         "vue": "^3.2.47",
         "vue-advanced-chat": "^2.0.7"
     },
     "devDependencies": {
         "@types/lodash": "^4.14.194",
-        "@typescript-eslint/eslint-plugin": "^5.58.0",
-        "@typescript-eslint/parser": "^5.58.0",
+        "@typescript-eslint/eslint-plugin": "^5.59.0",
+        "@typescript-eslint/parser": "^5.59.0",
         "@vitejs/plugin-vue": "^4.1.0",
         "autoprefixer": "^10.4.14",
         "eslint": "^8.38.0",
         "eslint-config-prettier": "^8.8.0",
-        "eslint-plugin-vue": "^9.10.0",
+        "eslint-plugin-vue": "^9.11.0",
         "laravel-vite-plugin": "^0.7.4",
-        "postcss": "^8.4.21",
+        "postcss": "^8.4.23",
         "prettier": "^2.8.7",
         "typescript": "^5.0.4",
-        "vite": "^4.2.1",
-        "vue-tsc": "1.3.6"
+        "vite": "^4.3.1",
+        "vue-tsc": "1.4.2"
     },
     "packageManager": "yarn@3.5.0"
 }
