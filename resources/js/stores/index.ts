@@ -210,7 +210,7 @@ export const useSupportChatStore = defineStore("support-chat", () => {
                         if (+messageIndexId > -1) {
                             _uploadProgress(messageIndexId, filename, progress);
                         }
-                    }
+                    },
                 )
                 .listen(".attachment.uploaded", ({ messageIndexId, filename, progress }: AttachmentCallbackArgs) => {
                     if (+messageIndexId > -1) {
