@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class SupportChatServiceProvider extends ServiceProvider
@@ -18,6 +19,7 @@ class SupportChatServiceProvider extends ServiceProvider
     {
         $this->registerRoutes();
         $this->registerResources();
+        $this->registerMixins();
 
         if ($this->app->runningInConsole()) {
             $this->offerPublishing();
@@ -53,6 +55,11 @@ class SupportChatServiceProvider extends ServiceProvider
     protected function registerResources(): void
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'support-chat');
+    }
+
+    protected function registerMixins(): void
+    {
+        Vite::mixin(new Support\ViteAliasMixin);
     }
 
     protected function offerPublishing(): void

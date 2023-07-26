@@ -2,15 +2,19 @@
   "_vendor-99812c21.js": {
     "file": "assets/vendor-99812c21.js"
   },
+  "resources/images/favicon.svg": {
+    "file": "assets/favicon-fd34bfbb.svg",
+    "src": "resources/images/favicon.svg"
+  },
   "resources/js/app.css": {
-    "file": "assets/app-0df83a4a.css",
+    "file": "assets/app-31e70a1f.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.ts": {
     "css": [
-      "assets/app-0df83a4a.css"
+      "assets/app-31e70a1f.css"
     ],
-    "file": "assets/app-04259cac.js",
+    "file": "assets/app-f134e6c7.js",
     "imports": [
       "_vendor-99812c21.js"
     ],

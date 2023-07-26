@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale', 'en') }}">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="shortcut icon" href="{{ asset('/vendor/support-chat/img/favicon.png') }}" />
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <link rel="shortcut icon" href="{{ Vite::supportChatImage('favicon.svg') }}" />
 
-    <title>Support Chat{{ config('app.name') ? ' - ' . config('app.name') : '' }}</title>
+        <title>Support Chat - {{ config('app.name', 'Laravel') }}</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net" />
+        <link rel="stylesheet" href="https://fonts.bunny.net/css?family=nunito:400,500,600&display=swap" />
 
-    @vite('resources/js/app.js')
-    {{
-        Vite::useHotFile('vendor/support-chat/hot')
-            ->useBuildDirectory('vendor/support-chat/build')
-            ->withEntryPoints(['resources/js/app.ts'])
-    }}
-</head>
-<body>
-<div id="support-chat" v-cloak>
-    <support-chat user-id="{{ auth()->id() }}"></support-chat>
-</div>
+        <!-- Scripts -->
+        @vite('resources/js/app.js')
+        {{ Vite::supportChatEntryPoint() }}
+    </head>
+    <body class="font-sans antialiased">
+        <div id="support-chat" v-cloak>
+            <support-chat user-id="{{ auth()->id() }}"></support-chat>
+        </div>
 
-<!-- Global Support Chat Object -->
-<script type="text/javascript">
-    window.SupportChat = @json($supportChatScriptVariables);
-</script>
-
-</body>
+        <!-- Global Support Chat Object -->
+        <script type="text/javascript">
+            window.SupportChat = @json($supportChatScriptVariables);
+        </script>
+    </body>
 </html>

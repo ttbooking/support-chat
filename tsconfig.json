@@ -1,22 +1,26 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["resources/js/*"]
-        },
-        "target": "ESNext",
-        "useDefineForClassFields": true,
+        "allowJs": true,
         "module": "ESNext",
-        "moduleResolution": "Node",
-        "strict": true,
+        "moduleResolution": "bundler",
         "jsx": "preserve",
-        "resolveJsonModule": true,
+        "strict": true,
         "isolatedModules": true,
+        "target": "ESNext",
         "esModuleInterop": true,
-        "lib": ["ESNext", "DOM"],
-        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
         "noEmit": true,
-        "types": ["vite/client", "vue-advanced-chat/types"]
+        "skipLibCheck": true,
+        "paths": {
+            "@/*": ["./resources/js/*"]
+        }
     },
-    "exclude": ["node_modules", "public"]
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.d.ts",
+        "resources/js/**/*.vue",
+        "vite.config.ts"
+    ]
 }
