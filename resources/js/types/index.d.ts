@@ -1,4 +1,4 @@
-import { Message, Room, StringNumber } from "vue-advanced-chat";
+import { Message, MessageFile, Room, StringNumber } from "vue-advanced-chat";
 
 export interface File {
     blob: Blob;
@@ -70,6 +70,14 @@ export interface AttachmentCallbackArgs {
     messageIndexId: StringNumber;
     filename: string;
     progress?: number;
+}
+
+export interface OpenFileArgs {
+    message: Message;
+    file: {
+        action: "preview" | "download";
+        file: MessageFile;
+    };
 }
 
 export interface RoomStoreRequest {

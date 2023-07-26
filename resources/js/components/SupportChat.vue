@@ -25,8 +25,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { register, CustomAction, Message, StringNumber, VueAdvancedChat } from "vue-advanced-chat";
+import { register, CustomAction, StringNumber, VueAdvancedChat } from "vue-advanced-chat";
 import { useSupportChatStore } from "@/stores";
+import type { OpenFileArgs } from "@/types";
 
 register();
 
@@ -46,8 +47,8 @@ onMounted(() => {
     store.fetchRooms();
 });
 
-function openFile({ file }: { message: Message; file: any }) {
-    window.location = file.file.url;
+function openFile(args: OpenFileArgs) {
+    window.location = args.file.file.url;
 }
 
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
