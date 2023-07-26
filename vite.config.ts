@@ -20,7 +20,7 @@ export default defineConfig({
         vue({
             template: {
                 compilerOptions: {
-                    isCustomElement: (tag) => tag === "vue-advanced-chat",
+                    isCustomElement: (tag) => tag === "vue-advanced-chat" || tag === "emoji-picker",
                 },
                 transformAssetUrls: {
                     base: null,

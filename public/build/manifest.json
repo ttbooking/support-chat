@@ -3,14 +3,14 @@
     "file": "assets/vendor-99812c21.js"
   },
   "resources/js/app.css": {
-    "file": "assets/app-b481decf.css",
+    "file": "assets/app-0df83a4a.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.ts": {
     "css": [
-      "assets/app-b481decf.css"
+      "assets/app-0df83a4a.css"
     ],
-    "file": "assets/app-f89c1227.js",
+    "file": "assets/app-04259cac.js",
     "imports": [
       "_vendor-99812c21.js"
     ],
