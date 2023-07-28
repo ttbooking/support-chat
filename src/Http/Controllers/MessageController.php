@@ -39,7 +39,7 @@ class MessageController extends Controller
             $input = $request->validated();
 
             /** @var Message $message */
-            $message = $room->messages()->create($input + ['sender_id' => $request->user()->id]);
+            $message = $room->messages()->create($input + ['sender_id' => auth()->id()]);
 
             if ($input['attachments']) {
                 foreach ($input['attachments'] as $attachment) {

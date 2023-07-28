@@ -23,7 +23,7 @@ class MessageReactionController extends Controller
     public function store(Request $request, Message $message): \Illuminate\Http\Response
     {
         $message->reactions()->firstOrCreate([
-            'user_id' => $request->user()->id,
+            'user_id' => auth()->id(),
             'emoji' => Str::substr($request->getContent(), 0, 1),
         ]);
 

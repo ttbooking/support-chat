@@ -7,7 +7,9 @@ namespace TTBooking\SupportChat\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
+use TTBooking\SupportChat\Contracts\Personifiable;
 use TTBooking\SupportChat\Observers\MessageReactionObserver;
 
 /**
@@ -17,7 +19,7 @@ use TTBooking\SupportChat\Observers\MessageReactionObserver;
  * @property string $emoji
  * @property Carbon $created_at
  * @property Message $message
- * @property Model $user
+ * @property Model&Personifiable $user
  */
 class MessageReaction extends Model
 {
@@ -32,25 +34,29 @@ class MessageReaction extends Model
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
     public function getRouteKeyName(): string
     {
         return 'emoji';
     }
 
+    /**
+     * @return BelongsTo<Message, self>
+     */
     public function message(): BelongsTo
     {
         return $this->belongsTo(Message::class);
     }
 
+    /**
+     * @return BelongsTo<Model&Personifiable, self>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(config('support-chat.user_model'));
     }
 
-    public function resolveRouteBindingQuery($query, $value, $field = null)
+    public function resolveRouteBindingQuery($query, $value, $field = null): Relation
     {
         return parent::resolveRouteBindingQuery($query, $value, $field)->where('user_id', Auth::id());
     }

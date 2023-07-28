@@ -10,7 +10,7 @@ export interface File {
 }
 
 export interface InitMessageArgs {
-    _id: string;
+    _id?: string;
     content: string;
     replyMessage?: Message;
     files: File[];

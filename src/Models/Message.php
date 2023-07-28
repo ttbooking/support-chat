@@ -28,14 +28,14 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property Room $room
- * @property Model|Personifiable $sender
+ * @property Model&Personifiable $sender
  * @property Message|null $parent
- * @property Collection|Message[] $replies
- * @property Collection|MessageFile[] $attachments
- * @property Collection|MessageFile[] $files
- * @property Collection|MessageReaction[] $reactions
- * @property string $attachmentPath
- * @property ArrayObject $reactionsWithUsers
+ * @property Collection<int, Message> $replies
+ * @property Collection<int, MessageFile> $attachments
+ * @property Collection<int, MessageFile> $files
+ * @property Collection<int, MessageReaction> $reactions
+ * @property-read string $attachmentPath
+ * @property-read ArrayObject<string, int[]> $reactionsWithUsers
  */
 class Message extends Model
 {
@@ -67,7 +67,7 @@ class Message extends Model
 
     protected static function booted(): void
     {
-        static::deleting(function (self $message) {
+        static::deleting(static function (self $message) {
             $message->attachments->each->delete();
             if ($message->isForceDeleting()) {
                 $message->reactions()->delete();
@@ -78,52 +78,79 @@ class Message extends Model
         static::observe(MessageObserver::class);
     }
 
+    /**
+     * @return BelongsTo<Room, self>
+     */
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
     }
 
+    /**
+     * @return BelongsTo<Model&Personifiable, self>
+     */
     public function sender(): BelongsTo
     {
         return $this->belongsTo(config('support-chat.user_model'));
     }
 
+    /**
+     * @return BelongsTo<self, self>
+     */
     public function parent(): BelongsTo
     {
         return $this->belongsTo(static::class);
     }
 
+    /**
+     * @return HasMany<self>
+     */
     public function replies(): HasMany
     {
         return $this->hasMany(static::class, 'parent_id');
     }
 
+    /**
+     * @return HasMany<MessageFile>
+     */
     public function attachments(): HasMany
     {
         return $this->hasMany(MessageFile::class);
     }
 
+    /**
+     * @return HasMany<MessageFile>
+     */
     public function files(): HasMany
     {
         return $this->hasMany(MessageFile::class);
     }
 
+    /**
+     * @return HasMany<MessageReaction>
+     */
     public function reactions(): HasMany
     {
         return $this->hasMany(MessageReaction::class);
     }
 
-    public function attachmentPath(): Attribute
+    /**
+     * @return Attribute<string, never>
+     */
+    protected function attachmentPath(): Attribute
     {
-        return new Attribute(
-            get: fn () => 'support-chat/room/'.$this->room_id.'/'.$this->getKey()
+        return Attribute::get(
+            fn () => 'support-chat/room/'.$this->room_id.'/'.$this->getKey()
         );
     }
 
-    public function reactionsWithUsers(): Attribute
+    /**
+     * @return Attribute<ArrayObject<string, int[]>, never>
+     */
+    protected function reactionsWithUsers(): Attribute
     {
-        return new Attribute(
-            get: fn () => new ArrayObject($this->reactions->mapToGroups(
+        return Attribute::get(
+            fn () => new ArrayObject($this->reactions->mapToGroups(
                 static fn (MessageReaction $reaction) => [$reaction->emoji => $reaction->user_id]
             )->toArray())
         );

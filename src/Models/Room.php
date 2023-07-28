@@ -23,8 +23,8 @@ use TTBooking\SupportChat\Contracts\Personifiable;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property Model|null $subject
- * @property Collection|Model[]|Personifiable[] $users
- * @property Collection|Message[] $messages
+ * @property Collection<int, Model&Personifiable> $users
+ * @property Collection<int, Message> $messages
  */
 class Room extends Model
 {
@@ -34,17 +34,20 @@ class Room extends Model
 
     protected static function booted(): void
     {
-        static::deleting(function (self $room) {
+        static::deleting(static function (self $room) {
             $room->isForceDeleting()
                 ? $room->messages()->forceDelete()
                 : $room->messages()->delete();
         });
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function name(): Attribute
     {
-        return new Attribute(
-            get: fn (?string $name): string => $name ?? 'Room '.$this->getKey()
+        return Attribute::get(
+            fn (?string $name): string => $name ?? 'Room '.$this->getKey()
         );
     }
 
@@ -53,11 +56,17 @@ class Room extends Model
         return $this->morphTo();
     }
 
+    /**
+     * @return BelongsToMany<Model&Personifiable>
+     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(config('support-chat.user_model'));
     }
 
+    /**
+     * @return HasMany<Message>
+     */
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class)->withTrashed();

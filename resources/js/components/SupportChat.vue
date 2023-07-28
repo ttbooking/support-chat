@@ -1,39 +1,44 @@
 <template>
     <vue-advanced-chat
-        v-if="store.currentUserId"
-        :current-user-id="store.currentUserId"
-        :rooms.prop="store.rooms"
-        :rooms-loaded="store.roomsLoaded"
+        v-if="$env.userId"
+        :current-user-id="$env.userId"
+        :rooms.prop="rooms"
+        :rooms-loaded="roomRepo.loaded"
         :room-info-enabled="false"
-        :messages.prop="store.allMessages"
-        :messages-loaded="true"
+        :messages.prop="roomMessages"
+        :messages-loaded="messageRepo.loaded"
         :room-actions.prop="menuActions"
         :menu-actions.prop="menuActions"
-        @fetch-messages="store.fetchMessages($event.detail[0])"
-        @fetch-more-rooms="store.fetchRooms"
-        @send-message="store.sendMessage($event.detail[0])"
-        @edit-message="store.editMessage($event.detail[0])"
-        @delete-message="store.deleteMessage($event.detail[0])"
+        @fetch-messages="messageRepo.fetch($event.detail[0])"
+        @fetch-more-rooms="roomRepo.fetch"
+        @send-message="messageRepo.send($event.detail[0])"
+        @edit-message="messageRepo.edit($event.detail[0])"
+        @delete-message="messageRepo.delete($event.detail[0])"
         @open-file="openFile($event.detail[0])"
-        @open-failed-message="store.trySendMessage($event.detail[0])"
-        @add-room="store.addRoom"
+        @open-failed-message="messageRepo.trySend($event.detail[0])"
+        @add-room="roomRepo.add"
         @room-action-handler="menuActionHandler($event.detail[0])"
         @menu-action-handler="menuActionHandler($event.detail[0])"
-        @send-message-reaction="store.sendMessageReaction($event.detail[0])"
+        @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
     />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { register, CustomAction, StringNumber, VueAdvancedChat } from "vue-advanced-chat";
-import { useSupportChatStore } from "@/stores";
+import { computed, ref, onMounted } from "vue";
+import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import type { OpenFileArgs } from "@/types";
+
+import { useRepo } from "pinia-orm";
+import RoomRepository from "@/repositories/RoomRepository";
+import MessageRepository from "@/repositories/MessageRepository";
 
 register();
 
-const props = defineProps<{ userId: StringNumber }>();
+const roomRepo = computed(() => useRepo(RoomRepository));
+const messageRepo = computed(() => useRepo(MessageRepository));
 
-const store = useSupportChatStore();
+const rooms = computed(() => roomRepo.value.all());
+const roomMessages = computed(() => messageRepo.value.all());
 
 const menuActions = ref([
     {
@@ -42,19 +47,16 @@ const menuActions = ref([
     },
 ]);
 
-onMounted(() => {
-    store._setUserId(props.userId);
-    store.fetchRooms();
-});
+onMounted(roomRepo.value.fetch);
 
 function openFile(args: OpenFileArgs) {
-    window.location = args.file.file.url;
+    window.location.assign(args.file.file.url);
 }
 
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
         case "deleteRoom":
-            store.deleteRoom(roomId);
+            roomRepo.value.delete(roomId);
     }
 }
 </script>

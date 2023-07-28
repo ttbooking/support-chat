@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string|null $url
  * @property string|null $preview
  * @property Message $message
- * @property string $attachmentPath
+ * @property-read string $attachmentPath
  */
 class MessageFile extends Model
 {
@@ -36,20 +36,26 @@ class MessageFile extends Model
 
     protected static function booted(): void
     {
-        static::deleted(function (self $attachment) {
+        static::deleted(static function (self $attachment) {
             Storage::delete($attachment->attachmentPath);
         });
     }
 
+    /**
+     * @return BelongsTo<Message, self>
+     */
     public function message(): BelongsTo
     {
         return $this->belongsTo(Message::class);
     }
 
-    public function attachmentPath(): Attribute
+    /**
+     * @return Attribute<string, never>
+     */
+    protected function attachmentPath(): Attribute
     {
-        return new Attribute(
-            get: fn () => $this->message->attachmentPath.'/'.$this->name
+        return Attribute::get(
+            fn () => $this->message->attachmentPath.'/'.$this->name
         );
     }
 }
