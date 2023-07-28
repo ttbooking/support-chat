@@ -13,13 +13,13 @@ export interface InitMessageArgs {
     _id?: string;
     content: string;
     replyMessage?: Message;
-    files: File[];
+    files?: File[];
 }
 
 export interface SendMessageArgs {
     roomId: string;
     content: string;
-    files: File[];
+    files?: File[];
     replyMessage?: Message;
     usersTag: string;
 }
@@ -28,7 +28,7 @@ export interface EditMessageArgs {
     roomId: string;
     messageId: StringNumber;
     newContent: string;
-    files: File[];
+    files?: File[];
     replyMessage?: Message;
     usersTag: string;
 }

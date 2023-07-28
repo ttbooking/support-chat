@@ -71,7 +71,7 @@ export default class MessageRepository extends Repository<Message> {
     private init({ _id, content, replyMessage, files }: InitMessageArgs) {
         return this.save({
             content,
-            files: files.map<MessageFile>((file) => ({
+            files: (files || []).map<MessageFile>((file) => ({
                 name: file.name,
                 type: file.type,
                 extension: file.extension,
