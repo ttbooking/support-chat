@@ -41,6 +41,10 @@ class Message extends Model
 {
     use SoftDeletes;
 
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
     protected $touches = ['room'];
 
     protected $fillable = ['id', 'sender_id', 'parent_id', 'content'];
