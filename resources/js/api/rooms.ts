@@ -8,7 +8,7 @@ export default {
         return window.axios.get<{ data: Room[] }>(baseUrl + "/rooms");
     },
 
-    store(room: RoomStoreRequest = {}) {
+    store(room: RoomStoreRequest) {
         return window.axios.post<{ data: Room }>(baseUrl + "/rooms", room);
     },
 

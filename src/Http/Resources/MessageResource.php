@@ -22,7 +22,7 @@ class MessageResource extends JsonResource
     public function toArray($request = null): array
     {
         return [
-            '_id' => (string) $this->getKey(),
+            '_id' => $this->getKey(),
             'indexId' => $this->getKey(),
             'content' => ! $this->trashed() ? $this->content : '',
             'senderId' => (string) $this->sender_id,

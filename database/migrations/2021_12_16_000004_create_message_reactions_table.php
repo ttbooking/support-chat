@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('message_reactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('message_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('message_id', 21)->constrained()->cascadeOnDelete();
             //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
             $table->char('emoji', 1)->collation('utf8mb4_bin');

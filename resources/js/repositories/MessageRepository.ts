@@ -19,7 +19,7 @@ export default class MessageRepository extends Repository<Message> {
 
     fetch = async ({ room }: FetchMessagesArgs) => {
         this.loaded = false;
-        const response = await api.messages.index(room.roomId.toString());
+        const response = await api.messages.index(room.roomId);
         const messages = this.save(response.data.data);
         this.loaded = true;
         return messages;
@@ -33,8 +33,9 @@ export default class MessageRepository extends Repository<Message> {
     trySend = async ({ roomId, message }: TrySendMessageArgs) => {
         try {
             const response = await api.messages.store(roomId, {
+                id: message._id,
+                parent_id: message.replyMessage?._id,
                 content: message.content,
-                parent_id: message.replyMessage?.indexId ?? message.replyMessage?._id,
                 attachments:
                     message.files?.map((file) => ({
                         name: file.name + "." + file.extension,
@@ -42,7 +43,7 @@ export default class MessageRepository extends Repository<Message> {
                         size: file.size,
                     })) ?? [],
             });
-            return this.save({ ...response.data.data, _id: message._id } as Partial<BaseMessage>);
+            return this.save(response.data.data);
         } catch (error) {
             this.where("_id", message._id).update({ failure: true });
             throw error;
@@ -54,8 +55,8 @@ export default class MessageRepository extends Repository<Message> {
     };
 
     delete = async ({ message }: DeleteMessageArgs) => {
-        await api.messages.destroy(message.indexId ?? message._id);
-        this.destroy(message.indexId ?? message._id);
+        await api.messages.destroy(message._id);
+        this.destroy(message._id);
     };
 
     sendReaction = async ({ messageId, reaction, remove }: SendMessageReactionArgs) => {
@@ -68,7 +69,7 @@ export default class MessageRepository extends Repository<Message> {
         }
     };
 
-    private init({ _id, content, replyMessage, files }: InitMessageArgs) {
+    private init({ content, replyMessage, files }: InitMessageArgs) {
         return this.save({
             content,
             files: (files || []).map<MessageFile>((file) => ({
@@ -85,6 +86,6 @@ export default class MessageRepository extends Repository<Message> {
                 blob: file.blob,
             })),
             replyMessage,
-        } as Partial<BaseMessage>);
+        });
     }
 }

@@ -1,4 +1,4 @@
-import { Message, MessageFile, Room, StringNumber } from "vue-advanced-chat";
+import { Message, MessageFile, Room } from "vue-advanced-chat";
 
 export interface File {
     blob: Blob;
@@ -10,7 +10,6 @@ export interface File {
 }
 
 export interface InitMessageArgs {
-    _id?: string;
     content: string;
     replyMessage?: Message;
     files?: File[];
@@ -26,7 +25,7 @@ export interface SendMessageArgs {
 
 export interface EditMessageArgs {
     roomId: string;
-    messageId: StringNumber;
+    messageId: string;
     newContent: string;
     files?: File[];
     replyMessage?: Message;
@@ -45,12 +44,12 @@ export interface DeleteMessageArgs {
 
 export interface TrySendMessageArgs {
     roomId: string;
-    message: InitMessageArgs;
+    message: { _id: string } & InitMessageArgs;
 }
 
 export interface SendMessageReactionArgs {
     roomId: string;
-    messageId: StringNumber;
+    messageId: string;
     reaction: { unicode: string };
     remove: boolean;
 }
@@ -61,13 +60,13 @@ export interface UploadAttachmentArgs {
 }
 
 export interface ReactionCallbackArgs {
-    messageIndexId: StringNumber;
+    messageId: string;
     userId: string;
     emoji: string;
 }
 
 export interface AttachmentCallbackArgs {
-    messageIndexId: StringNumber;
+    messageId: string;
     filename: string;
     progress?: number;
 }
@@ -81,12 +80,14 @@ export interface OpenFileArgs {
 }
 
 export interface RoomStoreRequest {
+    id: string;
     name?: string;
 }
 
 export interface MessageStoreRequest {
+    id: string;
+    parent_id?: string;
     content: string;
-    parent_id?: StringNumber;
     attachments?: Array<{
         name: string;
         type?: string;

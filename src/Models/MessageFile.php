@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int $id
- * @property int $message_id
+ * @property string $message_id
  * @property string $name
  * @property int $size
  * @property string $type

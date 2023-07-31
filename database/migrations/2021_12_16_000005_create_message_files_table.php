@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('message_files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('message_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('message_id', 21)->constrained()->cascadeOnDelete();
             $table->string('name')->index();
             $table->string('type')->nullable()->index();
             $table->unsignedBigInteger('size');

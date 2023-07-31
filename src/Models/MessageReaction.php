@@ -14,7 +14,7 @@ use TTBooking\SupportChat\Observers\MessageReactionObserver;
 
 /**
  * @property int $id
- * @property int $message_id
+ * @property string $message_id
  * @property int $user_id
  * @property string $emoji
  * @property Carbon $created_at

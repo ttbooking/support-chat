@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\SupportChat\Contracts\Personifiable;
 
 /**
- * @property int $id
+ * @property string $id
  * @property string|null $subject_type
  * @property int|null $subject_id
  * @property string $name

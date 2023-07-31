@@ -1,4 +1,4 @@
-import type { Message, StringNumber } from "vue-advanced-chat";
+import type { Message } from "vue-advanced-chat";
 import type { MessageStoreRequest } from "@/types";
 
 const baseUrl = window.SupportChat.path + "/api/v1";
@@ -12,15 +12,15 @@ export default {
         return window.axios.post<{ data: Message }>(`${baseUrl}/rooms/${roomId}/messages`, message);
     },
 
-    show(messageId: StringNumber) {
+    show(messageId: string) {
         return window.axios.get<{ data: Message }>(`${baseUrl}/messages/${messageId}`);
     },
 
-    update(messageId: StringNumber, message: MessageStoreRequest) {
+    update(messageId: string, message: MessageStoreRequest) {
         return window.axios.put<{ data: Message }>(`${baseUrl}/messages/${messageId}`, message);
     },
 
-    destroy(messageId: StringNumber) {
+    destroy(messageId: string) {
         return window.axios.delete(`${baseUrl}/messages/${messageId}`);
     },
 };

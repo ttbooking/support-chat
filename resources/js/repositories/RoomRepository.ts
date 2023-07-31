@@ -16,7 +16,8 @@ export default class RoomRepository extends Repository<Room> {
     };
 
     add = async () => {
-        const response = await api.rooms.store();
+        const { roomId } = this.new()!;
+        const response = await api.rooms.store({ id: roomId });
         return this.save(response.data.data);
     };
 

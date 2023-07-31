@@ -16,10 +16,10 @@ use TTBooking\SupportChat\Contracts\Personifiable;
 use TTBooking\SupportChat\Observers\MessageObserver;
 
 /**
- * @property int $id
- * @property int $room_id
+ * @property string $id
+ * @property string $room_id
  * @property int $sender_id
- * @property int|null $parent_id
+ * @property string|null $parent_id
  * @property int $type
  * @property string $content
  * @property int $state
