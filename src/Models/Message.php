@@ -43,7 +43,7 @@ class Message extends Model
 
     protected $touches = ['room'];
 
-    protected $fillable = ['sender_id', 'parent_id', 'content'];
+    protected $fillable = ['id', 'sender_id', 'parent_id', 'content'];
 
     protected $with = ['files', 'reactions'];
 

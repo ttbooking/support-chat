@@ -15,8 +15,9 @@ return new class extends Migration
             $table->char('id', 21)->primary();
             $table->foreignUlid('room_id', 21)->constrained()->cascadeOnDelete();
             //$table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
-            $table->unsignedInteger('sender_id');
-            $table->foreignUlid('parent_id', 21)->nullable()->constrained('messages')->cascadeOnDelete();
+            $table->unsignedInteger('sender_id')->index();
+            //$table->foreignUlid('parent_id', 21)->nullable()->constrained('messages')->cascadeOnDelete();
+            $table->char('parent_id', 21)->nullable()->index();
             $table->unsignedTinyInteger('type')->default(0)->index();
             $table->text('content')->fulltext();
             $table->unsignedTinyInteger('state')->default(0);
@@ -24,7 +25,11 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
+        });
+
+        Schema::table('messages', function (Blueprint $table) {
             $table->foreign('sender_id')->references('id')->on('p2_users')->cascadeOnDelete();
+            $table->foreign('parent_id')->references('id')->on('messages')->cascadeOnDelete();
         });
     }
 

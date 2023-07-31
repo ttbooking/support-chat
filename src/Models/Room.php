@@ -30,7 +30,7 @@ class Room extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['id', 'name'];
 
     protected static function booted(): void
     {
