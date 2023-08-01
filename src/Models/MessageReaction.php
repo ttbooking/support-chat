@@ -7,7 +7,6 @@ namespace TTBooking\SupportChat\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
 use TTBooking\SupportChat\Contracts\Personifiable;
 use TTBooking\SupportChat\Observers\MessageReactionObserver;
@@ -56,7 +55,7 @@ class MessageReaction extends Model
         return $this->belongsTo(config('support-chat.user_model'));
     }
 
-    public function resolveRouteBindingQuery($query, $value, $field = null): Relation
+    public function resolveRouteBindingQuery($query, $value, $field = null)
     {
         return parent::resolveRouteBindingQuery($query, $value, $field)->where('user_id', Auth::id());
     }
