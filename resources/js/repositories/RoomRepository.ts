@@ -30,14 +30,14 @@ export default class RoomRepository extends Repository<Room> {
     setUsers = (roomId: string, users: RoomUser[]) => {
         this.query()
             .whereId(roomId)
-            .save({ users } as Partial<BaseRoom>);
+            .update({ users } as Partial<BaseRoom>);
     };
 
     joinUser = (roomId: string, user: RoomUser) => {
         const existingUsers = this.find(roomId)?.users ?? [];
         this.query()
             .whereId(roomId)
-            .save({ users: [...existingUsers, user] } as Partial<BaseRoom>);
+            .update({ users: [...existingUsers, user] } as Partial<BaseRoom>);
     };
 
     leaveUser = (roomId: string, user: RoomUser) => {
@@ -45,7 +45,7 @@ export default class RoomRepository extends Repository<Room> {
         const users = existingUsers.filter((current) => current._id !== user._id);
         this.query()
             .whereId(roomId)
-            .save({ users } as Partial<BaseRoom>);
+            .update({ users } as Partial<BaseRoom>);
     };
 
     messagePosted = (roomId: string, message: Message) => {
