@@ -54,10 +54,13 @@ onMounted(async () => {
     await roomRepo.value.fetch();
 
     for (const room of joinedRooms.value) {
-        window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`)
+        window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`);
+        window.roomChannel
             .here((users: RoomUser[]) => roomRepo.value.setUsers(room.roomId, users))
             .joining((user: RoomUser) => roomRepo.value.joinUser(room.roomId, user))
             .leaving((user: RoomUser) => roomRepo.value.leaveUser(room.roomId, user))
+            .listenToAll((event: string, data: unknown) => console.log(event, data))
+            .error((error: unknown) => console.error(error))
             .listen(".message.posted", (message: Message) => messageRepo.value.posted(room.roomId, message))
             .listen(".message.edited", (message: Message) => messageRepo.value.edited(message))
             .listen(".message.deleted", (message: Message) => messageRepo.value.deleted(message))
