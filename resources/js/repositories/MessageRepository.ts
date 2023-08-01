@@ -10,6 +10,7 @@ import type {
     DeleteMessageArgs,
     SendMessageReactionArgs,
     InitMessageArgs,
+    Reaction,
 } from "@/types";
 
 export default class MessageRepository extends Repository<Message> {
@@ -67,6 +68,28 @@ export default class MessageRepository extends Repository<Message> {
             await api.messageReactions.store(messageId, reaction.unicode);
             // TODO
         }
+    };
+
+    posted = (roomId: string, message: BaseMessage) => {
+        return this.save({ ...message, roomId });
+    };
+
+    edited = (message: BaseMessage) => {
+        return this.save(message);
+    };
+
+    deleted = (message: BaseMessage) => {
+        //this.destroy(message._id);
+        //this.query().whereId(message._id).update({ deleted: true });
+        return this.save({ ...message, deleted: true });
+    };
+
+    reactionLeft = (reaction: Reaction) => {
+        //
+    };
+
+    reactionRemoved = (reaction: Reaction) => {
+        //
     };
 
     private init({ content, replyMessage, files }: InitMessageArgs) {

@@ -25,8 +25,10 @@
 
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
+import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
-import type { OpenFileArgs } from "@/types";
+import type { RoomUser, Message } from "vue-advanced-chat";
+import type { Reaction, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
@@ -38,6 +40,7 @@ const roomRepo = computed(() => useRepo(RoomRepository));
 const messageRepo = computed(() => useRepo(MessageRepository));
 
 const rooms = computed(() => roomRepo.value.all());
+const joinedRooms = computed(() => roomRepo.value.joined().get());
 const roomMessages = computed(() => messageRepo.value.all());
 
 const menuActions = ref([
@@ -47,7 +50,21 @@ const menuActions = ref([
     },
 ]);
 
-onMounted(roomRepo.value.fetch);
+onMounted(async () => {
+    await roomRepo.value.fetch();
+
+    for (const room of joinedRooms.value) {
+        window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`)
+            .here((users: RoomUser[]) => roomRepo.value.setUsers(room.roomId, users))
+            .joining((user: RoomUser) => roomRepo.value.joinUser(room.roomId, user))
+            .leaving((user: RoomUser) => roomRepo.value.leaveUser(room.roomId, user))
+            .listen(".message.posted", (message: Message) => messageRepo.value.posted(room.roomId, message))
+            .listen(".message.edited", (message: Message) => messageRepo.value.edited(message))
+            .listen(".message.deleted", (message: Message) => messageRepo.value.deleted(message))
+            .listen(".reaction.left", (reaction: Reaction) => messageRepo.value.reactionLeft(reaction))
+            .listen(".reaction.removed", (reaction: Reaction) => messageRepo.value.reactionRemoved(reaction));
+    }
+});
 
 function openFile(args: OpenFileArgs) {
     window.location.assign(args.file.file.url);

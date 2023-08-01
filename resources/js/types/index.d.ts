@@ -59,7 +59,7 @@ export interface UploadAttachmentArgs {
     file: File;
 }
 
-export interface ReactionCallbackArgs {
+export interface Reaction {
     messageId: string;
     userId: string;
     emoji: string;
