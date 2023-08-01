@@ -54,7 +54,7 @@ abstract class Event implements ShouldBroadcastNow
     public function broadcastWith(): array
     {
         return [
-            'messageIndexId' => $this->reaction->message_id,
+            'messageId' => $this->reaction->message_id,
             'userId' => $this->reaction->user_id,
             'emoji' => $this->reaction->emoji,
         ];

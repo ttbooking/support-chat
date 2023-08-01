@@ -54,7 +54,7 @@ class Uploaded implements ShouldBroadcastNow
     public function broadcastWith(): array
     {
         return [
-            'messageIndexId' => $this->attachment->message_id,
+            'messageId' => $this->attachment->message_id,
             'filename' => $this->attachment->name,
         ];
     }

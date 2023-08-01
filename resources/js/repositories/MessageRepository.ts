@@ -62,10 +62,10 @@ export default class MessageRepository extends Repository<Message> {
 
     sendReaction = async ({ messageId, reaction, remove }: SendMessageReactionArgs) => {
         if (remove) {
-            this.reactionLeft({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
+            this.reactionRemoved({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
             await api.messageReactions.destroy(messageId, reaction.unicode);
         } else {
-            this.reactionRemoved({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
+            this.reactionLeft({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
             await api.messageReactions.store(messageId, reaction.unicode);
         }
     };
