@@ -28,7 +28,7 @@ export default class Message extends Model implements BaseMessage {
     @Bool(null) declare failure?: boolean;
     @Bool(null) declare disableActions?: boolean;
     @Bool(null) declare disableReactions?: boolean;
-    @Attr({}) declare reactions?: MessageReactions;
+    @Attr({}) declare reactions: MessageReactions;
 
     @BelongsTo(() => Room, "roomId") declare room: Room;
     @BelongsTo(() => User, "senderId") declare sender: User;

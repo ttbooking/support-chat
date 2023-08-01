@@ -62,11 +62,11 @@ export default class MessageRepository extends Repository<Message> {
 
     sendReaction = async ({ messageId, reaction, remove }: SendMessageReactionArgs) => {
         if (remove) {
+            this.reactionLeft({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
             await api.messageReactions.destroy(messageId, reaction.unicode);
-            // TODO
         } else {
+            this.reactionRemoved({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
             await api.messageReactions.store(messageId, reaction.unicode);
-            // TODO
         }
     };
 
@@ -84,12 +84,18 @@ export default class MessageRepository extends Repository<Message> {
         return this.save({ ...message, deleted: true });
     };
 
-    reactionLeft = (reaction: Reaction) => {
-        //
+    reactionLeft = ({ messageId, userId, emoji }: Reaction) => {
+        const reactions = this.find(messageId)!.reactions;
+        reactions[emoji] = [...new Set(reactions[emoji]).add(userId)];
+        return this.query().whereId(messageId).update({ reactions });
     };
 
-    reactionRemoved = (reaction: Reaction) => {
-        //
+    reactionRemoved = ({ messageId, userId, emoji }: Reaction) => {
+        const reactions = this.find(messageId)!.reactions;
+        const reactionUsers = new Set(reactions[emoji]);
+        reactionUsers.delete(userId);
+        reactions[emoji] = [...reactionUsers];
+        return this.query().whereId(messageId).update({ reactions });
     };
 
     private init({ content, replyMessage, files }: InitMessageArgs) {
