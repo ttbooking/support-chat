@@ -55,6 +55,8 @@ class Message extends Model
         'content' => '',
     ];
 
+    protected $dateFormat = 'Y-m-d H:i:s.u';
+
     const STATE_SAVED = 0;
 
     const STATE_DISTRIBUTED = 1;

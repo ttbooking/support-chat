@@ -22,9 +22,9 @@ return new class extends Migration
             $table->text('content')->fulltext();
             $table->unsignedTinyInteger('state')->default(0);
             $table->unsignedTinyInteger('flags')->default(0);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
-            $table->softDeletes();
+            $table->timestamp('created_at', 6)->useCurrent()->index();
+            $table->timestamp('updated_at', 6)->useCurrent()->useCurrentOnUpdate();
+            $table->softDeletes('deleted_at', 6);
         });
 
         Schema::table('messages', function (Blueprint $table) {
