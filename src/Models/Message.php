@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
 use TTBooking\SupportChat\Observers\MessageObserver;
 
@@ -39,11 +40,7 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  */
 class Message extends Model
 {
-    use SoftDeletes;
-
-    protected $keyType = 'string';
-
-    public $incrementing = false;
+    use HasNanoids, SoftDeletes;
 
     protected $touches = ['room'];
 

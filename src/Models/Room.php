@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
 
 /**
@@ -28,11 +29,7 @@ use TTBooking\SupportChat\Contracts\Personifiable;
  */
 class Room extends Model
 {
-    use SoftDeletes;
-
-    protected $keyType = 'string';
-
-    public $incrementing = false;
+    use HasNanoids, SoftDeletes;
 
     protected $fillable = ['id', 'name'];
 

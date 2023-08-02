@@ -21,7 +21,8 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "laravel/framework": "^9.19 || ^10.0"
+        "laravel/framework": "^9.19 || ^10.0",
+        "ttbooking/laravel-nanoid": "dev-master"
     },
     "require-dev": {
         "fakerphp/faker": "^1.20",

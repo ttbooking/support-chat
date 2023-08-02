@@ -38,7 +38,7 @@ class StoreRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|string|size:21',
+            'id' => 'required|nanoid|size:21',
             'name' => 'sometimes|nullable|string|max:255',
         ];
     }
