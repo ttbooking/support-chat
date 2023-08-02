@@ -22,7 +22,7 @@
         "php": "^8.0",
         "ext-json": "*",
         "laravel/framework": "^9.19 || ^10.0",
-        "ttbooking/laravel-nanoid": "dev-master"
+        "ttbooking/laravel-nanoid": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.20",
