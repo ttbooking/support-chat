@@ -3,18 +3,18 @@
     "file": "assets/vendor-99812c21.js"
   },
   "resources/images/favicon.svg": {
-    "file": "assets/favicon-1f7cf941.svg",
+    "file": "assets/favicon-fd34bfbb.svg",
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.css": {
-    "file": "assets/app-5971ca4e.css",
+    "file": "assets/app-1412630b.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.ts": {
     "css": [
-      "assets/app-5971ca4e.css"
+      "assets/app-1412630b.css"
     ],
-    "file": "assets/app-79cc05f1.js",
+    "file": "assets/app-c2650c48.js",
     "imports": [
       "_vendor-99812c21.js"
     ],
