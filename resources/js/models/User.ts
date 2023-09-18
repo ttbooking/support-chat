@@ -1,5 +1,5 @@
 import { Model } from "pinia-orm";
-import { Uid, Attr, Str, BelongsToMany, HasMany } from "pinia-orm/decorators";
+import { Attr, Str, BelongsToMany, HasMany } from "pinia-orm/decorators";
 import { UserStatus, RoomUser as BaseUser } from "vue-advanced-chat";
 import Room from "./Room";
 import RoomUser from "./RoomUser";
@@ -10,7 +10,7 @@ export default class User extends Model implements BaseUser {
 
     static primaryKey = "_id";
 
-    @Uid() declare _id: string;
+    @Attr() declare _id: string;
     @Str("") declare username: string;
     @Str("") declare avatar: string;
     @Attr() declare status: UserStatus;

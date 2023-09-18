@@ -31,6 +31,8 @@ class Room extends Model
 {
     use HasNanoids, SoftDeletes;
 
+    protected int $nanoidSize = 7;
+
     protected $fillable = ['id', 'name'];
 
     protected static function booted(): void

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->nanoid()->primary();
-            $table->foreignNanoid('room_id')->constrained()->cascadeOnDelete();
+            $table->nanoid(length: 7)->primary();
+            $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
             //$table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
             $table->unsignedInteger('sender_id')->index();
             //$table->foreignNanoid('parent_id')->nullable()->constrained('messages')->cascadeOnDelete();
-            $table->nanoid('parent_id')->nullable()->index();
+            $table->nanoid('parent_id', 7)->nullable()->index();
             $table->unsignedTinyInteger('type')->default(0)->index();
             $table->text('content')->fulltext();
             $table->unsignedTinyInteger('state')->default(0);

@@ -1,14 +1,13 @@
 import { Model } from "pinia-orm";
-import { Uid, Attr, Str, Num, Bool, BelongsTo } from "pinia-orm/decorators";
+import { Attr, Str, Num, Bool, BelongsTo } from "pinia-orm/decorators";
 import { MessageFile as BaseMessageFile } from "vue-advanced-chat";
 import Message from "./Message";
 
 export default class MessageFile extends Model implements BaseMessageFile {
     static entity = "messageFiles";
 
-    static primaryKey = "_id";
+    static primaryKey = ["messageId", "name"];
 
-    @Uid() declare _id: string;
     @Str("") declare messageId: string;
     @Str("") declare name: string;
     @Str("") declare type: string;

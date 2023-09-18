@@ -10,7 +10,7 @@ export default class Room extends Model implements BaseRoom {
 
     static primaryKey = "roomId";
 
-    @Uid() declare roomId: string;
+    @Uid(7) declare roomId: string;
     @Str("") declare roomName: string;
     @Str("") declare avatar: string;
     @Num(null) declare unreadCount?: number;

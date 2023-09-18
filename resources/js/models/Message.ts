@@ -10,7 +10,7 @@ export default class Message extends Model implements BaseMessage {
 
     static primaryKey = "_id";
 
-    @Uid() declare _id: string;
+    @Uid(7) declare _id: string;
     @Attr() declare roomId: string;
     @Str(window.SupportChat.userId) declare senderId: string;
     @Str(null) declare replyMessageId?: string;

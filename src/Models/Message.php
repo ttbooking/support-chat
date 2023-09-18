@@ -42,6 +42,8 @@ class Message extends Model
 {
     use HasNanoids, SoftDeletes;
 
+    protected int $nanoidSize = 7;
+
     protected $touches = ['room'];
 
     protected $fillable = ['id', 'sender_id', 'parent_id', 'content'];
