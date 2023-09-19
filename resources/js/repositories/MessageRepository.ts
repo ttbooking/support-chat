@@ -1,4 +1,4 @@
-import { Repository } from "pinia-orm";
+import { AxiosRepository } from "@pinia-orm/axios";
 import Message from "@/models/Message";
 import api from "@/api";
 import type { Message as BaseMessage, MessageFile } from "vue-advanced-chat";
@@ -13,17 +13,16 @@ import type {
     Reaction,
 } from "@/types";
 
-export default class MessageRepository extends Repository<Message> {
+export default class MessageRepository extends AxiosRepository<Message> {
     use = Message;
 
     loaded = false;
 
     fetch = async ({ room }: FetchMessagesArgs) => {
         this.loaded = false;
-        const response = await api.messages.index(room.roomId);
-        const messages = this.save(response.data.data);
+        const response = await this.api().get(`/rooms/${room.roomId}/messages`);
         this.loaded = true;
-        return messages;
+        return response;
     };
 
     send = async ({ roomId, content, files, replyMessage }: SendMessageArgs) => {
@@ -33,7 +32,7 @@ export default class MessageRepository extends Repository<Message> {
 
     trySend = async ({ roomId, message }: TrySendMessageArgs) => {
         try {
-            const response = await api.messages.store(roomId, {
+            return await this.api().post(`/rooms/${roomId}/messages`, {
                 id: message._id,
                 parent_id: message.replyMessage?._id,
                 content: message.content,
@@ -44,7 +43,6 @@ export default class MessageRepository extends Repository<Message> {
                         size: file.size,
                     })) ?? [],
             });
-            return this.save(response.data.data);
         } catch (error) {
             this.where("_id", message._id).update({ failure: true });
             throw error;
@@ -56,8 +54,7 @@ export default class MessageRepository extends Repository<Message> {
     };
 
     delete = async ({ message }: DeleteMessageArgs) => {
-        await api.messages.destroy(message._id);
-        this.destroy(message._id);
+        return await this.api().delete(`/messages/${message._id}`, { delete: 1 });
     };
 
     sendReaction = async ({ messageId, reaction, remove }: SendMessageReactionArgs) => {

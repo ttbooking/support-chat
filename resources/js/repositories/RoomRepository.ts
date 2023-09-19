@@ -1,30 +1,26 @@
-import { Repository } from "pinia-orm";
+import { AxiosRepository } from "@pinia-orm/axios";
 import Room from "@/models/Room";
-import api from "@/api";
 import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
 
-export default class RoomRepository extends Repository<Room> {
+export default class RoomRepository extends AxiosRepository<Room> {
     use = Room;
 
     loaded = false;
 
     fetch = async () => {
         this.loaded = false;
-        const response = await api.rooms.index();
-        const rooms = this.save(response.data.data);
+        const response = await this.api().get("/rooms");
         this.loaded = true;
-        return rooms;
+        return response;
     };
 
     add = async () => {
         const { roomId } = this.new()!;
-        const response = await api.rooms.store({ id: roomId });
-        return this.save(response.data.data);
+        return await this.api().post("/rooms", { id: roomId });
     };
 
     delete = async (roomId: string) => {
-        await api.rooms.destroy(roomId);
-        this.destroy(roomId);
+        return await this.api().delete(`/rooms/${roomId}`, { delete: 1 });
     };
 
     setUsers = (roomId: string, users: RoomUser[]) => {
