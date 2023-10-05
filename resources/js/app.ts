@@ -5,6 +5,6 @@ import env from "./plugins/env";
 import pinia from "./plugins/pinia";
 import SupportChat from "./components/SupportChat.vue";
 
-import.meta.glob("../images/**");
+//import.meta.glob("../images/**");
 
 createApp({}).component("support-chat", SupportChat).use(env).use(pinia).mount("#support-chat");

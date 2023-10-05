@@ -19,6 +19,8 @@
     <body class="font-sans antialiased">
         <div id="support-chat" v-cloak>
             <support-chat></support-chat>
+            <support-chat></support-chat>
+            <support-chat></support-chat>
         </div>
 
         <!-- Global Support Chat Object -->

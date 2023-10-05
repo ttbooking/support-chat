@@ -7,7 +7,8 @@ export default defineConfig({
         rollupOptions: {
             output: {
                 manualChunks: {
-                    vendor: ["vue-advanced-chat"],
+                    "advanced-chat": ["vue-advanced-chat"],
+                    winbox: ["vue-winbox"],
                 },
             },
         },
