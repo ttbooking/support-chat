@@ -2,11 +2,11 @@
   "_advanced-chat-99812c21.js": {
     "file": "assets/advanced-chat-99812c21.js"
   },
-  "_winbox-c232e572.js": {
-    "file": "assets/winbox-c232e572.js"
+  "_winbox-43a85172.js": {
+    "file": "assets/winbox-43a85172.js"
   },
   "resources/images/favicon.svg": {
-    "file": "assets/favicon-fd34bfbb.svg",
+    "file": "assets/favicon-1f7cf941.svg",
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.css": {
@@ -15,14 +15,14 @@
   },
   "resources/js/app.ts": {
     "assets": [
-      "assets/favicon-fd34bfbb.svg"
+      "assets/favicon-1f7cf941.svg"
     ],
     "css": [
       "assets/app-20353611.css"
     ],
-    "file": "assets/app-c6e4e5a0.js",
+    "file": "assets/app-22ee0d6a.js",
     "imports": [
-      "_winbox-c232e572.js",
+      "_winbox-43a85172.js",
       "_advanced-chat-99812c21.js"
     ],
     "isEntry": true,
