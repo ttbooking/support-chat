@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "vue-tsc && vite build",
         "serve": "vite preview",
         "lint": "eslint \"resources/**/*.{ts,vue}\"",
         "prettify": "prettier --write resources"

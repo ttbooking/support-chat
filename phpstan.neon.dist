@@ -10,4 +10,4 @@ parameters:
     level: 9
 
 includes:
-    - vendor/nunomaduro/larastan/extension.neon
+    - vendor/larastan/larastan/extension.neon
