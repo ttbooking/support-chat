@@ -2,8 +2,8 @@
   "_advanced-chat-jhNtGTZx.js": {
     "file": "assets/advanced-chat-jhNtGTZx.js"
   },
-  "_winbox-Ipu7N5O2.js": {
-    "file": "assets/winbox-Ipu7N5O2.js"
+  "_winbox-5CT6_iRL.js": {
+    "file": "assets/winbox-5CT6_iRL.js"
   },
   "resources/images/favicon.svg": {
     "file": "assets/favicon-1ykXWufD.svg",
@@ -16,9 +16,9 @@
     "css": [
       "assets/app-WKVa4fEW.css"
     ],
-    "file": "assets/app-v_NTlbSC.js",
+    "file": "assets/app-7T1hbjWn.js",
     "imports": [
-      "_winbox-Ipu7N5O2.js",
+      "_winbox-5CT6_iRL.js",
       "_advanced-chat-jhNtGTZx.js"
     ],
     "isEntry": true,
