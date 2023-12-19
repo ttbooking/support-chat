@@ -2,23 +2,23 @@
   "_advanced-chat-jhNtGTZx.js": {
     "file": "assets/advanced-chat-jhNtGTZx.js"
   },
-  "_winbox-5CT6_iRL.js": {
-    "file": "assets/winbox-5CT6_iRL.js"
+  "_winbox-JyJb2kCg.js": {
+    "file": "assets/winbox-JyJb2kCg.js"
   },
   "resources/images/favicon.svg": {
-    "file": "assets/favicon-1ykXWufD.svg",
+    "file": "assets/favicon-K2gI3-Km.svg",
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
     "assets": [
-      "assets/favicon-1ykXWufD.svg"
+      "assets/favicon-K2gI3-Km.svg"
     ],
     "css": [
-      "assets/app-WKVa4fEW.css"
+      "assets/app-uK4jEs5e.css"
     ],
-    "file": "assets/app-7T1hbjWn.js",
+    "file": "assets/app-mRRh27Tm.js",
     "imports": [
-      "_winbox-5CT6_iRL.js",
+      "_winbox-JyJb2kCg.js",
       "_advanced-chat-jhNtGTZx.js"
     ],
     "isEntry": true,
