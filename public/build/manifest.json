@@ -6,17 +6,17 @@
     "file": "assets/winbox-JyJb2kCg.js"
   },
   "resources/images/favicon.svg": {
-    "file": "assets/favicon-K2gI3-Km.svg",
+    "file": "assets/favicon-1ykXWufD.svg",
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
     "assets": [
-      "assets/favicon-K2gI3-Km.svg"
+      "assets/favicon-1ykXWufD.svg"
     ],
     "css": [
       "assets/app-uK4jEs5e.css"
     ],
-    "file": "assets/app-mRRh27Tm.js",
+    "file": "assets/app-j4rnSYlM.js",
     "imports": [
       "_winbox-JyJb2kCg.js",
       "_advanced-chat-jhNtGTZx.js"
