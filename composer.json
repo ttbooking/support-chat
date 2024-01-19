@@ -1,7 +1,7 @@
 {
     "name": "ttbooking/support-chat",
-    "description": "Support Chat.",
     "type": "library",
+    "description": "Support Chat.",
     "keywords": ["support", "chat", "support chat"],
     "license": "MIT",
     "support": {
@@ -25,7 +25,8 @@
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.4.4",
         "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^10.0"
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.2"
     },
     "autoload": {
         "psr-4": {
@@ -39,11 +40,6 @@
             "TTBooking\\SupportChat\\Tests\\": "tests/"
         }
     },
-    "scripts": {
-        "analyse": "@php vendor/bin/phpstan analyse",
-        "lint": "@php vendor/bin/pint --test",
-        "test": "@php vendor/bin/phpunit"
-    },
     "extra": {
         "laravel": {
             "providers": [
@@ -52,8 +48,16 @@
         }
     },
     "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "analyse": "@php vendor/bin/phpstan analyse",
+        "lint": "@php vendor/bin/pint --test",
+        "test": "@php vendor/bin/pest"
+    }
 }
