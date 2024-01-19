@@ -12,8 +12,6 @@ class RoomChannel
 {
     /**
      * Create a new channel instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -22,9 +20,6 @@ class RoomChannel
 
     /**
      * Authenticate the user's access to the channel.
-     *
-     * @param  Model  $user
-     * @return UserResource|false
      */
     public function join(Model $user, Room $room): UserResource|false
     {

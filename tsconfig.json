@@ -21,6 +21,6 @@
         "resources/js/**/*.ts",
         "resources/js/**/*.d.ts",
         "resources/js/**/*.vue",
-        "vite.config.ts"
+        "*.config.ts"
     ]
 }

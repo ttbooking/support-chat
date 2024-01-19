@@ -12,8 +12,6 @@ class SupportChatServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
@@ -29,8 +27,6 @@ class SupportChatServiceProvider extends ServiceProvider
 
     /**
      * Register the Support Chat routes.
-     *
-     * @return void
      */
     protected function registerRoutes(): void
     {
@@ -49,8 +45,6 @@ class SupportChatServiceProvider extends ServiceProvider
 
     /**
      * Register the Support Chat resources.
-     *
-     * @return void
      */
     protected function registerResources(): void
     {
@@ -88,8 +82,6 @@ class SupportChatServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register(): void
     {

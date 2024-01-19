@@ -1,6 +1,8 @@
 /vendor
 /node_modules
 /.idea
+/.vscode
+/.phpunit.cache
 /public/hot
 /phpstan.neon
 /phpunit.xml

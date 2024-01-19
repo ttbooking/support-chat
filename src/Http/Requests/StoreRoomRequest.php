@@ -10,8 +10,6 @@ class StoreRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -20,8 +18,6 @@ class StoreRoomRequest extends FormRequest
 
     /**
      * Prepare the data for validation.
-     *
-     * @return void
      */
     public function prepareForValidation(): void
     {
@@ -33,7 +29,7 @@ class StoreRoomRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, string>
      */
     public function rules(): array
     {

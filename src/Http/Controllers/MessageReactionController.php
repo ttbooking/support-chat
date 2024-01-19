@@ -15,10 +15,6 @@ class MessageReactionController extends Controller
 {
     /**
      * Store a newly created message reaction in storage.
-     *
-     * @param  Request  $request
-     * @param  Message  $message
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Message $message): \Illuminate\Http\Response
     {
@@ -32,10 +28,6 @@ class MessageReactionController extends Controller
 
     /**
      * Remove the specified message from storage.
-     *
-     * @param  Message  $message
-     * @param  MessageReaction  $reaction
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Message $message, MessageReaction $reaction): \Illuminate\Http\Response
     {

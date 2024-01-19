@@ -12,9 +12,6 @@ class MessageReactionObserver
 {
     /**
      * Handle the Message's reaction "created" event.
-     *
-     * @param  MessageReaction  $reaction
-     * @return void
      */
     public function created(MessageReaction $reaction): void
     {
@@ -23,9 +20,6 @@ class MessageReactionObserver
 
     /**
      * Handle the Message's reaction "deleted" event.
-     *
-     * @param  MessageReaction  $reaction
-     * @return void
      */
     public function deleted(MessageReaction $reaction): void
     {

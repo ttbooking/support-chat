@@ -28,9 +28,6 @@ class MessageObserver
 
     /**
      * Handle the Message "created" event.
-     *
-     * @param  Message  $message
-     * @return void
      */
     public function created(Message $message): void
     {
@@ -39,9 +36,6 @@ class MessageObserver
 
     /**
      * Handle the Message "updated" event.
-     *
-     * @param  Message  $message
-     * @return void
      */
     public function updated(Message $message): void
     {
@@ -50,9 +44,6 @@ class MessageObserver
 
     /**
      * Handle the Message "deleted" event.
-     *
-     * @param  Message  $message
-     * @return void
      */
     public function deleted(Message $message): void
     {
@@ -61,9 +52,6 @@ class MessageObserver
 
     /**
      * Handle the Message "restored" event.
-     *
-     * @param  Message  $message
-     * @return void
      */
     public function restored(Message $message): void
     {
@@ -72,9 +60,6 @@ class MessageObserver
 
     /**
      * Handle the Message "force deleted" event.
-     *
-     * @param  Message  $message
-     * @return void
      */
     public function forceDeleted(Message $message): void
     {

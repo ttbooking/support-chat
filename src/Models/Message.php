@@ -44,12 +44,12 @@ class Message extends Model
 
     protected int $nanoidSize = 7;
 
+    /** @var list<string> */
     protected $touches = ['room'];
 
     protected $fillable = ['id', 'sender_id', 'parent_id', 'content'];
 
-    protected $with = ['files', 'reactions'];
-
+    /** @var array<string, mixed> */
     protected $attributes = [
         'content' => '',
     ];
@@ -96,7 +96,10 @@ class Message extends Model
      */
     public function sender(): BelongsTo
     {
-        return $this->belongsTo(config('support-chat.user_model'));
+        /** @var class-string<Model> $model */
+        $model = config('support-chat.user_model');
+
+        return $this->belongsTo($model);
     }
 
     /**

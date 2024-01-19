@@ -16,10 +16,9 @@ class MessageResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  Request|null  $request
-     * @return array
+     * @return array<string, mixed>
      */
-    public function toArray($request = null): array
+    public function toArray(?Request $request = null): array
     {
         return [
             '_id' => $this->getKey(),
@@ -37,7 +36,7 @@ class MessageResource extends JsonResource
             'disableReactions' => (bool) ($this->flags & Message::FLAG_DISABLE_REACTIONS),
             'files' => ! $this->trashed() ? MessageFileResource::collection($this->files) : [],
             'reactions' => $this->reactionsWithUsers,
-            'replyMessage' => $this->parent ? new static($this->parent) : null,
+            'replyMessage' => $this->parent ? new self($this->parent) : null,
         ];
     }
 }

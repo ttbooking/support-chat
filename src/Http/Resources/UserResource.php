@@ -11,17 +11,16 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use TTBooking\SupportChat\Contracts\Personifiable;
 
 /**
- * @mixin Model|Personifiable
+ * @mixin Model&Personifiable
  */
 class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  Request  $request
-     * @return array
+     * @return array<string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(?Request $request = null): array
     {
         $person = $this->getPersonInfo();
         $lastChanged = $person->lastChanged ? Carbon::createFromInterface($person->lastChanged) : Carbon::now();

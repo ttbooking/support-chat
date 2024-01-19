@@ -17,9 +17,6 @@ class MessageController extends Controller
 {
     /**
      * Display a listing of the messages in the room.
-     *
-     * @param  Room  $room
-     * @return ResourceCollection
      */
     public function index(Room $room): ResourceCollection
     {
@@ -28,10 +25,6 @@ class MessageController extends Controller
 
     /**
      * Store a newly created message in storage.
-     *
-     * @param  StoreMessageRequest  $request
-     * @param  Room  $room
-     * @return MessageResource
      */
     public function store(StoreMessageRequest $request, Room $room): MessageResource
     {
@@ -55,9 +48,6 @@ class MessageController extends Controller
 
     /**
      * Display the specified message.
-     *
-     * @param  Message  $message
-     * @return MessageResource
      */
     public function show(Message $message): MessageResource
     {
@@ -66,10 +56,6 @@ class MessageController extends Controller
 
     /**
      * Update the specified message in storage.
-     *
-     * @param  StoreMessageRequest  $request
-     * @param  Message  $message
-     * @return MessageResource
      */
     public function update(StoreMessageRequest $request, Message $message): MessageResource
     {
@@ -80,9 +66,6 @@ class MessageController extends Controller
 
     /**
      * Remove the specified message from storage.
-     *
-     * @param  Message  $message
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Message $message): \Illuminate\Http\Response
     {

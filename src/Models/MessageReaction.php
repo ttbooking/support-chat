@@ -52,7 +52,10 @@ class MessageReaction extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(config('support-chat.user_model'));
+        /** @var class-string<Model> $model */
+        $model = config('support-chat.user_model');
+
+        return $this->belongsTo($model);
     }
 
     public function resolveRouteBindingQuery($query, $value, $field = null)

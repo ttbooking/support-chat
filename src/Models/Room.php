@@ -50,7 +50,7 @@ class Room extends Model
     protected function name(): Attribute
     {
         return Attribute::get(
-            fn (?string $name): string => $name ?? 'Room '.$this->getKey()
+            fn (?string $name): string => $name ?? 'Room '.$this->id
         );
     }
 
@@ -64,7 +64,10 @@ class Room extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(config('support-chat.user_model'));
+        /** @var class-string<Model> $model */
+        $model = config('support-chat.user_model');
+
+        return $this->belongsToMany($model);
     }
 
     /**

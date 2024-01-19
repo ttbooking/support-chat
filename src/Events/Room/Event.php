@@ -20,9 +20,6 @@ abstract class Event implements ShouldBroadcastNow
 
     /**
      * Create a new event instance.
-     *
-     * @param  Room  $room
-     * @return void
      */
     public function __construct(public Room $room)
     {
@@ -30,8 +27,6 @@ abstract class Event implements ShouldBroadcastNow
 
     /**
      * The event's broadcast name.
-     *
-     * @return string
      */
     public function broadcastAs(): string
     {
@@ -40,8 +35,6 @@ abstract class Event implements ShouldBroadcastNow
 
     /**
      * Get the channels the event should broadcast on.
-     *
-     * @return PrivateChannel
      */
     public function broadcastOn(): PrivateChannel
     {
@@ -50,8 +43,6 @@ abstract class Event implements ShouldBroadcastNow
 
     /**
      * Get the data to broadcast.
-     *
-     * @return RoomResource
      */
     public function broadcastWith(): RoomResource
     {

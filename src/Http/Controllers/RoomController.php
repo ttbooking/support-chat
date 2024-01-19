@@ -15,8 +15,6 @@ class RoomController extends Controller
 {
     /**
      * Display a listing of the rooms.
-     *
-     * @return ResourceCollection
      */
     public function index(): ResourceCollection
     {
@@ -25,9 +23,6 @@ class RoomController extends Controller
 
     /**
      * Store a newly created room in storage.
-     *
-     * @param  StoreRoomRequest  $request
-     * @return RoomResource
      */
     public function store(StoreRoomRequest $request): RoomResource
     {
@@ -38,9 +33,6 @@ class RoomController extends Controller
 
     /**
      * Display the specified room.
-     *
-     * @param  Room  $room
-     * @return RoomResource
      */
     public function show(Room $room): RoomResource
     {
@@ -49,10 +41,6 @@ class RoomController extends Controller
 
     /**
      * Update the specified room in storage.
-     *
-     * @param  StoreRoomRequest  $request
-     * @param  Room  $room
-     * @return RoomResource
      */
     public function update(StoreRoomRequest $request, Room $room): RoomResource
     {
@@ -63,9 +51,6 @@ class RoomController extends Controller
 
     /**
      * Remove the specified room from storage.
-     *
-     * @param  Room  $room
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Room $room): \Illuminate\Http\Response
     {

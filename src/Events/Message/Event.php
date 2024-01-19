@@ -22,9 +22,6 @@ abstract class Event implements ShouldBroadcast
 
     /**
      * Create a new event instance.
-     *
-     * @param  Message  $message
-     * @return void
      */
     public function __construct(public Message $message)
     {
@@ -32,8 +29,6 @@ abstract class Event implements ShouldBroadcast
 
     /**
      * The event's broadcast name.
-     *
-     * @return string
      */
     public function broadcastAs(): string
     {
@@ -42,8 +37,6 @@ abstract class Event implements ShouldBroadcast
 
     /**
      * Get the channels the event should broadcast on.
-     *
-     * @return PresenceChannel
      */
     public function broadcastOn(): PresenceChannel
     {
@@ -53,7 +46,7 @@ abstract class Event implements ShouldBroadcast
     /**
      * Get the data to broadcast.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function broadcastWith(): array
     {
@@ -63,7 +56,7 @@ abstract class Event implements ShouldBroadcast
     /**
      * Get the tags that should be assigned to the job.
      *
-     * @return array
+     * @return list<string>
      */
     public function tags(): array
     {

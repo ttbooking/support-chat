@@ -18,9 +18,6 @@ class Uploaded implements ShouldBroadcastNow
 
     /**
      * Create a new event instance.
-     *
-     * @param  MessageFile  $attachment
-     * @return void
      */
     public function __construct(public MessageFile $attachment)
     {
@@ -28,8 +25,6 @@ class Uploaded implements ShouldBroadcastNow
 
     /**
      * The event's broadcast name.
-     *
-     * @return string
      */
     public function broadcastAs(): string
     {
@@ -38,8 +33,6 @@ class Uploaded implements ShouldBroadcastNow
 
     /**
      * Get the channels the event should broadcast on.
-     *
-     * @return PresenceChannel
      */
     public function broadcastOn(): PresenceChannel
     {
@@ -49,7 +42,7 @@ class Uploaded implements ShouldBroadcastNow
     /**
      * Get the data to broadcast.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function broadcastWith(): array
     {
@@ -62,7 +55,7 @@ class Uploaded implements ShouldBroadcastNow
     /**
      * Get the tags that should be assigned to the job.
      *
-     * @return array
+     * @return list<string>
      */
     public function tags(): array
     {

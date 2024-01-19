@@ -18,10 +18,6 @@ class MessageAttachmentController extends Controller
 {
     /**
      * Store a newly created attachment in storage.
-     *
-     * @param  StoreAttachmentRequest  $request
-     * @param  Message  $message
-     * @return MessageFileResource
      */
     public function store(StoreAttachmentRequest $request, Message $message): MessageFileResource
     {
@@ -36,10 +32,6 @@ class MessageAttachmentController extends Controller
 
     /**
      * Download the specified attachment.
-     *
-     * @param  Message  $message
-     * @param  MessageFile  $attachment
-     * @return StreamedResponse
      */
     public function show(Message $message, MessageFile $attachment): StreamedResponse
     {
@@ -48,10 +40,6 @@ class MessageAttachmentController extends Controller
 
     /**
      * Remove the specified attachment from storage.
-     *
-     * @param  Message  $message
-     * @param  MessageFile  $attachment
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Message $message, MessageFile $attachment): \Illuminate\Http\Response
     {

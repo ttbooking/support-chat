@@ -28,6 +28,7 @@ class MessageFile extends Model
         'audio' => 'bool',
     ];
 
+    /** @var list<string> */
     protected $touches = ['message'];
 
     protected $fillable = ['name', 'type', 'size'];
