@@ -1,6 +1,6 @@
 {
-  "_advanced-chat-CoyY-DKE.js": {
-    "file": "assets/advanced-chat-CoyY-DKE.js"
+  "_advanced-chat-HxGRyht-.js": {
+    "file": "assets/advanced-chat-HxGRyht-.js"
   },
   "_winbox--JY9a05e.js": {
     "file": "assets/winbox--JY9a05e.js"
@@ -10,12 +10,12 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-XcRqu4X9.js",
+    "file": "assets/app-CmLvyHMx.js",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
       "_winbox--JY9a05e.js",
-      "_advanced-chat-CoyY-DKE.js"
+      "_advanced-chat-HxGRyht-.js"
     ],
     "css": [
       "assets/app-CWX_69a1.css"
