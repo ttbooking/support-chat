@@ -2,26 +2,26 @@
   "_advanced-chat-HxGRyht-.js": {
     "file": "assets/advanced-chat-HxGRyht-.js"
   },
-  "_winbox-BOQbf8io.js": {
-    "file": "assets/winbox-BOQbf8io.js"
+  "_winbox-CVvEWNLp.js": {
+    "file": "assets/winbox-CVvEWNLp.js"
   },
   "resources/images/favicon.svg": {
-    "file": "assets/favicon-DXKRda58.svg",
+    "file": "assets/favicon-raAjf4qY.svg",
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-BrCuB5XZ.js",
+    "file": "assets/app-CEadL7nn.js",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_winbox-BOQbf8io.js",
+      "_winbox-CVvEWNLp.js",
       "_advanced-chat-HxGRyht-.js"
     ],
     "css": [
       "assets/app-CWX_69a1.css"
     ],
     "assets": [
-      "assets/favicon-DXKRda58.svg"
+      "assets/favicon-raAjf4qY.svg"
     ]
   }
 }
