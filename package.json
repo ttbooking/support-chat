@@ -11,7 +11,7 @@
     "dependencies": {
         "@pinia-orm/axios": "^1.7.0",
         "@tailwindcss/forms": "^0.5.7",
-        "axios": "^1.6.7",
+        "axios": "^1.6.8",
         "laravel-echo": "^1.16.0",
         "lodash": "^4.17.21",
         "pinia": "^2.1.7",
@@ -25,17 +25,17 @@
         "@types/lodash": "^4.17.0",
         "@types/winbox": "^0.2.5",
         "@vitejs/plugin-vue": "^5.0.4",
-        "autoprefixer": "^10.4.18",
+        "autoprefixer": "^10.4.19",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-vue": "^9.23.0",
         "laravel-vite-plugin": "^1.0.2",
-        "postcss": "^8.4.35",
+        "postcss": "^8.4.38",
         "prettier": "^3.2.5",
-        "typescript": "^5.4.2",
-        "typescript-eslint": "^7.2.0",
-        "vite": "^5.1.6",
-        "vue-tsc": "^2.0.6"
+        "typescript": "^5.4.3",
+        "typescript-eslint": "^7.3.1",
+        "vite": "^5.2.6",
+        "vue-tsc": "^2.0.7"
     },
     "packageManager": "yarn@4.1.1"
 }
