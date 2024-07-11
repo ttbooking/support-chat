@@ -8,11 +8,11 @@
     "name": "winbox"
   },
   "resources/images/favicon.svg": {
-    "file": "assets/favicon-DXKRda58.svg",
+    "file": "assets/favicon-raAjf4qY.svg",
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-DyI3GzP8.js",
+    "file": "assets/app-DwdCuE4g.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
@@ -24,7 +24,7 @@
       "assets/app-CzcFWOHc.css"
     ],
     "assets": [
-      "assets/favicon-DXKRda58.svg"
+      "assets/favicon-raAjf4qY.svg"
     ]
   }
 }
