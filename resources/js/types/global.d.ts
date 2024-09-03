@@ -14,7 +14,7 @@ declare global {
     }
 }
 
-declare module "@vue/runtime-core" {
+declare module "vue" {
     interface ComponentCustomProperties {
         $env: typeof window.SupportChat;
     }
