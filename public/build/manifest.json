@@ -3,8 +3,8 @@
     "file": "assets/advanced-chat-B527sa3p.js",
     "name": "advanced-chat"
   },
-  "_winbox-CW5YT9Om.js": {
-    "file": "assets/winbox-CW5YT9Om.js",
+  "_winbox-CQ2bkSWZ.js": {
+    "file": "assets/winbox-CQ2bkSWZ.js",
     "name": "winbox"
   },
   "resources/images/favicon.svg": {
@@ -12,16 +12,16 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-Dn1ZjQbK.js",
+    "file": "assets/app-D83LfHWK.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_winbox-CW5YT9Om.js",
+      "_winbox-CQ2bkSWZ.js",
       "_advanced-chat-B527sa3p.js"
     ],
     "css": [
-      "assets/app-CzcFWOHc.css"
+      "assets/app-DWU67g-E.css"
     ],
     "assets": [
       "assets/favicon-DXKRda58.svg"
