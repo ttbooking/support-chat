@@ -8,6 +8,7 @@
 
 public/*.css binary
 public/*.js binary
+public/*.map binary
 
 /.github export-ignore
 /tests export-ignore
