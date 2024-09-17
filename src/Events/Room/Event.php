@@ -21,9 +21,7 @@ abstract class Event implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct(public Room $room)
-    {
-    }
+    public function __construct(public Room $room) {}
 
     /**
      * The event's broadcast name.

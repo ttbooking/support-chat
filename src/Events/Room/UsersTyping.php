@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Events\Room;
 
-class UsersTyping extends Event
-{
-}
+class UsersTyping extends Event {}

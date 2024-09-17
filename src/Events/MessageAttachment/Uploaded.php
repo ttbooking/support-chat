@@ -19,9 +19,7 @@ class Uploaded implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct(public MessageFile $attachment)
-    {
-    }
+    public function __construct(public MessageFile $attachment) {}
 
     /**
      * The event's broadcast name.

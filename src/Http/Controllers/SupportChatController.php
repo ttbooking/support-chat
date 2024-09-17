@@ -6,6 +6,4 @@ namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 
-class SupportChatController extends Controller
-{
-}
+class SupportChatController extends Controller {}

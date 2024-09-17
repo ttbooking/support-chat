@@ -13,6 +13,5 @@ class PersonInfo
         public ?string $avatar = null,
         public bool $online = false,
         public ?DateTimeInterface $lastChanged = null,
-    ) {
-    }
+    ) {}
 }

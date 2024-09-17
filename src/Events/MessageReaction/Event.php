@@ -19,9 +19,7 @@ abstract class Event implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct(public MessageReaction $reaction)
-    {
-    }
+    public function __construct(public MessageReaction $reaction) {}
 
     /**
      * The event's broadcast name.
