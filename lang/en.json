@@ -1,4 +1,18 @@
 {
+    "advanced_chat": {
+        "rooms_empty": "No rooms",
+        "room_empty": "No room selected",
+        "new_messages": "New Messages",
+        "message_deleted": "This message was deleted",
+        "messages_empty": "No messages",
+        "conversation_started": "Conversation started on:",
+        "type_message": "Type message",
+        "search": "Search",
+        "is_online": "is online",
+        "last_seen": "last seen ",
+        "is_typing": "is writing...",
+        "cancel_select_message": "Cancel"
+    },
     "title": "Support Chat",
     "invite_users": "Invite Users",
     "rename_room": "Rename Room",

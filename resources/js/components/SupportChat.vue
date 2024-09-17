@@ -6,6 +6,7 @@
             :current-user-id="$env.userId"
             :rooms.prop="rooms"
             :rooms-loaded="roomRepo.loaded"
+            :text-messages.prop="textMessages"
             :room-info-enabled="false"
             :messages.prop="roomMessages"
             :messages-loaded="messageRepo.loaded"
@@ -46,7 +47,11 @@ import icon from "../../images/favicon.svg";
 
 register();
 
-const { t } = useI18n();
+const { t, tm, rt } = useI18n();
+
+const textMessages = computed(() =>
+    Object.fromEntries(Object.entries(tm("advanced_chat")).map(([key, msg]) => [key.toUpperCase(), rt(msg)])),
+);
 
 const wbRef = ref<InstanceType<typeof VueWinBox>>();
 const options: WinBox.Params & { icon?: string } = {

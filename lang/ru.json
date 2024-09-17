@@ -1,4 +1,18 @@
 {
+    "advanced_chat": {
+        "rooms_empty": "Нет комнат",
+        "room_empty": "Комната не выбрана",
+        "new_messages": "Новые сообщения",
+        "message_deleted": "Сообщение было удалено",
+        "messages_empty": "Нет сообщений",
+        "conversation_started": "Переписка начата:",
+        "type_message": "Введите сообщение",
+        "search": "Поиск",
+        "is_online": "в сети",
+        "last_seen": "был(а) в сети ",
+        "is_typing": "печатает...",
+        "cancel_select_message": "Отмена"
+    },
     "title": "Чат поддержки",
     "invite_users": "Пригласить пользователей",
     "rename_room": "Переименовать комнату",
