@@ -24,11 +24,12 @@
             @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
         />
     </vue-win-box>
-    <TextFieldDialog v-model="roomName" v-model:show="roomRenameDialogOpened" title="Rename Room" />
+    <TextFieldDialog v-model="roomName" v-model:show="roomRenameDialogOpened" :title="$t('rename_room')" />
 </template>
 
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { VueWinBox } from "vue-winbox";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
@@ -45,6 +46,8 @@ import icon from "../../images/favicon.svg";
 
 register();
 
+const { t } = useI18n();
+
 const wbRef = ref<InstanceType<typeof VueWinBox>>();
 const options: WinBox.Params & { icon?: string } = {
     x: "center",
@@ -52,7 +55,7 @@ const options: WinBox.Params & { icon?: string } = {
     minwidth: 250,
     minheight: 400,
     icon,
-    title: "Support Chat",
+    title: t("title"),
     class: "modern",
 };
 const height = ref<string>("600px");
@@ -70,15 +73,15 @@ const roomRenameDialogOpened = ref<boolean>(false);
 const menuActions = ref([
     {
         name: "inviteUsers",
-        title: "Invite Users",
+        title: t("invite_users"),
     },
     {
         name: "renameRoom",
-        title: "Rename Room",
+        title: t("rename_room"),
     },
     {
         name: "deleteRoom",
-        title: "Delete Room",
+        title: t("delete_room"),
     },
 ]);
 
