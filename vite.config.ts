@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 export default defineConfig({
     build: {
@@ -25,11 +26,11 @@ export default defineConfig({
                 compilerOptions: {
                     isCustomElement: (tag) => tag === "vue-advanced-chat" || tag === "emoji-picker",
                 },
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
-                },
+                transformAssetUrls,
             },
+        }),
+        vuetify({
+            autoImport: true,
         }),
     ],
     resolve: {

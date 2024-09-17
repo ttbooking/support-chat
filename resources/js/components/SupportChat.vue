@@ -24,6 +24,7 @@
             @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
         />
     </vue-win-box>
+    <TextFieldDialog v-model="roomName" v-model:show="roomRenameDialogOpened" title="Rename Room" />
 </template>
 
 <script setup lang="ts">
@@ -35,6 +36,7 @@ import type { RoomUser, Message } from "vue-advanced-chat";
 import type { Reaction, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
+import TextFieldDialog from "@/components/TextFieldDialog.vue";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
 import WinBox from "winbox";
@@ -62,7 +64,18 @@ const rooms = computed(() => roomRepo.value.all());
 const joinedRooms = computed(() => roomRepo.value.joined().get());
 const roomMessages = computed(() => messageRepo.value.all());
 
+const roomName = ref<string>();
+const roomRenameDialogOpened = ref<boolean>(false);
+
 const menuActions = ref([
+    {
+        name: "inviteUsers",
+        title: "Invite Users",
+    },
+    {
+        name: "renameRoom",
+        title: "Rename Room",
+    },
     {
         name: "deleteRoom",
         title: "Delete Room",
@@ -94,6 +107,10 @@ function openFile(args: OpenFileArgs) {
 
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
+        case "renameRoom":
+            roomName.value = roomRepo.value.find(roomId)?.roomName;
+            roomRenameDialogOpened.value = true;
+            break;
         case "deleteRoom":
             roomRepo.value.delete(roomId);
     }
