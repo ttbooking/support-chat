@@ -17,6 +17,10 @@
     "invite_users": "Invite Users",
     "rename_room": "Rename Room",
     "delete_room": "Delete Room",
+    "reply_message": "Reply",
+    "edit_message": "Edit Message",
+    "delete_message": "Delete Message",
+    "select_messages": "Select",
     "ok": "OK",
     "cancel": "Cancel"
 }

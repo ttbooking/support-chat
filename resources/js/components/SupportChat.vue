@@ -12,6 +12,7 @@
             :messages-loaded="messageRepo.loaded"
             :room-actions.prop="menuActions"
             :menu-actions.prop="menuActions"
+            :message-actions.prop="messageActions"
             @fetch-messages="messageRepo.fetch($event.detail[0])"
             @fetch-more-rooms="roomRepo.fetch"
             @send-message="messageRepo.send($event.detail[0])"
@@ -76,18 +77,16 @@ const roomName = ref<string>();
 const roomRenameDialogOpened = ref<boolean>(false);
 
 const menuActions = ref([
-    {
-        name: "inviteUsers",
-        title: t("invite_users"),
-    },
-    {
-        name: "renameRoom",
-        title: t("rename_room"),
-    },
-    {
-        name: "deleteRoom",
-        title: t("delete_room"),
-    },
+    { name: "inviteUsers", title: t("invite_users") },
+    { name: "renameRoom", title: t("rename_room") },
+    { name: "deleteRoom", title: t("delete_room") },
+]);
+
+const messageActions = ref([
+    { name: "replyMessage", title: t("reply_message") },
+    { name: "editMessage", title: t("edit_message"), onlyMe: true },
+    { name: "deleteMessage", title: t("delete_message"), onlyMe: true },
+    { name: "selectMessages", title: t("select_messages") },
 ]);
 
 onMounted(async () => {
