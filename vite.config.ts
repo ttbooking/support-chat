@@ -20,7 +20,7 @@ export default defineConfig({
     },
     plugins: [
         i18n({
-            include: [path.resolve(__dirname, "./lang/**")],
+            include: [path.resolve(__dirname, "./resources/js/locales/**")],
         }),
         laravel({
             input: "resources/js/app.ts",

@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 import Echo from "laravel-echo";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
-import en from "../../../lang/en.json";
+import en from "../locales/en.json";
 
 declare global {
     interface Window {

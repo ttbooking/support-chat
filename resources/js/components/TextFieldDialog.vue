@@ -14,8 +14,8 @@
                         <v-text-field v-model="model.value" :placeholder="text" density="compact" autofocus />
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn :disabled="isPristine" @click="close(save)">OK</v-btn>
-                        <v-btn @click="close(cancel)">Cancel</v-btn>
+                        <v-btn :disabled="isPristine" @click="close(save)">{{ $t("ok") }}</v-btn>
+                        <v-btn @click="close(cancel)">{{ $t("cancel") }}</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
