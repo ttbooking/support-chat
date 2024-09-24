@@ -753,6 +753,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/web-bluetooth@npm:^0.0.20":
+  version: 0.0.20
+  resolution: "@types/web-bluetooth@npm:0.0.20"
+  checksum: 10c0/3a49bd9396506af8f1b047db087aeeea9fe4301b7fad4fe06ae0f6e00d331138caae878fd09e6410658b70b4aaf10e4b191c41c1a5ff72211fe58da290c7d003
+  languageName: node
+  linkType: hard
+
 "@types/winbox@npm:^0.2.5":
   version: 0.2.5
   resolution: "@types/winbox@npm:0.2.5"
@@ -1106,6 +1113,34 @@ __metadata:
     vue: ^3.0.0
     vuetify: ^3.0.0
   checksum: 10c0/88cfe831821e8c4ac11edb725ee7321436f0b152ac8c2aad70ca71d343a39176e79f67314397cfb622118520998712660f4ed036128b0123244ed2cafb2c9b46
+  languageName: node
+  linkType: hard
+
+"@vueuse/core@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "@vueuse/core@npm:11.1.0"
+  dependencies:
+    "@types/web-bluetooth": "npm:^0.0.20"
+    "@vueuse/metadata": "npm:11.1.0"
+    "@vueuse/shared": "npm:11.1.0"
+    vue-demi: "npm:>=0.14.10"
+  checksum: 10c0/ecbeb277de81608c78aa4ebc7e4cae8a6d5f0650e2ee5ed71bf387676df4725bd2e8bcfeadcc0798ab6850e6317ff79822ef32adef4646184086764fe7f684ac
+  languageName: node
+  linkType: hard
+
+"@vueuse/metadata@npm:11.1.0":
+  version: 11.1.0
+  resolution: "@vueuse/metadata@npm:11.1.0"
+  checksum: 10c0/5063d8b81c31e3c7ea24ff7fad0d0ec43a951540066329f36daf96fc0e8780ed902282d36c6df856288f07d0c5edb525f551cf9e8b84837782e2ac0a1988c498
+  languageName: node
+  linkType: hard
+
+"@vueuse/shared@npm:11.1.0":
+  version: 11.1.0
+  resolution: "@vueuse/shared@npm:11.1.0"
+  dependencies:
+    vue-demi: "npm:>=0.14.10"
+  checksum: 10c0/ed9a4625537825fe783c66823592560696604f5301e8dcef12dda3a816b85334e7c70ccbaaf1c0c62ea2b8efcce58893b780210162374d2e9bc1e4c5889e066b
   languageName: node
   linkType: hard
 
@@ -3107,15 +3142,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "nanoid@npm:4.0.2"
-  bin:
-    nanoid: bin/nanoid.js
-  checksum: 10c0/3fec62f422bc4727918eda0e7aa43e9cbb2e759be72813a0587b9dac99727d3c7ad972efce7f4f1d4cb5c7c554136a1ec3b1043d1d91d28d818d6acbe98200e5
-  languageName: node
-  linkType: hard
-
 "natural-compare@npm:^1.4.0":
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
@@ -3657,6 +3683,7 @@ __metadata:
     "@types/node": "npm:^22.5.5"
     "@types/winbox": "npm:^0.2.5"
     "@vitejs/plugin-vue": "npm:^5.1.3"
+    "@vueuse/core": "npm:^11.1.0"
     autoprefixer: "npm:^10.4.20"
     axios: "npm:^1.7.7"
     eslint: "npm:^9.10.0"
@@ -3678,8 +3705,8 @@ __metadata:
     vue-advanced-chat: "npm:^2.1.0"
     vue-i18n: "npm:^10.0.1"
     vue-tsc: "npm:^2.1.6"
-    vue-winbox: "npm:^0.2.3"
     vuetify: "npm:^3.7.1"
+    winbox: "npm:^0.2.82"
   languageName: unknown
   linkType: soft
 
@@ -4224,7 +4251,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-demi@npm:^0.14.10":
+"vue-demi@npm:>=0.14.10, vue-demi@npm:^0.14.10":
   version: 0.14.10
   resolution: "vue-demi@npm:0.14.10"
   peerDependencies:
@@ -4298,18 +4325,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-winbox@npm:^0.2.3":
-  version: 0.2.3
-  resolution: "vue-winbox@npm:0.2.3"
-  dependencies:
-    nanoid: "npm:^4.0.2"
-    winbox: "npm:^0.2.6"
-  peerDependencies:
-    vue: ">=3.2.0"
-  checksum: 10c0/062468346fd1da8d7e5a5cb3c5e22b166a466b8728f4fe0cdf2efa54b26765ebeae8f7365ec6a3cfd9e295908b77dffa34e5284d488bc34fce36208f5868cf76
-  languageName: node
-  linkType: hard
-
 "vue@npm:^3.4, vue@npm:^3.5.6":
   version: 3.5.6
   resolution: "vue@npm:3.5.6"
@@ -4376,7 +4391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winbox@npm:^0.2.6":
+"winbox@npm:^0.2.82":
   version: 0.2.731
   resolution: "winbox@npm:0.2.731"
   checksum: 10c0/032353356eb735523a0d6c0a5ba9e3ca43d5edd8746182ea3e61e2c4072eb8c910d1b2317b5872f5d9ea5320ac73b7348801d91a28dd30d239fcc0beb7b0aee0

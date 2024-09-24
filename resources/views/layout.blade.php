@@ -17,9 +17,7 @@
         {{ Vite::supportChatEntryPoint() }}
     </head>
     <body class="font-sans antialiased">
-        <div id="support-chat" v-cloak>
-            <support-chat></support-chat>
-        </div>
+        <div id="support-chat" v-cloak></div>
 
         <!-- Global Support Chat Object -->
         <script type="text/javascript">

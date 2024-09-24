@@ -1,39 +1,43 @@
 <template>
-    <vue-win-box ref="wbRef" :options="options" @resize="resizeHandler">
-        <vue-advanced-chat
-            v-if="$env.userId"
-            :height="height"
-            :current-user-id="$env.userId"
-            :rooms.prop="rooms"
-            :rooms-loaded="roomRepo.loaded"
-            :text-messages.prop="textMessages"
-            :room-info-enabled="false"
-            :messages.prop="roomMessages"
-            :messages-loaded="messageRepo.loaded"
-            :room-actions.prop="menuActions"
-            :menu-actions.prop="menuActions"
-            :message-actions.prop="messageActions"
-            @fetch-messages="messageRepo.fetch($event.detail[0])"
-            @fetch-more-rooms="roomRepo.fetch"
-            @send-message="messageRepo.send($event.detail[0])"
-            @edit-message="messageRepo.edit($event.detail[0])"
-            @delete-message="messageRepo.delete($event.detail[0])"
-            @open-file="openFile($event.detail[0])"
-            @open-failed-message="messageRepo.trySend($event.detail[0])"
-            @add-room="roomRepo.add"
-            @room-action-handler="menuActionHandler($event.detail[0])"
-            @menu-action-handler="menuActionHandler($event.detail[0])"
-            @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
+    <vue-advanced-chat
+        v-if="$env.userId"
+        :height="computedHeight"
+        :current-user-id="$env.userId"
+        :rooms.prop="rooms"
+        :rooms-loaded="roomRepo.loaded"
+        :text-messages.prop="textMessages"
+        :room-info-enabled="false"
+        :messages.prop="roomMessages"
+        :messages-loaded="messageRepo.loaded"
+        :room-actions.prop="menuActions"
+        :menu-actions.prop="menuActions"
+        :message-actions.prop="messageActions"
+        @fetch-messages="messageRepo.fetch($event.detail[0])"
+        @fetch-more-rooms="roomRepo.fetch"
+        @send-message="messageRepo.send($event.detail[0])"
+        @edit-message="messageRepo.edit($event.detail[0])"
+        @delete-message="messageRepo.delete($event.detail[0])"
+        @open-file="openFile($event.detail[0])"
+        @open-failed-message="messageRepo.trySend($event.detail[0])"
+        @add-room="roomRepo.add"
+        @room-action-handler="menuActionHandler($event.detail[0])"
+        @menu-action-handler="menuActionHandler($event.detail[0])"
+        @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
+    />
+    <Teleport to="body">
+        <TextFieldDialog
+            v-show="roomRenameDialogOpened"
+            v-model="roomName"
+            v-model:show="roomRenameDialogOpened"
+            :title="$t('rename_room')"
         />
-    </vue-win-box>
-    <TextFieldDialog v-model="roomName" v-model:show="roomRenameDialogOpened" :title="$t('rename_room')" />
+    </Teleport>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
-import { VueWinBox } from "vue-winbox";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import type { RoomUser, Message } from "vue-advanced-chat";
 import type { Reaction, OpenFileArgs } from "@/types";
@@ -42,29 +46,18 @@ import { useRepo } from "pinia-orm";
 import TextFieldDialog from "@/components/TextFieldDialog.vue";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
-import WinBox from "winbox";
-
-import icon from "../../images/favicon.svg";
 
 register();
+
+const props = defineProps<{ height: number }>();
+
+const computedHeight = computed(() => props.height - 35 + "px");
 
 const { t, tm, rt } = useI18n();
 
 const textMessages = computed(() =>
     Object.fromEntries(Object.entries(tm("advanced_chat")).map(([key, msg]) => [key.toUpperCase(), rt(msg)])),
 );
-
-const wbRef = ref<InstanceType<typeof VueWinBox>>();
-const options: WinBox.Params & { icon?: string } = {
-    x: "center",
-    y: "center",
-    minwidth: 250,
-    minheight: 400,
-    icon,
-    title: t("title"),
-    class: "modern",
-};
-const height = ref<string>("600px");
 
 const roomRepo = computed(() => useRepo(RoomRepository));
 const messageRepo = computed(() => useRepo(MessageRepository));
@@ -121,9 +114,5 @@ function menuActionHandler({ roomId, action }: { roomId: string; action: CustomA
         case "deleteRoom":
             roomRepo.value.delete(roomId);
     }
-}
-
-function resizeHandler(size: { width: number; height: number }) {
-    height.value = size.height - 35 + "px";
 }
 </script>

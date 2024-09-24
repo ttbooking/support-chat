@@ -1,0 +1,1 @@
+export { useWindowManager } from "./useWindowManager";

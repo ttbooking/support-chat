@@ -12,7 +12,6 @@ export default defineConfig({
             output: {
                 manualChunks: {
                     "advanced-chat": ["vue-advanced-chat"],
-                    winbox: ["vue-winbox"],
                 },
             },
         },
@@ -38,9 +37,4 @@ export default defineConfig({
             autoImport: true,
         }),
     ],
-    resolve: {
-        alias: {
-            vue: "vue/dist/vue.esm-bundler",
-        },
-    },
 });
