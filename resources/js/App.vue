@@ -1,17 +1,20 @@
 <template>
-    <VueWinBox
-        v-for="[id, window] in windows"
-        :key="id"
-        v-model="window.value"
-        title="My Window"
-        minwidth="300"
-        minheight="450"
-        class="modern"
-        @close="closeWindow"
-    >
-        <SupportChat :height="window.value.height" />
-    </VueWinBox>
-    <v-fab icon="$vuetify" color="primary" position="fixed" location="bottom right" @click="createWindow" />
+    <v-app>
+        <VueWinBox
+            v-for="[id, window] in windows"
+            :key="id"
+            v-model="window.value"
+            title="My Window"
+            class="modern"
+            :index="1000"
+            minwidth="300"
+            minheight="450"
+            @close="closeWindow"
+        >
+            <SupportChat :height="window.value.height" />
+        </VueWinBox>
+        <v-fab class="fixed" icon="$vuetify" color="primary" @click="createWindow" />
+    </v-app>
 </template>
 
 <script setup lang="ts">
@@ -21,3 +24,12 @@ import { useWindowManager } from "@/composables";
 
 const { windows, createWindow, closeWindow } = useWindowManager();
 </script>
+
+<style scoped>
+.fixed {
+    position: fixed;
+    right: 64px;
+    bottom: 64px;
+    z-index: 5000;
+}
+</style>

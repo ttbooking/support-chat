@@ -13,12 +13,14 @@ const props = withDefaults(
     defineProps<{
         title?: string;
         class?: string | string[];
+        index?: number;
         minheight?: string | number;
         minwidth?: string | number;
     }>(),
     {
         title: "My Window",
         class: "modern",
+        index: 1000,
         minwidth: 250,
         minheight: 400,
     },
