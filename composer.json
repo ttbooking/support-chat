@@ -44,7 +44,10 @@
         "laravel": {
             "providers": [
                 "TTBooking\\SupportChat\\SupportChatServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "SupportChat": "TTBooking\\SupportChat\\SupportChat"
+            }
         }
     },
     "config": {
