@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class SupportChatServiceProvider extends ServiceProvider
@@ -16,8 +16,7 @@ class SupportChatServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerRoutes();
-        $this->registerResources();
-        $this->registerMixins();
+        $this->registerBladeDirective();
 
         if ($this->app->runningInConsole()) {
             $this->offerPublishing();
@@ -43,17 +42,11 @@ class SupportChatServiceProvider extends ServiceProvider
         require __DIR__.'/../routes/channels.php';
     }
 
-    /**
-     * Register the Support Chat resources.
-     */
-    protected function registerResources(): void
+    protected function registerBladeDirective(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'support-chat');
-    }
-
-    protected function registerMixins(): void
-    {
-        Vite::mixin(new Support\ViteAliasMixin);
+        Blade::directive('supportChat', static function () {
+            return "<?php echo TTBooking\SupportChat\SupportChat::register()->toHtml(); ?>";
+        });
     }
 
     protected function offerPublishing(): void
@@ -65,10 +58,6 @@ class SupportChatServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations' => $this->app->databasePath('migrations'),
         ], ['support-chat-migrations', 'support-chat', 'migrations']);
-
-        $this->publishes([
-            __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/support-chat'),
-        ], ['support-chat-views', 'support-chat', 'views']);
 
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/support-chat'),

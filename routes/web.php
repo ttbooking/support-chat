@@ -25,6 +25,3 @@ Route::prefix('api/v1')->group(function () {
         ['only' => ['store', 'destroy']]
     );
 });
-
-// Catch-all Route...
-Route::get('/{view?}', 'HomeController@index')->where('view', '(.*)')->name('index');
