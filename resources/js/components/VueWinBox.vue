@@ -13,22 +13,23 @@ const props = withDefaults(
     defineProps<{
         title?: string;
         class?: string | string[];
-        index?: number;
         minheight?: string | number;
         minwidth?: string | number;
+        overflow?: boolean;
     }>(),
     {
         title: "My Window",
         class: "modern",
-        index: 1000,
         minwidth: 250,
         minheight: 400,
+        overflow: true,
     },
 );
 
 const model = defineModel<WinBoxModel>({
     required: true,
     default: {
+        index: 1000,
         x: 100,
         y: 100,
         width: 500,
@@ -112,9 +113,11 @@ onBeforeMount(() => {
         },
         onfocus() {
             model.value.focused = true;
+            model.value.index = this.index;
         },
         onblur() {
             model.value.focused = false;
+            model.value.index = this.index;
         },
     });
 

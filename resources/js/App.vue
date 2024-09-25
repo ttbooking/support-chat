@@ -6,7 +6,6 @@
             v-model="window.value"
             title="My Window"
             class="modern"
-            :index="1000"
             minwidth="300"
             minheight="450"
             @close="closeWindow"

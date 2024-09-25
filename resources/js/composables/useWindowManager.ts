@@ -7,23 +7,22 @@ export function useWindowManager(storage?: StorageLike) {
     const windows = useStorage<Map<string, ShallowRef<WinBoxModel>>>("support-chat", new Map(), storage, {
         listenToStorageChanges: true,
         serializer: {
-            read: (raw) => {
-                const object: Record<string, WinBoxModel> = JSON.parse(raw);
-                const map = new Map();
-                for (const [id, window] of Object.entries(object)) {
-                    window.id = id;
-                    map.set(id, shallowRef(window));
-                }
-                return map;
-            },
-            write: (value) => {
-                const object: Record<string, Omit<WinBoxModel, "id">> = {};
-                for (const [id, window] of value) {
-                    const { id: _, ...rest } = window.value;
-                    object[id] = rest;
-                }
-                return JSON.stringify(object);
-            },
+            read: (raw) =>
+                new Map(
+                    (JSON.parse(raw) as WinBoxModel[]).map((window) => [
+                        window.id,
+                        shallowRef({ ...window, index: 1000 }),
+                    ]),
+                ),
+            write: (map) =>
+                JSON.stringify(
+                    [...map.values()]
+                        .sort((a, b) => a.value.index - b.value.index)
+                        .map((window) => {
+                            const { index, ...rest } = window.value;
+                            return rest;
+                        }),
+                ),
         },
     });
 
@@ -34,6 +33,7 @@ export function useWindowManager(storage?: StorageLike) {
             id,
             shallowRef({
                 id,
+                index: 1000,
                 x: 100,
                 y: 100,
                 width: 500,
