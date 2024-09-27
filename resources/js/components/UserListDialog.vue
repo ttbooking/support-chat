@@ -3,7 +3,7 @@
         v-model="show"
         persistent
         width="auto"
-        min-width="300"
+        min-width="600"
         @keydown.enter="show = false"
         @keydown.esc="show = false"
     >
@@ -11,6 +11,8 @@
             <v-card-text>
                 <v-autocomplete
                     v-model="participants"
+                    v-model:search="search"
+                    no-filter
                     multiple
                     chips
                     closable-chips
@@ -43,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRepo } from "pinia-orm";
 import UserRepository from "@/repositories/UserRepository";
 
@@ -51,13 +53,27 @@ const show = defineModel<boolean>("show", { default: false });
 
 defineProps<{ title: string }>();
 
-const userRepo = computed(() => useRepo(UserRepository));
-
-const users = computed(() => userRepo.value.orderBy("username").get());
-
 const participants = ref<string[]>([]);
+const search = ref<string>("");
+
+const userRepo = computed(() => useRepo(UserRepository));
+const users = computed(() =>
+    userRepo.value
+        // TODO: custom filtering, use with "no-filter" property
+        .where(
+            (user) =>
+                participants.value.includes(user._id) ||
+                user.username.toLowerCase().startsWith(search.value.toLowerCase()),
+        )
+        .orderBy("username")
+        .get(),
+);
+
+watch(search, async (search) => {
+    await userRepo.value.fetch(search);
+});
 
 async function onIntersect(entries, observer, isIntersecting) {
-    if (isIntersecting) await userRepo.value.fetch();
+    if (isIntersecting) await userRepo.value.fetch(search.value);
 }
 </script>
