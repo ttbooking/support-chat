@@ -28,6 +28,7 @@ class UserResource extends JsonResource
         return [
             '_id' => (string) $this->getKey(),
             'username' => $person->name,
+            'email' => $person->email,
             'avatar' => $person->avatar,
             'status' => [
                 'state' => $person->online ? 'online' : 'offline',

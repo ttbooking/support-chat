@@ -5,8 +5,11 @@ use TTBooking\SupportChat\Http\Controllers\MessageAttachmentController;
 use TTBooking\SupportChat\Http\Controllers\MessageController;
 use TTBooking\SupportChat\Http\Controllers\MessageReactionController;
 use TTBooking\SupportChat\Http\Controllers\RoomController;
+use TTBooking\SupportChat\Http\Controllers\UserController;
 
 Route::prefix('api/v1')->group(function () {
+    Route::apiResource('users', '\\'.UserController::class, ['only' => ['index', 'show']]);
+
     Route::apiResources([
         'rooms' => '\\'.RoomController::class,
         'rooms.messages' => '\\'.MessageController::class,

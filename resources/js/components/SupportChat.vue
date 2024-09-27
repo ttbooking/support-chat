@@ -31,6 +31,7 @@
             v-model:show="roomRenameDialogOpened"
             :title="$t('rename_room')"
         />
+        <UserListDialog v-show="userListDialogOpened" v-model:show="userListDialogOpened" title="User List" />
     </Teleport>
 </template>
 
@@ -44,6 +45,7 @@ import type { Reaction, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import TextFieldDialog from "@/components/TextFieldDialog.vue";
+import UserListDialog from "@/components/UserListDialog.vue";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
 
@@ -68,6 +70,7 @@ const roomMessages = computed(() => messageRepo.value.all());
 
 const roomName = ref<string>();
 const roomRenameDialogOpened = ref<boolean>(false);
+const userListDialogOpened = ref<boolean>(false);
 
 const menuActions = ref([
     { name: "inviteUsers", title: t("invite_users") },
@@ -107,6 +110,9 @@ function openFile(args: OpenFileArgs) {
 
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
+        case "inviteUsers":
+            userListDialogOpened.value = true;
+            break;
         case "renameRoom":
             roomName.value = roomRepo.value.find(roomId)?.roomName;
             roomRenameDialogOpened.value = true;

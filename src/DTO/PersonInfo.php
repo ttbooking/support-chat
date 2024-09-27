@@ -10,6 +10,7 @@ class PersonInfo
 {
     public function __construct(
         public string $name,
+        public ?string $email = null,
         public ?string $avatar = null,
         public bool $online = false,
         public ?DateTimeInterface $lastChanged = null,
