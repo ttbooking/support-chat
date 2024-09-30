@@ -31,12 +31,18 @@
             v-model:show="roomRenameDialogOpened"
             :title="$t('rename_room')"
         />
-        <UserListDialog v-show="userListDialogOpened" v-model:show="userListDialogOpened" title="User List" />
+        <UserListDialog
+            v-if="room"
+            v-show="userListDialogOpened"
+            v-model="room"
+            v-model:show="userListDialogOpened"
+            title="User List"
+        />
     </Teleport>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
@@ -44,10 +50,12 @@ import type { RoomUser, Message } from "vue-advanced-chat";
 import type { Reaction, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
-import TextFieldDialog from "@/components/TextFieldDialog.vue";
-import UserListDialog from "@/components/UserListDialog.vue";
+import Room from "@/models/Room";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
+
+import TextFieldDialog from "@/components/TextFieldDialog.vue";
+import UserListDialog from "@/components/UserListDialog.vue";
 
 register();
 
@@ -71,6 +79,11 @@ const roomMessages = computed(() => messageRepo.value.all());
 const roomName = ref<string>();
 const roomRenameDialogOpened = ref<boolean>(false);
 const userListDialogOpened = ref<boolean>(false);
+const room = ref<Room | null>(null);
+
+watch(room, (room) => {
+    if (room) roomRepo.value.save(room);
+});
 
 const menuActions = ref([
     { name: "inviteUsers", title: t("invite_users") },
@@ -111,6 +124,7 @@ function openFile(args: OpenFileArgs) {
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
         case "inviteUsers":
+            room.value = roomRepo.value.find(roomId);
             userListDialogOpened.value = true;
             break;
         case "renameRoom":

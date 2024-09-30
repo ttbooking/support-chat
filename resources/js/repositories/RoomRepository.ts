@@ -19,6 +19,10 @@ export default class RoomRepository extends AxiosRepository<Room> {
         return await this.api().post("/rooms", { id: roomId });
     };
 
+    update = async (room: BaseRoom) => {
+        return await this.api().put(`/rooms/${room.roomId}`, room);
+    };
+
     delete = async (roomId: string) => {
         return await this.api().delete(`/rooms/${roomId}`, { delete: 1 });
     };

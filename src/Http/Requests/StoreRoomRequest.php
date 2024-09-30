@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Requests;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRoomRequest extends FormRequest
@@ -33,9 +34,14 @@ class StoreRoomRequest extends FormRequest
      */
     public function rules(): array
     {
+        /** @var class-string<Model> $model */
+        $model = config('support-chat.user_model');
+
         return [
-            'id' => 'required|nanoid|size:7',
+            'id' => 'sometimes|nanoid|size:7',
             'name' => 'sometimes|nullable|string|max:255',
+            'users' => 'sometimes|array',
+            'users.*._id' => "sometimes|exists:$model,id",
         ];
     }
 }
