@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <div>
         <VueWinBox
             v-for="[id, window] in windows"
             :key="id"
@@ -13,7 +13,7 @@
             <SupportChat :height="window.value.height" />
         </VueWinBox>
         <v-fab class="fixed" icon="$vuetify" color="primary" @click="createWindow" />
-    </v-app>
+    </div>
 </template>
 
 <script setup lang="ts">
