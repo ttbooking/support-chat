@@ -2,15 +2,14 @@ import { createPinia } from "pinia";
 import { createORM } from "pinia-orm";
 import { createPiniaOrmAxios } from "@pinia-orm/axios";
 
-const pinia = createPinia();
-const piniaOrm = createORM({
-    plugins: [
-        createPiniaOrmAxios({
-            axios: window.axios,
-            baseURL: window.SupportChat.path + "/api/v1",
-            dataKey: "data",
-        }),
-    ],
-});
-
-export default pinia.use(piniaOrm);
+export default createPinia().use(
+    createORM({
+        plugins: [
+            createPiniaOrmAxios({
+                axios: window.axios,
+                baseURL: window.SupportChat.path + "/api/v1",
+                dataKey: "data",
+            }),
+        ],
+    }),
+);

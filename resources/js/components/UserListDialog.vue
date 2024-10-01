@@ -1,5 +1,5 @@
 <template>
-    <v-confirm-edit v-if="room" :key="room.roomId" v-model="room">
+    <v-confirm-edit v-model="room">
         <template #default="{ model, save, cancel, isPristine }">
             <v-dialog
                 v-model="show"
@@ -24,10 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import Room from "@/models/Room";
 import UserAutocomplete from "@/components/UserAutocomplete.vue";
+import type { Room as BaseRoom } from "vue-advanced-chat";
 
-const room = defineModel<Room>({ required: true });
+const room = defineModel<BaseRoom>({ required: true });
 const show = defineModel<boolean>("show", { default: false });
 
 defineProps<{ title: string }>();

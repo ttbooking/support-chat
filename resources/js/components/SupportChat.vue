@@ -46,11 +46,10 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
-import type { RoomUser, Message } from "vue-advanced-chat";
+import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
 import type { Reaction, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
-import Room from "@/models/Room";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
 
@@ -79,7 +78,7 @@ const roomMessages = computed(() => messageRepo.value.all());
 const roomName = ref<string>();
 const roomRenameDialogOpened = ref<boolean>(false);
 const userListDialogOpened = ref<boolean>(false);
-const room = ref<Room | null>(null);
+const room = ref<BaseRoom | null>(null);
 
 watch(
     room,
@@ -128,7 +127,7 @@ function openFile(args: OpenFileArgs) {
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
         case "inviteUsers":
-            room.value = roomRepo.value.find(roomId);
+            room.value = roomRepo.value.with("users").find(roomId)?.$toJson() as BaseRoom;
             userListDialogOpened.value = true;
             break;
         case "renameRoom":
