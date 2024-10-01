@@ -81,9 +81,13 @@ const roomRenameDialogOpened = ref<boolean>(false);
 const userListDialogOpened = ref<boolean>(false);
 const room = ref<Room | null>(null);
 
-watch(room, (room) => {
-    if (room) roomRepo.value.save(room);
-});
+watch(
+    room,
+    (room) => {
+        if (room) roomRepo.value.update(room);
+    },
+    { deep: true },
+);
 
 const menuActions = ref([
     { name: "inviteUsers", title: t("invite_users") },
