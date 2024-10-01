@@ -682,17 +682,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/forms@npm:^0.5.9":
-  version: 0.5.9
-  resolution: "@tailwindcss/forms@npm:0.5.9"
-  dependencies:
-    mini-svg-data-uri: "npm:^1.2.3"
-  peerDependencies:
-    tailwindcss: ">=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20"
-  checksum: 10c0/c7b99bc41ec548a27b68735ae459f5102535b3577020db3d9f348c88d997a623405e0833cf59beff5ca1bac7e7e2c55d5948ab374706277937e512e934947210
-  languageName: node
-  linkType: hard
-
 "@types/debug@npm:^4.0.0":
   version: 4.1.12
   resolution: "@types/debug@npm:4.1.12"
@@ -2958,15 +2947,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mini-svg-data-uri@npm:^1.2.3":
-  version: 1.4.4
-  resolution: "mini-svg-data-uri@npm:1.4.4"
-  bin:
-    mini-svg-data-uri: cli.js
-  checksum: 10c0/24545fa30b5a45449241bf19c25b8bc37594b63ec06401b3d563bd1c2e8a6abb7c18741f8b354e0064baa63c291be214154bf3a66f201ae71dfab3cc1a5e3191
-  languageName: node
-  linkType: hard
-
 "minimatch@npm:^3.1.2":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
@@ -3361,9 +3341,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinia@npm:^2.2.3":
-  version: 2.2.3
-  resolution: "pinia@npm:2.2.3"
+"pinia@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "pinia@npm:2.2.4"
   dependencies:
     "@vue/devtools-api": "npm:^6.6.3"
     vue-demi: "npm:^0.14.10"
@@ -3376,7 +3356,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10c0/ffa4af7f58313bd4c7cd4c5f42f4a6048baf28086dc371303c405ab0ad08c3599413fe7d34295ca216d21e98f138cba8af6221207456727d177a8b54a17215b1
+  checksum: 10c0/d4eea590e19f8b499488664d28c280292f1821990ba9d3021408093b253acfba260ab6405c33dafe761a761469d108e9c11ebe0f877ce99f19658d6a3eeb0578
   languageName: node
   linkType: hard
 
@@ -3667,7 +3647,6 @@ __metadata:
   dependencies:
     "@intlify/unplugin-vue-i18n": "npm:^5.2.0"
     "@pinia-orm/axios": "npm:@pinia-orm/axios-edge@latest"
-    "@tailwindcss/forms": "npm:^0.5.9"
     "@types/lodash": "npm:^4.17.9"
     "@types/node": "npm:^22.7.4"
     "@types/winbox": "npm:^0.2.5"
@@ -3681,7 +3660,7 @@ __metadata:
     laravel-echo: "npm:^1.16.1"
     laravel-vite-plugin: "npm:^1.0.5"
     lodash: "npm:^4.17.21"
-    pinia: "npm:^2.2.3"
+    pinia: "npm:^2.2.4"
     pinia-orm: "npm:pinia-orm-edge@latest"
     postcss: "npm:^8.4.47"
     prettier: "npm:^3.3.3"

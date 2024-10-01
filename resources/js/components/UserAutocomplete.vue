@@ -5,10 +5,8 @@
         multiple
         chips
         closable-chips
-        density="compact"
         :items="users"
         item-title="username"
-        item-value="_id"
         return-object
     >
         <template #chip="{ props, item }">

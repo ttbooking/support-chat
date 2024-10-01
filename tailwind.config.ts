@@ -1,6 +1,5 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
-import forms from "@tailwindcss/forms";
 
 export default <Partial<Config>>{
     content: [
@@ -17,6 +16,4 @@ export default <Partial<Config>>{
             },
         },
     },
-
-    plugins: [forms],
 };

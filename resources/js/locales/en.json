@@ -14,13 +14,15 @@
         "cancel_select_message": "Cancel"
     },
     "title": "Support Chat",
-    "invite_users": "Invite Users",
-    "rename_room": "Rename Room",
+    "configure_room": "Configure Room",
     "delete_room": "Delete Room",
     "reply_message": "Reply",
     "edit_message": "Edit Message",
     "delete_message": "Delete Message",
     "select_messages": "Select",
+    "room_configuration": "Room {name} configuration",
+    "room_name": "Room name",
+    "participants": "Participants",
     "ok": "OK",
     "cancel": "Cancel"
 }

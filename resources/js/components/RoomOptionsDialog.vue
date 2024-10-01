@@ -9,9 +9,21 @@
                 @keydown.enter="isPristine || close(save)"
                 @keydown.esc="close(cancel)"
             >
-                <v-card :title="model.value.roomName">
+                <v-card :title="$t('room_configuration', { name: room.roomName })">
                     <v-card-text>
-                        <UserAutocomplete v-model="model.value.users" />
+                        <v-text-field
+                            v-model="model.value.roomName"
+                            :placeholder="room.roomName"
+                            :label="$t('room_name')"
+                            variant="outlined"
+                            density="compact"
+                        />
+                        <UserAutocomplete
+                            v-model="model.value.users"
+                            :label="$t('participants')"
+                            variant="outlined"
+                            density="compact"
+                        />
                     </v-card-text>
                     <v-card-actions>
                         <v-btn :disabled="isPristine" @click="close(save)">{{ $t("ok") }}</v-btn>

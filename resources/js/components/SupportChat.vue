@@ -25,13 +25,7 @@
         @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
     />
     <Teleport to="body">
-        <TextFieldDialog
-            v-show="roomRenameDialogOpened"
-            v-model="roomName"
-            v-model:show="roomRenameDialogOpened"
-            :title="$t('rename_room')"
-        />
-        <UserListDialog v-show="userListDialogOpened" v-model="room" v-model:show="userListDialogOpened" />
+        <RoomOptionsDialog v-show="roomOptionsDialogOpened" v-model="room" v-model:show="roomOptionsDialogOpened" />
     </Teleport>
 </template>
 
@@ -47,8 +41,7 @@ import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
 
-import TextFieldDialog from "@/components/TextFieldDialog.vue";
-import UserListDialog from "@/components/UserListDialog.vue";
+import RoomOptionsDialog from "@/components/RoomOptionsDialog.vue";
 
 register();
 
@@ -69,9 +62,7 @@ const rooms = computed(() => roomRepo.value.all());
 const joinedRooms = computed(() => roomRepo.value.joined().get());
 const roomMessages = computed(() => messageRepo.value.all());
 
-const roomName = ref<string>();
-const roomRenameDialogOpened = ref<boolean>(false);
-const userListDialogOpened = ref<boolean>(false);
+const roomOptionsDialogOpened = ref<boolean>(false);
 
 const currentRoomId = ref<string | null>(null);
 const room = computed<BaseRoom>({
@@ -85,8 +76,7 @@ const room = computed<BaseRoom>({
 });
 
 const menuActions = ref([
-    { name: "inviteUsers", title: t("invite_users") },
-    { name: "renameRoom", title: t("rename_room") },
+    { name: "configureRoom", title: t("configure_room") },
     { name: "deleteRoom", title: t("delete_room") },
 ]);
 
@@ -122,13 +112,9 @@ function openFile(args: OpenFileArgs) {
 
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
-        case "inviteUsers":
+        case "configureRoom":
             currentRoomId.value = roomId;
-            userListDialogOpened.value = true;
-            break;
-        case "renameRoom":
-            roomName.value = roomRepo.value.find(roomId)?.roomName;
-            roomRenameDialogOpened.value = true;
+            roomOptionsDialogOpened.value = true;
             break;
         case "deleteRoom":
             roomRepo.value.delete(roomId);

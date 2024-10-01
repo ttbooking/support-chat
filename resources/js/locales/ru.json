@@ -14,13 +14,15 @@
         "cancel_select_message": "Отмена"
     },
     "title": "Чат поддержки",
-    "invite_users": "Пригласить пользователей",
-    "rename_room": "Переименовать комнату",
+    "configure_room": "Настройки комнаты",
     "delete_room": "Удалить комнату",
     "reply_message": "Ответить",
     "edit_message": "Изменить",
     "delete_message": "Удалить",
     "select_messages": "Выбрать",
+    "room_configuration": "Настройки комнаты {name}",
+    "room_name": "Имя комнаты",
+    "participants": "Участники",
     "ok": "OK",
     "cancel": "Отмена"
 }
