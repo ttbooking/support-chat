@@ -9,7 +9,7 @@
                 @keydown.enter="isPristine || close(save)"
                 @keydown.esc="close(cancel)"
             >
-                <v-card :title="title">
+                <v-card :title="model.value.roomName">
                     <v-card-text>
                         <UserAutocomplete v-model="model.value.users" />
                     </v-card-text>
@@ -29,8 +29,6 @@ import type { Room as BaseRoom } from "vue-advanced-chat";
 
 const room = defineModel<BaseRoom>({ required: true });
 const show = defineModel<boolean>("show", { default: false });
-
-defineProps<{ title: string }>();
 
 const close = (action?: () => void) => {
     show.value = false;

@@ -2,7 +2,6 @@
     <v-autocomplete
         v-model="participants"
         v-model:search="search"
-        no-filter
         multiple
         chips
         closable-chips
@@ -43,11 +42,11 @@ const userRepo = computed(() => useRepo(UserRepository));
 const users = computed(() =>
     userRepo.value
         // TODO: custom filtering, use with "no-filter" property
-        .where(
+        /*.where(
             (user) =>
                 participants.value.map((user) => user._id).includes(user._id) ||
                 user.username.toLowerCase().startsWith(search.value.toLowerCase()),
-        )
+        )*/
         .orderBy("username")
         .get(),
 );

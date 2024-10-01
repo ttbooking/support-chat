@@ -31,18 +31,12 @@
             v-model:show="roomRenameDialogOpened"
             :title="$t('rename_room')"
         />
-        <UserListDialog
-            v-if="room"
-            v-show="userListDialogOpened"
-            v-model="room"
-            v-model:show="userListDialogOpened"
-            title="User List"
-        />
+        <UserListDialog v-show="userListDialogOpened" v-model="room" v-model:show="userListDialogOpened" />
     </Teleport>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
@@ -78,15 +72,17 @@ const roomMessages = computed(() => messageRepo.value.all());
 const roomName = ref<string>();
 const roomRenameDialogOpened = ref<boolean>(false);
 const userListDialogOpened = ref<boolean>(false);
-const room = ref<BaseRoom | null>(null);
 
-watch(
-    room,
-    (room) => {
-        if (room) roomRepo.value.update(room);
+const currentRoomId = ref<string | null>(null);
+const room = computed<BaseRoom>({
+    get(oldRoom) {
+        if (currentRoomId.value === oldRoom?.roomId) return oldRoom;
+        return roomRepo.value.with("users").find(currentRoomId.value!)?.$refresh().$toJson() as BaseRoom;
     },
-    { deep: true },
-);
+    set(room) {
+        roomRepo.value.update(room);
+    },
+});
 
 const menuActions = ref([
     { name: "inviteUsers", title: t("invite_users") },
@@ -127,7 +123,7 @@ function openFile(args: OpenFileArgs) {
 function menuActionHandler({ roomId, action }: { roomId: string; action: CustomAction }) {
     switch (action.name) {
         case "inviteUsers":
-            room.value = roomRepo.value.with("users").find(roomId)?.$toJson() as BaseRoom;
+            currentRoomId.value = roomId;
             userListDialogOpened.value = true;
             break;
         case "renameRoom":
