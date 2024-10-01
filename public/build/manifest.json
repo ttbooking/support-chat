@@ -8,7 +8,7 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-DDw0h6q2.js",
+    "file": "assets/app-bbeI8Wgl.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
@@ -16,7 +16,7 @@
       "_advanced-chat-B527sa3p.js"
     ],
     "css": [
-      "assets/app-pkTFGg-2.css"
+      "assets/app-uWmi9D-7.css"
     ]
   }
 }
