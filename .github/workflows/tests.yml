@@ -1,0 +1,42 @@
+name: tests
+
+on: ['push', 'pull_request']
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-22.04, windows-2019]
+        php: [8.2, 8.3]
+        laravel: [^11.9]
+        stability: [prefer-lowest, prefer-stable]
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+
+      - name: Execute lint tests with Laravel preset
+        run: vendor/bin/pint --test
+
+      - name: Execute static analysis
+        run: vendor/bin/phpstan
+        if: matrix.php == '8.2'
+
+      - name: Execute unit/feature tests
+        run: vendor/bin/pest
