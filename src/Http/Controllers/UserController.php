@@ -22,7 +22,7 @@ class UserController
         return UserResource::collection(
             $model::query()
                 ->when($search = $request->query('search'))
-                ->whereLike('name', $search.'%')
+                ->whereLike('name', '%'.$search.'%')
                 ->orderBy('name')->orderBy('id')
                 ->cursorPaginate()
         );

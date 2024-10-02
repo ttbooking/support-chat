@@ -27,8 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { useRepo } from "pinia-orm";
+import { useSortBy } from "pinia-orm/helpers";
 import UserRepository from "@/repositories/UserRepository";
 import type { RoomUser } from "vue-advanced-chat";
 
@@ -36,24 +37,19 @@ const participants = defineModel<RoomUser[]>({ required: true });
 
 const search = ref<string>("");
 
-const userRepo = computed(() => useRepo(UserRepository));
+const userRepo = useRepo(UserRepository);
 const users = computed(() =>
-    userRepo.value
-        // TODO: custom filtering, use with "no-filter" property
-        /*.where(
-            (user) =>
-                participants.value.map((user) => user._id).includes(user._id) ||
-                user.username.toLowerCase().startsWith(search.value.toLowerCase()),
-        )*/
-        .orderBy("username")
-        .get(),
+    useSortBy(
+        userRepo.orderBy("username").get(),
+        (user) => !participants.value.map((user) => user._id).includes(user._id),
+    ),
 );
 
-watch(search, async (search) => {
-    await userRepo.value.fetch(search);
+watchEffect(async () => {
+    await userRepo.fetch(search.value);
 });
 
 async function onIntersect(isIntersecting: boolean) {
-    if (isIntersecting) await userRepo.value.fetch(search.value);
+    if (isIntersecting) await userRepo.fetch(search.value);
 }
 </script>
