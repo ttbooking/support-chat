@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
+use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Observers\MessageObserver;
 
 /**
@@ -23,7 +24,8 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property string|null $parent_id
  * @property int $type
  * @property string $content
- * @property int $state
+ * @property array|null $meta
+ * @property MessageState $state
  * @property int $flags
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -47,28 +49,26 @@ class Message extends Model
     /** @var list<string> */
     protected $touches = ['room'];
 
-    protected $fillable = ['id', 'sender_id', 'parent_id', 'content'];
+    protected $fillable = ['id', 'sender_id', 'parent_id', 'content', 'meta'];
 
     /** @var array<string, mixed> */
     protected $attributes = [
         'content' => '',
     ];
 
+    /** @var array<string, string> */
+    protected $casts = [
+        'meta' => 'array',
+        'state' => MessageState::class,
+    ];
+
     protected $dateFormat = 'Y-m-d H:i:s.u';
 
-    const STATE_SAVED = 0;
+    public const FLAG_SYSTEM = 0b0001;
 
-    const STATE_DISTRIBUTED = 1;
+    public const FLAG_DISABLE_ACTIONS = 0b0010;
 
-    const STATE_SEEN = 2;
-
-    const STATE_FAILURE = 3;
-
-    const FLAG_SYSTEM = 0b0001;
-
-    const FLAG_DISABLE_ACTIONS = 0b0010;
-
-    const FLAG_DISABLE_REACTIONS = 0b0100;
+    public const FLAG_DISABLE_REACTIONS = 0b0100;
 
     protected static function booted(): void
     {

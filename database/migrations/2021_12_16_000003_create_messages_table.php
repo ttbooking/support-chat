@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use TTBooking\SupportChat\Enums\MessageState;
 
 return new class extends Migration
 {
@@ -20,7 +21,8 @@ return new class extends Migration
             $table->nanoid('parent_id', 7)->nullable()->index();
             $table->unsignedTinyInteger('type')->default(0)->index();
             $table->text('content')->fulltext();
-            $table->unsignedTinyInteger('state')->default(0);
+            $table->json('meta')->nullable();
+            $table->enum('state', array_column(MessageState::cases(), 'value'))->default(MessageState::Saved->value);
             $table->unsignedTinyInteger('flags')->default(0);
             $table->timestamp('created_at', 6)->useCurrent()->index();
             $table->timestamp('updated_at', 6)->useCurrent()->useCurrentOnUpdate();

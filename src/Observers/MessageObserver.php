@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Observers;
 
 use Exception;
+use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Events\Message\Deleted;
 use TTBooking\SupportChat\Events\Message\Edited;
 use TTBooking\SupportChat\Events\Message\Event;
@@ -17,8 +18,8 @@ class MessageObserver
     {
         try {
             broadcast($event)->toOthers();
-            Message::withoutEvents(function () use ($event) {
-                $event->message->state = Message::STATE_DISTRIBUTED;
+            Message::withoutEvents(static function () use ($event) {
+                $event->message->state = MessageState::Distributed;
                 $event->message->save();
             });
         } catch (Exception $e) {

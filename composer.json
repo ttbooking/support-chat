@@ -46,6 +46,7 @@
                 "TTBooking\\SupportChat\\SupportChatServiceProvider"
             ],
             "aliases": {
+                "Chat": "TTBooking\\SupportChat\\Facades\\Chat",
                 "SupportChat": "TTBooking\\SupportChat\\SupportChat"
             }
         }

@@ -11,6 +11,15 @@ use Illuminate\Support\ServiceProvider;
 class SupportChatServiceProvider extends ServiceProvider
 {
     /**
+     * All of the singletons that should be registered.
+     *
+     * @var array<string, class-string>
+     */
+    public array $singletons = [
+        'support-chat' => Chat::class,
+    ];
+
+    /**
      * Bootstrap any application services.
      */
     public function boot(): void
@@ -85,6 +94,16 @@ class SupportChatServiceProvider extends ServiceProvider
 
     protected function registerServices(): void
     {
-        //
+        $this->app->alias('support-chat', Contracts\Chat::class);
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return list<string>
+     */
+    public function provides(): array
+    {
+        return ['support-chat', Contracts\Chat::class];
     }
 }

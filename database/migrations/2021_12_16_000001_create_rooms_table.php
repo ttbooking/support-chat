@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->nanoid(length: 7)->primary();
-            $table->nullableMorphs('subject');
             $table->string('name')->nullable()->index();
+            $table->json('tags')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
-            $table->unique(['subject_type', 'subject_id', 'name']);
+
+            $table->rawIndex('(CAST(tags->"$" AS VARCHAR(32) ARRAY))', 'rooms_tags_index');
         });
     }
 
