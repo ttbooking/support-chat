@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedInteger('sender_id')->index();
             //$table->foreignNanoid('parent_id')->nullable()->constrained('messages')->cascadeOnDelete();
             $table->nanoid('parent_id', 7)->nullable()->index();
-            $table->unsignedTinyInteger('type')->default(0)->index();
             $table->text('content')->fulltext();
             $table->json('meta')->nullable();
             $table->enum('state', array_column(MessageState::cases(), 'value'))->default(MessageState::Saved->value)

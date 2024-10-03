@@ -22,7 +22,6 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property string $room_id
  * @property int $sender_id
  * @property string|null $parent_id
- * @property int $type
  * @property string $content
  * @property array|null $meta
  * @property MessageState $state
