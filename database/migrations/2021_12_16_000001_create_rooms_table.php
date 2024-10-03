@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
 
-            $table->rawIndex('(CAST(tags->"$" AS VARCHAR(32) ARRAY))', 'rooms_tags_index');
+            $table->rawIndex('(CAST(tags->"$" AS CHAR(32) ARRAY))', 'rooms_tags_index');
         });
     }
 

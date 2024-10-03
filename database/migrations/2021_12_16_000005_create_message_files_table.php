@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('type')->nullable()->index();
             $table->unsignedBigInteger('size');
             $table->boolean('audio')->default(false);
-            $table->unsignedFloat('duration')->nullable();
+            $table->float('duration')->nullable();
             $table->string('url')->nullable();
             $table->binary('preview')->nullable();
             $table->unique(['message_id', 'name']);

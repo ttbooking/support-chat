@@ -22,7 +22,8 @@ return new class extends Migration
             $table->unsignedTinyInteger('type')->default(0)->index();
             $table->text('content')->fulltext();
             $table->json('meta')->nullable();
-            $table->enum('state', array_column(MessageState::cases(), 'value'))->default(MessageState::Saved->value);
+            $table->enum('state', array_column(MessageState::cases(), 'value'))->default(MessageState::Saved->value)
+                ->collation('utf8mb4_bin');
             $table->unsignedTinyInteger('flags')->default(0);
             $table->timestamp('created_at', 6)->useCurrent()->index();
             $table->timestamp('updated_at', 6)->useCurrent()->useCurrentOnUpdate();

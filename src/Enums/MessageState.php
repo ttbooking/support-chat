@@ -6,8 +6,8 @@ namespace TTBooking\SupportChat\Enums;
 
 enum MessageState: string
 {
-    case Saved = '✔️';
-    case Distributed = '⚡';
-    case Seen = '👀';
-    case Failure = '❗';
+    case Saved = '✓';
+    case Distributed = '✓✓';
+    case Seen = '✔✔';
+    case Failure = '✗';
 }
