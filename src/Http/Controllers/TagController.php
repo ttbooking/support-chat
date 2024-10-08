@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Tags\Tag;
-use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\Models\RoomTag;
 
 class TagController
 {
@@ -15,13 +14,10 @@ class TagController
      */
     public function index(Request $request)
     {
-        $room = new Room;
-
-        return Tag::query()
-            ->whereMorphedTo($room->getTaggableMorphName(), Room::class)
+        return RoomTag::query()
             ->when($search = $request->query('search'))
-            ->containing($search)
-            ->ordered()
+            ->whereLike('tag', '%'.$search.'%')
+            ->orderBy('tag')
             ->cursorPaginate();
     }
 }

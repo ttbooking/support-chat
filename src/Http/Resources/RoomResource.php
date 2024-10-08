@@ -24,7 +24,7 @@ class RoomResource extends JsonResource
             'roomId' => $this->getKey(),
             'roomName' => $this->name,
             'users' => UserResource::collection($this->users),
-            'tags' => $this->tags->map->name,
+            'tags' => $this->tags->map->tag,
         ];
     }
 }

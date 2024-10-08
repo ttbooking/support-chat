@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Tags\HasTags;
-use Spatie\Tags\Tag;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
 
@@ -23,12 +21,12 @@ use TTBooking\SupportChat\Contracts\Personifiable;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property Collection<int, Model&Personifiable> $users
+ * @property Collection<int, RoomTag> $tags
  * @property Collection<int, Message> $messages
- * @property Collection<int, Tag> $tags
  */
 class Room extends Model
 {
-    use HasNanoids, HasTags, SoftDeletes;
+    use HasNanoids, SoftDeletes;
 
     protected int $nanoidSize = 7;
 
@@ -62,6 +60,14 @@ class Room extends Model
         $model = config('support-chat.user_model');
 
         return $this->belongsToMany($model);
+    }
+
+    /**
+     * @return BelongsToMany<RoomTag>
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(RoomTag::class, 'room_tag', relatedPivotKey: 'tag')->withTimestamps();
     }
 
     /**

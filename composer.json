@@ -17,7 +17,6 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.9",
-        "spatie/laravel-tags": "^4.0",
         "ttbooking/laravel-nanoid": "^1.0"
     },
     "require-dev": {
