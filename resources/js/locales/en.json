@@ -23,6 +23,7 @@
     "room_configuration": "Room {name} configuration",
     "room_name": "Room name",
     "participants": "Participants",
+    "tags": "Tags",
     "ok": "OK",
     "cancel": "Cancel"
 }

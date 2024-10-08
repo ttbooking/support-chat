@@ -23,6 +23,7 @@
     "room_configuration": "Настройки комнаты {name}",
     "room_name": "Имя комнаты",
     "participants": "Участники",
+    "tags": "Теги",
     "ok": "OK",
     "cancel": "Отмена"
 }

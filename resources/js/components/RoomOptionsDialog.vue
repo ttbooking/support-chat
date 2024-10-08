@@ -24,6 +24,12 @@
                             variant="outlined"
                             density="compact"
                         />
+                        <TagAutocomplete
+                            v-model="model.value.tags"
+                            :label="$t('tags')"
+                            variant="outlined"
+                            density="compact"
+                        />
                     </v-card-text>
                     <v-card-actions>
                         <v-btn :disabled="isPristine" @click="save">{{ $t("ok") }}</v-btn>
@@ -37,8 +43,9 @@
 
 <script setup lang="ts">
 import UserAutocomplete from "@/components/UserAutocomplete.vue";
+import TagAutocomplete from "@/components/TagAutocomplete.vue";
 import type { Room as BaseRoom } from "vue-advanced-chat";
 
-const room = defineModel<BaseRoom>({ required: true });
+const room = defineModel<BaseRoom & { tags: string[] }>({ required: true });
 const show = defineModel<boolean>("show", { default: false });
 </script>
