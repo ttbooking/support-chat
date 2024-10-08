@@ -7,6 +7,8 @@ namespace TTBooking\SupportChat;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Tags\Tag;
+use TTBooking\SupportChat\Models\Room;
 
 class SupportChatServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class SupportChatServiceProvider extends ServiceProvider
     {
         $this->registerRoutes();
         $this->registerBladeDirective();
+        $this->defineTagRoomsRelationship();
 
         if ($this->app->runningInConsole()) {
             $this->offerPublishing();
@@ -56,6 +59,17 @@ class SupportChatServiceProvider extends ServiceProvider
         Blade::directive('supportChat', static function () {
             return "<?php echo TTBooking\SupportChat\SupportChat::register()->toHtml(); ?>";
         });
+    }
+
+    protected function defineTagRoomsRelationship(): void
+    {
+        $room = new Room;
+
+        Tag::resolveRelationUsing('rooms', static fn (Tag $tag) => $tag
+            ->morphedByMany(Room::class, $room->getTaggableMorphName(), $room->getTaggableTableName())
+            ->using($room->getPivotModelClassName())
+            ->ordered()
+        );
     }
 
     protected function offerPublishing(): void

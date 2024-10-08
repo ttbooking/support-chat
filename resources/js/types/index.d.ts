@@ -1,4 +1,4 @@
-import { Message, MessageFile, Room } from "vue-advanced-chat";
+import type { Message, MessageFile, Room, RoomUser } from "vue-advanced-chat";
 
 export interface File {
     blob: Blob;
@@ -82,6 +82,8 @@ export interface OpenFileArgs {
 export interface RoomStoreRequest {
     id: string;
     name?: string;
+    users?: RoomUser[];
+    tags?: string[];
 }
 
 export interface MessageStoreRequest {

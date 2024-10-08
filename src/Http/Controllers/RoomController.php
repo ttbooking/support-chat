@@ -26,8 +26,9 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request): RoomResource
     {
-        $room = Room::query()->create($request->safe()->except('users'));
+        $room = Room::query()->create($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));
+        $room->syncTags($request->validated('tags'));
 
         return new RoomResource($room);
     }
@@ -45,8 +46,9 @@ class RoomController extends Controller
      */
     public function update(StoreRoomRequest $request, Room $room): RoomResource
     {
-        $room->update($request->safe()->except('users'));
+        $room->update($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));
+        $room->syncTags($request->validated('tags'));
 
         return new RoomResource($room);
     }

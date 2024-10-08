@@ -14,12 +14,9 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->nanoid(length: 7)->primary();
             $table->string('name')->nullable()->index();
-            $table->json('tags')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
-
-            $table->rawIndex('(CAST(tags->"$" AS CHAR(32) ARRAY))', 'rooms_tags_index');
         });
     }
 

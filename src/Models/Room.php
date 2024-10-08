@@ -11,31 +11,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Tags\HasTags;
+use Spatie\Tags\Tag;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
 
 /**
  * @property string $id
  * @property string $name
- * @property list<string>|null $tags
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property Collection<int, Model&Personifiable> $users
  * @property Collection<int, Message> $messages
+ * @property Collection<int, Tag> $tags
  */
 class Room extends Model
 {
-    use HasNanoids, SoftDeletes;
+    use HasNanoids, HasTags, SoftDeletes;
 
     protected int $nanoidSize = 7;
 
-    protected $fillable = ['id', 'name', 'tags'];
-
-    /** @var array<string, string> */
-    protected $casts = [
-        'tags' => 'array',
-    ];
+    protected $fillable = ['id', 'name'];
 
     protected static function booted(): void
     {

@@ -16,6 +16,7 @@ export default class Room extends Model implements BaseRoom {
     @Num(null) declare unreadCount?: number;
     @Attr(null) declare index?: StringNumber | Date;
     @Attr(null) declare typingUsers?: string[];
+    @Attr(null) declare tags?: string[];
 
     @BelongsToMany(() => User, () => RoomUser, "roomId", "userId") declare users: User[];
     @HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
