@@ -24,13 +24,16 @@ import stc from "string-to-color";
 import { useRepo } from "pinia-orm";
 import { useSortBy } from "pinia-orm/helpers";
 import TagRepository from "@/repositories/TagRepository";
+import type { Tag } from "@/types";
 
-const pickedTags = defineModel<string[]>({ default: [] });
+const pickedTags = defineModel<Tag[]>({ default: [] });
 
 const search = ref<string>("");
 
 const tagRepo = useRepo(TagRepository);
-const tags = computed(() => useSortBy(tagRepo.orderBy("tag").get(), (tag) => !pickedTags.value.includes(tag.tag)));
+const tags = computed(() =>
+    useSortBy(tagRepo.orderBy("tag").get(), (tag) => !pickedTags.value.map((tag) => tag.tag).includes(tag.tag)),
+);
 
 watchEffect(async () => {
     await tagRepo.fetch(search.value);
