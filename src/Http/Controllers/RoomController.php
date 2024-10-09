@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use TTBooking\SupportChat\Http\Requests\StoreRoomRequest;
@@ -16,7 +16,7 @@ class RoomController extends Controller
     /**
      * Display a listing of the rooms.
      */
-    public function index(): ResourceCollection
+    public function index(): AnonymousResourceCollection
     {
         return RoomResource::collection(Room::all());
     }

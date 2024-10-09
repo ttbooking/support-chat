@@ -6,7 +6,7 @@ namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use TTBooking\SupportChat\Http\Resources\UserResource;
 
 class UserController
@@ -14,7 +14,7 @@ class UserController
     /**
      * Display a listing of the users.
      */
-    public function index(Request $request): ResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
         /** @var class-string<Model> $model */
         $model = config('support-chat.user_model');

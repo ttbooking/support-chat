@@ -3,6 +3,8 @@ import { Uid, Attr, Num, Str, BelongsToMany, HasMany, HasManyBy } from "pinia-or
 import { StringNumber, Room as BaseRoom } from "vue-advanced-chat";
 import User from "./User";
 import RoomUser from "./RoomUser";
+import Tag from "./Tag";
+import RoomTag from "./RoomTag";
 import Message from "./Message";
 
 export default class Room extends Model implements BaseRoom {
@@ -16,9 +18,9 @@ export default class Room extends Model implements BaseRoom {
     @Num(null) declare unreadCount?: number;
     @Attr(null) declare index?: StringNumber | Date;
     @Attr(null) declare typingUsers?: string[];
-    @Attr(null) declare tags?: string[];
 
     @BelongsToMany(() => User, () => RoomUser, "roomId", "userId") declare users: User[];
+    @BelongsToMany(() => Tag, () => RoomTag, "roomId", "tag") declare tags: Tag[];
     @HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
     @HasMany(() => Message, "roomId") declare messages: Message[];
 }

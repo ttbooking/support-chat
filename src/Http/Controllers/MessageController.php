@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -18,7 +18,7 @@ class MessageController extends Controller
     /**
      * Display a listing of the messages in the room.
      */
-    public function index(Room $room): ResourceCollection
+    public function index(Room $room): AnonymousResourceCollection
     {
         return MessageResource::collection($room->messages);
     }
