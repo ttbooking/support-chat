@@ -8,12 +8,14 @@ use ArrayObject;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
+use TTBooking\SupportChat\Database\Factories\MessageFactory;
 use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Observers\MessageObserver;
 
@@ -41,7 +43,8 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  */
 class Message extends Model
 {
-    use HasNanoids, SoftDeletes;
+    /** @use HasFactory<MessageFactory> */
+    use HasFactory, HasNanoids, SoftDeletes;
 
     protected int $nanoidSize = 7;
 
@@ -80,6 +83,11 @@ class Message extends Model
         });
 
         static::observe(MessageObserver::class);
+    }
+
+    protected static function newFactory(): MessageFactory
+    {
+        return MessageFactory::new();
     }
 
     /**

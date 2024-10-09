@@ -6,8 +6,10 @@ namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use TTBooking\SupportChat\Database\Factories\RoomTagFactory;
 
 /**
  * @property string $tag
@@ -16,6 +18,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class RoomTag extends Model
 {
+    /** @use HasFactory<RoomTagFactory> */
+    use HasFactory;
+
     protected $primaryKey = 'tag';
 
     protected $keyType = 'string';
@@ -28,6 +33,11 @@ class RoomTag extends Model
     protected $touches = ['rooms'];
 
     protected $fillable = ['tag'];
+
+    protected static function newFactory(): RoomTagFactory
+    {
+        return RoomTagFactory::new();
+    }
 
     /**
      * @return BelongsToMany<Room>

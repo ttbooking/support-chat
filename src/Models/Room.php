@@ -7,12 +7,14 @@ namespace TTBooking\SupportChat\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
+use TTBooking\SupportChat\Database\Factories\RoomFactory;
 
 /**
  * @property string $id
@@ -26,7 +28,8 @@ use TTBooking\SupportChat\Contracts\Personifiable;
  */
 class Room extends Model
 {
-    use HasNanoids, SoftDeletes;
+    /** @use HasFactory<RoomFactory> */
+    use HasFactory, HasNanoids, SoftDeletes;
 
     protected int $nanoidSize = 7;
 
@@ -41,6 +44,11 @@ class Room extends Model
                 ? $room->messages()->forceDelete()
                 : $room->messages()->delete();
         });
+    }
+
+    protected static function newFactory(): RoomFactory
+    {
+        return RoomFactory::new();
     }
 
     /**
