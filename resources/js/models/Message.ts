@@ -1,9 +1,9 @@
 import { Model } from "pinia-orm";
 import { Uid, Attr, Str, Bool, BelongsTo, HasMany } from "pinia-orm/decorators";
-import { StringNumber, Message as BaseMessage, MessageReactions } from "vue-advanced-chat";
 import Room from "./Room";
 import User from "./User";
 import MessageFile from "./MessageFile";
+import type { StringNumber, Message as BaseMessage, MessageReactions } from "vue-advanced-chat";
 
 export default class Message extends Model implements BaseMessage {
     static entity = "messages";

@@ -1,4 +1,12 @@
-import type { Message, MessageFile, Room, RoomUser } from "vue-advanced-chat";
+import type { Message, MessageFile, Room as BaseRoom, RoomUser } from "vue-advanced-chat";
+
+export interface Tag {
+    tag: string;
+}
+
+export interface Room extends BaseRoom {
+    tags: Tag[];
+}
 
 export interface File {
     blob: Blob;

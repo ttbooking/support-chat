@@ -7,7 +7,7 @@
         closable-chips
         :items="tags"
         item-title="tag"
-        item-value="tag"
+        return-object
     >
         <template #chip="{ props, item }">
             <v-chip v-bind="props" variant="flat" :color="stc(item.raw.tag.replace(/ .*/, ''))" />

@@ -1,11 +1,12 @@
 import { Model } from "pinia-orm";
 import { Uid, Attr, Num, Str, BelongsToMany, HasMany, HasManyBy } from "pinia-orm/decorators";
-import { StringNumber, Room as BaseRoom } from "vue-advanced-chat";
 import User from "./User";
 import RoomUser from "./RoomUser";
 import Tag from "./Tag";
 import RoomTag from "./RoomTag";
 import Message from "./Message";
+import type { StringNumber } from "vue-advanced-chat";
+import type { Room as BaseRoom } from "@/types";
 
 export default class Room extends Model implements BaseRoom {
     static entity = "rooms";

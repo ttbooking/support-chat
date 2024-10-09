@@ -6,6 +6,7 @@ namespace TTBooking\SupportChat\Http\Requests;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
+use TTBooking\SupportChat\Models\RoomTag;
 
 class StoreRoomRequest extends FormRequest
 {
@@ -43,7 +44,7 @@ class StoreRoomRequest extends FormRequest
             'users' => 'sometimes|array',
             'users.*._id' => "sometimes|exists:$model,id",
             'tags' => 'sometimes|array',
-            'tags.*' => 'sometimes|string',
+            'tags.*.tag' => 'sometimes|exists:'.RoomTag::class.',tag',
         ];
     }
 }

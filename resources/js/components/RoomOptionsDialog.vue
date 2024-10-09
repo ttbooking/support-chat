@@ -44,8 +44,8 @@
 <script setup lang="ts">
 import UserAutocomplete from "@/components/UserAutocomplete.vue";
 import TagAutocomplete from "@/components/TagAutocomplete.vue";
-import type { Room as BaseRoom } from "vue-advanced-chat";
+import type { Room as BaseRoom } from "@/types";
 
-const room = defineModel<BaseRoom & { tags: any }>({ required: true });
+const room = defineModel<BaseRoom>({ required: true });
 const show = defineModel<boolean>("show", { default: false });
 </script>
