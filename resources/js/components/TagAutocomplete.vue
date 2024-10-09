@@ -10,7 +10,7 @@
         item-value="tag"
     >
         <template #chip="{ props, item }">
-            <v-chip v-bind="props" :color="stc(item.raw.tag)" />
+            <v-chip v-bind="props" variant="flat" :color="stc(item.raw.tag.replace(/ .*/, ''))" />
         </template>
         <template #append-item>
             <v-list-item v-intersect="onIntersect">Loading...</v-list-item>
