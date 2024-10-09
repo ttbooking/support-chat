@@ -9,6 +9,9 @@
         item-title="tag"
         item-value="tag"
     >
+        <template #chip="{ props, item }">
+            <v-chip v-bind="props" :color="stc(item.raw.tag)" />
+        </template>
         <template #append-item>
             <v-list-item v-intersect="onIntersect">Loading...</v-list-item>
         </template>
@@ -17,6 +20,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watchEffect } from "vue";
+import stc from "string-to-color";
 import { useRepo } from "pinia-orm";
 import { useSortBy } from "pinia-orm/helpers";
 import TagRepository from "@/repositories/TagRepository";

@@ -1466,6 +1466,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colornames@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "colornames@npm:1.1.1"
+  checksum: 10c0/a17049f485ebf1a1de659f8fc0f5b2397b48885122c3b2e60cf078aabc5e1cf06d7b934ad4033eb161e7630d871b4b388385c67d5adb179e90ac5e7ca3c6fdf3
+  languageName: node
+  linkType: hard
+
 "combined-stream@npm:^1.0.8":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
@@ -2250,6 +2257,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hex-rgb@npm:^4.1.0":
+  version: 4.3.0
+  resolution: "hex-rgb@npm:4.3.0"
+  checksum: 10c0/ce2c2ff260d9e0686bead74e3318c1684d8a2da856da30ed90535442f705fb4f5cd93ffe70274e2534a7319a99cda6a6617f23d4f163b72867f406e25ea30cb4
+  languageName: node
+  linkType: hard
+
 "http-cache-semantics@npm:^4.1.1":
   version: 4.1.1
   resolution: "http-cache-semantics@npm:4.1.1"
@@ -2559,6 +2573,27 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: 10c0/402fa16a1edd7538de5b5903a90228aa48eb5533986ba7fa26606a49db2572bf414ff73a2c9f5d5fd36b31c46a5d5c7e1527749c07cbcf965ccff5fbdf32c506
+  languageName: node
+  linkType: hard
+
+"lodash.padend@npm:^4.6.1":
+  version: 4.6.1
+  resolution: "lodash.padend@npm:4.6.1"
+  checksum: 10c0/da10eae6e7862541e431d97e652ea66690307104676a30793398e2f66d0fd9a62b07f199451d2185560d9b4627dc6652d33dc7cceb7ab9d843f6e15addec56f5
+  languageName: node
+  linkType: hard
+
+"lodash.trimstart@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "lodash.trimstart@npm:4.5.1"
+  checksum: 10c0/de0d4b1da63fb98cdae1e9ce02e845e5791b0cae78285f0dc6a8029878e7663e586bf6660ab49c5c12302432583f5f7ec2effe735645b208cbf758eba5f9f0d8
+  languageName: node
+  linkType: hard
+
+"lodash.words@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "lodash.words@npm:4.2.0"
+  checksum: 10c0/bb67bf8d9c9797794dc8254f8888eaf2e1e3bf154de736505574d4a0e3fc4489349ef9361ef7bb7288276e0fee2a22d6d81f83a3608ea41a326f5ae1ab506f40
   languageName: node
   linkType: hard
 
@@ -3586,6 +3621,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rgb-hex@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "rgb-hex@npm:3.0.0"
+  checksum: 10c0/6d287c540b03a11ce318b0ab2cb930949604cd2421e662b8a59e9d02345f6da6477c6b60d7b4fd32b6752527ee9f993bba72da48325be9dd3162b4c25d650c91
+  languageName: node
+  linkType: hard
+
 "rollup@npm:^4.20.0":
   version: 4.24.0
   resolution: "rollup@npm:4.24.0"
@@ -3672,8 +3714,9 @@ __metadata:
     pinia-orm: "npm:pinia-orm-edge@latest"
     postcss: "npm:^8.4.47"
     prettier: "npm:^3.3.3"
+    string-to-color: "npm:^2.2.2"
     tailwindcss: "npm:^3.4.13"
-    typescript: "npm:^5.6.2"
+    typescript: "npm:^5.6.3"
     typescript-eslint: "npm:^8.8.1"
     vite: "npm:^5.4.8"
     vite-plugin-vuetify: "npm:^2.0.4"
@@ -3805,6 +3848,20 @@ __metadata:
   dependencies:
     minipass: "npm:^7.0.3"
   checksum: 10c0/e5a1e23a4057a86a97971465418f22ea89bd439ac36ade88812dd920e4e61873e8abd6a9b72a03a67ef50faa00a2daf1ab745c5a15b46d03e0544a0296354227
+  languageName: node
+  linkType: hard
+
+"string-to-color@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "string-to-color@npm:2.2.2"
+  dependencies:
+    colornames: "npm:^1.1.1"
+    hex-rgb: "npm:^4.1.0"
+    lodash.padend: "npm:^4.6.1"
+    lodash.trimstart: "npm:^4.5.1"
+    lodash.words: "npm:^4.2.0"
+    rgb-hex: "npm:^3.0.0"
+  checksum: 10c0/efad47e261741e2e51cc677c590c2704658b653892b8faa7418322322171bde7c5beb97795761aa1ee27dc220f90ae29793043e25422563f8d27fc3aef96e3af
   languageName: node
   linkType: hard
 
@@ -4023,23 +4080,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.6.2":
-  version: 5.6.2
-  resolution: "typescript@npm:5.6.2"
+"typescript@npm:^5.6.3":
+  version: 5.6.3
+  resolution: "typescript@npm:5.6.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/3ed8297a8c7c56b7fec282532503d1ac795239d06e7c4966b42d4330c6cf433a170b53bcf93a130a7f14ccc5235de5560df4f1045eb7f3550b46ebed16d3c5e5
+  checksum: 10c0/44f61d3fb15c35359bc60399cb8127c30bae554cd555b8e2b46d68fa79d680354b83320ad419ff1b81a0bdf324197b29affe6cc28988cd6a74d4ac60c94f9799
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.6.2#optional!builtin<compat/typescript>":
-  version: 5.6.2
-  resolution: "typescript@patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"
+"typescript@patch:typescript@npm%3A^5.6.3#optional!builtin<compat/typescript>":
+  version: 5.6.3
+  resolution: "typescript@patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/94eb47e130d3edd964b76da85975601dcb3604b0c848a36f63ac448d0104e93819d94c8bdf6b07c00120f2ce9c05256b8b6092d23cf5cf1c6fa911159e4d572f
+  checksum: 10c0/7c9d2e07c81226d60435939618c91ec2ff0b75fbfa106eec3430f0fcf93a584bc6c73176676f532d78c3594fe28a54b36eb40b3d75593071a7ec91301533ace7
   languageName: node
   linkType: hard
 
