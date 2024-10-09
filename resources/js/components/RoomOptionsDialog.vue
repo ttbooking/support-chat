@@ -18,15 +18,15 @@
                             variant="outlined"
                             density="compact"
                         />
-                        <UserAutocomplete
-                            v-model="model.value.users"
-                            :label="$t('participants')"
-                            variant="outlined"
-                            density="compact"
-                        />
                         <TagAutocomplete
                             v-model="model.value.tags"
                             :label="$t('tags')"
+                            variant="outlined"
+                            density="compact"
+                        />
+                        <UserAutocomplete
+                            v-model="model.value.users"
+                            :label="$t('participants')"
                             variant="outlined"
                             density="compact"
                         />
@@ -46,6 +46,6 @@ import UserAutocomplete from "@/components/UserAutocomplete.vue";
 import TagAutocomplete from "@/components/TagAutocomplete.vue";
 import type { Room as BaseRoom } from "vue-advanced-chat";
 
-const room = defineModel<BaseRoom & { tags: string[] }>({ required: true });
+const room = defineModel<BaseRoom & { tags: any }>({ required: true });
 const show = defineModel<boolean>("show", { default: false });
 </script>
