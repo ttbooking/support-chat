@@ -32,6 +32,8 @@ class Room extends Model
 
     protected $fillable = ['id', 'name'];
 
+    protected $with = ['tags'];
+
     protected static function booted(): void
     {
         static::deleting(static function (self $room) {

@@ -33,7 +33,7 @@ import { useSortBy } from "pinia-orm/helpers";
 import UserRepository from "@/repositories/UserRepository";
 import type { RoomUser } from "vue-advanced-chat";
 
-const participants = defineModel<RoomUser[]>({ required: true });
+const participants = defineModel<RoomUser[]>({ default: [] });
 
 const search = ref<string>("");
 

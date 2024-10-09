@@ -21,7 +21,7 @@ import { useRepo } from "pinia-orm";
 import { useSortBy } from "pinia-orm/helpers";
 import TagRepository from "@/repositories/TagRepository";
 
-const pickedTags = defineModel<string[]>({ required: true });
+const pickedTags = defineModel<string[]>({ default: [] });
 
 const search = ref<string>("");
 
