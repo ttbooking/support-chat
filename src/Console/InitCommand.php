@@ -62,8 +62,6 @@ class InitCommand extends Command
 
         Schema::enableForeignKeyConstraints();
 
-        $this->components->info('Clean up finished.');
-
         return 0;
     }
 }

@@ -33,10 +33,6 @@ class SeedCommand extends Command
      */
     public function handle(): int
     {
-        $result = $this->call('db:seed', ['class' => DatabaseSeeder::class]);
-
-        $result || $this->components->info('Seeding finished.');
-
-        return $result;
+        return $this->call('db:seed', ['class' => DatabaseSeeder::class]);
     }
 }
