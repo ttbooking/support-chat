@@ -6,7 +6,7 @@
         chips
         closable-chips
         :items="tags"
-        item-title="tag"
+        item-title="name"
         return-object
     >
         <template #chip="{ props, item }">
