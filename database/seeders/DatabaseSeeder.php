@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Database\Seeders;
 
+use Illuminate\Auth\CreatesUserProviders;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\UserProvider;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
@@ -17,8 +18,9 @@ use TTBooking\SupportChat\Models\RoomTag;
 class DatabaseSeeder extends Seeder
 {
     //use WithoutModelEvents;
+    use CreatesUserProviders;
 
-    public function __construct(protected UserProvider $userProvider) {}
+    public function __construct(protected Container $app) {}
 
     /**
      * Run the database seeds.
@@ -41,11 +43,14 @@ class DatabaseSeeder extends Seeder
         $credentials = (array) config('support-chat.seeding_credentials', ['email' => null]);
 
         foreach ($credentials as $credential => &$value) {
-            $value ??= $this->command->ask("Enter user $credential:");
+            $value ??= $this->command->ask("Enter user $credential");
         }
 
-        return tap($this->userProvider->retrieveByCredentials($credentials), function (?Authenticatable $user) {
-            $user || $this->command->warn('User not found - proceeding anyway.');
-        });
+        return tap(
+            $this->createUserProvider(config('auth.defaults.provider', 'users'))?->retrieveByCredentials($credentials),
+            function (?Authenticatable $user) {
+                $user || $this->command->warn('User not found - proceeding anyway.');
+            }
+        );
     }
 }
