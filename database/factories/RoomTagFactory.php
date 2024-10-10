@@ -27,7 +27,7 @@ class RoomTagFactory extends Factory
     public function definition(): array
     {
         return [
-            'tag' => fake()->words(3, true),
+            'tag' => fake()->words(2, true),
         ];
     }
 }
