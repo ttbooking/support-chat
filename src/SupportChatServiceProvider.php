@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat;
 
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +18,16 @@ class SupportChatServiceProvider extends ServiceProvider
      */
     public array $singletons = [
         'support-chat' => Chat::class,
+    ];
+
+    /**
+     * The commands to be registered.
+     *
+     * @var list<class-string<Command>>
+     */
+    protected array $commands = [
+        Console\InitCommand::class,
+        Console\SeedCommand::class,
     ];
 
     /**
@@ -85,16 +96,35 @@ class SupportChatServiceProvider extends ServiceProvider
     {
         $this->configure();
         $this->registerServices();
+        $this->registerCommands();
     }
 
+    /**
+     * Setup the configuration for Support Chat.
+     */
     protected function configure(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/support-chat.php', 'support-chat');
     }
 
+    /**
+     * Register Support Chat's services in the container.
+     */
     protected function registerServices(): void
     {
         $this->app->alias('support-chat', Contracts\Chat::class);
+    }
+
+    /**
+     * Register the Support Chat Artisan commands.
+     */
+    protected function registerCommands(): void
+    {
+        foreach ($this->commands as $command) {
+            $this->app->singleton($command);
+        }
+
+        $this->commands($this->commands);
     }
 
     /**
@@ -104,6 +134,6 @@ class SupportChatServiceProvider extends ServiceProvider
      */
     public function provides(): array
     {
-        return ['support-chat', Contracts\Chat::class];
+        return ['support-chat', Contracts\Chat::class, ...$this->commands];
     }
 }
