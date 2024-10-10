@@ -34,4 +34,14 @@ return [
 
     'user_model' => App\Models\User::class,
 
+    /*
+    |--------------------------------------------------------------------------
+    | User Credentials for Seeding
+    |--------------------------------------------------------------------------
+    */
+
+    'seeding_credentials' => [
+        'email' => env('SC_SEED_EMAIL'),
+    ],
+
 ];
