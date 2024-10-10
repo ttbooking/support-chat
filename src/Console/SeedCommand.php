@@ -31,10 +31,12 @@ class SeedCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(): void
+    public function handle(): int
     {
-        $this->call('db:seed', ['class' => DatabaseSeeder::class]);
+        $result = $this->call('db:seed', ['class' => DatabaseSeeder::class]);
 
         $this->components->info('Seeding finished.');
+
+        return $result;
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -15,6 +16,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 )]
 class InitCommand extends Command
 {
+    use ConfirmableTrait;
+
     /**
      * The console command name.
      *
@@ -29,31 +32,38 @@ class InitCommand extends Command
      */
     protected $description = 'Clean up support chat tables';
 
+    /** @var list<string> */
+    protected array $tables = [
+        'message_reactions',
+        'message_files',
+        'messages',
+        'room_user',
+        'room_tag',
+        'room_tags',
+        'rooms',
+    ];
+
     /**
      * Execute the console command.
      */
-    public function handle(): void
+    public function handle(): int
     {
-        $tables = [
-            'message_reactions',
-            'message_files',
-            'messages',
-            'room_user',
-            'room_tag',
-            'room_tags',
-            'rooms',
-        ];
+        if (! $this->confirmToProceed()) {
+            return 1;
+        }
 
         $this->components->info('Cleaning up database.');
 
         Schema::disableForeignKeyConstraints();
 
-        foreach ($tables as $table) {
+        foreach ($this->tables as $table) {
             DB::table($table)->truncate();
         }
 
         Schema::enableForeignKeyConstraints();
 
         $this->components->info('Clean up finished.');
+
+        return 0;
     }
 }
