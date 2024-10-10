@@ -35,7 +35,7 @@ class SeedCommand extends Command
     {
         $result = $this->call('db:seed', ['class' => DatabaseSeeder::class]);
 
-        $this->components->info('Seeding finished.');
+        $result || $this->components->info('Seeding finished.');
 
         return $result;
     }
