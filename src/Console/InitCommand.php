@@ -44,6 +44,8 @@ class InitCommand extends Command
             'rooms',
         ];
 
+        $this->components->info('Cleaning up database.');
+
         Schema::disableForeignKeyConstraints();
 
         foreach ($tables as $table) {

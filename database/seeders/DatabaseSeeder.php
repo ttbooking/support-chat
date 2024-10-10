@@ -43,13 +43,13 @@ class DatabaseSeeder extends Seeder
         $credentials = (array) config('support-chat.seeding_credentials', ['email' => null]);
 
         foreach ($credentials as $credential => &$value) {
-            $value ??= $this->command->ask("Enter user $credential");
+            $value ??= $this->command->outputComponents()->ask("Enter user $credential");
         }
 
         return tap(
             $this->createUserProvider(config('auth.defaults.provider', 'users'))?->retrieveByCredentials($credentials),
             function (?Authenticatable $user) {
-                $user || $this->command->warn('User not found - proceeding anyway.');
+                $user || $this->command->outputComponents()->warn('User not found - proceeding anyway.');
             }
         );
     }
