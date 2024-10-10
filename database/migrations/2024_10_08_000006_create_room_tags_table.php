@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('room_tags', function (Blueprint $table) {
-            $table->string('tag', 32)->primary();
+            $table->string('name', 32)->primary();
+            $table->string('type', 32)->nullable()->index();
             $table->timestamp('created_at')->useCurrent();
         });
     }

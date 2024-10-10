@@ -26,7 +26,7 @@ class Room implements Contracts\Room
      */
     public function tags(): Collection
     {
-        return collect($this->model->tags->map->tag);
+        return collect($this->model->tags->map->name);
     }
 
     public function addUsers(iterable $users): static

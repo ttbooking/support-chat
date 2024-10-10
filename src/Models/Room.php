@@ -77,7 +77,7 @@ class Room extends Model
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(RoomTag::class, 'room_tag', relatedPivotKey: 'tag')->withTimestamps();
+        return $this->belongsToMany(RoomTag::class, 'room_tag', relatedPivotKey: 'tag_name')->withTimestamps();
     }
 
     /**

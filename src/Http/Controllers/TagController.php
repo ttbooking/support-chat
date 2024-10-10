@@ -19,8 +19,8 @@ class TagController
         return JsonResource::collection(
             RoomTag::query()
                 ->when($search = $request->query('search'))
-                ->whereLike('tag', '%'.$search.'%')
-                ->orderBy('tag')
+                ->whereLike('name', '%'.$search.'%')
+                ->orderBy('name')
                 ->cursorPaginate()
         );
     }

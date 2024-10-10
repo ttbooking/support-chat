@@ -10,7 +10,7 @@
         return-object
     >
         <template #chip="{ props, item }">
-            <v-chip v-bind="props" variant="flat" :color="stc(item.raw.tag.replace(/ .*/, ''))" />
+            <v-chip v-bind="props" variant="flat" :color="tagColor(item.raw)" />
         </template>
         <template #append-item>
             <v-list-item v-intersect="onIntersect">Loading...</v-list-item>
@@ -32,8 +32,10 @@ const search = ref<string>("");
 
 const tagRepo = useRepo(TagRepository);
 const tags = computed(() =>
-    useSortBy(tagRepo.orderBy("tag").get(), (tag) => !pickedTags.value.map((tag) => tag.tag).includes(tag.tag)),
+    useSortBy(tagRepo.orderBy("name").get(), (tag) => !pickedTags.value.map((tag) => tag.name).includes(tag.name)),
 );
+
+const tagColor = (tag: Tag) => stc(tag.type ?? tag.name.replace(/ .*/, ""));
 
 watchEffect(async () => {
     await tagRepo.fetch(search.value);

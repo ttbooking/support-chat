@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('room_tag', function (Blueprint $table) {
             $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
-            $table->string('tag', 32);
+            $table->string('tag_name', 32);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
-            $table->primary(['room_id', 'tag']);
-            $table->foreign('tag')->references('tag')->on('room_tags')->cascadeOnDelete();
+            $table->primary(['room_id', 'tag_name']);
+            $table->foreign('tag_name')->references('name')->on('room_tags')->cascadeOnDelete();
         });
     }
 

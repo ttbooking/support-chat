@@ -44,7 +44,8 @@ class StoreRoomRequest extends FormRequest
             'users' => 'sometimes|array',
             'users.*._id' => "sometimes|exists:$model,id",
             'tags' => 'sometimes|array',
-            'tags.*.tag' => 'sometimes|exists:'.RoomTag::class.',tag',
+            'tags.*.name' => 'sometimes|exists:'.RoomTag::class.',name',
+            'tags.*.type' => 'sometimes|nullable|string|max:32',
         ];
     }
 }

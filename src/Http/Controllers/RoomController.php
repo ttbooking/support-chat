@@ -28,7 +28,7 @@ class RoomController extends Controller
     {
         $room = Room::query()->create($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));
-        $room->tags()->sync($request->validated('tags.*.tag'));
+        $room->tags()->sync($request->validated('tags.*.name'));
 
         return new RoomResource($room);
     }
@@ -48,7 +48,7 @@ class RoomController extends Controller
     {
         $room->update($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));
-        $room->tags()->sync($request->validated('tags.*.tag'));
+        $room->tags()->sync($request->validated('tags.*.name'));
 
         return new RoomResource($room);
     }
