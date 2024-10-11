@@ -21,9 +21,10 @@
     "delete_message": "Удалить",
     "select_messages": "Выбрать",
     "room_configuration": "Настройки комнаты {name}",
+    "creator": "Создатель",
     "room_name": "Имя комнаты",
-    "participants": "Участники",
     "tags": "Теги",
+    "participants": "Участники",
     "ok": "OK",
     "cancel": "Отмена"
 }

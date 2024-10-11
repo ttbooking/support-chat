@@ -25,7 +25,7 @@ class MessageResource extends JsonResource
             '_id' => $this->getKey(),
             'indexId' => $this->getKey(),
             'content' => ! $this->trashed() ? $this->content : '',
-            'senderId' => (string) $this->sender_id,
+            'senderId' => (string) $this->sent_by,
             'username' => $this->sender->getPersonInfo()->name,
             'system' => (bool) ($this->flags & Message::FLAG_SYSTEM),
             'saved' => $this->exists,
@@ -37,7 +37,7 @@ class MessageResource extends JsonResource
             'disableReactions' => (bool) ($this->flags & Message::FLAG_DISABLE_REACTIONS),
             'files' => ! $this->trashed() ? MessageFileResource::collection($this->files) : [],
             'reactions' => $this->reactionsWithUsers,
-            'replyMessage' => $this->parent ? new self($this->parent) : null,
+            'replyMessage' => $this->origin ? new self($this->origin) : null,
         ];
     }
 }

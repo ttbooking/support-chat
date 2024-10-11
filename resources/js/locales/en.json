@@ -21,9 +21,10 @@
     "delete_message": "Delete Message",
     "select_messages": "Select",
     "room_configuration": "Room {name} configuration",
+    "creator": "Creator",
     "room_name": "Room name",
-    "participants": "Participants",
     "tags": "Tags",
+    "participants": "Participants",
     "ok": "OK",
     "cancel": "Cancel"
 }

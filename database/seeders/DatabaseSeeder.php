@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $users = $userModel::all()->random(3)->push(...Arr::wrap($this->user()));
 
         Room::factory()
+            ->recycle($users)
             ->hasAttached($users, [], 'users')
             ->has(RoomTag::factory()->count(3), 'tags')
             ->has(Message::factory()->recycle($users)->count(10))

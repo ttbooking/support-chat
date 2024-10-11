@@ -35,7 +35,7 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             'id' => 'required|nanoid|size:7',
-            'parent_id' => 'sometimes|nullable|nanoid|size:7',
+            'reply_to' => 'sometimes|nullable|nanoid|size:7',
             'content' => 'required_without:attachments|string',
             'attachments' => 'required_without:content|array',
             'attachments.*.name' => 'required|string|max:255',

@@ -22,8 +22,8 @@ use TTBooking\SupportChat\Observers\MessageObserver;
 /**
  * @property string $id
  * @property string $room_id
- * @property int $sender_id
- * @property string|null $parent_id
+ * @property int $sent_by
+ * @property string|null $reply_to
  * @property string $content
  * @property array|null $meta
  * @property MessageState $state
@@ -33,7 +33,7 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property Carbon|null $deleted_at
  * @property Room $room
  * @property Model&Personifiable $sender
- * @property Message|null $parent
+ * @property Message|null $origin
  * @property Collection<int, Message> $replies
  * @property Collection<int, MessageFile> $attachments
  * @property Collection<int, MessageFile> $files
@@ -51,7 +51,7 @@ class Message extends Model
     /** @var list<string> */
     protected $touches = ['room'];
 
-    protected $fillable = ['id', 'sender_id', 'parent_id', 'content', 'meta'];
+    protected $fillable = ['id', 'sent_by', 'reply_to', 'content', 'meta'];
 
     /** @var array<string, mixed> */
     protected $attributes = [
@@ -106,15 +106,15 @@ class Message extends Model
         /** @var class-string<Model> $model */
         $model = config('support-chat.user_model');
 
-        return $this->belongsTo($model);
+        return $this->belongsTo($model, 'sent_by');
     }
 
     /**
      * @return BelongsTo<self, self>
      */
-    public function parent(): BelongsTo
+    public function origin(): BelongsTo
     {
-        return $this->belongsTo(static::class);
+        return $this->belongsTo(static::class, 'reply_to');
     }
 
     /**
@@ -122,7 +122,7 @@ class Message extends Model
      */
     public function replies(): HasMany
     {
-        return $this->hasMany(static::class, 'parent_id');
+        return $this->hasMany(static::class, 'reply_to');
     }
 
     /**

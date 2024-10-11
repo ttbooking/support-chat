@@ -33,7 +33,7 @@ class MessageFactory extends Factory
 
         return [
             'room_id' => Room::factory(),
-            'sender_id' => $this->getRandomRecycledModel($userModel)?->getKey() ?? $userModel::all()->random()->getKey(),
+            'sent_by' => $this->getRandomRecycledModel($userModel)?->getKey() ?? $userModel::all()->random()->getKey(),
             'content' => fake()->sentence(),
         ];
     }

@@ -22,6 +22,7 @@ class RoomResource extends JsonResource
     {
         return [
             'roomId' => $this->getKey(),
+            'creator' => new UserResource($this->creator),
             'roomName' => $this->name,
             'users' => UserResource::collection($this->users),
             'tags' => $this->tags,

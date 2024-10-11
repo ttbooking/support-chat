@@ -12,6 +12,17 @@
                 <v-card :title="$t('room_configuration', { name: room.roomName })">
                     <v-card-text>
                         <v-text-field
+                            v-model="model.value.creator.username"
+                            :label="$t('creator')"
+                            variant="outlined"
+                            density="compact"
+                            readonly
+                        >
+                            <template #prepend-inner>
+                                <v-avatar :image="model.value.creator.avatar" />
+                            </template>
+                        </v-text-field>
+                        <v-text-field
                             v-model="model.value.roomName"
                             :placeholder="room.roomName"
                             :label="$t('room_name')"

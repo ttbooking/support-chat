@@ -72,7 +72,7 @@ class Room implements Contracts\Room
     {
         return new Message($this, $this->model->messages()->create([
             'content' => $content,
-            'parent_id' => $replyTo?->id(),
+            'reply_to' => $replyTo?->id(),
         ]));
     }
 

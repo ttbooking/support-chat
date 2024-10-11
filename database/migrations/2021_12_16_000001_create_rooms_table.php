@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->nanoid(length: 7)->primary();
             $table->string('name')->nullable()->index();
+            $table->unsignedInteger('created_by')->index();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
+
+            $table->foreign('created_by')->references('id')->on('p2_users')->cascadeOnDelete();
         });
     }
 

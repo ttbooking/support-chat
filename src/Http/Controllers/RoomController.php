@@ -26,7 +26,7 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request): RoomResource
     {
-        $room = Room::query()->create($request->safe()->except('users', 'tags'));
+        $room = Room::query()->create($request->safe()->except('users', 'tags') + ['created_by' => auth()->id()]);
         $room->users()->sync($request->validated('users.*._id'));
         $room->tags()->sync($request->validated('tags.*.name'));
 

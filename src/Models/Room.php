@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,9 +21,11 @@ use TTBooking\SupportChat\Database\Factories\RoomFactory;
 /**
  * @property string $id
  * @property string $name
+ * @property int $created_by
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
+ * @property Model&Authenticatable $creator
  * @property Collection<int, Model&Personifiable> $users
  * @property Collection<int, RoomTag> $tags
  * @property Collection<int, Message> $messages
@@ -33,7 +37,7 @@ class Room extends Model
 
     protected int $nanoidSize = 7;
 
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['id', 'name', 'created_by'];
 
     protected $with = ['tags'];
 
@@ -59,6 +63,17 @@ class Room extends Model
         return Attribute::get(
             fn (?string $name): string => $name ?? 'Room '.$this->id
         );
+    }
+
+    /**
+     * @return BelongsTo<Model&Authenticatable, self>
+     */
+    public function creator(): BelongsTo
+    {
+        /** @var class-string<Model> $model */
+        $model = config('support-chat.user_model');
+
+        return $this->belongsTo($model, 'created_by');
     }
 
     /**

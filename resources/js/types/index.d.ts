@@ -6,6 +6,7 @@ export interface Tag {
 }
 
 export interface Room extends BaseRoom {
+    creator: RoomUser;
     tags: Tag[];
 }
 

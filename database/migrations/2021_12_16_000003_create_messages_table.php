@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->nanoid(length: 7)->primary();
             $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
-            //$table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
-            $table->unsignedInteger('sender_id')->index();
-            //$table->foreignNanoid('parent_id')->nullable()->constrained('messages')->cascadeOnDelete();
-            $table->nanoid('parent_id', 7)->nullable()->index();
+            //$table->foreignId('sent_by')->constrained('users')->cascadeOnDelete();
+            $table->unsignedInteger('sent_by')->index();
+            //$table->foreignNanoid('reply_to')->nullable()->constrained('messages')->cascadeOnDelete();
+            $table->nanoid('reply_to', 7)->nullable()->index();
             $table->text('content')->fulltext();
             $table->json('meta')->nullable();
             $table->enum('state', array_column(MessageState::cases(), 'value'))->default(MessageState::Saved->value)
@@ -30,8 +30,8 @@ return new class extends Migration
         });
 
         Schema::table('messages', function (Blueprint $table) {
-            $table->foreign('sender_id')->references('id')->on('p2_users')->cascadeOnDelete();
-            $table->foreign('parent_id')->references('id')->on('messages')->cascadeOnDelete();
+            $table->foreign('sent_by')->references('id')->on('p2_users')->cascadeOnDelete();
+            $table->foreign('reply_to')->references('id')->on('messages')->cascadeOnDelete();
         });
     }
 
