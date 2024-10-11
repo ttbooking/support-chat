@@ -11,6 +11,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\Room;
 use TTBooking\SupportChat\Models\RoomTag;
@@ -20,16 +21,16 @@ class DatabaseSeeder extends Seeder
     //use WithoutModelEvents;
     use CreatesUserProviders;
 
-    public function __construct(protected Container $app) {}
+    public function __construct(protected Container $app, protected Guard $auth) {}
 
     /**
      * Run the database seeds.
      */
-    public function run(Guard $auth): void
+    public function run(): void
     {
         /** @var class-string<Model&Authenticatable> $userModel */
         $userModel = config('support-chat.user_model');
-        $users = $userModel::all()->random(3)->when($me = $auth->user() ?? $this->user())->add($me);
+        $users = $userModel::all()->random(3)->push(...Arr::wrap($this->user()));
 
         Room::factory()
             ->hasAttached($users, [], 'users')
@@ -40,6 +41,10 @@ class DatabaseSeeder extends Seeder
 
     protected function user(): ?Authenticatable
     {
+        if ($this->auth->hasUser()) {
+            return $this->auth->user();
+        }
+
         $credentials = (array) config('support-chat.seeding_credentials', ['email' => null]);
 
         foreach ($credentials as $credential => &$value) {
