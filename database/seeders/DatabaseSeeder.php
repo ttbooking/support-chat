@@ -19,7 +19,9 @@ use TTBooking\SupportChat\Models\RoomTag;
 class DatabaseSeeder extends Seeder
 {
     //use WithoutModelEvents;
-    use CreatesUserProviders;
+    use CreatesUserProviders {
+        getDefaultUserProvider as protected defaultUserProvider;
+    }
 
     public function __construct(protected Container $app, protected Guard $auth) {}
 
@@ -52,10 +54,15 @@ class DatabaseSeeder extends Seeder
         }
 
         return tap(
-            $this->createUserProvider(config('auth.defaults.provider', 'users'))?->retrieveByCredentials($credentials),
+            $this->createUserProvider()?->retrieveByCredentials($credentials),
             function (?Authenticatable $user) {
                 $user || $this->command->outputComponents()->warn('User not found - proceeding anyway.');
             }
         );
+    }
+
+    public function getDefaultUserProvider(): string
+    {
+        return $this->defaultUserProvider() ?? 'users';
     }
 }
