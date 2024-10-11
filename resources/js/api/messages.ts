@@ -1,7 +1,7 @@
 import type { Message } from "vue-advanced-chat";
 import type { MessageStoreRequest } from "@/types";
 
-const baseUrl = window.SupportChat.path + "/api/v1";
+const baseUrl = window.SupportChat.path;
 
 export default {
     index(roomId: string) {
