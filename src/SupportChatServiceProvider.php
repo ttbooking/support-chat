@@ -49,15 +49,12 @@ class SupportChatServiceProvider extends ServiceProvider
      */
     protected function registerRoutes(): void
     {
-        Route::group([
-            'domain' => $this->app['config']['support-chat.domain'] ?? null,
-            'prefix' => $this->app['config']['support-chat.path'] ?? null,
-            'name' => 'support-chat.',
-            'namespace' => 'TTBooking\\SupportChat\\Http\\Controllers',
-            'middleware' => $this->app['config']['support-chat.middleware'] ?? 'web',
-        ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        });
+        Route::domain($this->app['config']['support-chat.domain'])
+            ->prefix($this->app['config']['support-chat.path'] ?? 'support-chat')
+            ->name('support-chat.')
+            ->namespace('TTBooking\\SupportChat\\Http\\Controllers')
+            ->middleware($this->app['config']['support-chat.middleware'] ?? ['web', 'auth'])
+            ->group(fn () => $this->loadRoutesFrom(__DIR__.'/../routes/web.php'));
 
         require __DIR__.'/../routes/channels.php';
     }
