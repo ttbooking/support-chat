@@ -14,12 +14,11 @@
                         <v-text-field
                             v-model="model.value.creator.username"
                             :label="$t('creator')"
-                            variant="outlined"
-                            density="compact"
+                            variant="plain"
                             readonly
                         >
                             <template #prepend-inner>
-                                <v-avatar :image="model.value.creator.avatar" />
+                                <v-avatar size="24" :image="model.value.creator.avatar" />
                             </template>
                         </v-text-field>
                         <v-text-field
