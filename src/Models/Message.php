@@ -155,7 +155,7 @@ class Message extends Model
     protected function attachmentPath(): Attribute
     {
         return Attribute::get(
-            fn () => 'support-chat/room/'.$this->room_id.'/'.$this->getKey()
+            fn () => 'attachments/'.$this->room_id.'/'.$this->getKey()
         );
     }
 

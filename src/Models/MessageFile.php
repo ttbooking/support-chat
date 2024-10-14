@@ -38,7 +38,7 @@ class MessageFile extends Model
     protected static function booted(): void
     {
         static::deleted(static function (self $attachment) {
-            Storage::delete($attachment->attachmentPath);
+            Storage::disk(config('support-chat.disk'))->delete($attachment->attachmentPath);
         });
     }
 

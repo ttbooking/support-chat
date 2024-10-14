@@ -23,7 +23,9 @@ class MessageAttachmentController extends Controller
     {
         $attachmentFile = $request->file('attachment');
         $attachment = $message->getAttachment($attachmentFile->getClientOriginalName());
-        $attachmentFile->storeAs($message->attachmentPath, $attachment->name);
+        $attachmentFile->storeAs($message->attachmentPath, $attachment->name, [
+            'disk' => config('support-chat.disk'),
+        ]);
 
         broadcast(new Uploaded($attachment))->toOthers();
 
@@ -35,7 +37,7 @@ class MessageAttachmentController extends Controller
      */
     public function show(Message $message, MessageFile $attachment): StreamedResponse
     {
-        return Storage::download($attachment->attachmentPath);
+        return Storage::disk(config('support-chat.disk'))->download($attachment->attachmentPath);
     }
 
     /**

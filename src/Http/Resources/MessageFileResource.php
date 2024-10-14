@@ -29,7 +29,7 @@ class MessageFileResource extends JsonResource
             'duration' => $this->duration,
             'url' => route('messages.attachments.show', ['message' => $this->message_id, 'attachment' => $this->name]),
             'preview' => $this->preview ? 'data:image/png;base64,'.base64_encode($this->preview) : null,
-            'progress' => Storage::exists($this->attachmentPath) ? -1 : 0,
+            'progress' => Storage::disk(config('support-chat.disk'))->exists($this->attachmentPath) ? -1 : 0,
         ];
     }
 }
