@@ -34,8 +34,8 @@ import { ref, computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
-import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
-import type { Reaction, OpenFileArgs } from "@/types";
+import type { RoomUser, Message } from "vue-advanced-chat";
+import type { Room as BaseRoom, Reaction, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
@@ -68,7 +68,13 @@ const currentRoomId = ref<string | null>(null);
 const room = computed<BaseRoom>({
     get(oldRoom) {
         if (currentRoomId.value === oldRoom?.roomId) return oldRoom;
-        return roomRepo.with("users").with("tags").find(currentRoomId.value!)?.$refresh().$toJson() as BaseRoom;
+        return roomRepo
+            .with("creator")
+            .with("users")
+            .with("tags")
+            .find(currentRoomId.value!)
+            ?.$refresh()
+            .$toJson() as BaseRoom;
     },
     set(room) {
         roomRepo.update(room);
