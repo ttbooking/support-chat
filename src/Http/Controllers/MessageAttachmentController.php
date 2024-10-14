@@ -23,9 +23,7 @@ class MessageAttachmentController extends Controller
     {
         $attachmentFile = $request->file('attachment');
         $attachment = $message->getAttachment($attachmentFile->getClientOriginalName());
-        $attachmentFile->storeAs($message->attachmentPath, $attachment->name, [
-            'disk' => config('support-chat.disk'),
-        ]);
+        $attachmentFile->storeAs($message->attachmentPath, $attachment->name, config('support-chat.disk'));
 
         broadcast(new Uploaded($attachment))->toOthers();
 
