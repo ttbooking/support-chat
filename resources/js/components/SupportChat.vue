@@ -55,12 +55,12 @@ const textMessages = computed(() =>
     Object.fromEntries(Object.entries(tm("advanced_chat")).map(([key, msg]) => [key.toUpperCase(), rt(msg)])),
 );
 
-const roomRepo = useRepo(RoomRepository);
-const messageRepo = useRepo(MessageRepository);
+const roomRepo = computed(() => useRepo(RoomRepository));
+const messageRepo = computed(() => useRepo(MessageRepository));
 
-const rooms = computed(() => roomRepo.all());
-const joinedRooms = computed(() => roomRepo.joined().get());
-const roomMessages = computed(() => messageRepo.all());
+const rooms = computed(() => roomRepo.value.all());
+const joinedRooms = computed(() => roomRepo.value.joined().get());
+const roomMessages = computed(() => messageRepo.value.all());
 
 const roomOptionsDialogOpened = ref<boolean>(false);
 
@@ -68,7 +68,7 @@ const currentRoomId = ref<string | null>(null);
 const room = computed<BaseRoom>({
     get(oldRoom) {
         if (currentRoomId.value === oldRoom?.roomId) return oldRoom;
-        return roomRepo
+        return roomRepo.value
             .with("creator")
             .with("users")
             .with("tags")
@@ -77,7 +77,7 @@ const room = computed<BaseRoom>({
             .$toJson() as BaseRoom;
     },
     set(room) {
-        roomRepo.update(room);
+        roomRepo.value.update(room);
     },
 });
 
@@ -94,21 +94,21 @@ const messageActions = ref([
 ]);
 
 onMounted(async () => {
-    await roomRepo.fetch();
+    await roomRepo.value.fetch();
 
     for (const room of joinedRooms.value) {
         window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`);
         window.roomChannel
-            .here((users: RoomUser[]) => roomRepo.setUsers(room.roomId, users))
-            .joining((user: RoomUser) => roomRepo.joinUser(room.roomId, user))
-            .leaving((user: RoomUser) => roomRepo.leaveUser(room.roomId, user))
+            .here((users: RoomUser[]) => roomRepo.value.setUsers(room.roomId, users))
+            .joining((user: RoomUser) => roomRepo.value.joinUser(room.roomId, user))
+            .leaving((user: RoomUser) => roomRepo.value.leaveUser(room.roomId, user))
             .listenToAll((event: string, data: unknown) => console.log(event, data))
             .error((error: unknown) => console.error(error))
-            .listen(".message.posted", (message: Message) => messageRepo.posted(room.roomId, message))
-            .listen(".message.edited", (message: Message) => messageRepo.edited(message))
-            .listen(".message.deleted", (message: Message) => messageRepo.deleted(message))
-            .listen(".reaction.left", (reaction: Reaction) => messageRepo.reactionLeft(reaction))
-            .listen(".reaction.removed", (reaction: Reaction) => messageRepo.reactionRemoved(reaction));
+            .listen(".message.posted", (message: Message) => messageRepo.value.posted(room.roomId, message))
+            .listen(".message.edited", (message: Message) => messageRepo.value.edited(message))
+            .listen(".message.deleted", (message: Message) => messageRepo.value.deleted(message))
+            .listen(".reaction.left", (reaction: Reaction) => messageRepo.value.reactionLeft(reaction))
+            .listen(".reaction.removed", (reaction: Reaction) => messageRepo.value.reactionRemoved(reaction));
     }
 });
 
@@ -123,7 +123,7 @@ function menuActionHandler({ roomId, action }: { roomId: string; action: CustomA
             roomOptionsDialogOpened.value = true;
             break;
         case "deleteRoom":
-            roomRepo.delete(roomId);
+            roomRepo.value.delete(roomId);
     }
 }
 </script>

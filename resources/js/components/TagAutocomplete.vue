@@ -30,18 +30,21 @@ const pickedTags = defineModel<Tag[]>({ default: [] });
 
 const search = ref<string>("");
 
-const tagRepo = useRepo(TagRepository);
+const tagRepo = computed(() => useRepo(TagRepository));
 const tags = computed(() =>
-    useSortBy(tagRepo.orderBy("name").get(), (tag) => !pickedTags.value.map((tag) => tag.name).includes(tag.name)),
+    useSortBy(
+        tagRepo.value.orderBy("name").get(),
+        (tag) => !pickedTags.value.map((tag) => tag.name).includes(tag.name),
+    ),
 );
 
 const tagColor = (tag: Tag) => stc(tag.type ?? tag.name.replace(/ .*/, ""));
 
 watchEffect(async () => {
-    await tagRepo.fetch(search.value);
+    await tagRepo.value.fetch(search.value);
 });
 
 async function onIntersect(isIntersecting: boolean) {
-    if (isIntersecting) await tagRepo.fetch(search.value);
+    if (isIntersecting) await tagRepo.value.fetch(search.value);
 }
 </script>
