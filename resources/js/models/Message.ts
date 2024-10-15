@@ -25,6 +25,7 @@ export default class Message extends Model implements BaseMessage {
     @Bool(null) declare distributed?: boolean;
     @Bool(null) declare seen?: boolean;
     @Bool(null) declare deleted?: boolean;
+    @Bool(null) declare edited?: boolean;
     @Bool(null) declare failure?: boolean;
     @Bool(null) declare disableActions?: boolean;
     @Bool(null) declare disableReactions?: boolean;

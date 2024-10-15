@@ -58,7 +58,7 @@ const textMessages = computed(() =>
 const roomRepo = computed(() => useRepo(RoomRepository));
 const messageRepo = computed(() => useRepo(MessageRepository));
 
-const rooms = computed(() => roomRepo.value.all());
+const rooms = computed(() => roomRepo.value.with("users").get());
 const joinedRooms = computed(() => roomRepo.value.joined().get());
 const roomMessages = computed(() => messageRepo.value.all());
 
