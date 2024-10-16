@@ -45,7 +45,7 @@ export default class MessageRepository extends AxiosRepository<Message> {
                 window.SupportChat.path + `/rooms/${roomId}/messages`,
                 {
                     id: message._id,
-                    parent_id: message.replyMessage?._id,
+                    reply_to: message.replyMessage?._id,
                     content: message.content,
                     attachments:
                         message.files?.map((file) => ({

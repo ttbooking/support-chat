@@ -98,7 +98,7 @@ export interface RoomStoreRequest {
 
 export interface MessageStoreRequest {
     id: string;
-    parent_id?: string;
+    reply_to?: string;
     content: string;
     attachments?: Array<{
         name: string;
