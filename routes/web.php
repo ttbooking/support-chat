@@ -32,4 +32,4 @@ Route::prefix('api')->group(function () {
     );
 });
 
-Route::get('/{roomId?}', 'ChatController@index')->where('roomId', '(.{7}")')->name('index');
+Route::get('/{roomId?}', 'ChatController@index')->where('roomId', '(.{7})')->name('index');

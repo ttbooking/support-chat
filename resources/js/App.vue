@@ -1,5 +1,5 @@
 <template>
-    <SupportChat :room-id="$env.roomId" :height="300" />
+    <SupportChat :room-id="$env.roomId" :height="1000" />
 </template>
 
 <script setup lang="ts">
