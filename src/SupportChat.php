@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\HtmlString;
+use TTBooking\ViteManager\Facades\Vite;
 
 class SupportChat
 {
@@ -20,10 +20,7 @@ class SupportChat
 
         return new HtmlString(
             "<script>window.SupportChat = $scriptVariables</script>".
-            Vite::useHotFile('vendor/support-chat/hot')
-                ->useBuildDirectory('vendor/support-chat/build')
-                ->withEntryPoints(['resources/js/app.ts'])
-                ->toHtml()
+            Vite::app('standalone-chat')->toHtml()
         );
     }
 
@@ -36,17 +33,7 @@ class SupportChat
 
         return new HtmlString(
             "<script>window.SupportChat = $scriptVariables</script>".
-            Vite::useHotFile('vendor/support-chat/hot')
-                ->useBuildDirectory('vendor/support-chat/build')
-                ->withEntryPoints(['resources/js/win.ts'])
-                ->toHtml()
+            Vite::app('windowed-chat')->toHtml()
         );
-    }
-
-    public static function asset(string $asset): string
-    {
-        return Vite::useHotFile('vendor/support-chat/hot')
-            ->useBuildDirectory('vendor/support-chat/build')
-            ->asset("resources/$asset");
     }
 }

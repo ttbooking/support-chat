@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use TTBooking\ViteManager\Facades\Vite;
 
 class SupportChatServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,7 @@ class SupportChatServiceProvider extends ServiceProvider
         $this->registerRoutes();
         $this->registerBladeDirectives();
         $this->registerResources();
+        $this->registerAssets();
 
         if ($this->app->runningInConsole()) {
             $this->offerPublishing();
@@ -80,6 +82,22 @@ class SupportChatServiceProvider extends ServiceProvider
     protected function registerResources(): void
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'support-chat');
+    }
+
+    /**
+     * Register the Support Chat assets.
+     */
+    protected function registerAssets(): void
+    {
+        Vite::app('standalone-chat')
+            ->useHotFile('vendor/support-chat/hot')
+            ->useBuildDirectory('vendor/support-chat/build')
+            ->withEntryPoints(['resources/js/app.ts']);
+
+        Vite::app('windowed-chat')
+            ->useHotFile('vendor/support-chat/hot')
+            ->useBuildDirectory('vendor/support-chat/build')
+            ->withEntryPoints(['resources/js/win.ts']);
     }
 
     protected function offerPublishing(): void
