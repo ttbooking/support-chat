@@ -10,17 +10,24 @@ import type {
     DeleteMessageArgs,
     SendMessageReactionArgs,
     InitMessageArgs,
+    Room,
     Reaction,
 } from "@/types";
 
 export default class MessageRepository extends AxiosRepository<Message> {
     use = Message;
 
+    room?: Room;
+
     loaded = false;
 
+    currentRoom = () => this.where("roomId", this.room?.roomId);
+
     fetch = async ({ room }: FetchMessagesArgs) => {
+        this.room = room;
         this.loaded = false;
         const response = await this.api().get(window.SupportChat.path + `/rooms/${room.roomId}/messages`, {
+            //dataTransformer: ({ data }) => data.data.map((message: BaseMessage) => ({ ...message, room })),
             dataKey: "data",
         });
         this.loaded = true;
@@ -28,7 +35,7 @@ export default class MessageRepository extends AxiosRepository<Message> {
     };
 
     send = async ({ roomId, content, files, replyMessage }: SendMessageArgs) => {
-        const { _id } = this.init({ content, replyMessage, files });
+        const { _id } = this.init({ roomId, content, replyMessage, files });
         return await this.trySend({ roomId, message: { _id, content, replyMessage, files } });
     };
 
@@ -104,8 +111,9 @@ export default class MessageRepository extends AxiosRepository<Message> {
         return this.query().whereId(messageId).update({ reactions });
     };
 
-    private init({ content, replyMessage, files }: InitMessageArgs) {
+    private init({ roomId, content, replyMessage, files }: { roomId: string } & InitMessageArgs) {
         return this.save({
+            roomId,
             content,
             files: (files || []).map<MessageFile>((file) => ({
                 name: file.name,

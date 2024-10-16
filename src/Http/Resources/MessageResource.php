@@ -23,6 +23,7 @@ class MessageResource extends JsonResource
     {
         return [
             '_id' => $this->getKey(),
+            'roomId' => $this->room_id,
             'senderId' => (string) $this->sent_by,
             'indexId' => $this->getKey(),
             'content' => ! $this->trashed() ? $this->content : '',

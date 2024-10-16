@@ -25,7 +25,12 @@
         @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
     />
     <Teleport to="body">
-        <RoomOptionsDialog v-show="roomOptionsDialogOpened" v-model="room" v-model:show="roomOptionsDialogOpened" />
+        <RoomOptionsDialog
+            v-if="room"
+            v-show="roomOptionsDialogOpened"
+            v-model="room"
+            v-model:show="roomOptionsDialogOpened"
+        />
     </Teleport>
 </template>
 
@@ -60,7 +65,7 @@ const messageRepo = computed(() => useRepo(MessageRepository));
 
 const rooms = computed(() => roomRepo.value.with("users").get());
 const joinedRooms = computed(() => roomRepo.value.joined().get());
-const roomMessages = computed(() => messageRepo.value.all());
+const roomMessages = computed(() => messageRepo.value.currentRoom().get());
 
 const roomOptionsDialogOpened = ref<boolean>(false);
 
