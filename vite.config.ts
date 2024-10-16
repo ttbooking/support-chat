@@ -22,7 +22,7 @@ export default defineConfig({
             include: [path.resolve(__dirname, "./resources/js/locales/**")],
         }),
         laravel({
-            input: "resources/js/app.ts",
+            input: ["resources/js/app.ts", "resources/js/win.ts"],
             refresh: true,
         }),
         vue({

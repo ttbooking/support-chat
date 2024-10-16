@@ -1,4 +1,4 @@
-const baseUrl = window.SupportChat.path;
+const baseUrl = window.SupportChat.path + "/api";
 
 export default {
     store(messageId: string, attachment: any, config: any) {

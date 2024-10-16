@@ -22,6 +22,7 @@ export default [
     {
         rules: {
             "@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
+            "vue/multi-word-component-names": ["error", { ignores: ["Win"] }],
         },
     },
 ];

@@ -6,8 +6,9 @@ import en from "../locales/en.json";
 declare global {
     interface Window {
         SupportChat: {
-            userId: string;
             path: string;
+            userId: string;
+            roomId?: string;
         };
         axios: AxiosInstance;
         Echo: Echo;

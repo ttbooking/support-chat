@@ -5,6 +5,8 @@
         :current-user-id="$env.userId"
         :rooms.prop="rooms"
         :rooms-loaded="roomRepo.loaded"
+        :room-id="roomId"
+        :single-room="!!roomId"
         :text-messages.prop="textMessages"
         :room-info-enabled="false"
         :messages.prop="roomMessages"
@@ -50,7 +52,7 @@ import RoomOptionsDialog from "@/components/RoomOptionsDialog.vue";
 
 register();
 
-const props = defineProps<{ height: number }>();
+const props = defineProps<{ roomId?: string; height: number }>();
 
 const computedHeight = computed(() => props.height - 35 + "px");
 

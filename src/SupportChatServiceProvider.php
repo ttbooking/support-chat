@@ -36,7 +36,8 @@ class SupportChatServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerRoutes();
-        $this->registerBladeDirective();
+        $this->registerBladeDirectives();
+        $this->registerResources();
 
         if ($this->app->runningInConsole()) {
             $this->offerPublishing();
@@ -59,11 +60,26 @@ class SupportChatServiceProvider extends ServiceProvider
         require __DIR__.'/../routes/channels.php';
     }
 
-    protected function registerBladeDirective(): void
+    /**
+     * Register the Support Chat Blade directives.
+     */
+    protected function registerBladeDirectives(): void
     {
-        Blade::directive('supportChat', static function () {
-            return "<?php echo TTBooking\SupportChat\SupportChat::register()->toHtml(); ?>";
+        Blade::directive('chat', static function (?string $roomId = null) {
+            return "<?php echo TTBooking\\SupportChat\\SupportChat::standalone($roomId)->toHtml(); ?>";
         });
+
+        Blade::directive('winchat', static function () {
+            return '<?php echo TTBooking\\SupportChat\\SupportChat::windowed()->toHtml(); ?>';
+        });
+    }
+
+    /**
+     * Register the Support Chat resources.
+     */
+    protected function registerResources(): void
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'support-chat');
     }
 
     protected function offerPublishing(): void
@@ -75,6 +91,10 @@ class SupportChatServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations' => $this->app->databasePath('migrations'),
         ], ['support-chat-migrations', 'support-chat', 'migrations']);
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/support-chat'),
+        ], ['support-chat-views', 'support-chat', 'views']);
 
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/support-chat'),

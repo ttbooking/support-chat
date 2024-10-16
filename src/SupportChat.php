@@ -10,11 +10,12 @@ use Illuminate\Support\HtmlString;
 
 class SupportChat
 {
-    public static function register(): Htmlable
+    public static function standalone(?string $roomId = null): Htmlable
     {
         $scriptVariables = json_encode([
-            'userId' => (string) auth()->id(),
             'path' => config('support-chat.path'),
+            'userId' => (string) auth()->id(),
+            'roomId' => $roomId,
         ]);
 
         return new HtmlString(
@@ -22,6 +23,22 @@ class SupportChat
             Vite::useHotFile('vendor/support-chat/hot')
                 ->useBuildDirectory('vendor/support-chat/build')
                 ->withEntryPoints(['resources/js/app.ts'])
+                ->toHtml()
+        );
+    }
+
+    public static function windowed(): Htmlable
+    {
+        $scriptVariables = json_encode([
+            'path' => config('support-chat.path'),
+            'userId' => (string) auth()->id(),
+        ]);
+
+        return new HtmlString(
+            "<script>window.SupportChat = $scriptVariables</script>".
+            Vite::useHotFile('vendor/support-chat/hot')
+                ->useBuildDirectory('vendor/support-chat/build')
+                ->withEntryPoints(['resources/js/win.ts'])
                 ->toHtml()
         );
     }

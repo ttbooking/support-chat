@@ -8,7 +8,7 @@ export default class TagRepository extends AxiosRepository<Tag> {
 
     fetch = async (search?: string, fresh = false) => {
         if (fresh) TagRepository.cursor = null;
-        const response = await this.api().get(window.SupportChat.path + "/tags", {
+        const response = await this.api().get(window.SupportChat.path + "/api/tags", {
             dataKey: "data",
             params: { search, cursor: TagRepository.cursor },
         });
