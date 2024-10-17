@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <link rel="shortcut icon" href="{{ Vite::app('standalone-chat')->asset('resources/images/favicon.svg') }}" />
+        <link rel="shortcut icon" href="{{ Vite::app('support-chat')->asset('resources/images/favicon.svg') }}" />
 
         <title>Support Chat - {{ config('app.name', 'Laravel') }}</title>
 
