@@ -65,7 +65,9 @@ const textMessages = computed(() =>
 const roomRepo = computed(() => useRepo(RoomRepository));
 const messageRepo = computed(() => useRepo(MessageRepository));
 
-const rooms = computed(() => roomRepo.value.with("users").get());
+const rooms = computed(() =>
+    props.roomId ? roomRepo.value.whereId(props.roomId).with("users").get() : roomRepo.value.with("users").get(),
+);
 const joinedRooms = computed(() => roomRepo.value.joined().get());
 const roomMessages = computed(() => messageRepo.value.currentRoom().get());
 
@@ -101,7 +103,7 @@ const messageActions = ref([
 ]);
 
 onMounted(async () => {
-    await roomRepo.value.fetch();
+    await roomRepo.value.fetch(props.roomId);
 
     for (const room of joinedRooms.value) {
         window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`);

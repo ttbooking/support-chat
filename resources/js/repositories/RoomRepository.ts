@@ -7,9 +7,10 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     loaded = false;
 
-    fetch = async () => {
+    fetch = async (roomId?: string) => {
         this.loaded = false;
-        const response = await this.api().get(window.SupportChat.path + "/api/rooms", { dataKey: "data" });
+        const url = window.SupportChat.path + "/api/rooms";
+        const response = await this.api().get(roomId ? `${url}/${roomId}` : url, { dataKey: "data" });
         this.loaded = true;
         return response;
     };
@@ -24,7 +25,10 @@ export default class RoomRepository extends AxiosRepository<Room> {
     };
 
     delete = async (roomId: string) => {
-        return await this.api().delete(window.SupportChat.path + `/api/rooms/${roomId}`, { delete: 1, dataKey: "data" });
+        return await this.api().delete(window.SupportChat.path + `/api/rooms/${roomId}`, {
+            delete: 1,
+            dataKey: "data",
+        });
     };
 
     setUsers = (roomId: string, users: RoomUser[]) => {
