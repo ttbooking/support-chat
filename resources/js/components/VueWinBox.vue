@@ -11,12 +11,14 @@ const winbox = ref<WinBox | null>(null);
 
 const props = withDefaults(
     defineProps<{
+        icon?: string;
         class?: string | string[];
         minheight?: string | number;
         minwidth?: string | number;
         overflow?: boolean;
     }>(),
     {
+        icon: undefined,
         class: "modern",
         minwidth: 250,
         minheight: 400,

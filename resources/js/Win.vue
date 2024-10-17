@@ -4,6 +4,7 @@
             v-for="[id, window] in windows"
             :key="id"
             v-model="window.value"
+            :icon="icon"
             class="modern"
             minwidth="300"
             minheight="450"
@@ -19,6 +20,8 @@
 import VueWinBox from "@/components/VueWinBox.vue";
 import SupportChat from "@/components/SupportChat.vue";
 import { useWindowManager } from "@/composables";
+
+import icon from "../images/favicon.svg";
 
 const { windows, createWindow, closeWindow } = useWindowManager();
 </script>
