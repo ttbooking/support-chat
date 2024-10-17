@@ -37,9 +37,9 @@ class SupportChatServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerRoutes();
+        $this->registerAssets();
         $this->registerBladeDirectives();
         $this->registerResources();
-        $this->registerAssets();
 
         if ($this->app->runningInConsole()) {
             $this->offerPublishing();
@@ -63,16 +63,27 @@ class SupportChatServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the Support Chat assets.
+     */
+    protected function registerAssets(): void
+    {
+        Vite::app('support-chat')
+            ->useHotFile('vendor/support-chat/hot')
+            ->useBuildDirectory('vendor/support-chat/build')
+            ->withEntryPoints(['resources/js/app.ts']);
+    }
+
+    /**
      * Register the Support Chat Blade directives.
      */
     protected function registerBladeDirectives(): void
     {
         Blade::directive('chat', static function (?string $roomId = null) {
-            return "<?php echo TTBooking\\SupportChat\\SupportChat::standalone($roomId)->toHtml(); ?>";
+            return "<?php echo TTBooking\SupportChat\SupportChat::standalone($roomId)->toHtml(); ?>";
         });
 
         Blade::directive('winchat', static function () {
-            return '<?php echo TTBooking\\SupportChat\\SupportChat::windowed()->toHtml(); ?>';
+            return '<?php echo TTBooking\SupportChat\SupportChat::windowed()->toHtml(); ?>';
         });
     }
 
@@ -82,22 +93,6 @@ class SupportChatServiceProvider extends ServiceProvider
     protected function registerResources(): void
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'support-chat');
-    }
-
-    /**
-     * Register the Support Chat assets.
-     */
-    protected function registerAssets(): void
-    {
-        Vite::app('standalone-chat')
-            ->useHotFile('vendor/support-chat/hot')
-            ->useBuildDirectory('vendor/support-chat/build')
-            ->withEntryPoints(['resources/js/app.ts']);
-
-        Vite::app('windowed-chat')
-            ->useHotFile('vendor/support-chat/hot')
-            ->useBuildDirectory('vendor/support-chat/build')
-            ->withEntryPoints(['resources/js/win.ts']);
     }
 
     protected function offerPublishing(): void

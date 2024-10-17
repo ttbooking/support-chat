@@ -20,7 +20,7 @@ class SupportChat
 
         return new HtmlString(
             "<script>window.SupportChat = $scriptVariables</script>".
-            Vite::app('standalone-chat')->toHtml()
+            Vite::app('support-chat')->toHtml()
         );
     }
 
@@ -33,7 +33,7 @@ class SupportChat
 
         return new HtmlString(
             "<script>window.SupportChat = $scriptVariables</script>".
-            Vite::app('windowed-chat')->toHtml()
+            Vite::app('support-chat')->withEntryPoints(['resources/js/win.ts'])->toHtml()
         );
     }
 }
