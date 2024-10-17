@@ -54,7 +54,7 @@
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-_RrgMtAk.js",
+    "file": "assets/win-ZcfnFhub.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
@@ -63,7 +63,10 @@
       "_advanced-chat-B527sa3p.js"
     ],
     "css": [
-      "assets/win-BDnonk1Z.css"
+      "assets/win-DTtxxaCZ.css"
+    ],
+    "assets": [
+      "assets/favicon-DXKRda58.svg"
     ]
   }
 }
