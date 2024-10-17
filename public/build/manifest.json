@@ -4,40 +4,62 @@
     "name": "advanced-chat"
   },
   "_vuetify-!~{004}~.js": {
-    "file": "assets/vuetify-CTobiVs6.css",
+    "file": "assets/vuetify-CBOdocp9.css",
     "src": "_vuetify-!~{004}~.js"
   },
-  "_vuetify-DOsNdism.js": {
-    "file": "assets/vuetify-DOsNdism.js",
+  "_vuetify-CqVnhp9s.js": {
+    "file": "assets/vuetify-CqVnhp9s.js",
     "name": "vuetify",
     "imports": [
       "_advanced-chat-B527sa3p.js"
     ],
     "css": [
-      "assets/vuetify-CTobiVs6.css"
+      "assets/vuetify-CBOdocp9.css"
+    ],
+    "assets": [
+      "assets/materialdesignicons-webfont-CSr8KVlo.eot",
+      "assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
+      "assets/materialdesignicons-webfont-PXm3-2wK.woff",
+      "assets/materialdesignicons-webfont-B7mPwVP_.ttf"
     ]
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
+    "file": "assets/materialdesignicons-webfont-CSr8KVlo.eot",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf": {
+    "file": "assets/materialdesignicons-webfont-B7mPwVP_.ttf",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff": {
+    "file": "assets/materialdesignicons-webfont-PXm3-2wK.woff",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2": {
+    "file": "assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
   },
   "resources/images/favicon.svg": {
     "file": "assets/favicon-DXKRda58.svg",
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-D4iUibnd.js",
+    "file": "assets/app-Dkwm-tua.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-DOsNdism.js",
+      "_vuetify-CqVnhp9s.js",
       "_advanced-chat-B527sa3p.js"
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-Bbiszsig.js",
+    "file": "assets/win-CItVq9Vk.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-DOsNdism.js",
+      "_vuetify-CqVnhp9s.js",
       "_advanced-chat-B527sa3p.js"
     ],
     "css": [
