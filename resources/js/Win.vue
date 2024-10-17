@@ -4,13 +4,12 @@
             v-for="[id, window] in windows"
             :key="id"
             v-model="window.value"
-            title="My Window"
             class="modern"
             minwidth="300"
             minheight="450"
             @close="closeWindow"
         >
-            <SupportChat :height="window.value.height" />
+            <SupportChat v-model="window.value.title" :height="window.value.height" />
         </VueWinBox>
         <v-fab class="fixed" icon="$vuetify" color="primary" @click="createWindow" />
     </div>

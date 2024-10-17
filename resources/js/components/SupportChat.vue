@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, watchEffect, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
@@ -52,6 +52,8 @@ import RoomOptionsDialog from "@/components/RoomOptionsDialog.vue";
 
 register();
 
+const model = defineModel<string>();
+
 const props = defineProps<{ roomId?: string; height: number }>();
 
 const computedHeight = computed(() => props.height - 35 + "px");
@@ -62,14 +64,18 @@ const textMessages = computed(() =>
     Object.fromEntries(Object.entries(tm("advanced_chat")).map(([key, msg]) => [key.toUpperCase(), rt(msg)])),
 );
 
-const roomRepo = computed(() => useRepo(RoomRepository));
-const messageRepo = computed(() => useRepo(MessageRepository));
+const roomRepo = useRepo(RoomRepository);
+const messageRepo = useRepo(MessageRepository);
 
 const rooms = computed(() =>
-    props.roomId ? roomRepo.value.whereId(props.roomId).with("users").get() : roomRepo.value.with("users").get(),
+    props.roomId ? roomRepo.whereId(props.roomId).with("users").get() : roomRepo.with("users").get(),
 );
-const joinedRooms = computed(() => roomRepo.value.joined().get());
-const roomMessages = computed(() => messageRepo.value.currentRoom().get());
+const joinedRooms = computed(() => roomRepo.joined().get());
+const roomMessages = computed(() => messageRepo.currentRoom().get());
+
+watchEffect(() => {
+    model.value = messageRepo.room.value?.roomName;
+});
 
 const roomOptionsDialogOpened = ref<boolean>(false);
 
@@ -77,7 +83,7 @@ const currentRoomId = ref<string | null>(null);
 const room = computed<BaseRoom>({
     get(oldRoom) {
         if (currentRoomId.value === oldRoom?.roomId) return oldRoom;
-        return roomRepo.value
+        return roomRepo
             .with("creator")
             .with("users")
             .with("tags")
@@ -86,7 +92,7 @@ const room = computed<BaseRoom>({
             .$toJson() as BaseRoom;
     },
     set(room) {
-        roomRepo.value.update(room);
+        roomRepo.update(room);
     },
 });
 
@@ -103,21 +109,21 @@ const messageActions = ref([
 ]);
 
 onMounted(async () => {
-    await roomRepo.value.fetch(props.roomId);
+    await roomRepo.fetch(props.roomId);
 
     for (const room of joinedRooms.value) {
         window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`);
         window.roomChannel
-            .here((users: RoomUser[]) => roomRepo.value.setUsers(room.roomId, users))
-            .joining((user: RoomUser) => roomRepo.value.joinUser(room.roomId, user))
-            .leaving((user: RoomUser) => roomRepo.value.leaveUser(room.roomId, user))
+            .here((users: RoomUser[]) => roomRepo.setUsers(room.roomId, users))
+            .joining((user: RoomUser) => roomRepo.joinUser(room.roomId, user))
+            .leaving((user: RoomUser) => roomRepo.leaveUser(room.roomId, user))
             .listenToAll((event: string, data: unknown) => console.log(event, data))
             .error((error: unknown) => console.error(error))
-            .listen(".message.posted", (message: Message) => messageRepo.value.posted(room.roomId, message))
-            .listen(".message.edited", (message: Message) => messageRepo.value.edited(message))
-            .listen(".message.deleted", (message: Message) => messageRepo.value.deleted(message))
-            .listen(".reaction.left", (reaction: Reaction) => messageRepo.value.reactionLeft(reaction))
-            .listen(".reaction.removed", (reaction: Reaction) => messageRepo.value.reactionRemoved(reaction));
+            .listen(".message.posted", (message: Message) => messageRepo.posted(room.roomId, message))
+            .listen(".message.edited", (message: Message) => messageRepo.edited(message))
+            .listen(".message.deleted", (message: Message) => messageRepo.deleted(message))
+            .listen(".reaction.left", (reaction: Reaction) => messageRepo.reactionLeft(reaction))
+            .listen(".reaction.removed", (reaction: Reaction) => messageRepo.reactionRemoved(reaction));
     }
 });
 
@@ -132,7 +138,7 @@ function menuActionHandler({ roomId, action }: { roomId: string; action: CustomA
             roomOptionsDialogOpened.value = true;
             break;
         case "deleteRoom":
-            roomRepo.value.delete(roomId);
+            roomRepo.delete(roomId);
     }
 }
 </script>

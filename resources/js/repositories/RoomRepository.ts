@@ -1,3 +1,4 @@
+import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Room from "@/models/Room";
 import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
@@ -5,13 +6,13 @@ import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
 export default class RoomRepository extends AxiosRepository<Room> {
     use = Room;
 
-    loaded = false;
+    loaded = ref(false);
 
     fetch = async (roomId?: string) => {
-        this.loaded = false;
+        this.loaded.value = false;
         const url = window.SupportChat.path + "/api/rooms";
         const response = await this.api().get(roomId ? `${url}/${roomId}` : url, { dataKey: "data" });
-        this.loaded = true;
+        this.loaded.value = true;
         return response;
     };
 

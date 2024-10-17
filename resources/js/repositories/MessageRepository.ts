@@ -1,3 +1,4 @@
+import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Message from "@/models/Message";
 import api from "@/api";
@@ -17,20 +18,20 @@ import type {
 export default class MessageRepository extends AxiosRepository<Message> {
     use = Message;
 
-    room?: Room;
+    room = ref<Room>();
 
-    loaded = false;
+    loaded = ref(false);
 
-    currentRoom = () => this.where("roomId", this.room?.roomId);
+    currentRoom = () => this.where("roomId", this.room.value?.roomId);
 
     fetch = async ({ room }: FetchMessagesArgs) => {
-        this.room = room;
-        this.loaded = false;
+        this.room.value = room;
+        this.loaded.value = false;
         const response = await this.api().get(window.SupportChat.path + `/api/rooms/${room.roomId}/messages`, {
             //dataTransformer: ({ data }) => data.data.map((message: BaseMessage) => ({ ...message, room })),
             dataKey: "data",
         });
-        this.loaded = true;
+        this.loaded.value = true;
         return response;
     };
 

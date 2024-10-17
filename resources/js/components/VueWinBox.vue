@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onBeforeMount, onScopeDispose, toRaw } from "vue";
+import { ref, watchEffect, onBeforeMount, onScopeDispose, toRaw } from "vue";
 import "winbox";
 import type { WinBoxModel } from "@/types/winbox";
 
@@ -11,14 +11,12 @@ const winbox = ref<WinBox | null>(null);
 
 const props = withDefaults(
     defineProps<{
-        title?: string;
         class?: string | string[];
         minheight?: string | number;
         minwidth?: string | number;
         overflow?: boolean;
     }>(),
     {
-        title: "My Window",
         class: "modern",
         minwidth: 250,
         minheight: 400,
@@ -29,6 +27,7 @@ const props = withDefaults(
 const model = defineModel<WinBoxModel>({
     required: true,
     default: {
+        title: "My Window",
         index: 1000,
         x: 100,
         y: 100,
@@ -42,37 +41,35 @@ const emit = defineEmits<{
     (e: "close", id: string): void;
 }>();
 
-watch(
-    () => props.title,
-    (title) => winbox.value?.setTitle(title),
-);
-
-watch(model, (window) => {
-    if (winbox.value?.x !== window.x || winbox.value?.y !== window.y) {
-        winbox.value?.move(window.x, window.y);
+watchEffect(() => {
+    if (winbox.value?.title !== model.value.title) {
+        winbox.value?.setTitle(model.value.title);
     }
-    if (winbox.value?.width !== window.width || winbox.value?.height !== window.height) {
-        winbox.value?.resize(window.width, window.height);
+    if (winbox.value?.x !== model.value.x || winbox.value?.y !== model.value.y) {
+        winbox.value?.move(model.value.x, model.value.y);
     }
-    if (winbox.value?.min !== window.min) {
-        winbox.value?.minimize(window.min);
+    if (winbox.value?.width !== model.value.width || winbox.value?.height !== model.value.height) {
+        winbox.value?.resize(model.value.width, model.value.height);
     }
-    if (winbox.value?.max !== window.max) {
-        winbox.value?.maximize(window.max);
+    if (winbox.value?.min !== model.value.min) {
+        winbox.value?.minimize(model.value.min);
     }
-    if (winbox.value?.full !== window.full) {
-        winbox.value?.fullscreen(window.full);
+    if (winbox.value?.max !== model.value.max) {
+        winbox.value?.maximize(model.value.max);
     }
-    if (winbox.value?.hidden !== window.hidden) {
-        winbox.value?.hide(window.hidden);
+    if (winbox.value?.full !== model.value.full) {
+        winbox.value?.fullscreen(model.value.full);
     }
-    if (winbox.value?.focused !== window.focused) {
-        winbox.value?.focus(window.focused);
+    if (winbox.value?.hidden !== model.value.hidden) {
+        winbox.value?.hide(model.value.hidden);
+    }
+    if (winbox.value?.focused !== model.value.focused) {
+        winbox.value?.focus(model.value.focused);
     }
 });
 
 onBeforeMount(() => {
-    winbox.value = new WinBox(props.title, {
+    winbox.value = new WinBox({
         ...props,
         ...model.value,
         oncreate() {

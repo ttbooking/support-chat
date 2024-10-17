@@ -1,5 +1,6 @@
 export interface WinBoxModel {
     id: string;
+    title: string;
     index: number;
     x: number;
     y: number;

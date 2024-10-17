@@ -33,6 +33,7 @@ export function useWindowManager(storage?: StorageLike) {
             id,
             shallowRef({
                 id,
+                title: "My Window",
                 index: 1000,
                 x: 100,
                 y: 100,

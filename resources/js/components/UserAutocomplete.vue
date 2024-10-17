@@ -32,19 +32,19 @@ const participants = defineModel<RoomUser[]>({ default: [] });
 
 const search = ref<string>("");
 
-const userRepo = computed(() => useRepo(UserRepository));
+const userRepo = useRepo(UserRepository);
 const users = computed(() =>
     useSortBy(
-        userRepo.value.orderBy("username").get(),
+        userRepo.orderBy("username").get(),
         (user) => !participants.value.map((user) => user._id).includes(user._id),
     ),
 );
 
 watchEffect(async () => {
-    await userRepo.value.fetch(search.value);
+    await userRepo.fetch(search.value);
 });
 
 async function onIntersect(isIntersecting: boolean) {
-    if (isIntersecting) await userRepo.value.fetch(search.value);
+    if (isIntersecting) await userRepo.fetch(search.value);
 }
 </script>
