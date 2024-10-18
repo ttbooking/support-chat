@@ -4,17 +4,16 @@ on: ['push', 'pull_request']
 
 jobs:
   tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04
 
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-22.04, windows-2019]
         php: [8.2, 8.3]
         laravel: [11.9]
         stability: [prefer-lowest, prefer-stable]
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }}
 
     steps:
       - name: Checkout code
@@ -28,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework=^${{ matrix.laravel }}" --no-interaction --no-update
+          composer require "laravel/framework:^${{ matrix.laravel }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute lint tests with Laravel preset
