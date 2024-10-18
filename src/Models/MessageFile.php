@@ -43,7 +43,7 @@ class MessageFile extends Model
     }
 
     /**
-     * @return BelongsTo<Message, self>
+     * @return BelongsTo<Message, $this>
      */
     public function message(): BelongsTo
     {

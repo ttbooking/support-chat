@@ -66,29 +66,29 @@ class Room extends Model
     }
 
     /**
-     * @return BelongsTo<Model&Authenticatable, self>
+     * @return BelongsTo<Model&Authenticatable, $this>
      */
     public function creator(): BelongsTo
     {
-        /** @var class-string<Model> $model */
+        /** @var class-string<Model&Authenticatable> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsTo($model, 'created_by');
     }
 
     /**
-     * @return BelongsToMany<Model&Personifiable>
+     * @return BelongsToMany<Model&Personifiable, $this>
      */
     public function users(): BelongsToMany
     {
-        /** @var class-string<Model> $model */
+        /** @var class-string<Model&Personifiable> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsToMany($model);
     }
 
     /**
-     * @return BelongsToMany<RoomTag>
+     * @return BelongsToMany<RoomTag, $this>
      */
     public function tags(): BelongsToMany
     {
@@ -96,7 +96,7 @@ class Room extends Model
     }
 
     /**
-     * @return HasMany<Message>
+     * @return HasMany<Message, $this>
      */
     public function messages(): HasMany
     {

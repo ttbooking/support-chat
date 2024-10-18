@@ -41,7 +41,7 @@ class RoomTag extends Model
     }
 
     /**
-     * @return BelongsToMany<Room>
+     * @return BelongsToMany<Room, $this>
      */
     public function rooms(): BelongsToMany
     {

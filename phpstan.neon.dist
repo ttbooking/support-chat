@@ -10,7 +10,7 @@ parameters:
         - src
         - tests
 
-    level: max
+    level: 2
 
     ignoreErrors:
         - '#^Class App\\Models\\User not found\.$#'

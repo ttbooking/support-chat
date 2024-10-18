@@ -23,7 +23,7 @@ class UserResource extends JsonResource
     public function toArray(?Request $request = null): array
     {
         $person = $this->getPersonInfo();
-        $lastChanged = $person->lastChanged ? Carbon::createFromInterface($person->lastChanged) : Carbon::now();
+        $lastChanged = $person->lastChanged ? Carbon::instance($person->lastChanged) : Carbon::now();
 
         return [
             '_id' => (string) $this->getKey(),

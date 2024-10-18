@@ -40,7 +40,7 @@ class MessageReaction extends Model
     }
 
     /**
-     * @return BelongsTo<Message, self>
+     * @return BelongsTo<Message, $this>
      */
     public function message(): BelongsTo
     {
@@ -48,11 +48,11 @@ class MessageReaction extends Model
     }
 
     /**
-     * @return BelongsTo<Model&Personifiable, self>
+     * @return BelongsTo<Model&Personifiable, $this>
      */
     public function user(): BelongsTo
     {
-        /** @var class-string<Model> $model */
+        /** @var class-string<Model&Personifiable> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsTo($model);

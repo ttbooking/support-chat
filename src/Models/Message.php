@@ -91,7 +91,7 @@ class Message extends Model
     }
 
     /**
-     * @return BelongsTo<Room, self>
+     * @return BelongsTo<Room, $this>
      */
     public function room(): BelongsTo
     {
@@ -99,18 +99,18 @@ class Message extends Model
     }
 
     /**
-     * @return BelongsTo<Model&Personifiable, self>
+     * @return BelongsTo<Model&Personifiable, $this>
      */
     public function sender(): BelongsTo
     {
-        /** @var class-string<Model> $model */
+        /** @var class-string<Model&Personifiable> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsTo($model, 'sent_by');
     }
 
     /**
-     * @return BelongsTo<self, self>
+     * @return BelongsTo<self, $this>
      */
     public function origin(): BelongsTo
     {
@@ -118,7 +118,7 @@ class Message extends Model
     }
 
     /**
-     * @return HasMany<self>
+     * @return HasMany<self, $this>
      */
     public function replies(): HasMany
     {
@@ -126,7 +126,7 @@ class Message extends Model
     }
 
     /**
-     * @return HasMany<MessageFile>
+     * @return HasMany<MessageFile, $this>
      */
     public function attachments(): HasMany
     {
@@ -134,7 +134,7 @@ class Message extends Model
     }
 
     /**
-     * @return HasMany<MessageFile>
+     * @return HasMany<MessageFile, $this>
      */
     public function files(): HasMany
     {
@@ -142,7 +142,7 @@ class Message extends Model
     }
 
     /**
-     * @return HasMany<MessageReaction>
+     * @return HasMany<MessageReaction, $this>
      */
     public function reactions(): HasMany
     {
