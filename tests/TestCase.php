@@ -11,6 +11,8 @@ use TTBooking\SupportChat\SupportChatServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
+    protected $enablesPackageDiscoveries = true;
+
     protected function getPackageProviders($app): array
     {
         return [SupportChatServiceProvider::class];
