@@ -8,6 +8,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use TTBooking\SupportChat\Facades\Chat;
 use TTBooking\SupportChat\SupportChat;
 use TTBooking\SupportChat\SupportChatServiceProvider;
+use TTBooking\ViteManager\ViteServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
@@ -15,7 +16,7 @@ abstract class TestCase extends OrchestraTestCase
 
     protected function getPackageProviders($app): array
     {
-        return [SupportChatServiceProvider::class];
+        return [ViteServiceProvider::class, SupportChatServiceProvider::class];
     }
 
     protected function getPackageAliases($app): array
