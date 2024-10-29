@@ -7,14 +7,17 @@ namespace TTBooking\SupportChat\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use TTBooking\SupportChat\Models\Message;
 
-class StoreMessageRequest extends FormRequest
+/**
+ * @property-read Message $message
+ */
+class UpdateMessageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', Message::class);
+        return $this->user()->can('update', $this->message);
     }
 
     /**

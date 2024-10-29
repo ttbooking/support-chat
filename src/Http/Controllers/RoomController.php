@@ -4,15 +4,24 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use TTBooking\SupportChat\Http\Requests\StoreRoomRequest;
+use TTBooking\SupportChat\Http\Requests\UpdateRoomRequest;
 use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Room;
 
 class RoomController extends Controller
 {
+    use AuthorizesRequests;
+
+    public function __construct()
+    {
+        $this->authorizeResource(Room::class, 'room');
+    }
+
     /**
      * Display a listing of the rooms.
      */
@@ -44,7 +53,7 @@ class RoomController extends Controller
     /**
      * Update the specified room in storage.
      */
-    public function update(StoreRoomRequest $request, Room $room): RoomResource
+    public function update(UpdateRoomRequest $request, Room $room): RoomResource
     {
         $room->update($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));

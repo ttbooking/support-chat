@@ -4,17 +4,26 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use TTBooking\SupportChat\Http\Requests\StoreMessageRequest;
+use TTBooking\SupportChat\Http\Requests\UpdateMessageRequest;
 use TTBooking\SupportChat\Http\Resources\MessageResource;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\Room;
 
 class MessageController extends Controller
 {
+    use AuthorizesRequests;
+
+    public function __construct()
+    {
+        $this->authorizeResource(Message::class, 'message');
+    }
+
     /**
      * Display a listing of the messages in the room.
      */
@@ -57,7 +66,7 @@ class MessageController extends Controller
     /**
      * Update the specified message in storage.
      */
-    public function update(StoreMessageRequest $request, Message $message): MessageResource
+    public function update(UpdateMessageRequest $request, Message $message): MessageResource
     {
         $message->update($request->validated());
 

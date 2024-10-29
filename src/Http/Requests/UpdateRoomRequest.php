@@ -9,14 +9,17 @@ use Illuminate\Foundation\Http\FormRequest;
 use TTBooking\SupportChat\Models\Room;
 use TTBooking\SupportChat\Models\RoomTag;
 
-class StoreRoomRequest extends FormRequest
+/**
+ * @property-read Room $room
+ */
+class UpdateRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', Room::class);
+        return $this->user()->can('update', $this->room);
     }
 
     /**
