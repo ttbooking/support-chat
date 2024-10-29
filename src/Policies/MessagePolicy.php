@@ -9,13 +9,14 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use TTBooking\SupportChat\Models\Message;
+use TTBooking\SupportChat\Models\Room;
 
 class MessagePolicy
 {
     /**
      * Determine whether the user can view any messages.
      */
-    public function viewAny(Authenticatable&Model $user): bool
+    public function viewAny(Authenticatable&Model $user, Room $room): bool
     {
         return true;
     }
@@ -33,7 +34,7 @@ class MessagePolicy
     /**
      * Determine whether the user can create messages.
      */
-    public function create(Authenticatable&Model $user): bool
+    public function create(Authenticatable&Model $user, Room $room): bool
     {
         return true;
     }

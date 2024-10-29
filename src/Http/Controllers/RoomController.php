@@ -19,7 +19,7 @@ class RoomController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(Room::class, 'room');
+        $this->authorizeResource(Room::class);
     }
 
     /**

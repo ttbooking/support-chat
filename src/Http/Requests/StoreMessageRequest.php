@@ -6,7 +6,11 @@ namespace TTBooking\SupportChat\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use TTBooking\SupportChat\Models\Message;
+use TTBooking\SupportChat\Models\Room;
 
+/**
+ * @property-read Room $room
+ */
 class StoreMessageRequest extends FormRequest
 {
     /**
@@ -14,7 +18,7 @@ class StoreMessageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('create', Message::class);
+        return $this->user()->can('create', [Message::class, $this->room]);
     }
 
     /**

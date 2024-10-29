@@ -21,7 +21,7 @@ class MessageController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(Message::class, 'message');
+        $this->authorizeResource([Message::class, 'room']);
     }
 
     /**
