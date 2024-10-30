@@ -6,7 +6,6 @@ namespace TTBooking\SupportChat\Policies;
 
 use Illuminate\Auth\Access\Response;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use TTBooking\SupportChat\Models\Room;
 
@@ -23,11 +22,11 @@ class RoomPolicy
     /**
      * Determine whether the user can view the room.
      */
-    public function view(Authenticatable&Model $user, Room $room): bool
+    public function view(Authenticatable&Model $user, Room $room): Response
     {
-        return $room->query()->whereHas('users', function (Builder $query) use ($user) {
-            $query->whereKey($user->getAuthIdentifier());
-        })->exists();
+        return $room->users()->whereKey($user->getAuthIdentifier())->exists()
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**

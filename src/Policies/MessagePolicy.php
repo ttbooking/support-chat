@@ -16,9 +16,11 @@ class MessagePolicy
     /**
      * Determine whether the user can view any messages.
      */
-    public function viewAny(Authenticatable&Model $user, Room $room): bool
+    public function viewAny(Authenticatable&Model $user, Room $room): Response
     {
-        return true;
+        return $room->users()->whereKey($user->getAuthIdentifier())->exists()
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     /**
