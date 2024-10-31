@@ -53,6 +53,18 @@ export default class RoomRepository extends AxiosRepository<Room> {
             .update({ users } as Partial<BaseRoom>);
     };
 
+    added = (room: BaseRoom) => {
+        return this.save(room);
+    };
+
+    updated = (room: BaseRoom) => {
+        return this.save(room);
+    };
+
+    deleted = (room: BaseRoom) => {
+        this.destroy(room.roomId);
+    };
+
     messagePosted = (roomId: string, message: Message) => {
         //
     };

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
@@ -20,16 +21,12 @@ use TTBooking\SupportChat\Observers\MessageReactionObserver;
  * @property Message $message
  * @property Model&Personifiable $user
  */
+#[ObservedBy(MessageReactionObserver::class)]
 class MessageReaction extends Model
 {
     protected $fillable = ['user_id', 'emoji'];
 
     const UPDATED_AT = null;
-
-    protected static function booted(): void
-    {
-        static::observe(MessageReactionObserver::class);
-    }
 
     /**
      * Get the route key for the model.

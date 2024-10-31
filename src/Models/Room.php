@@ -6,6 +6,7 @@ namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
 use TTBooking\SupportChat\Database\Factories\RoomFactory;
+use TTBooking\SupportChat\Observers\RoomObserver;
 
 /**
  * @property string $id
@@ -30,6 +32,7 @@ use TTBooking\SupportChat\Database\Factories\RoomFactory;
  * @property Collection<int, RoomTag> $tags
  * @property Collection<int, Message> $messages
  */
+#[ObservedBy(RoomObserver::class)]
 class Room extends Model
 {
     /** @use HasFactory<RoomFactory> */
