@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Room from "@/models/Room";
+import { useDebounceFn } from "@vueuse/core";
 import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
 import type { UserTypingArgs } from "@/types";
 
@@ -76,8 +77,16 @@ export default class RoomRepository extends AxiosRepository<Room> {
         });
     }
 
-    userTyping = ({ userId, roomId }: UserTypingArgs) => {
+    userTyping = async ({ userId, roomId }: UserTypingArgs) => {
         const typingUsers = Array.from(new Set(this.find(roomId)?.typingUsers ?? []).add(userId));
+        this.query().whereId(roomId).update({ typingUsers });
+        await useDebounceFn(this.userNoMoreTyping, 5000)({ userId, roomId });
+    };
+
+    userNoMoreTyping = ({ userId, roomId }: UserTypingArgs) => {
+        const typingUserSet = new Set(this.find(roomId)?.typingUsers ?? []);
+        typingUserSet.delete(userId);
+        const typingUsers = Array.from(typingUserSet);
         this.query().whereId(roomId).update({ typingUsers });
     };
 }
