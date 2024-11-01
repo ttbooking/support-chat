@@ -89,6 +89,16 @@ export interface OpenFileArgs {
     };
 }
 
+export interface TypingMessageArgs {
+    roomId: string;
+    message: string;
+}
+
+export interface UserTypingArgs {
+    userId: string;
+    roomId: string;
+}
+
 export interface RoomStoreRequest {
     id: string;
     name?: string;

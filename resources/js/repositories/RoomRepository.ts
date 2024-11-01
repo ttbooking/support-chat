@@ -2,6 +2,7 @@ import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Room from "@/models/Room";
 import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
+import type { UserTypingArgs } from "@/types";
 
 export default class RoomRepository extends AxiosRepository<Room> {
     use = Room;
@@ -74,4 +75,9 @@ export default class RoomRepository extends AxiosRepository<Room> {
             query.whereId(window.SupportChat.userId);
         });
     }
+
+    userTyping = ({ userId, roomId }: UserTypingArgs) => {
+        const typingUsers = Array.from(new Set(this.find(roomId)?.typingUsers ?? []).add(userId));
+        this.query().whereId(roomId).update({ typingUsers });
+    };
 }

@@ -25,6 +25,7 @@
         @room-action-handler="menuActionHandler($event.detail[0])"
         @menu-action-handler="menuActionHandler($event.detail[0])"
         @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
+        @typing-message="typingMessage($event.detail[0])"
     />
     <Teleport to="body">
         <RoomOptionsDialog
@@ -42,7 +43,7 @@ import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import type { RoomUser, Message } from "vue-advanced-chat";
-import type { Room as BaseRoom, Reaction, OpenFileArgs } from "@/types";
+import type { Room as BaseRoom, Reaction, OpenFileArgs, TypingMessageArgs, UserTypingArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
@@ -122,6 +123,7 @@ onMounted(async () => {
             .listen(".room.added", (room: BaseRoom) => roomRepo.added(room))
             .listen(".room.updated", (room: BaseRoom) => roomRepo.updated(room))
             .listen(".room.deleted", (room: BaseRoom) => roomRepo.deleted(room))
+            .listenForWhisper("typing", (typing: UserTypingArgs) => roomRepo.userTyping(typing))
             .listen(".message.posted", (message: Message) => messageRepo.posted(room.roomId, message))
             .listen(".message.edited", (message: Message) => messageRepo.edited(message))
             .listen(".message.deleted", (message: Message) => messageRepo.deleted(message))
@@ -143,5 +145,12 @@ function menuActionHandler({ roomId, action }: { roomId: string; action: CustomA
         case "deleteRoom":
             roomRepo.delete(roomId);
     }
+}
+
+function typingMessage({ roomId }: TypingMessageArgs) {
+    window.roomChannel.whisper("typing", {
+        userId: window.SupportChat.userId,
+        roomId,
+    });
 }
 </script>
