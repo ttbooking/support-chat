@@ -16,6 +16,8 @@ abstract class Event implements ShouldBroadcastNow
 {
     use InteractsWithSockets, SerializesModels;
 
+    public bool $afterCommit = true;
+
     protected ?string $broadcastAs = null;
 
     /**
@@ -41,9 +43,21 @@ abstract class Event implements ShouldBroadcastNow
 
     /**
      * Get the data to broadcast.
+     *
+     * @return array<string, mixed>
      */
-    public function broadcastWith(): RoomResource
+    public function broadcastWith(): array
     {
-        return new RoomResource($this->room);
+        return (new RoomResource($this->room))->resolve();
+    }
+
+    /**
+     * Get the tags that should be assigned to the job.
+     *
+     * @return list<string>
+     */
+    public function tags(): array
+    {
+        return ['support-chat', 'room:'.$this->room->getKey()];
     }
 }
