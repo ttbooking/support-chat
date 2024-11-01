@@ -120,15 +120,15 @@ onMounted(async () => {
             .leaving((user: RoomUser) => roomRepo.leaveUser(room.roomId, user))
             .listenToAll((event: string, data: unknown) => console.log(event, data))
             .error((error: unknown) => console.error(error))
-            .listen(".room.added", (room: BaseRoom) => roomRepo.added(room))
-            .listen(".room.updated", (room: BaseRoom) => roomRepo.updated(room))
-            .listen(".room.deleted", (room: BaseRoom) => roomRepo.deleted(room))
-            .listenForWhisper("typing", (typing: UserTypingArgs) => roomRepo.userTyping(typing))
+            .listen(".room.added", roomRepo.added)
+            .listen(".room.updated", roomRepo.updated)
+            .listen(".room.deleted", roomRepo.deleted)
+            .listenForWhisper("typing", roomRepo.userTyping)
             .listen(".message.posted", (message: Message) => messageRepo.posted(room.roomId, message))
-            .listen(".message.edited", (message: Message) => messageRepo.edited(message))
-            .listen(".message.deleted", (message: Message) => messageRepo.deleted(message))
-            .listen(".reaction.left", (reaction: Reaction) => messageRepo.reactionLeft(reaction))
-            .listen(".reaction.removed", (reaction: Reaction) => messageRepo.reactionRemoved(reaction));
+            .listen(".message.edited", messageRepo.edited)
+            .listen(".message.deleted", messageRepo.deleted)
+            .listen(".reaction.left", messageRepo.reactionLeft)
+            .listen(".reaction.removed", messageRepo.reactionRemoved);
     }
 });
 
