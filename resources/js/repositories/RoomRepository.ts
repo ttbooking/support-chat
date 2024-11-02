@@ -35,12 +35,14 @@ export default class RoomRepository extends AxiosRepository<Room> {
     };
 
     setUsers = (roomId: string, users: RoomUser[]) => {
+        console.log("here", roomId, users);
         this.query()
             .whereId(roomId)
             .update({ users } as Partial<BaseRoom>);
     };
 
     joinUser = (roomId: string, user: RoomUser) => {
+        console.log("joining", roomId, user);
         const existingUsers = this.find(roomId)?.users ?? [];
         this.query()
             .whereId(roomId)
@@ -48,6 +50,7 @@ export default class RoomRepository extends AxiosRepository<Room> {
     };
 
     leaveUser = (roomId: string, user: RoomUser) => {
+        console.log("leaving", roomId, user);
         const existingUsers = this.find(roomId)?.users ?? [];
         const users = existingUsers.filter((current) => current._id !== user._id);
         this.query()

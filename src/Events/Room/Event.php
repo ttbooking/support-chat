@@ -6,13 +6,13 @@ namespace TTBooking\SupportChat\Events\Room;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Room;
 
-abstract class Event implements ShouldBroadcastNow
+abstract class Event implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
@@ -35,10 +35,15 @@ abstract class Event implements ShouldBroadcastNow
 
     /**
      * Get the channels the event should broadcast on.
+     *
+     * @return PrivateChannel[]
      */
-    public function broadcastOn(): PrivateChannel
+    public function broadcastOn(): array
     {
-        return new PrivateChannel('support-chat');
+        return array_map(
+            static fn (int|string $id) => new PrivateChannel("support-chat.user.$id"),
+            $this->room->users->modelKeys()
+        );
     }
 
     /**
