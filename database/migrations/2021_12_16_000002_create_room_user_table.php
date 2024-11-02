@@ -15,7 +15,9 @@ return new class extends Migration
             $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
             //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
-            $table->unique(['room_id', 'user_id']);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->primary(['room_id', 'user_id']);
             $table->foreign('user_id')->references('id')->on('p2_users')->cascadeOnDelete();
         });
     }
