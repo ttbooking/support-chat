@@ -19,8 +19,8 @@ class UserChannel
     /**
      * Authenticate the user's access to the channel.
      */
-    public function join(Model $user, int|string $id): bool
+    public function join(Model $user, string $id): bool
     {
-        return $user->getKey() === $id;
+        return (string) $user->getKey() === $id;
     }
 }
