@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use TTBooking\SupportChat\Contracts\Personifiable;
+use TTBooking\SupportChat\Observers\RoomUserObserver;
 
 /**
  * @property string $room_id
@@ -18,6 +20,7 @@ use TTBooking\SupportChat\Contracts\Personifiable;
  * @property Room $room
  * @property Model $user
  */
+#[ObservedBy(RoomUserObserver::class)]
 class RoomUser extends Pivot
 {
     /** @var list<string> */
