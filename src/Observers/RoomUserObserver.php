@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Observers;
 
-use TTBooking\SupportChat\Events\Room\Updated;
+use TTBooking\SupportChat\Events\User\Joined;
+use TTBooking\SupportChat\Events\User\Left;
 use TTBooking\SupportChat\Models\RoomUser;
 
 class RoomUserObserver
@@ -14,7 +15,7 @@ class RoomUserObserver
      */
     public function created(RoomUser $roomUser): void
     {
-        broadcast(new Updated($roomUser->room))->toOthers();
+        broadcast(new Joined($roomUser->user, $roomUser->room))->toOthers();
     }
 
     /**
@@ -30,7 +31,7 @@ class RoomUserObserver
      */
     public function deleted(RoomUser $roomUser): void
     {
-        broadcast(new Updated($roomUser->room))->toOthers();
+        broadcast(new Left($roomUser->user, $roomUser->room))->toOthers();
     }
 
     /**

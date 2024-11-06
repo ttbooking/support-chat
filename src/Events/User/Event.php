@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TTBooking\SupportChat\Events\Room;
+namespace TTBooking\SupportChat\Events\User;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 use TTBooking\SupportChat\Http\Resources\RoomResource;
@@ -23,22 +24,22 @@ abstract class Event implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct(public Room $room) {}
+    public function __construct(public Model $user, public Room $room) {}
 
     /**
      * The event's broadcast name.
      */
     public function broadcastAs(): string
     {
-        return 'room.'.($this->broadcastAs ?? Str::kebab(class_basename(static::class)));
+        return 'user.'.($this->broadcastAs ?? Str::kebab(class_basename(static::class)));
     }
 
     /**
      * Get the channels the event should broadcast on.
      */
-    public function broadcastOn(): PresenceChannel
+    public function broadcastOn(): PrivateChannel
     {
-        return new PresenceChannel('support-chat.room.'.$this->room->getKey());
+        return new PrivateChannel('support-chat.user.'.$this->user->getKey());
     }
 
     /**
@@ -58,6 +59,6 @@ abstract class Event implements ShouldBroadcast
      */
     public function tags(): array
     {
-        return ['support-chat', 'room:'.$this->room->getKey()];
+        return ['support-chat', 'user:'.$this->user->getKey(), 'room:'.$this->room->getKey()];
     }
 }
