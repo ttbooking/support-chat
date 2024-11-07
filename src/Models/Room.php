@@ -87,7 +87,7 @@ class Room extends Model
         /** @var class-string<Model&Personifiable> $model */
         $model = config('support-chat.user_model');
 
-        return $this->belongsToMany($model)->using(UserStatus::class)->as('status')->withTimestamps();
+        return $this->belongsToMany($model, 'user_status')->using(UserStatus::class)->as('presence')->withTimestamps();
     }
 
     /**

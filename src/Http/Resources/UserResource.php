@@ -28,7 +28,7 @@ class UserResource extends JsonResource
             'username' => $person->name,
             'email' => $person->email,
             'avatar' => $person->avatar,
-            'status' => $this->whenHas('status', static fn ($status) => [
+            'status' => $this->whenHas('presence', static fn ($status) => [
                 'state' => $status->online ? 'online' : 'offline',
                 'lastChanged' => $status->created_at->translatedFormat('d F, H:i'),
             ]),
