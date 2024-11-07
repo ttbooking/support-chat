@@ -17,6 +17,9 @@ export default defineConfig({
         },
         sourcemap: true,
     },
+    define: {
+        __VUE_PROD_DEVTOOLS__: true,
+    },
     plugins: [
         i18n({
             include: [path.resolve(__dirname, "./resources/js/locales/**")],
