@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('room_user', function (Blueprint $table) {
+        Schema::create('user_status', function (Blueprint $table) {
             $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
             //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('room_user');
+        Schema::dropIfExists('user_status');
     }
 };

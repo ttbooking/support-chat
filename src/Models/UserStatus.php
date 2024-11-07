@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use TTBooking\SupportChat\Contracts\Personifiable;
-use TTBooking\SupportChat\Observers\RoomUserObserver;
+use TTBooking\SupportChat\Observers\UserStatusObserver;
 
 /**
  * @property string $room_id
@@ -20,8 +20,8 @@ use TTBooking\SupportChat\Observers\RoomUserObserver;
  * @property Room $room
  * @property Model $user
  */
-#[ObservedBy(RoomUserObserver::class)]
-class RoomUser extends Pivot
+#[ObservedBy(UserStatusObserver::class)]
+class UserStatus extends Pivot
 {
     /** @var list<string> */
     protected $touches = ['room'];
