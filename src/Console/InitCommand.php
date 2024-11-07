@@ -37,7 +37,7 @@ class InitCommand extends Command
         'message_reactions',
         'message_files',
         'messages',
-        'room_user',
+        'user_status',
         'room_tag',
         'room_tags',
         'rooms',
