@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -23,17 +22,16 @@ class UserResource extends JsonResource
     public function toArray(?Request $request = null): array
     {
         $person = $this->getPersonInfo();
-        $lastChanged = $person->lastChanged ? Carbon::instance($person->lastChanged) : Carbon::now();
 
         return [
             '_id' => (string) $this->getKey(),
             'username' => $person->name,
             'email' => $person->email,
             'avatar' => $person->avatar,
-            'status' => [
-                'state' => $person->online ? 'online' : 'offline',
-                'lastChanged' => $lastChanged->translatedFormat('d F, H:i'),
-            ],
+            'status' => $this->whenHas('status', static fn ($status) => [
+                'state' => $status->online ? 'online' : 'offline',
+                'lastChanged' => $status->created_at->translatedFormat('d F, H:i'),
+            ]),
         ];
     }
 }
