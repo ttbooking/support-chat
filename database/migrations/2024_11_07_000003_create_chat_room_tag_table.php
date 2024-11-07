@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chat_room_tag', function (Blueprint $table) {
-            $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
+            $table->foreignNanoid('room_id', 7)->constrained('chat_rooms')->cascadeOnDelete();
             $table->string('tag_name', 32);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->primary(['room_id', 'tag_name']);
-            $table->foreign('tag_name')->references('name')->on('room_tags')->cascadeOnDelete();
+            $table->foreign('tag_name')->references('name')->on('chat_room_tags')->cascadeOnDelete();
         });
     }
 

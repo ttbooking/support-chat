@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chat_participants', function (Blueprint $table) {
-            $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
+            $table->foreignNanoid('room_id', 7)->constrained('chat_rooms')->cascadeOnDelete();
             //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
             $table->timestamp('created_at')->useCurrent();

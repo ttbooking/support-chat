@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('chat_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignNanoid('message_id', 7)->constrained()->cascadeOnDelete();
+            $table->foreignNanoid('message_id', 7)->constrained('chat_messages')->cascadeOnDelete();
             $table->string('name')->index();
             $table->string('type')->nullable()->index();
             $table->unsignedBigInteger('size');
