@@ -1,7 +1,7 @@
 import { Model } from "pinia-orm";
 import { Uid, Attr, Num, Str, BelongsTo, BelongsToMany, HasMany, HasManyBy } from "pinia-orm/decorators";
 import User from "./User";
-import RoomUser from "./RoomUser";
+import UserStatus from "./UserStatus";
 import Tag from "./Tag";
 import RoomTag from "./RoomTag";
 import Message from "./Message";
@@ -20,9 +20,10 @@ export default class Room extends Model implements BaseRoom {
     @Num(null) declare unreadCount?: number;
     @Attr(null) declare index?: StringNumber | Date;
     @Attr(null) declare typingUsers?: string[];
+    declare status: UserStatus;
 
     @BelongsTo(() => User, "creatorId") declare creator: User;
-    @BelongsToMany(() => User, { as: "status", model: () => RoomUser }, "roomId", "userId") declare users: User[];
+    @BelongsToMany(() => User, { as: "status", model: () => UserStatus }, "roomId", "userId") declare users: User[];
     @BelongsToMany(() => Tag, () => RoomTag, "roomId", "tagName") declare tags: Tag[];
     @HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
     @HasMany(() => Message, "roomId") declare messages: Message[];
