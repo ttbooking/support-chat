@@ -43,16 +43,27 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     joinUser = (roomId: string, user: RoomUser) => {
         console.log("joining", roomId, user);
-        const existingUsers = this.find(roomId)?.users ?? [];
+        const users = this.find(roomId)?.users ?? [];
+        users.forEach((currentUser) => {
+            if (currentUser._id === user._id) {
+                currentUser.status.state = "online";
+                currentUser.status.lastChanged = new Date().toLocaleString();
+            }
+        });
         this.query()
             .whereId(roomId)
-            .update({ users: [...existingUsers, user] } as Partial<BaseRoom>);
+            .update({ users } as Partial<BaseRoom>);
     };
 
     leaveUser = (roomId: string, user: RoomUser) => {
         console.log("leaving", roomId, user);
-        const existingUsers = this.find(roomId)?.users ?? [];
-        const users = existingUsers.filter((current) => current._id !== user._id);
+        const users = this.find(roomId)?.users ?? [];
+        users.forEach((currentUser) => {
+            if (currentUser._id === user._id) {
+                currentUser.status.state = "offline";
+                currentUser.status.lastChanged = new Date().toLocaleString();
+            }
+        });
         this.query()
             .whereId(roomId)
             .update({ users } as Partial<BaseRoom>);
