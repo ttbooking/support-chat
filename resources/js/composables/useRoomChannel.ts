@@ -28,7 +28,7 @@ export function useRoomChannel(roomId: string) {
             .listenToAll((event: string, data: unknown) => console.log(`room.${roomId}`, event, data))
             .error((error: unknown) => console.error(error))
             //.listen(".room.added", roomRepo.added)
-            //.listen(".room.updated", roomRepo.updated)
+            .listen(".room.updated", roomRepo.updated)
             //.listen(".room.deleted", roomRepo.deleted)
             .listenForWhisper("typing", roomRepo.userTyping)
             .listen(".message.posted", (message: Message) => messageRepo.posted(roomId, message))

@@ -25,7 +25,7 @@
         @room-action-handler="menuActionHandler($event.detail[0])"
         @menu-action-handler="menuActionHandler($event.detail[0])"
         @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
-        @typing-message="typingMessage($event.detail[0])"
+        @typing-message="typing($event.detail[0])"
     />
     <Teleport to="body">
         <RoomOptionsDialog
@@ -38,12 +38,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watchEffect, onMounted } from "vue";
+import { ref, computed, watchEffect, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import type { RoomUser, Message } from "vue-advanced-chat";
-import type { Room as BaseRoom, Reaction, OpenFileArgs, TypingMessageArgs, UserTypingArgs } from "@/types";
+import type { Room as BaseRoom, Reaction, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
@@ -76,8 +76,7 @@ const rooms = computed(() =>
 const joinedRooms = computed(() => roomRepo.joined().get());
 const roomMessages = computed(() => messageRepo.currentRoom().get());
 
-useUserChannel(window.SupportChat.userId);
-const roomChannels = reactive<Record<string, PusherPresenceChannel>>({});
+const { typing } = useUserChannel(window.SupportChat.userId);
 
 watchEffect(() => {
     model.value = messageRepo.room.value?.roomName;
@@ -150,12 +149,5 @@ function menuActionHandler({ roomId, action }: { roomId: string; action: CustomA
         case "deleteRoom":
             roomRepo.delete(roomId);
     }
-}
-
-function typingMessage({ roomId }: TypingMessageArgs) {
-    window.roomChannel.whisper("typing", {
-        userId: window.SupportChat.userId,
-        roomId,
-    });
 }
 </script>
