@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TTBooking\SupportChat\Events\MessageReaction;
+namespace TTBooking\SupportChat\Events\Reaction;
 
 use Illuminate\Queue\SerializesModels;
 

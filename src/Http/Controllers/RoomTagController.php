@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use TTBooking\SupportChat\Models\RoomTag;
 
-class TagController
+class RoomTagController
 {
     /**
      * Display a listing of all the existing rooms' tags.

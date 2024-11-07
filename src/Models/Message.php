@@ -36,9 +36,9 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property Model&Personifiable $sender
  * @property Message|null $origin
  * @property Collection<int, Message> $replies
- * @property Collection<int, MessageFile> $attachments
- * @property Collection<int, MessageFile> $files
- * @property Collection<int, MessageReaction> $reactions
+ * @property Collection<int, Attachment> $attachments
+ * @property Collection<int, Attachment> $files
+ * @property Collection<int, Reaction> $reactions
  * @property-read string $attachmentPath
  * @property-read ArrayObject<string, int[]> $reactionsWithUsers
  */
@@ -47,6 +47,8 @@ class Message extends Model
 {
     /** @use HasFactory<MessageFactory> */
     use HasFactory, HasNanoids, SoftDeletes;
+
+    protected $table = 'chat_messages';
 
     protected int $nanoidSize = 7;
 
@@ -126,27 +128,27 @@ class Message extends Model
     }
 
     /**
-     * @return HasMany<MessageFile, $this>
+     * @return HasMany<Attachment, $this>
      */
     public function attachments(): HasMany
     {
-        return $this->hasMany(MessageFile::class);
+        return $this->hasMany(Attachment::class);
     }
 
     /**
-     * @return HasMany<MessageFile, $this>
+     * @return HasMany<Attachment, $this>
      */
     public function files(): HasMany
     {
-        return $this->hasMany(MessageFile::class);
+        return $this->hasMany(Attachment::class);
     }
 
     /**
-     * @return HasMany<MessageReaction, $this>
+     * @return HasMany<Reaction, $this>
      */
     public function reactions(): HasMany
     {
-        return $this->hasMany(MessageReaction::class);
+        return $this->hasMany(Reaction::class);
     }
 
     /**
@@ -166,12 +168,12 @@ class Message extends Model
     {
         return Attribute::get(
             fn () => new ArrayObject($this->reactions->mapToGroups(
-                static fn (MessageReaction $reaction) => [$reaction->emoji => $reaction->user_id]
+                static fn (Reaction $reaction) => [$reaction->emoji => $reaction->user_id]
             )->toArray())
         );
     }
 
-    public function getAttachment(string $filename): MessageFile
+    public function getAttachment(string $filename): Attachment
     {
         return $this->files->where('name', $filename)->first();
     }

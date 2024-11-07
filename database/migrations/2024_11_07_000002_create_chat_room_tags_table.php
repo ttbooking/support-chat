@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('room_tags', function (Blueprint $table) {
+        Schema::create('chat_room_tags', function (Blueprint $table) {
             $table->string('name', 32)->primary();
             $table->string('type', 32)->nullable()->index();
             $table->timestamp('created_at')->useCurrent();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('room_tags');
+        Schema::dropIfExists('chat_room_tags');
     }
 };

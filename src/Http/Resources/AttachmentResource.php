@@ -7,12 +7,12 @@ namespace TTBooking\SupportChat\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
-use TTBooking\SupportChat\Models\MessageFile;
+use TTBooking\SupportChat\Models\Attachment;
 
 /**
- * @mixin MessageFile
+ * @mixin Attachment
  */
-class MessageFileResource extends JsonResource
+class AttachmentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

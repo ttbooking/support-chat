@@ -22,6 +22,8 @@ class RoomTag extends Model
     /** @use HasFactory<RoomTagFactory> */
     use HasFactory;
 
+    protected $table = 'chat_room_tags';
+
     protected $primaryKey = 'name';
 
     protected $keyType = 'string';
@@ -45,6 +47,7 @@ class RoomTag extends Model
      */
     public function rooms(): BelongsToMany
     {
-        return $this->belongsToMany(Room::class, 'room_tag', foreignPivotKey: 'tag_name')->withTimestamps(parent::CREATED_AT, parent::UPDATED_AT);
+        return $this->belongsToMany(Room::class, 'chat_room_tag', foreignPivotKey: 'tag_name')
+            ->withTimestamps(parent::CREATED_AT, parent::UPDATED_AT);
     }
 }

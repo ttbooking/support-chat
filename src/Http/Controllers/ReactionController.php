@@ -9,9 +9,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 use TTBooking\SupportChat\Models\Message;
-use TTBooking\SupportChat\Models\MessageReaction;
+use TTBooking\SupportChat\Models\Reaction;
 
-class MessageReactionController extends Controller
+class ReactionController extends Controller
 {
     /**
      * Store a newly created message reaction in storage.
@@ -29,7 +29,7 @@ class MessageReactionController extends Controller
     /**
      * Remove the specified message from storage.
      */
-    public function destroy(Message $message, MessageReaction $reaction): \Illuminate\Http\Response
+    public function destroy(Message $message, Reaction $reaction): \Illuminate\Http\Response
     {
         $reaction->delete();
 

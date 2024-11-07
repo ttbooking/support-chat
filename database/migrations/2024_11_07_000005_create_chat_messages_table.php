@@ -12,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('chat_messages', function (Blueprint $table) {
             $table->nanoid(length: 7)->primary();
             $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
             //$table->foreignId('sent_by')->constrained('users')->cascadeOnDelete();
             $table->unsignedInteger('sent_by')->index();
-            //$table->foreignNanoid('reply_to')->nullable()->constrained('messages')->cascadeOnDelete();
+            //$table->foreignNanoid('reply_to')->nullable()->constrained('chat_messages')->cascadeOnDelete();
             $table->nanoid('reply_to', 7)->nullable()->index();
             $table->text('content')->fulltext();
             $table->json('meta')->nullable();
@@ -31,7 +31,7 @@ return new class extends Migration
 
         Schema::table('messages', function (Blueprint $table) {
             $table->foreign('sent_by')->references('id')->on('p2_users')->cascadeOnDelete();
-            $table->foreign('reply_to')->references('id')->on('messages')->cascadeOnDelete();
+            $table->foreign('reply_to')->references('id')->on('chat_messages')->cascadeOnDelete();
         });
     }
 
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('chat_messages');
     }
 };

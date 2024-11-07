@@ -28,9 +28,9 @@ class UserResource extends JsonResource
             'username' => $person->name,
             'email' => $person->email,
             'avatar' => $person->avatar,
-            'status' => $this->whenHas('presence', static fn ($status) => [
-                'state' => $status->online ? 'online' : 'offline',
-                'lastChanged' => $status->created_at->translatedFormat('d F, H:i'),
+            'status' => $this->whenHas('participant', static fn ($participant) => [
+                'state' => $participant->online ? 'online' : 'offline',
+                'lastChanged' => $participant->created_at->translatedFormat('d F, H:i'),
             ]),
         ];
     }

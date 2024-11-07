@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use TTBooking\SupportChat\Contracts\Personifiable;
-use TTBooking\SupportChat\Observers\MessageReactionObserver;
+use TTBooking\SupportChat\Observers\ReactionObserver;
 
 /**
  * @property int $id
@@ -21,9 +21,11 @@ use TTBooking\SupportChat\Observers\MessageReactionObserver;
  * @property Message $message
  * @property Model&Personifiable $user
  */
-#[ObservedBy(MessageReactionObserver::class)]
-class MessageReaction extends Model
+#[ObservedBy(ReactionObserver::class)]
+class Reaction extends Model
 {
+    protected $table = 'chat_reactions';
+
     protected $fillable = ['user_id', 'emoji'];
 
     const UPDATED_AT = null;

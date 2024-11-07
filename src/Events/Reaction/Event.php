@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TTBooking\SupportChat\Events\MessageReaction;
+namespace TTBooking\SupportChat\Events\Reaction;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Support\Str;
-use TTBooking\SupportChat\Models\MessageReaction;
+use TTBooking\SupportChat\Models\Reaction;
 
 abstract class Event implements ShouldBroadcastNow
 {
@@ -19,7 +19,7 @@ abstract class Event implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct(public MessageReaction $reaction) {}
+    public function __construct(public Reaction $reaction) {}
 
     /**
      * The event's broadcast name.

@@ -22,8 +22,10 @@ use Illuminate\Support\Facades\Storage;
  * @property Message $message
  * @property-read string $attachmentPath
  */
-class MessageFile extends Model
+class Attachment extends Model
 {
+    protected $table = 'chat_attachments';
+
     protected $casts = [
         'audio' => 'bool',
     ];

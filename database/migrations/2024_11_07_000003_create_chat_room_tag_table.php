@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('room_tag', function (Blueprint $table) {
+        Schema::create('chat_room_tag', function (Blueprint $table) {
             $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
             $table->string('tag_name', 32);
             $table->timestamp('created_at')->useCurrent();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('room_tag');
+        Schema::dropIfExists('chat_room_tag');
     }
 };

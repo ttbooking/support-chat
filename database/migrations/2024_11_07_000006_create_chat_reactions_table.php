@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_status', function (Blueprint $table) {
-            $table->foreignNanoid('room_id', 7)->constrained()->cascadeOnDelete();
+        Schema::create('chat_reactions', function (Blueprint $table) {
+            $table->id();
+            $table->foreignNanoid('message_id', 7)->constrained()->cascadeOnDelete();
             //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
+            $table->char('emoji', 1)->collation('utf8mb4_bin');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
-            $table->primary(['room_id', 'user_id']);
+            $table->index(['message_id', 'user_id']);
+            $table->unique(['message_id', 'user_id', 'emoji']);
             $table->foreign('user_id')->references('id')->on('p2_users')->cascadeOnDelete();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_status');
+        Schema::dropIfExists('chat_reactions');
     }
 };

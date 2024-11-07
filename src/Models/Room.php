@@ -38,6 +38,8 @@ class Room extends Model
     /** @use HasFactory<RoomFactory> */
     use HasFactory, HasNanoids, SoftDeletes;
 
+    protected $table = 'chat_rooms';
+
     protected int $nanoidSize = 7;
 
     protected $fillable = ['id', 'name', 'created_by'];
@@ -87,7 +89,10 @@ class Room extends Model
         /** @var class-string<Model&Personifiable> $model */
         $model = config('support-chat.user_model');
 
-        return $this->belongsToMany($model, 'user_status')->using(UserStatus::class)->as('presence')->withTimestamps();
+        return $this->belongsToMany($model, 'chat_participants')
+            ->using(Participant::class)
+            ->as('participant')
+            ->withTimestamps();
     }
 
     /**
@@ -95,7 +100,7 @@ class Room extends Model
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(RoomTag::class, 'room_tag', relatedPivotKey: 'tag_name')->withTimestamps();
+        return $this->belongsToMany(RoomTag::class, 'chat_room_tag', relatedPivotKey: 'tag_name')->withTimestamps();
     }
 
     /**

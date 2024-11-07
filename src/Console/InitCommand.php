@@ -34,13 +34,13 @@ class InitCommand extends Command
 
     /** @var list<string> */
     protected array $tables = [
-        'message_reactions',
-        'message_files',
-        'messages',
-        'user_status',
-        'room_tag',
-        'room_tags',
-        'rooms',
+        'chat_reactions',
+        'chat_attachments',
+        'chat_messages',
+        'chat_participants',
+        'chat_room_tag',
+        'chat_room_tags',
+        'chat_rooms',
     ];
 
     /**

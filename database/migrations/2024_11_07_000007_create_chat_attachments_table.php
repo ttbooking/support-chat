@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('message_files', function (Blueprint $table) {
+        Schema::create('chat_attachments', function (Blueprint $table) {
             $table->id();
             $table->foreignNanoid('message_id', 7)->constrained()->cascadeOnDelete();
             $table->string('name')->index();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('message_files');
+        Schema::dropIfExists('chat_attachments');
     }
 };

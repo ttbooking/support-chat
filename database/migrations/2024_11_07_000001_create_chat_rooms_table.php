@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('chat_rooms', function (Blueprint $table) {
             $table->nanoid(length: 7)->primary();
             $table->string('name')->nullable()->index();
             $table->unsignedInteger('created_by')->index();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('chat_rooms');
     }
 };

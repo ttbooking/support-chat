@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace TTBooking\SupportChat\Events\MessageAttachment;
+namespace TTBooking\SupportChat\Events\Attachment;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Support\Str;
-use TTBooking\SupportChat\Models\MessageFile;
+use TTBooking\SupportChat\Models\Attachment;
 
 class Uploaded implements ShouldBroadcastNow
 {
@@ -19,7 +19,7 @@ class Uploaded implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct(public MessageFile $attachment) {}
+    public function __construct(public Attachment $attachment) {}
 
     /**
      * The event's broadcast name.
