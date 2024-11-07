@@ -40,10 +40,8 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
-import type { RoomUser, Message } from "vue-advanced-chat";
-import type { Room as BaseRoom, Reaction, OpenFileArgs } from "@/types";
+import type { Room as BaseRoom, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
@@ -73,7 +71,6 @@ const messageRepo = useRepo(MessageRepository);
 const rooms = computed(() =>
     props.roomId ? roomRepo.whereId(props.roomId).with("users").get() : roomRepo.with("users").get(),
 );
-const joinedRooms = computed(() => roomRepo.joined().get());
 const roomMessages = computed(() => messageRepo.currentRoom().get());
 
 const { typing } = useUserChannel(window.SupportChat.userId);
@@ -115,25 +112,6 @@ const messageActions = ref([
 
 onMounted(async () => {
     await roomRepo.fetch(props.roomId);
-
-    for (const room of joinedRooms.value) {
-        window.roomChannel = <PusherPresenceChannel>window.Echo.join(`support-chat.room.${room.roomId}`);
-        window.roomChannel
-            .here((users: RoomUser[]) => roomRepo.setUsers(room.roomId, users))
-            .joining((user: RoomUser) => roomRepo.joinUser(room.roomId, user))
-            .leaving((user: RoomUser) => roomRepo.leaveUser(room.roomId, user))
-            .listenToAll((event: string, data: unknown) => console.log(event, data))
-            .error((error: unknown) => console.error(error))
-            .listen(".room.added", roomRepo.added)
-            .listen(".room.updated", roomRepo.updated)
-            .listen(".room.deleted", roomRepo.deleted)
-            .listenForWhisper("typing", roomRepo.userTyping)
-            .listen(".message.posted", (message: Message) => messageRepo.posted(room.roomId, message))
-            .listen(".message.edited", messageRepo.edited)
-            .listen(".message.deleted", messageRepo.deleted)
-            .listen(".reaction.left", messageRepo.reactionLeft)
-            .listen(".reaction.removed", messageRepo.reactionRemoved);
-    }
 });
 
 function openFile(args: OpenFileArgs) {

@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Room from "@/models/Room";
 import { useDebounceFn } from "@vueuse/core";
-import type { Room as BaseRoom, RoomUser, Message } from "vue-advanced-chat";
+import type { Room as BaseRoom, RoomUser } from "vue-advanced-chat";
 import type { UserTypingArgs } from "@/types";
 
 export default class RoomRepository extends AxiosRepository<Room> {
@@ -69,16 +69,6 @@ export default class RoomRepository extends AxiosRepository<Room> {
     deleted = (room: BaseRoom) => {
         this.destroy(room.roomId);
     };
-
-    messagePosted = (roomId: string, message: Message) => {
-        //
-    };
-
-    joined() {
-        return this.with("users", (query) => {
-            query.whereId(window.SupportChat.userId);
-        });
-    }
 
     userTyping = async ({ userId, roomId }: UserTypingArgs) => {
         const typingUsers = Array.from(new Set(this.find(roomId)?.typingUsers ?? []).add(userId));
