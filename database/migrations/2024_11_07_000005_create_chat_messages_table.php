@@ -29,7 +29,7 @@ return new class extends Migration
             $table->softDeletes('deleted_at', 6);
         });
 
-        Schema::table('messages', function (Blueprint $table) {
+        Schema::table('chat_messages', function (Blueprint $table) {
             $table->foreign('sent_by')->references('id')->on('p2_users')->cascadeOnDelete();
             $table->foreign('reply_to')->references('id')->on('chat_messages')->cascadeOnDelete();
         });
