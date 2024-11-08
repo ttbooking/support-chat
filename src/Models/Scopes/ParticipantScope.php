@@ -15,8 +15,10 @@ class ParticipantScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->whereHas('users', function (Builder $query) {
-            $query->whereKey(auth()->id());
-        });
+        if (auth()->hasUser()) {
+            $builder->whereHas('users', function (Builder $query) {
+                $query->whereKey(auth()->id());
+            });
+        }
     }
 }
