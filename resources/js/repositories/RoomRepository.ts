@@ -1,9 +1,9 @@
 import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Room from "@/models/Room";
-import { useDebounceFn } from "@vueuse/core";
+//import { useDebounceFn } from "@vueuse/core";
 import type { Room as BaseRoom, RoomUser } from "vue-advanced-chat";
-import type { UserTypingArgs } from "@/types";
+//import type { UserTypingArgs } from "@/types";
 
 export default class RoomRepository extends AxiosRepository<Room> {
     use = Room;
@@ -36,37 +36,49 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     setUsers = (roomId: string, users: RoomUser[]) => {
         console.log("here", roomId, users);
-        this.query()
-            .whereId(roomId)
-            .update({ users } as Partial<BaseRoom>);
+        const room = this.find(roomId)!;
+        room.users = users.map((user) => ({
+            ...user,
+            status: {
+                state: "online",
+                lastChanged: new Date().toLocaleString(),
+            },
+        }));
+        this.save(room);
     };
 
     joinUser = (roomId: string, user: RoomUser) => {
         console.log("joining", roomId, user);
-        const users = this.find(roomId)?.users ?? [];
-        users.forEach((currentUser) => {
-            if (currentUser._id === user._id) {
-                currentUser.status.state = "online";
-                currentUser.status.lastChanged = new Date().toLocaleString();
+        const room = this.find(roomId)!;
+        for (const i in room.users) {
+            if (room.users[i]._id === user._id) {
+                room.users[i] = {
+                    ...room.users[i],
+                    status: {
+                        state: "online",
+                        lastChanged: new Date().toLocaleString(),
+                    },
+                };
             }
-        });
-        this.query()
-            .whereId(roomId)
-            .update({ users } as Partial<BaseRoom>);
+        }
+        this.save(room);
     };
 
     leaveUser = (roomId: string, user: RoomUser) => {
         console.log("leaving", roomId, user);
-        const users = this.find(roomId)?.users ?? [];
-        users.forEach((currentUser) => {
-            if (currentUser._id === user._id) {
-                currentUser.status.state = "offline";
-                currentUser.status.lastChanged = new Date().toLocaleString();
+        const room = this.find(roomId)!;
+        for (const i in room.users) {
+            if (room.users[i]._id === user._id) {
+                room.users[i] = {
+                    ...room.users[i],
+                    status: {
+                        state: "offline",
+                        lastChanged: new Date().toLocaleString(),
+                    },
+                };
             }
-        });
-        this.query()
-            .whereId(roomId)
-            .update({ users } as Partial<BaseRoom>);
+        }
+        this.save(room);
     };
 
     added = (room: BaseRoom) => {
@@ -81,7 +93,7 @@ export default class RoomRepository extends AxiosRepository<Room> {
         this.destroy(room.roomId);
     };
 
-    userTyping = async ({ userId, roomId }: UserTypingArgs) => {
+    /*userTyping = async ({ userId, roomId }: UserTypingArgs) => {
         const typingUsers = Array.from(new Set(this.find(roomId)?.typingUsers ?? []).add(userId));
         this.query().whereId(roomId).update({ typingUsers });
         await useDebounceFn(this.userNoMoreTyping, 5000)({ userId, roomId });
@@ -92,5 +104,5 @@ export default class RoomRepository extends AxiosRepository<Room> {
         typingUserSet.delete(userId);
         const typingUsers = Array.from(typingUserSet);
         this.query().whereId(roomId).update({ typingUsers });
-    };
+    };*/
 }

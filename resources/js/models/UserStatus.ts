@@ -1,5 +1,5 @@
 import { Model } from "pinia-orm";
-import { Attr } from "pinia-orm/decorators";
+import { Attr, Str } from "pinia-orm/decorators";
 import type { UserStatus as BaseUserStatus } from "vue-advanced-chat";
 
 export default class UserStatus extends Model implements BaseUserStatus {
@@ -9,6 +9,6 @@ export default class UserStatus extends Model implements BaseUserStatus {
 
     @Attr() declare roomId: string;
     @Attr() declare userId: string;
-    @Attr() declare state: "online" | "offline";
+    @Str("offline") declare state: "online" | "offline";
     @Attr() declare lastChanged: string;
 }

@@ -1,2 +1,2 @@
-export { useUserChannel } from "./useUserChannel";
+export { useRoomChannel } from "./useRoomChannel";
 export { useWindowManager } from "./useWindowManager";

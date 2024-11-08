@@ -25,7 +25,6 @@
         @room-action-handler="menuActionHandler($event.detail[0])"
         @menu-action-handler="menuActionHandler($event.detail[0])"
         @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
-        @typing-message="typing($event.detail[0])"
     />
     <Teleport to="body">
         <RoomOptionsDialog
@@ -38,16 +37,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect, onMounted } from "vue";
+import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
+import { PusherPrivateChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import type { Room as BaseRoom, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
-
-import { useUserChannel } from "@/composables";
+import Room from "@/models/Room";
 
 import RoomOptionsDialog from "@/components/RoomOptionsDialog.vue";
 
@@ -68,12 +67,10 @@ const textMessages = computed(() =>
 const roomRepo = useRepo(RoomRepository);
 const messageRepo = useRepo(MessageRepository);
 
-const rooms = computed(() =>
+const rooms = computed<Room[]>(() =>
     props.roomId ? roomRepo.whereId(props.roomId).with("users").get() : roomRepo.with("users").get(),
 );
 const roomMessages = computed(() => messageRepo.currentRoom().get());
-
-const { typing } = useUserChannel(window.SupportChat.userId);
 
 watchEffect(() => {
     model.value = messageRepo.room.value?.roomName;
@@ -112,6 +109,18 @@ const messageActions = ref([
 
 onMounted(async () => {
     await roomRepo.fetch(props.roomId);
+
+    (window.Echo.private(`support-chat.user.${window.SupportChat.userId}`) as PusherPrivateChannel)
+        .listenToAll((event: string, data: unknown) => console.log(`user.${window.SupportChat.userId}`, event, data))
+        .error((error: unknown) => console.error(error))
+        .listen(".user.invited", roomRepo.save)
+        .listen(".user.kicked", (room: BaseRoom) => roomRepo.destroy(room.roomId));
+});
+
+onBeforeUnmount(() => {
+    window.Echo.leaveChannel(`support-chat.user.${window.SupportChat.userId}`);
+
+    roomRepo.destroy(rooms.value.map((room) => room.roomId));
 });
 
 function openFile(args: OpenFileArgs) {
