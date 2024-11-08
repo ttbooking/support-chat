@@ -113,7 +113,7 @@ onMounted(async () => {
     (window.Echo.private(`support-chat.user.${window.SupportChat.userId}`) as PusherPrivateChannel)
         .listenToAll((event: string, data: unknown) => console.log(`user.${window.SupportChat.userId}`, event, data))
         .error((error: unknown) => console.error(error))
-        .listen(".user.invited", roomRepo.save)
+        .listen(".user.invited", (room: BaseRoom) => roomRepo.save(room))
         .listen(".user.kicked", (room: BaseRoom) => roomRepo.destroy(room.roomId));
 });
 
