@@ -1,5 +1,3 @@
-import { PusherPresenceChannel } from "laravel-echo/dist/channel";
-
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
@@ -11,7 +9,7 @@ export function useRoomChannel() {
     const messageRepo = useRepo(MessageRepository);
 
     const join = (room: Room) =>
-        (window.Echo.join(`support-chat.room.${room.roomId}`) as PusherPresenceChannel)
+        window.Echo.join(`support-chat.room.${room.roomId}`)
             .here((users: RoomUser[]) => roomRepo.setUsers(room.roomId, users))
             .joining((user: RoomUser) => roomRepo.joinUser(room.roomId, user))
             .leaving((user: RoomUser) => roomRepo.leaveUser(room.roomId, user))
@@ -25,7 +23,7 @@ export function useRoomChannel() {
             .listen(".message.edited", messageRepo.edited)
             .listen(".message.deleted", messageRepo.deleted)
             .listen(".reaction.left", messageRepo.reactionLeft)
-            .listen(".reaction.removed", messageRepo.reactionRemoved) as PusherPresenceChannel;
+            .listen(".reaction.removed", messageRepo.reactionRemoved);
 
     const leave = (room: Room) => window.Echo.leaveChannel(`support-chat.room.${room.roomId}`);
 

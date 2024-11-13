@@ -39,7 +39,6 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
-import { PusherPrivateChannel } from "laravel-echo/dist/channel";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import type { Room as BaseRoom, OpenFileArgs } from "@/types";
 
@@ -110,7 +109,7 @@ const messageActions = ref([
 onMounted(async () => {
     await roomRepo.fetch(props.roomId);
 
-    (window.Echo.private(`support-chat.user.${window.SupportChat.userId}`) as PusherPrivateChannel)
+    window.Echo.private(`support-chat.user.${window.SupportChat.userId}`)
         .listenToAll((event: string, data: unknown) => console.log(`user.${window.SupportChat.userId}`, event, data))
         .error((error: unknown) => console.error(error))
         .listen(".user.invited", (room: BaseRoom) => roomRepo.save(room))
