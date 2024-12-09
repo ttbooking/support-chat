@@ -577,21 +577,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pinia-orm/axios@npm:@pinia-orm/axios-edge@latest":
-  version: 1.10.2-28887420.1701f72
-  resolution: "@pinia-orm/axios-edge@npm:1.10.2-28887420.1701f72"
+"@pinia-orm/axios@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "@pinia-orm/axios@npm:1.10.1"
   peerDependencies:
     axios: ">=1.7.7"
     pinia: ">=2.1.7"
-    pinia-orm: "*"
-  checksum: 10c0/46fa78e171b9075175489d89a1db8f7aeccd4e0fa3626d8c995fcc139bcd79721642b043fe7a4fe8494c4fed0583001733c367760933d25af82c571f125bd9d8
+    pinia-orm: ">=1.9.1"
+  checksum: 10c0/d7e1c6d398849f5392f94a1f779ad74159e45a1e37bab37857779e645ca963cb6a901b10bc0a660e3f6d75dad291950a162db227e45f3b0918447bbb3570651f
   languageName: node
   linkType: hard
 
-"@pinia-orm/normalizr@npm:@pinia-orm/normalizr-edge@1.10.2-28887420.1701f72":
-  version: 1.10.2-28887420.1701f72
-  resolution: "@pinia-orm/normalizr-edge@npm:1.10.2-28887420.1701f72"
-  checksum: 10c0/7fffe497c26845339953c89577a2ff05ac06e54c123d742aed8224d06c235739310d3afc8247c15ecf47a64ab8e7724e8404a126b03ec2031e8f54b120ebd20e
+"@pinia-orm/normalizr@npm:1.10.1":
+  version: 1.10.1
+  resolution: "@pinia-orm/normalizr@npm:1.10.1"
+  checksum: 10c0/3ecc8357f52ab3f277ed825f5f106d078e91362b39d2d931965e015aa61468f25950e9d0378f9906b96a897cd817f81fda37c26fabff84ecd56eb2716a1e3033
   languageName: node
   linkType: hard
 
@@ -3297,15 +3297,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinia-orm@npm:pinia-orm-edge@latest":
-  version: 1.10.2-28887420.1701f72
-  resolution: "pinia-orm-edge@npm:1.10.2-28887420.1701f72"
+"pinia-orm@npm:^1.10.1":
+  version: 1.10.1
+  resolution: "pinia-orm@npm:1.10.1"
   dependencies:
-    "@pinia-orm/normalizr": "npm:@pinia-orm/normalizr-edge@1.10.2-28887420.1701f72"
+    "@pinia-orm/normalizr": "npm:1.10.1"
     vue-demi: "npm:^0.14.10"
   peerDependencies:
     pinia: ^2.1.7
-  checksum: 10c0/1dff542d877727e7ea35a0e041812237093f588dfd3e6a7517d4f45432f9f61cd5865c9b92d256747187567f96e52b3def5f38e8a4c739bdefe8e60a5c50046d
+  checksum: 10c0/e1ba30e242ce1040e577c799d3751dec70daf1f4014521a2587469ab0887480d723e3cdaea528fb4b949df0db003f04a2b2c3945fc18e5e819de40bce0943d92
   languageName: node
   linkType: hard
 
@@ -3639,7 +3639,7 @@ __metadata:
   dependencies:
     "@intlify/unplugin-vue-i18n": "npm:^6.0.1"
     "@mdi/font": "npm:^7.4.47"
-    "@pinia-orm/axios": "npm:@pinia-orm/axios-edge@latest"
+    "@pinia-orm/axios": "npm:^1.10.1"
     "@types/lodash": "npm:^4.17.13"
     "@types/node": "npm:^22.10.1"
     "@types/winbox": "npm:^0.2.5"
@@ -3654,7 +3654,7 @@ __metadata:
     laravel-vite-plugin: "npm:^1.1.1"
     lodash: "npm:^4.17.21"
     pinia: "npm:^2.3.0"
-    pinia-orm: "npm:pinia-orm-edge@latest"
+    pinia-orm: "npm:^1.10.1"
     postcss: "npm:^8.4.49"
     prettier: "npm:^3.4.2"
     string-to-color: "npm:^2.2.2"
