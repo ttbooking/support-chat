@@ -12,4 +12,6 @@ parameters:
     level: 2
 
     ignoreErrors:
-        - '#^Class App\\Models\\User not found\.$#'
+        -
+            message: '#^Class App\\Models\\User not found\.$#'
+            reportUnmatched: false
