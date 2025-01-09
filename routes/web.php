@@ -16,7 +16,7 @@ Route::prefix('api')->group(function () {
     Route::apiResources([
         'rooms' => '\\'.RoomController::class,
         'rooms.messages' => '\\'.MessageController::class,
-        //'messages.attachments' => '\\'.AttachmentController::class,
+        // 'messages.attachments' => '\\'.AttachmentController::class,
     ], ['shallow' => true]);
 
     Route::apiResource(

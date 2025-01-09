@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('chat_participants', function (Blueprint $table) {
             $table->foreignNanoid('room_id', 7)->constrained('chat_rooms')->cascadeOnDelete();
-            //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('chat_messages', function (Blueprint $table) {
             $table->nanoid(length: 7)->primary();
             $table->foreignNanoid('room_id', 7)->constrained('chat_rooms')->cascadeOnDelete();
-            //$table->foreignId('sent_by')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('sent_by')->constrained('users')->cascadeOnDelete();
             $table->unsignedInteger('sent_by')->index();
-            //$table->foreignNanoid('reply_to')->nullable()->constrained('chat_messages')->cascadeOnDelete();
+            // $table->foreignNanoid('reply_to')->nullable()->constrained('chat_messages')->cascadeOnDelete();
             $table->nanoid('reply_to', 7)->nullable()->index();
             $table->text('content')->fulltext();
             $table->json('meta')->nullable();

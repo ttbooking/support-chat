@@ -18,7 +18,7 @@ use TTBooking\SupportChat\Models\RoomTag;
 
 class DatabaseSeeder extends Seeder
 {
-    //use WithoutModelEvents;
+    // use WithoutModelEvents;
     use CreatesUserProviders {
         getDefaultUserProvider as protected defaultUserProvider;
     }
