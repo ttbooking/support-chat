@@ -1,6 +1,5 @@
 import { AxiosInstance } from "axios";
 import Echo from "laravel-echo";
-import { PusherPresenceChannel } from "laravel-echo/dist/channel";
 import en from "../locales/en.json";
 
 declare global {
@@ -11,8 +10,7 @@ declare global {
             roomId?: string;
         };
         axios: AxiosInstance;
-        Echo: Echo;
-        roomChannel: PusherPresenceChannel;
+        Echo: Echo<"pusher">;
     }
 }
 
