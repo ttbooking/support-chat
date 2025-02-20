@@ -3,14 +3,14 @@
     "file": "assets/advanced-chat-DFo_OHs7.js",
     "name": "advanced-chat"
   },
-  "_vuetify-BXDM2kUz.js": {
-    "file": "assets/vuetify-BXDM2kUz.js",
+  "_vuetify-BG4j4fh4.js": {
+    "file": "assets/vuetify-BG4j4fh4.js",
     "name": "vuetify",
     "imports": [
       "_advanced-chat-DFo_OHs7.js"
     ],
     "css": [
-      "assets/vuetify-DzqYdljm.css"
+      "assets/vuetify-CdC6pcGQ.css"
     ],
     "assets": [
       "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -19,9 +19,9 @@
       "assets/materialdesignicons-webfont-B7mPwVP_.ttf"
     ]
   },
-  "_vuetify-DzqYdljm.css": {
-    "file": "assets/vuetify-DzqYdljm.css",
-    "src": "_vuetify-DzqYdljm.css"
+  "_vuetify-CdC6pcGQ.css": {
+    "file": "assets/vuetify-CdC6pcGQ.css",
+    "src": "_vuetify-CdC6pcGQ.css"
   },
   "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
     "file": "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -44,22 +44,22 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-Dn8Oq8ED.js",
+    "file": "assets/app-fTCDpvxu.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-BXDM2kUz.js",
+      "_vuetify-BG4j4fh4.js",
       "_advanced-chat-DFo_OHs7.js"
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-D9o-W-6q.js",
+    "file": "assets/win-B_5ZhsH6.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-BXDM2kUz.js",
+      "_vuetify-BG4j4fh4.js",
       "_advanced-chat-DFo_OHs7.js"
     ],
     "css": [
