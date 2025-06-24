@@ -1,16 +1,20 @@
 {
-  "_advanced-chat-Cmokl2X9.js": {
-    "file": "assets/advanced-chat-Cmokl2X9.js",
+  "_advanced-chat-DdR47Vuj.js": {
+    "file": "assets/advanced-chat-DdR47Vuj.js",
     "name": "advanced-chat"
   },
-  "_vuetify-C5APvIAo.js": {
-    "file": "assets/vuetify-C5APvIAo.js",
+  "_vuetify-BmoqRNvh.css": {
+    "file": "assets/vuetify-BmoqRNvh.css",
+    "src": "_vuetify-BmoqRNvh.css"
+  },
+  "_vuetify-BqGHImra.js": {
+    "file": "assets/vuetify-BqGHImra.js",
     "name": "vuetify",
     "imports": [
-      "_advanced-chat-Cmokl2X9.js"
+      "_advanced-chat-DdR47Vuj.js"
     ],
     "css": [
-      "assets/vuetify-Cop_zsoh.css"
+      "assets/vuetify-BmoqRNvh.css"
     ],
     "assets": [
       "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -18,10 +22,6 @@
       "assets/materialdesignicons-webfont-PXm3-2wK.woff",
       "assets/materialdesignicons-webfont-B7mPwVP_.ttf"
     ]
-  },
-  "_vuetify-Cop_zsoh.css": {
-    "file": "assets/vuetify-Cop_zsoh.css",
-    "src": "_vuetify-Cop_zsoh.css"
   },
   "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
     "file": "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -44,26 +44,26 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-CIvTbsRz.js",
+    "file": "assets/app-DIWduB1J.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-C5APvIAo.js",
-      "_advanced-chat-Cmokl2X9.js"
+      "_vuetify-BqGHImra.js",
+      "_advanced-chat-DdR47Vuj.js"
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-7E_setIy.js",
+    "file": "assets/win-C1akMiRI.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-C5APvIAo.js",
-      "_advanced-chat-Cmokl2X9.js"
+      "_vuetify-BqGHImra.js",
+      "_advanced-chat-DdR47Vuj.js"
     ],
     "css": [
-      "assets/win-OiJoCKMp.css"
+      "assets/win-CA-OHeiM.css"
     ],
     "assets": [
       "assets/favicon-DXKRda58.svg"
