@@ -4,20 +4,16 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Tests;
 
+use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use TTBooking\SupportChat\Facades\Chat;
 use TTBooking\SupportChat\SupportChat;
-use TTBooking\SupportChat\SupportChatServiceProvider;
-use TTBooking\ViteManager\ViteServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {
-    protected $enablesPackageDiscoveries = true;
+    use WithWorkbench;
 
-    protected function getPackageProviders($app): array
-    {
-        return [ViteServiceProvider::class, SupportChatServiceProvider::class];
-    }
+    protected $enablesPackageDiscoveries = true;
 
     protected function getPackageAliases($app): array
     {

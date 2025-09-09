@@ -1,17 +1,26 @@
 includes:
     - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+    - vendor/pestphp/pest/extension.neon
 
 parameters:
     paths:
+        - config
         - database/factories
         - database/seeders
         - routes
         - src
         - tests
 
+    configDirectories:
+        - config
+
     level: 2
 
     ignoreErrors:
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            reportUnmatched: false
         -
             message: '#^Class App\\Models\\User not found\.$#'
             reportUnmatched: false
