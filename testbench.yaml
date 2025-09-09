@@ -1,2 +1,3 @@
 providers:
+  - TTBooking\ViteManager\ViteServiceProvider
   - TTBooking\SupportChat\SupportChatServiceProvider
