@@ -27,7 +27,10 @@ export default class MessageRepository extends AxiosRepository<Message> {
     fetch = async ({ room }: FetchMessagesArgs) => {
         this.room.value = room;
         this.loaded.value = false;
-        const response = await this.api().get(`/rooms/${room.roomId}/messages`);
+        const response = await this.api().get(window.SupportChat.path + `/api/rooms/${room.roomId}/messages`, {
+            //dataTransformer: ({ data }) => data.data.map((message: BaseMessage) => ({ ...message, room })),
+            dataKey: "data",
+        });
         this.loaded.value = true;
         return response;
     };
@@ -39,17 +42,21 @@ export default class MessageRepository extends AxiosRepository<Message> {
 
     trySend = async ({ roomId, message }: TrySendMessageArgs) => {
         try {
-            return await this.api().post(`/rooms/${roomId}/messages`, {
-                id: message._id,
-                reply_to: message.replyMessage?._id,
-                content: message.content,
-                attachments:
-                    message.files?.map((file) => ({
-                        name: file.name + "." + file.extension,
-                        type: file.type,
-                        size: file.size,
-                    })) ?? [],
-            });
+            return await this.api().post(
+                window.SupportChat.path + `/api/rooms/${roomId}/messages`,
+                {
+                    id: message._id,
+                    reply_to: message.replyMessage?._id,
+                    content: message.content,
+                    attachments:
+                        message.files?.map((file) => ({
+                            name: file.name + "." + file.extension,
+                            type: file.type,
+                            size: file.size,
+                        })) ?? [],
+                },
+                { dataKey: "data" },
+            );
         } catch (error) {
             this.where("_id", message._id).update({ failure: true });
             throw error;
@@ -61,7 +68,10 @@ export default class MessageRepository extends AxiosRepository<Message> {
     };
 
     delete = async ({ message }: DeleteMessageArgs) => {
-        return await this.api().delete(`/messages/${message._id}`, { delete: 1 });
+        return await this.api().delete(window.SupportChat.path + `/api/messages/${message._id}`, {
+            delete: 1,
+            dataKey: "data",
+        });
     };
 
     sendReaction = async ({ messageId, reaction, remove }: SendMessageReactionArgs) => {
