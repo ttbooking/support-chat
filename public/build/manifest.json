@@ -7,8 +7,8 @@
     "file": "assets/vuetify-9Jq7coJI.css",
     "src": "_vuetify-9Jq7coJI.css"
   },
-  "_vuetify-IrioL1Eq.js": {
-    "file": "assets/vuetify-IrioL1Eq.js",
+  "_vuetify-BLgefNU9.js": {
+    "file": "assets/vuetify-BLgefNU9.js",
     "name": "vuetify",
     "imports": [
       "_advanced-chat-CMld-EBr.js"
@@ -44,22 +44,22 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-Cf9t20sX.js",
+    "file": "assets/app-CWSr8POQ.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-IrioL1Eq.js",
+      "_vuetify-BLgefNU9.js",
       "_advanced-chat-CMld-EBr.js"
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-CROya6X9.js",
+    "file": "assets/win-CMf1XMjy.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-IrioL1Eq.js",
+      "_vuetify-BLgefNU9.js",
       "_advanced-chat-CMld-EBr.js"
     ],
     "css": [
