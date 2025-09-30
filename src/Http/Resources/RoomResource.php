@@ -27,6 +27,7 @@ class RoomResource extends JsonResource
             'users' => UserResource::collection($this->users),
             'tags' => $this->tags,
             'index' => $this->updated_at,
+            'lastMessage' => new MessageResource($this->whenNotNull($this->lastMessage)),
         ];
     }
 }

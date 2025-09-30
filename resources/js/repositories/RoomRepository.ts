@@ -1,7 +1,6 @@
 import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Room from "@/models/Room";
-import { useRoomChannel } from "@/composables";
 //import { useDebounceFn } from "@vueuse/core";
 import type { Room as BaseRoom, RoomUser } from "vue-advanced-chat";
 //import type { UserTypingArgs } from "@/types";
@@ -20,10 +19,7 @@ export default class RoomRepository extends AxiosRepository<Room> {
     };
 
     add = async () => {
-        const { roomId } = this.new()!;
-        const res = await this.api().post(window.SupportChat.path + "/api/rooms", { id: roomId }, { dataKey: "data" });
-        useRoomChannel().join(res.getDataFromResponse() as Room);
-        return res;
+        return await this.api().post(window.SupportChat.path + "/api/rooms", null, { dataKey: "data" });
     };
 
     update = async (room: BaseRoom) => {

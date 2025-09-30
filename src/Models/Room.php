@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Contracts\Personifiable;
@@ -33,6 +34,7 @@ use TTBooking\SupportChat\Observers\RoomObserver;
  * @property Collection<int, Model&Personifiable> $users
  * @property Collection<int, RoomTag> $tags
  * @property Collection<int, Message> $messages
+ * @property Message|null $lastMessage
  */
 #[ScopedBy(ParticipantScope::class), ObservedBy(RoomObserver::class)]
 class Room extends Model
@@ -46,7 +48,7 @@ class Room extends Model
 
     protected $fillable = ['id', 'name', 'created_by'];
 
-    protected $with = ['tags'];
+    protected $with = ['tags', 'lastMessage'];
 
     protected static function booted(): void
     {
@@ -111,5 +113,13 @@ class Room extends Model
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class)->orderBy('created_at')->withTrashed();
+    }
+
+    /**
+     * @return HasOne<Message, $this>
+     */
+    public function lastMessage(): HasOne
+    {
+        return $this->hasOne(Message::class)->latestOfMany('created_at');
     }
 }

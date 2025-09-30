@@ -6,7 +6,7 @@ import Tag from "./Tag";
 import RoomTag from "./RoomTag";
 import Message from "./Message";
 import { useRoomChannel } from "@/composables";
-import type { StringNumber } from "vue-advanced-chat";
+import type { LastMessage, StringNumber } from "vue-advanced-chat";
 import type { Room as BaseRoom } from "@/types";
 
 export default class Room extends Model implements BaseRoom {
@@ -20,6 +20,7 @@ export default class Room extends Model implements BaseRoom {
     @Str("") declare avatar: string;
     @Num(null) declare unreadCount?: number;
     @Attr(null) declare index?: StringNumber | Date;
+    @Attr(null) declare lastMessage?: LastMessage;
     //@Attr(null) declare typingUsers?: string[];
     declare status: UserStatus;
 
@@ -28,6 +29,12 @@ export default class Room extends Model implements BaseRoom {
     @BelongsToMany(() => Tag, () => RoomTag, "roomId", "tagName") declare tags: Tag[];
     //@HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
     @HasMany(() => Message, "roomId") declare messages: Message[];
+
+    static created(room: Room) {
+        console.log("created", room);
+
+        useRoomChannel().join(room);
+    }
 
     static deleted(room: Room) {
         console.log("deleted", room);
