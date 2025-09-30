@@ -26,6 +26,10 @@ class StoreRoomRequest extends FormRequest
     {
         $this->merge([
             'name' => $this->roomName,
+            'users' => [
+                ['_id' => $this->user()->getKey()],
+                ...$this->input('users', []),
+            ],
         ]);
     }
 

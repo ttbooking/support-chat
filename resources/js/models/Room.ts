@@ -29,12 +29,6 @@ export default class Room extends Model implements BaseRoom {
     //@HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
     @HasMany(() => Message, "roomId") declare messages: Message[];
 
-    static created(room: Room) {
-        console.log("created", room);
-
-        useRoomChannel().join(room);
-    }
-
     static deleted(room: Room) {
         console.log("deleted", room);
 
