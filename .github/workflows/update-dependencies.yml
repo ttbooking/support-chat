@@ -1,0 +1,37 @@
+name: update dependencies
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: corepack enable
+
+      - name: Update dependencies
+        run: |
+          corepack enable
+          npx npm-check-updates -u
+          rm yarn.lock
+          [ -d "node_modules" ] && echo "node_modules does exist."
+          [ ! -d "node_modules" ] && echo "node_modules does not exist."
+          yarn install
+          [ -d "node_modules" ] && echo "node_modules does exist."
+          [ ! -d "node_modules" ] && echo "node_modules does not exist."
+
+      - name: Commit compiled files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update dependencies
+          file_pattern: 'package.json yarn.lock'
