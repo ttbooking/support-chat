@@ -17,8 +17,6 @@ jobs:
         with:
           node-version: 22
 
-      - run: corepack enable
-
       - name: Update dependencies
         env:
           YARN_ENABLE_IMMUTABLE_INSTALLS: false
@@ -26,11 +24,7 @@ jobs:
           corepack enable
           npx npm-check-updates -u
           rm yarn.lock
-          [ -d "node_modules" ] && echo "node_modules does exist 1."
-          [ ! -d "node_modules" ] && echo "node_modules does not exist 1."
           yarn install
-          [ -d "node_modules" ] && echo "node_modules does exist 2."
-          [ ! -d "node_modules" ] && echo "node_modules does not exist 2."
 
       - name: Commit compiled files
         uses: stefanzweifel/git-auto-commit-action@v5
