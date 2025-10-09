@@ -1,6 +1,6 @@
 name: compile assets
 
-on: [push, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   compile:
@@ -8,9 +8,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - name: Set up Node
+        uses: actions/setup-node@v5
         with:
           node-version: 22
 
@@ -23,7 +24,7 @@ jobs:
         run: yarn build
 
       - name: Commit compiled files
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: Compile assets
           file_pattern: public/

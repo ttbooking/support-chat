@@ -11,9 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - name: Set up Node
+        uses: actions/setup-node@v5
         with:
           node-version: 22
 
@@ -22,12 +23,13 @@ jobs:
           YARN_ENABLE_IMMUTABLE_INSTALLS: false
         run: |
           corepack enable
+          yarn set version stable
           npx npm-check-updates -u
           rm yarn.lock
           yarn install
 
       - name: Commit compiled files
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: Update dependencies
           file_pattern: 'package.json yarn.lock'
