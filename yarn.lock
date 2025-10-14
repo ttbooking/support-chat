@@ -445,7 +445,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@intlify/unplugin-vue-i18n@npm:^6.0.8":
+"@intlify/unplugin-vue-i18n@npm:^6.0.3":
   version: 6.0.8
   resolution: "@intlify/unplugin-vue-i18n@npm:6.0.8"
   dependencies:
@@ -1423,7 +1423,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^12.8.2":
+"@vueuse/core@npm:^12.5.0":
   version: 12.8.2
   resolution: "@vueuse/core@npm:12.8.2"
   dependencies:
@@ -2277,7 +2277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fdir@npm:^6.5.0":
+"fdir@npm:^6.4.4, fdir@npm:^6.5.0":
   version: 6.5.0
   resolution: "fdir@npm:6.5.0"
   peerDependencies:
@@ -3717,7 +3717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.6":
+"postcss@npm:^8.5.3, postcss@npm:^8.5.6":
   version: 8.5.6
   resolution: "postcss@npm:8.5.6"
   dependencies:
@@ -3881,7 +3881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^4.43.0":
+"rollup@npm:^4.34.9":
   version: 4.52.4
   resolution: "rollup@npm:4.52.4"
   dependencies:
@@ -3966,7 +3966,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@intlify/unplugin-vue-i18n": "npm:^6.0.8"
+    "@intlify/unplugin-vue-i18n": "npm:^6.0.3"
     "@mdi/font": "npm:^7.4.47"
     "@pinia-orm/axios": "npm:^1.10.2"
     "@tailwindcss/vite": "npm:^4.1.14"
@@ -3974,7 +3974,7 @@ __metadata:
     "@types/node": "npm:^24.7.2"
     "@types/winbox": "npm:^0.2.6"
     "@vitejs/plugin-vue": "npm:^6.0.1"
-    "@vueuse/core": "npm:^12.8.2"
+    "@vueuse/core": "npm:^12.5.0"
     axios: "npm:^1.12.2"
     eslint: "npm:^9.37.0"
     eslint-config-prettier: "npm:^10.1.8"
@@ -3989,15 +3989,15 @@ __metadata:
     string-to-color: "npm:^2.2.2"
     tailwindcss: "npm:^4.1.14"
     typescript: "npm:^5.9.3"
-    typescript-eslint: "npm:^8.46.1"
-    vite: "npm:^7.1.9"
+    typescript-eslint: "npm:^8.46.0"
+    vite: "npm:^6.0.0"
     vite-plugin-vuetify: "npm:^2.1.2"
     vue: "npm:^3.5.22"
     vue-advanced-chat: "npm:^2.1.0"
-    vue-i18n: "npm:^11.1.12"
+    vue-i18n: "npm:^11.1.1"
     vue-tsc: "npm:^3.1.1"
     vuetify: "npm:^3.10.5"
-    winbox: "npm:^0.2.731"
+    winbox: "npm:0.2.82"
   languageName: unknown
   linkType: soft
 
@@ -4222,7 +4222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.15":
+"tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.13":
   version: 0.2.15
   resolution: "tinyglobby@npm:0.2.15"
   dependencies:
@@ -4266,7 +4266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:^8.46.1":
+"typescript-eslint@npm:^8.46.0":
   version: 8.46.1
   resolution: "typescript-eslint@npm:8.46.1"
   dependencies:
@@ -4405,26 +4405,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^7.1.9":
-  version: 7.1.9
-  resolution: "vite@npm:7.1.9"
+"vite@npm:^6.0.0":
+  version: 6.3.6
+  resolution: "vite@npm:6.3.6"
   dependencies:
     esbuild: "npm:^0.25.0"
-    fdir: "npm:^6.5.0"
+    fdir: "npm:^6.4.4"
     fsevents: "npm:~2.3.3"
-    picomatch: "npm:^4.0.3"
-    postcss: "npm:^8.5.6"
-    rollup: "npm:^4.43.0"
-    tinyglobby: "npm:^0.2.15"
+    picomatch: "npm:^4.0.2"
+    postcss: "npm:^8.5.3"
+    rollup: "npm:^4.34.9"
+    tinyglobby: "npm:^0.2.13"
   peerDependencies:
-    "@types/node": ^20.19.0 || >=22.12.0
+    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
     jiti: ">=1.21.0"
-    less: ^4.0.0
+    less: "*"
     lightningcss: ^1.21.0
-    sass: ^1.70.0
-    sass-embedded: ^1.70.0
-    stylus: ">=0.54.8"
-    sugarss: ^5.0.0
+    sass: "*"
+    sass-embedded: "*"
+    stylus: "*"
+    sugarss: "*"
     terser: ^5.16.0
     tsx: ^4.8.1
     yaml: ^2.4.2
@@ -4456,7 +4456,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/f628f903a137c1410232558bde99c223ea00a090bda6af77752c61f912955f0050aac12d3cfe024d08a0f150ff6fab61b3d0be75d634a59b94d49f525392e1f7
+  checksum: 10c0/add701f1e72596c002275782e38d0389ab400c1be330c93a3009804d62db68097a936ca1c53c3301df3aaacfe5e328eab547060f31ef9c49a277ae50df6ad4fb
   languageName: node
   linkType: hard
 
@@ -4507,7 +4507,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-i18n@npm:^11.1.12":
+"vue-i18n@npm:^11.1.1":
   version: 11.1.12
   resolution: "vue-i18n@npm:11.1.12"
   dependencies:
@@ -4600,10 +4600,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winbox@npm:^0.2.731":
-  version: 0.2.731
-  resolution: "winbox@npm:0.2.731"
-  checksum: 10c0/032353356eb735523a0d6c0a5ba9e3ca43d5edd8746182ea3e61e2c4072eb8c910d1b2317b5872f5d9ea5320ac73b7348801d91a28dd30d239fcc0beb7b0aee0
+"winbox@npm:0.2.82":
+  version: 0.2.82
+  resolution: "winbox@npm:0.2.82"
+  checksum: 10c0/f0aeff4ce8cd4a9a010c1b935a8e8db354035529c29c57e6545ff42e672763d669da1af4766133f93abb61419a461f2a4a38cebbaa0172225427d4a4f4e1d777
   languageName: node
   linkType: hard
 
