@@ -24,7 +24,7 @@ jobs:
           node-version-file: .nvmrc
           package-manager-cache: false
 
-      - name: Install Yarn dependencies
+      - name: Install dependencies
         run: |
           corepack enable
           yarn install
