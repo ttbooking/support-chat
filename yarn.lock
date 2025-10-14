@@ -445,7 +445,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@intlify/unplugin-vue-i18n@npm:^6.0.3":
+"@intlify/unplugin-vue-i18n@npm:^6.0.8":
   version: 6.0.8
   resolution: "@intlify/unplugin-vue-i18n@npm:6.0.8"
   dependencies:
@@ -1423,7 +1423,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^12.5.0":
+"@vueuse/core@npm:^12.8.2":
   version: 12.8.2
   resolution: "@vueuse/core@npm:12.8.2"
   dependencies:
@@ -3966,7 +3966,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@intlify/unplugin-vue-i18n": "npm:^6.0.3"
+    "@intlify/unplugin-vue-i18n": "npm:^6.0.8"
     "@mdi/font": "npm:^7.4.47"
     "@pinia-orm/axios": "npm:^1.10.2"
     "@tailwindcss/vite": "npm:^4.1.14"
@@ -3974,7 +3974,7 @@ __metadata:
     "@types/node": "npm:^24.7.2"
     "@types/winbox": "npm:^0.2.6"
     "@vitejs/plugin-vue": "npm:^6.0.1"
-    "@vueuse/core": "npm:^12.5.0"
+    "@vueuse/core": "npm:^12.8.2"
     axios: "npm:^1.12.2"
     eslint: "npm:^9.37.0"
     eslint-config-prettier: "npm:^10.1.8"
@@ -3989,12 +3989,12 @@ __metadata:
     string-to-color: "npm:^2.2.2"
     tailwindcss: "npm:^4.1.14"
     typescript: "npm:^5.9.3"
-    typescript-eslint: "npm:^8.46.0"
-    vite: "npm:^6.0.0"
+    typescript-eslint: "npm:^8.46.1"
+    vite: "npm:^6.3.6"
     vite-plugin-vuetify: "npm:^2.1.2"
     vue: "npm:^3.5.22"
     vue-advanced-chat: "npm:^2.1.0"
-    vue-i18n: "npm:^11.1.1"
+    vue-i18n: "npm:^11.1.12"
     vue-tsc: "npm:^3.1.1"
     vuetify: "npm:^3.10.5"
     winbox: "npm:0.2.82"
@@ -4266,7 +4266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:^8.46.0":
+"typescript-eslint@npm:^8.46.1":
   version: 8.46.1
   resolution: "typescript-eslint@npm:8.46.1"
   dependencies:
@@ -4405,7 +4405,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.0":
+"vite@npm:^6.3.6":
   version: 6.3.6
   resolution: "vite@npm:6.3.6"
   dependencies:
@@ -4507,7 +4507,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-i18n@npm:^11.1.1":
+"vue-i18n@npm:^11.1.12":
   version: 11.1.12
   resolution: "vue-i18n@npm:11.1.12"
   dependencies:
