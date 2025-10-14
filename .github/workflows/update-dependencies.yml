@@ -28,7 +28,7 @@ jobs:
         run: |
           corepack enable
           yarn set version stable
-          npx npm-check-updates -u
+          npx npm-check-updates -u --target semver
           rm yarn.lock
           yarn install
 
