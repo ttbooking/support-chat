@@ -1,3 +1,4 @@
 providers:
+  - TTBooking\Nanoid\NanoidServiceProvider
   - TTBooking\ViteManager\ViteServiceProvider
   - TTBooking\SupportChat\SupportChatServiceProvider
