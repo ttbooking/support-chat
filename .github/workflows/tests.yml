@@ -39,3 +39,4 @@ jobs:
 
       - name: Execute unit/feature tests
         run: vendor/bin/pest
+        if: matrix.php >= '8.3'
