@@ -6,10 +6,9 @@ namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
-use TTBooking\SupportChat\Contracts\Personifiable;
+use Illuminate\Foundation\Auth\User;
 use TTBooking\SupportChat\Observers\ParticipantObserver;
 
 /**
@@ -18,7 +17,7 @@ use TTBooking\SupportChat\Observers\ParticipantObserver;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Room $room
- * @property Model $user
+ * @property User $user
  */
 #[ObservedBy(ParticipantObserver::class)]
 class Participant extends Pivot
@@ -37,11 +36,11 @@ class Participant extends Pivot
     }
 
     /**
-     * @return BelongsTo<Model, $this>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
-        /** @var class-string<Model&Personifiable> $model */
+        /** @var class-string<User> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsTo($model);

@@ -21,14 +21,18 @@ class MessageResource extends JsonResource
      */
     public function toArray(?Request $request = null): array
     {
+        /** @var class-string<JsonResource> $resource */
+        $resource = config('support-chat.user_resource');
+        $sender = $this->sender->toResource($resource)->resolve($request);
+
         return [
             '_id' => $this->getKey(),
             'roomId' => $this->room_id,
             'senderId' => (string) $this->sent_by,
             'indexId' => $this->getKey(),
             'content' => ! $this->trashed() ? $this->content : '',
-            'username' => $this->sender->getPersonInfo()->name,
-            'avatar' => $this->sender->getPersonInfo()->avatar,
+            'username' => $sender['username'],
+            'avatar' => $sender['avatar'] ?? null,
             'date' => $this->created_at->translatedFormat('jS F'),
             'timestamp' => $this->created_at->translatedFormat('G:i'),
             'system' => (bool) ($this->flags & Message::FLAG_SYSTEM),

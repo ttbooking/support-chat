@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -17,8 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User;
 use TTBooking\Nanoid\Concerns\HasNanoids;
-use TTBooking\SupportChat\Contracts\Personifiable;
 use TTBooking\SupportChat\Database\Factories\RoomFactory;
 use TTBooking\SupportChat\Models\Scopes\ParticipantScope;
 use TTBooking\SupportChat\Observers\RoomObserver;
@@ -30,8 +29,8 @@ use TTBooking\SupportChat\Observers\RoomObserver;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
- * @property Model&Authenticatable $creator
- * @property Collection<int, Model&Personifiable> $users
+ * @property User $creator
+ * @property Collection<int, User> $users
  * @property Collection<int, RoomTag> $tags
  * @property Collection<int, Message> $messages
  * @property Message|null $lastMessage
@@ -75,22 +74,22 @@ class Room extends Model
     }
 
     /**
-     * @return BelongsTo<Model&Authenticatable, $this>
+     * @return BelongsTo<User, $this>
      */
     public function creator(): BelongsTo
     {
-        /** @var class-string<Model&Authenticatable> $model */
+        /** @var class-string<User> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsTo($model, 'created_by');
     }
 
     /**
-     * @return BelongsToMany<Model&Personifiable, $this>
+     * @return BelongsToMany<User, $this>
      */
     public function users(): BelongsToMany
     {
-        /** @var class-string<Model&Personifiable> $model */
+        /** @var class-string<User> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsToMany($model, 'chat_participants')

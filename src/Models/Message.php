@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User;
 use TTBooking\Nanoid\Concerns\HasNanoids;
-use TTBooking\SupportChat\Contracts\Personifiable;
 use TTBooking\SupportChat\Database\Factories\MessageFactory;
 use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Observers\MessageObserver;
@@ -33,7 +33,7 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property Carbon $updated_at
  * @property Carbon|null $deleted_at
  * @property Room $room
- * @property Model&Personifiable $sender
+ * @property User $sender
  * @property Message|null $origin
  * @property Collection<int, Message> $replies
  * @property Collection<int, Attachment> $attachments
@@ -101,11 +101,11 @@ class Message extends Model
     }
 
     /**
-     * @return BelongsTo<Model&Personifiable, $this>
+     * @return BelongsTo<User, $this>
      */
     public function sender(): BelongsTo
     {
-        /** @var class-string<Model&Personifiable> $model */
+        /** @var class-string<User> $model */
         $model = config('support-chat.user_model');
 
         return $this->belongsTo($model, 'sent_by');

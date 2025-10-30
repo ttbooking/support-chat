@@ -28,11 +28,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | User Model
+    | User Model and Resource
     |--------------------------------------------------------------------------
     */
 
     'user_model' => App\Models\User::class,
+    'user_resource' => TTBooking\SupportChat\Http\Resources\UserResource::class,
 
     /*
     |--------------------------------------------------------------------------
