@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $sqlite = DB::connection()->getDriverName() === 'sqlite';
+        $driver = DB::connection()->getDriverName();
+        $title = DB::connection()->getDriverTitle();
+        $sqlite = $driver === 'sqlite';
+        echo "Database driver is $driver [$title].".PHP_EOL;
 
         Schema::create('chat_messages', function (Blueprint $table) use ($sqlite) {
             $table->nanoid(length: 7)->primary();
