@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
 
-            $table->foreign('created_by')->references('id')->on('p2_users')->cascadeOnDelete();
+            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

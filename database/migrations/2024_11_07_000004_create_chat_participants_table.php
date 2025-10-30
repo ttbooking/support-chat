@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->primary(['room_id', 'user_id']);
-            $table->foreign('user_id')->references('id')->on('p2_users')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

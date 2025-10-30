@@ -33,7 +33,7 @@ return new class extends Migration
         });
 
         Schema::table('chat_messages', function (Blueprint $table) {
-            $table->foreign('sent_by')->references('id')->on('p2_users')->cascadeOnDelete();
+            $table->foreign('sent_by')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('reply_to')->references('id')->on('chat_messages')->cascadeOnDelete();
         });
     }

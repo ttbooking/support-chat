@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->index(['message_id', 'user_id']);
             $table->unique(['message_id', 'user_id', 'emoji']);
-            $table->foreign('user_id')->references('id')->on('p2_users')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
