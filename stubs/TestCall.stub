@@ -1,0 +1,5 @@
+<?php
+
+namespace Pest\PendingCalls;
+
+final class TestCall {}

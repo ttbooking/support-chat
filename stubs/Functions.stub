@@ -1,0 +1,32 @@
+<?php
+
+use Pest\Concerns\Expectable;
+use Pest\PendingCalls\AfterEachCall;
+use Pest\PendingCalls\BeforeEachCall;
+use Pest\PendingCalls\TestCall;
+use Pest\Support\HigherOrderTapProxy;
+use TTBooking\SupportChat\Tests\TestCase;
+
+/**
+ * @param-closure-this TestCase $closure
+ * @return HigherOrderTapProxy<Expectable|TestCall|TestCase>|Expectable|TestCall|TestCase|mixed
+ */
+function beforeEach(?Closure $closure = null) {}
+
+/**
+ * @param-closure-this TestCase $closure
+ * @return Expectable|TestCall|TestCase|mixed
+ */
+function test(?string $description = null, ?Closure $closure = null) {}
+
+/**
+ * @param-closure-this TestCase $closure
+ * @return Expectable|TestCall|TestCase|mixed
+ */
+function it(string $description, ?Closure $closure = null) {}
+
+/**
+ * @param-closure-this TestCase $closure
+ * @return Expectable|HigherOrderTapProxy<Expectable|TestCall|TestCase>|TestCall|mixed
+ */
+function afterEach(?Closure $closure = null) {}

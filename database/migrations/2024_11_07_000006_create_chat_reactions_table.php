@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,12 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chat_reactions', function (Blueprint $table) {
+        $sqlite = DB::connection()->getDriverName() === 'sqlite';
+
+        Schema::create('chat_reactions', function (Blueprint $table) use ($sqlite) {
             $table->id();
             $table->foreignNanoid('message_id', 7)->constrained('chat_messages')->cascadeOnDelete();
             // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('user_id');
-            $table->char('emoji', 1)->collation('utf8mb4_bin');
+            $table->char('emoji', 1)->collation($sqlite ? 'binary' : 'utf8mb4_bin');
             $table->timestamp('created_at')->useCurrent();
             $table->index(['message_id', 'user_id']);
             $table->unique(['message_id', 'user_id', 'emoji']);

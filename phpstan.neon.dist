@@ -12,6 +12,15 @@ parameters:
         - src
         - tests
 
+    stubFiles:
+        - stubs/AfterEachCall.stub
+        - stubs/BeforeEachCall.stub
+        - stubs/Expectable.stub
+        - stubs/Functions.stub
+        - stubs/HigherOrderTapProxy.stub
+        - stubs/TestCall.stub
+        - stubs/TestCase.stub
+
     configDirectories:
         - config
 
