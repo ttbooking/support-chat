@@ -1,2 +1,4 @@
+/node_modules
+/storage
 .env
 .env.dusk
