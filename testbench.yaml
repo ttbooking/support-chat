@@ -13,6 +13,9 @@ seeders:
   - Workbench\Database\Seeders\DatabaseSeeder
   - TTBooking\SupportChat\Database\Seeders\DatabaseSeeder
 
+env:
+  - SC_DISK=local
+
 workbench:
   start: '/support-chat'
   user: test@example.com
