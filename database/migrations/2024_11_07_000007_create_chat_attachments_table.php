@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use TTBooking\SupportChat\Models\Message;
 
 return new class extends Migration
 {
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('chat_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignNanoid('message_id', 7)->constrained('chat_messages')->cascadeOnDelete();
+            $table->foreignNanoid('message_id', (new Message)->nanoidSize())->constrained('chat_messages')->cascadeOnDelete();
             $table->string('name')->index();
             $table->string('type')->nullable()->index();
             $table->unsignedBigInteger('size');

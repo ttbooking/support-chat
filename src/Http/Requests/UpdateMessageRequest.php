@@ -38,8 +38,8 @@ class UpdateMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|nanoid|size:7',
-            'reply_to' => 'sometimes|nullable|nanoid|size:7',
+            'id' => 'required|nanoid|size:'.(new Message)->nanoidSize(),
+            'reply_to' => 'sometimes|nullable|nanoid|size:'.(new Message)->nanoidSize(),
             'content' => 'required_without:attachments|string',
             'attachments' => 'required_without:content|array',
             'attachments.*.name' => 'required|string|max:255',

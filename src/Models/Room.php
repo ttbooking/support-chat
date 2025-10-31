@@ -63,6 +63,11 @@ class Room extends Model
         return RoomFactory::new();
     }
 
+    public function nanoidSize(): int
+    {
+        return config('support-chat.nanoid_size_rooms') ?: $this->nanoidSize ?? 21;
+    }
+
     /**
      * @return Attribute<string, never>
      */

@@ -43,7 +43,7 @@ class UpdateRoomRequest extends FormRequest
         $model = config('support-chat.user_model');
 
         return [
-            'id' => 'sometimes|nanoid|size:7',
+            'id' => 'sometimes|nanoid|size:'.(new Room)->nanoidSize(),
             'name' => 'sometimes|nullable|string|max:255',
             'users' => 'sometimes|array',
             'users.*._id' => "sometimes|exists:$model,id",

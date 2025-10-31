@@ -92,6 +92,11 @@ class Message extends Model
         return MessageFactory::new();
     }
 
+    public function nanoidSize(): int
+    {
+        return config('support-chat.nanoid_size_messages') ?: $this->nanoidSize ?? 21;
+    }
+
     /**
      * @return BelongsTo<Room, $this>
      */

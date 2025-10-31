@@ -6,6 +6,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use TTBooking\SupportChat\Enums\MessageState;
+use TTBooking\SupportChat\Models\Message;
+use TTBooking\SupportChat\Models\Room;
 
 return new class extends Migration
 {
@@ -20,10 +22,10 @@ return new class extends Migration
         $userModel = config('support-chat.user_model');
 
         Schema::create('chat_messages', function (Blueprint $table) use ($sqlite, $userModel) {
-            $table->nanoid(length: 7)->primary();
-            $table->foreignNanoid('room_id', 7)->constrained('chat_rooms')->cascadeOnDelete();
+            $table->nanoid(length: (new Message)->nanoidSize())->primary();
+            $table->foreignNanoid('room_id', (new Room)->nanoidSize())->constrained('chat_rooms')->cascadeOnDelete();
             $table->foreignIdFor($userModel, 'sent_by')->constrained()->cascadeOnDelete();
-            $table->nanoid('reply_to', 7)->nullable()->index();
+            $table->nanoid('reply_to', (new Message)->nanoidSize())->nullable()->index();
             $table->text('content')->unless($sqlite)->fulltext();
             $table->json('meta')->nullable();
             $table->enum('state', array_column(MessageState::cases(), 'value'))->default(MessageState::Saved->value)
