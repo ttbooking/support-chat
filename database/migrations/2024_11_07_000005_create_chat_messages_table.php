@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +16,13 @@ return new class extends Migration
     {
         $sqlite = DB::connection()->getDriverName() === 'sqlite';
 
-        Schema::create('chat_messages', function (Blueprint $table) use ($sqlite) {
+        /** @var class-string<Model> $userModel */
+        $userModel = config('support-chat.user_model');
+
+        Schema::create('chat_messages', function (Blueprint $table) use ($sqlite, $userModel) {
             $table->nanoid(length: 7)->primary();
             $table->foreignNanoid('room_id', 7)->constrained('chat_rooms')->cascadeOnDelete();
-            // $table->foreignId('sent_by')->constrained('users')->cascadeOnDelete();
-            $table->unsignedInteger('sent_by')->index();
-            // $table->foreignNanoid('reply_to')->nullable()->constrained('chat_messages')->cascadeOnDelete();
+            $table->foreignIdFor($userModel, 'sent_by')->constrained()->cascadeOnDelete();
             $table->nanoid('reply_to', 7)->nullable()->index();
             $table->text('content')->unless($sqlite)->fulltext();
             $table->json('meta')->nullable();
@@ -33,7 +35,6 @@ return new class extends Migration
         });
 
         Schema::table('chat_messages', function (Blueprint $table) {
-            $table->foreign('sent_by')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('reply_to')->references('id')->on('chat_messages')->cascadeOnDelete();
         });
     }
