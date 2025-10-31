@@ -9,8 +9,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Arr;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\Room;
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /** @var class-string<Model&Authenticatable> $userModel */
+        /** @var class-string<User> $userModel */
         $userModel = config('support-chat.user_model');
         $users = $userModel::all()->random(3)->push(...Arr::wrap($this->user()));
 

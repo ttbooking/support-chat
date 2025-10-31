@@ -11,6 +11,7 @@ migrations:
 
 seeders:
   - Workbench\Database\Seeders\DatabaseSeeder
+  - TTBooking\SupportChat\Database\Seeders\DatabaseSeeder
 
 workbench:
   start: '/support-chat'
