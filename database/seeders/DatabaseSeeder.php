@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
     {
         /** @var class-string<User> $userModel */
         $userModel = config('support-chat.user_model');
-        $users = $userModel::all()->random(3)->push(...Arr::wrap($this->user()));
+        $users = $userModel::all()->random(3)->push(...Arr::wrap($this->user()))->unique();
 
         Room::factory()
             ->recycle($users)
