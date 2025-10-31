@@ -26,6 +26,9 @@ class WorkbenchServiceProvider extends ServiceProvider
             ], 'workbench-assets');
         }
 
-        config(['support-chat.user_model' => User::class]);
+        config([
+            'support-chat.user_model' => User::class,
+            'support-chat.seeding_credentials.email' => 'test@example.com',
+        ]);
     }
 }
