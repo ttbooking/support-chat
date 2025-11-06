@@ -25,6 +25,7 @@
         "forxer/laravel-gravatar": "^4.1",
         "larastan/larastan": "^2.7 || ^3.0",
         "laravel/pint": "^1.17",
+        "laravel/reverb": "^1.0",
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^10.5",
         "pestphp/pest": "^4.0",
@@ -75,6 +76,7 @@
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "@build",
+            "@php vendor/bin/testbench reverb:start",
             "@php vendor/bin/testbench serve --ansi"
         ]
     }

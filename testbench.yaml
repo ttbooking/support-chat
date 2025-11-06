@@ -15,6 +15,10 @@ seeders:
 
 env:
   - SC_DISK=local
+  - BROADCAST_CONNECTION=reverb
+  - REVERB_APP_KEY=3ecd1714239498ef8bae
+  - REVERB_APP_SECRET=8ca799435cc151e691c5
+  - REVERB_APP_ID=1177139
 
 workbench:
   start: '/support-chat'

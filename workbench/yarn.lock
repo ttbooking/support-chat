@@ -465,14 +465,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.13.0":
-  version: 1.13.1
-  resolution: "axios@npm:1.13.1"
+"axios@npm:^1.13.2":
+  version: 1.13.2
+  resolution: "axios@npm:1.13.2"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.4"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/de9c3c6de43d3ee1146d3afe78645f19450cac6a5d7235bef8b8e8eeb705c2e47e2d231dea99cecaec4dae1897c521118ca9413b9d474063c719c4d94c5b9adc
+  checksum: 10c0/e8a42e37e5568ae9c7a28c348db0e8cf3e43d06fcbef73f0048669edfe4f71219664da7b6cc991b0c0f01c28a48f037c515263cb79be1f1ae8ff034cd813867b
   languageName: node
   linkType: hard
 
@@ -1027,13 +1027,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"laravel-echo@npm:^2.2.4":
-  version: 2.2.4
-  resolution: "laravel-echo@npm:2.2.4"
+"laravel-echo@npm:^2.2.6":
+  version: 2.2.6
+  resolution: "laravel-echo@npm:2.2.6"
   peerDependencies:
     pusher-js: "*"
     socket.io-client: "*"
-  checksum: 10c0/aacfe0900a33033137ab38efeec0a910489d9dafdf989abfc66268bf35aabbb177116ad4437913ef524b590592896475f6b7031a78810ea1bae0312e09260bdd
+  checksum: 10c0/77bf51521b00acb5e9d24e70417b0e8cac9f685e962af765ac4eb832fd13afeab7a465b6e8d5b77929a86d0668ba070e15ceaf0b4fec8e5a28add61ba0375976
   languageName: node
   linkType: hard
 
@@ -1427,11 +1427,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    axios: "npm:^1.13.0"
-    laravel-echo: "npm:^2.2.4"
+    axios: "npm:^1.13.2"
+    laravel-echo: "npm:^2.2.6"
     laravel-vite-plugin: "npm:^2.0.1"
     pusher-js: "npm:^8.4.0"
-    vite: "npm:^7.1.12"
+    vite: "npm:^7.2.1"
   languageName: unknown
   linkType: soft
 
@@ -1616,9 +1616,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^7.1.12":
-  version: 7.1.12
-  resolution: "vite@npm:7.1.12"
+"vite@npm:^7.2.1":
+  version: 7.2.1
+  resolution: "vite@npm:7.2.1"
   dependencies:
     esbuild: "npm:^0.25.0"
     fdir: "npm:^6.5.0"
@@ -1667,7 +1667,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/cef4d4b4a84e663e09b858964af36e916892ac8540068df42a05ced637ceeae5e9ef71c72d54f3cfc1f3c254af16634230e221b6e2327c2a66d794bb49203262
+  checksum: 10c0/25fbcfc67b1598fa6152f3ed0a7355144a2ac203859ad3b6a2e466b0930ec1081c19cc6f0d83104897517ecf30c0aac3e4a50c4e5e2980d3659decb1d9e41a28
   languageName: node
   linkType: hard
 
