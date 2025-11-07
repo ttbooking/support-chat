@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="workbench" type="CompoundRunConfigurationType">
-    <toRun name="serve" type="ComposerRunConfigurationType" />
     <toRun name="reverb" type="PhpLocalRunConfigurationType" />
+    <toRun name="serve" type="PhpLocalRunConfigurationType" />
     <method v="2" />
   </configuration>
 </component>

@@ -1,6 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="reverb" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/bin/testbench" scriptParameters="reverb:start">
+  <configuration default="false" name="reverb" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/bin/testbench" scriptParameters="reverb:start --ansi">
     <CommandLine workingDirectory="$PROJECT_DIR$" />
-    <method v="2" />
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="build" run_configuration_type="PhpLocalRunConfigurationType" />
+    </method>
   </configuration>
 </component>
