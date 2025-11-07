@@ -1,4 +1,21 @@
 <component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="build" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/bin/testbench" scriptParameters="workbench:build --ansi">
+    <CommandLine workingDirectory="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+
+  <configuration default="false" name="reverb" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/bin/testbench" scriptParameters="reverb:start --ansi">
+    <CommandLine workingDirectory="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+
+  <configuration default="false" name="serve" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/bin/testbench" scriptParameters="serve --ansi">
+    <CommandLine workingDirectory="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="LaunchBrowser.Before.Run" url="http://127.0.0.1:8000" />
+    </method>
+  </configuration>
+
   <configuration default="false" name="workbench" type="CompoundRunConfigurationType">
     <toRun name="reverb" type="PhpLocalRunConfigurationType" />
     <toRun name="serve" type="PhpLocalRunConfigurationType" />
