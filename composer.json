@@ -76,7 +76,6 @@
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "@build",
-            "@php vendor/bin/testbench reverb:start",
             "@php vendor/bin/testbench serve --ansi"
         ]
     }
