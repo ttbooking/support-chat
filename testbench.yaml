@@ -16,13 +16,24 @@ seeders:
 env:
   - SC_DISK=local
   - BROADCAST_CONNECTION=reverb
+  - REVERB_SERVER_HOST=127.0.0.1
+  - REVERB_SERVER_PORT=8080
+  - REVERB_APP_ID=1177139
   - REVERB_APP_KEY=3ecd1714239498ef8bae
   - REVERB_APP_SECRET=8ca799435cc151e691c5
-  - REVERB_APP_ID=1177139
+  - REVERB_HOST="${REVERB_SERVER_HOST}"
+  - REVERB_PORT="${REVERB_SERVER_PORT}"
+  - REVERB_SCHEME=http
+
+purge:
+  directories:
+    - public/build
+    - public/vendor
 
 workbench:
   start: '/support-chat'
-  user: test@example.com
+  # user: test@example.com
+  auth: true
   install: true
   health: false
   discovers:
@@ -33,6 +44,7 @@ workbench:
     factories: true
     views: false
   build:
+    - yarn-build
     - asset-publish
     - create-sqlite-db
     - db-wipe

@@ -2,6 +2,7 @@
 
 namespace Workbench\App\Providers;
 
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\ServiceProvider;
 use Workbench\App\Models\User;
 
@@ -30,5 +31,7 @@ class WorkbenchServiceProvider extends ServiceProvider
             'support-chat.user_model' => User::class,
             'support-chat.seeding_credentials.email' => 'test@example.com',
         ]);
+
+        Broadcast::routes();
     }
 }

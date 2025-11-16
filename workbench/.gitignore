@@ -1,4 +1,13 @@
 /node_modules
+/public/build
 /storage
 .env
 .env.dusk
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
