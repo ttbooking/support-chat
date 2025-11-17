@@ -10,15 +10,13 @@ public/*.css binary
 public/*.js binary
 public/*.map binary
 
-/.github export-ignore
+/.* export-ignore
 /stubs export-ignore
 /tests export-ignore
 /workbench export-ignore
-.editorconfig export-ignore
-.gitattributes export-ignore
-.gitignore export-ignore
 phpstan.neon.dist export-ignore
 phpunit.xml.dist export-ignore
 pint.json export-ignore
 testbench.yaml export-ignore
+workbench.run.xml export-ignore
 yarn.lock export-ignore
