@@ -29,6 +29,8 @@ purge:
   directories:
     - public/build
     - public/vendor
+  files:
+    - public/favicon.ico
 
 workbench:
   start: '/support-chat'
