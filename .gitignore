@@ -1,6 +1,7 @@
 /vendor
 /node_modules
-/.idea
+/.idea/*
+!.idea/icon.svg
 /.vscode
 /.phpunit.cache
 /public/hot
