@@ -1,0 +1,68 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "php",
+            "request": "launch",
+            "name": "clear",
+            "program": "${workspaceFolder}/vendor/bin/testbench",
+            "cwd": "${workspaceFolder}",
+            "port": 0,
+            "args": ["package:purge-skeleton", "--ansi"]
+        },
+        {
+            "type": "php",
+            "request": "launch",
+            "name": "prepare",
+            "program": "${workspaceFolder}/vendor/bin/testbench",
+            "cwd": "${workspaceFolder}",
+            "port": 0,
+            "args": ["package:discover", "--ansi"]
+        },
+        {
+            "type": "php",
+            "request": "launch",
+            "name": "build",
+            "program": "${workspaceFolder}/vendor/bin/testbench",
+            "cwd": "${workspaceFolder}",
+            "port": 0,
+            "args": ["workbench:build", "--ansi"]
+        },
+        {
+            "type": "php",
+            "request": "launch",
+            "name": "reverb",
+            "program": "${workspaceFolder}/vendor/bin/testbench",
+            "cwd": "${workspaceFolder}",
+            "port": 0,
+            "args": ["reverb:start", "--debug", "--ansi"]
+        },
+        {
+            "type": "php",
+            "request": "launch",
+            "name": "serve",
+            "program": "${workspaceFolder}/vendor/bin/testbench",
+            "cwd": "${workspaceFolder}",
+            "port": 9003,
+            "args": ["serve", "--ansi"]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "browse",
+            "url": "http://127.0.0.1:8000",
+            "webRoot": "${workspaceFolder}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "refresh",
+            "configurations": ["clear", "prepare"]
+        },
+        {
+            "name": "workbench",
+            "configurations": ["reverb", "serve", "browse"],
+            "stopAll": true
+        }
+    ]
+}
