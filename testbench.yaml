@@ -1,8 +1,6 @@
 laravel: '@testbench'
 
 providers:
-  - TTBooking\Nanoid\NanoidServiceProvider
-  - TTBooking\ViteManager\ViteServiceProvider
   - TTBooking\SupportChat\SupportChatServiceProvider
   - Workbench\App\Providers\WorkbenchServiceProvider
 
