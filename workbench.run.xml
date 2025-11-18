@@ -4,6 +4,11 @@
     <method v="2" />
   </configuration>
 
+  <configuration default="false" name="queue" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/bin/testbench" scriptParameters="queue:work --ansi">
+    <CommandLine workingDirectory="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+
   <configuration default="false" name="reverb" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/vendor/bin/testbench" scriptParameters="reverb:start --debug --ansi">
     <CommandLine workingDirectory="$PROJECT_DIR$" />
     <method v="2" />
@@ -17,6 +22,7 @@
   </configuration>
 
   <configuration default="false" name="workbench" type="CompoundRunConfigurationType">
+    <toRun name="queue" type="PhpLocalRunConfigurationType" />
     <toRun name="reverb" type="PhpLocalRunConfigurationType" />
     <toRun name="serve" type="PhpLocalRunConfigurationType" />
     <method v="2" />

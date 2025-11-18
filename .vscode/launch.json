@@ -4,6 +4,18 @@
         {
             "type": "php",
             "request": "launch",
+            "name": "queue",
+            "program": "${workspaceFolder}/vendor/bin/testbench",
+            "cwd": "${workspaceFolder}",
+            "port": 0,
+            "args": ["queue:work", "--ansi"],
+            "presentation": {
+                "hidden": true
+            }
+        },
+        {
+            "type": "php",
+            "request": "launch",
             "name": "reverb",
             "program": "${workspaceFolder}/vendor/bin/testbench",
             "cwd": "${workspaceFolder}",
@@ -11,7 +23,7 @@
             "args": ["reverb:start", "--debug", "--ansi"],
             "presentation": {
                 "hidden": true
-            },
+            }
         },
         {
             "type": "php",
@@ -23,7 +35,7 @@
             "args": ["serve", "--ansi"],
             "presentation": {
                 "hidden": true
-            },
+            }
         },
         {
             "type": "chrome",
@@ -33,13 +45,13 @@
             "webRoot": "${workspaceFolder}",
             "presentation": {
                 "hidden": true
-            },
+            }
         }
     ],
     "compounds": [
         {
             "name": "workbench",
-            "configurations": ["reverb", "serve", "browse"],
+            "configurations": ["queue", "reverb", "serve", "browse"],
             "preLaunchTask": "workbench: build",
             "stopAll": true
         }
