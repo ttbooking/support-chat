@@ -11,6 +11,7 @@ parameters:
         - routes
         - src
         - tests
+        - workbench
 
     stubFiles:
         - stubs/AfterEachCall.stub
