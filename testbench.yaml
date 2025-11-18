@@ -46,6 +46,8 @@ workbench:
     factories: true
     views: false
   build:
+    # - sync-skeleton
+    # - view-cache
     - yarn-build
     - asset-publish
     - create-sqlite-db
