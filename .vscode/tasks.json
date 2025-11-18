@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "phpstan: analyse",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/phpstan analyse",
+            "problemMatcher": []
+        },
+        {
+            "label": "pint: fix",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/pint",
+            "problemMatcher": []
+        },
+        {
+            "label": "pint: inspect",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/pint --test",
+            "problemMatcher": []
+        },
+        {
+            "label": "pest: test",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/pest",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "workbench: clear",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/testbench package:purge-skeleton --ansi",
+            "problemMatcher": []
+        },
+        {
+            "label": "workbench: prepare",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/testbench package:discover --ansi",
+            "problemMatcher": []
+        },
+        {
+            "label": "workbench: refresh",
+            "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "workbench: clear",
+                "workbench: prepare"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "workbench: build",
+            "type": "shell",
+            "command": "${workspaceFolder}/vendor/bin/testbench workbench:build --ansi",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

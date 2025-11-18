@@ -1,3 +1,6 @@
 {
-    "recommendations": ["Vue.volar"]
+    "recommendations": [
+        "xdebug.php-debug",
+        "vue.volar"
+    ]
 }
