@@ -2,6 +2,7 @@
 
 @source "../../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 @source "../../../vendor/orchestra/testbench-core/laravel/resources/views/**/*.blade.php";
+@source "../../../vendor/orchestra/workbench/resources/views/**/*.blade.php";
 @source "../../storage/framework/views/*.php";
 @source "../../resources/views/**/*.blade.php";
 @source "../../resources/js/**/*.vue";

@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "dependencies": {
+        "alpinejs": "^3.15.2",
         "axios": "^1.13.2",
         "laravel-echo": "^2.2.6",
         "pusher-js": "^8.4.0",
