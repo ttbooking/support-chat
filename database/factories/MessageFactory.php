@@ -31,9 +31,13 @@ class MessageFactory extends Factory
         /** @var class-string<Model> $userModel */
         $userModel = config('support-chat.user_model');
 
+        $room = $this->getRandomRecycledModel(Room::class);
+
         return [
-            'room_id' => Room::factory(),
-            'sent_by' => $this->getRandomRecycledModel($userModel)?->getKey() ?? $userModel::all()->random()->getKey(),
+            'room_id' => $room?->getKey() ?? Room::factory(),
+            'sent_by' => $this->getRandomRecycledModel($userModel)?->getKey()
+                ?? $room?->users->random()->getKey()
+                ?? $userModel::all()->random()->getKey(),
             'content' => fake()->sentence(),
         ];
     }

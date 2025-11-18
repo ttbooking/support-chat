@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
+use TTBooking\SupportChat\Models\Message;
+use TTBooking\SupportChat\Models\Room;
 
-// Artisan::command('inspire', function () {
-//     $this->comment(Inspiring::quote());
-// })->purpose('Display an inspiring quote');
+Schedule::call(function () {
+    Message::factory()->recycle(Room::all())->create();
+})->name('shitpost')->everyTenSeconds();

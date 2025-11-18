@@ -16,6 +16,18 @@
         {
             "type": "php",
             "request": "launch",
+            "name": "schedule",
+            "program": "${workspaceFolder}/vendor/bin/testbench",
+            "cwd": "${workspaceFolder}",
+            "port": 0,
+            "args": ["schedule:work", "--ansi"],
+            "presentation": {
+                "hidden": true
+            }
+        },
+        {
+            "type": "php",
+            "request": "launch",
             "name": "reverb",
             "program": "${workspaceFolder}/vendor/bin/testbench",
             "cwd": "${workspaceFolder}",
@@ -51,7 +63,7 @@
     "compounds": [
         {
             "name": "workbench",
-            "configurations": ["queue", "reverb", "serve", "browse"],
+            "configurations": ["queue", "schedule", "reverb", "serve", "browse"],
             "preLaunchTask": "workbench: build",
             "stopAll": true
         }

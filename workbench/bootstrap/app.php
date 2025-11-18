@@ -6,6 +6,10 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 use function Orchestra\Testbench\default_skeleton_path;
 
+if (! defined('ARTISAN_BINARY')) {
+    define('ARTISAN_BINARY', 'vendor/bin/testbench');
+}
+
 return Application::configure(basePath: $APP_BASE_PATH ?? default_skeleton_path())
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
