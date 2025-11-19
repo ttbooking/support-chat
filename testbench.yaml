@@ -33,7 +33,7 @@ purge:
 workbench:
   start: '/support-chat'
   # user: test@example.com
-  auth: true
+  # auth: true
   install: true
   health: false
   discovers:
@@ -42,7 +42,7 @@ workbench:
     commands: true
     components: false
     factories: true
-    views: false
+    views: true
   build:
     # - sync-skeleton
     # - view-cache
