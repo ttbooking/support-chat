@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
-        "forxer/laravel-gravatar": "^4.1",
+        "forxer/laravel-gravatar": "^4.3",
         "larastan/larastan": "^2.7 || ^3.0",
         "laravel/pint": "^1.17",
         "laravel/reverb": "^1.0",

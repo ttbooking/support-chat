@@ -64,6 +64,6 @@ class User extends Authenticatable
      */
     protected function avatar(): Attribute
     {
-        return Attribute::get(fn () => (string) gravatar($this->email)->defaultImage('monsterid'));
+        return Attribute::get(fn () => (string) gravatar($this->email)->defaultImage('initials')->name($this->name));
     }
 }
