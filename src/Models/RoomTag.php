@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,7 @@ use TTBooking\SupportChat\Database\Factories\RoomTagFactory;
  * @property Carbon $created_at
  * @property Collection<int, Room> $rooms
  */
+#[UseFactory(RoomTagFactory::class)]
 class RoomTag extends Model
 {
     /** @use HasFactory<RoomTagFactory> */
@@ -36,11 +38,6 @@ class RoomTag extends Model
     protected $touches = ['rooms'];
 
     protected $fillable = ['name', 'type'];
-
-    protected static function newFactory(): RoomTagFactory
-    {
-        return RoomTagFactory::new();
-    }
 
     /**
      * @return BelongsToMany<Room, $this>

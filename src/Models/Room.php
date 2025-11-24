@@ -7,6 +7,7 @@ namespace TTBooking\SupportChat\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,7 +36,7 @@ use TTBooking\SupportChat\Observers\RoomObserver;
  * @property Collection<int, Message> $messages
  * @property Message|null $lastMessage
  */
-#[ScopedBy(ParticipantScope::class), ObservedBy(RoomObserver::class)]
+#[ScopedBy(ParticipantScope::class), ObservedBy(RoomObserver::class), UseFactory(RoomFactory::class)]
 class Room extends Model
 {
     /** @use HasFactory<RoomFactory> */
@@ -56,11 +57,6 @@ class Room extends Model
                 ? $room->messages()->forceDelete()
                 : $room->messages()->delete();
         });
-    }
-
-    protected static function newFactory(): RoomFactory
-    {
-        return RoomFactory::new();
     }
 
     public function nanoidSize(): int

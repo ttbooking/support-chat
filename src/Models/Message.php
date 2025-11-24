@@ -7,6 +7,7 @@ namespace TTBooking\SupportChat\Models;
 use ArrayObject;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,7 +43,7 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property-read string $attachmentPath
  * @property-read ArrayObject<string, int[]> $reactionsWithUsers
  */
-#[ObservedBy(MessageObserver::class)]
+#[ObservedBy(MessageObserver::class), UseFactory(MessageFactory::class)]
 class Message extends Model
 {
     /** @use HasFactory<MessageFactory> */
@@ -85,11 +86,6 @@ class Message extends Model
                 $message->replies()->forceDelete();
             }
         });
-    }
-
-    protected static function newFactory(): MessageFactory
-    {
-        return MessageFactory::new();
     }
 
     public function nanoidSize(): int
