@@ -7,6 +7,7 @@ namespace TTBooking\SupportChat\Console;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use TTBooking\SupportChat\Contracts\Chat;
+
 use function Laravel\Prompts\note;
 
 #[AsCommand(
