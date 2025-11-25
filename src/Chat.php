@@ -23,9 +23,17 @@ class Chat implements Contracts\Chat
         return $this;
     }
 
+    public function user(): Authenticatable
+    {
+        return $this->user;
+    }
+
     public function createRoom(?string $name = null, array $tags = []): Room
     {
-        $room = Models\Room::query()->create(compact('name', 'tags'));
+        $room = Models\Room::query()->create([
+            'name' => $name,
+            'created_by' => $this->user->getAuthIdentifier(),
+        ]);
         $room->users()->syncWithoutDetaching([$this->user->getAuthIdentifier()]);
 
         return new Room($this, $room);

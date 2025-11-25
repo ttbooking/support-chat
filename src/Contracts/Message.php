@@ -13,6 +13,8 @@ interface Message
      */
     public function room(): Room;
 
+    public function content(): string;
+
     /**
      * @return $this
      */

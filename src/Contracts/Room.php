@@ -15,6 +15,8 @@ interface Room
 {
     public function id(): string;
 
+    public function name(): string;
+
     /**
      * @return Enumerable<int, string>
      */

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat;
 
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -27,8 +30,13 @@ class SupportChatServiceProvider extends ServiceProvider
      * @var list<class-string<Command>>
      */
     protected array $commands = [
+        Console\AddRoomCommand::class,
         Console\InitCommand::class,
+        Console\ListCommand::class,
+        Console\PostCommand::class,
+        Console\RemoveRoomCommand::class,
         Console\SeedCommand::class,
+        Console\ViewCommand::class,
     ];
 
     /**
@@ -142,6 +150,12 @@ class SupportChatServiceProvider extends ServiceProvider
      */
     protected function registerServices(): void
     {
+        $this->app->when(Chat::class)->needs(Authenticatable::class)->give(static function () {
+            $credentials = (array) config('support-chat.seeding_credentials', []);
+
+            return Auth::getProvider()->retrieveByCredentials($credentials) ?? new User;
+        });
+
         $this->app->alias('support-chat', Contracts\Chat::class);
     }
 

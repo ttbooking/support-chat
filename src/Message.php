@@ -18,6 +18,11 @@ class Message implements Contracts\Message
         return $this->room;
     }
 
+    public function content(): string
+    {
+        return $this->model->content;
+    }
+
     public function edit(string $content): static
     {
         $this->model->update(compact('content'));

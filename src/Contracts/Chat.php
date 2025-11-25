@@ -18,6 +18,8 @@ interface Chat
      */
     public function as(Authenticatable $user): static;
 
+    public function user(): Authenticatable;
+
     /**
      * @param  list<string>  $tags
      *

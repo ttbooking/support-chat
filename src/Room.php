@@ -21,6 +21,11 @@ class Room implements Contracts\Room
         return $this->model->id;
     }
 
+    public function name(): string
+    {
+        return $this->model->name;
+    }
+
     /**
      * @return Collection<int, string>
      */
@@ -71,8 +76,9 @@ class Room implements Contracts\Room
     public function post(string $content, ?Contracts\Message $replyTo = null): Message
     {
         return new Message($this, $this->model->messages()->create([
-            'content' => $content,
+            'sent_by' => $this->chat->user()->getAuthIdentifier(),
             'reply_to' => $replyTo?->id(),
+            'content' => $content,
         ]));
     }
 
