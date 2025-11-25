@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Database\Factories\RoomFactory;
 use TTBooking\SupportChat\Models\Scopes\ParticipantScope;
 use TTBooking\SupportChat\Observers\RoomObserver;
+use TTBooking\SupportChat\Policies\RoomPolicy;
 
 /**
  * @property string $id
@@ -36,7 +38,12 @@ use TTBooking\SupportChat\Observers\RoomObserver;
  * @property Collection<int, Message> $messages
  * @property Message|null $lastMessage
  */
-#[ScopedBy(ParticipantScope::class), ObservedBy(RoomObserver::class), UseFactory(RoomFactory::class)]
+#[
+    ObservedBy(RoomObserver::class),
+    ScopedBy(ParticipantScope::class),
+    UseFactory(RoomFactory::class),
+    UsePolicy(RoomPolicy::class),
+]
 class Room extends Model
 {
     /** @use HasFactory<RoomFactory> */

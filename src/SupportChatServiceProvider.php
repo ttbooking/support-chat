@@ -6,7 +6,6 @@ namespace TTBooking\SupportChat;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use TTBooking\ViteManager\Facades\Vite;
@@ -40,7 +39,6 @@ class SupportChatServiceProvider extends ServiceProvider
         $this->registerRoutes();
         $this->registerAssets();
         $this->registerBladeDirectives();
-        $this->registerPolicies();
         $this->registerResources();
 
         if ($this->app->runningInConsole()) {
@@ -87,15 +85,6 @@ class SupportChatServiceProvider extends ServiceProvider
         Blade::directive('winchat', static function () {
             return '<?php echo TTBooking\SupportChat\SupportChat::windowed()->toHtml(); ?>';
         });
-    }
-
-    /**
-     * Register the Support Chat policies.
-     */
-    protected function registerPolicies(): void
-    {
-        Gate::policy(Models\Room::class, Policies\RoomPolicy::class);
-        Gate::policy(Models\Message::class, Policies\MessagePolicy::class);
     }
 
     /**

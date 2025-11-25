@@ -8,6 +8,7 @@ use ArrayObject;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +21,7 @@ use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Database\Factories\MessageFactory;
 use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Observers\MessageObserver;
+use TTBooking\SupportChat\Policies\MessagePolicy;
 
 /**
  * @property string $id
@@ -43,7 +45,11 @@ use TTBooking\SupportChat\Observers\MessageObserver;
  * @property-read string $attachmentPath
  * @property-read ArrayObject<string, int[]> $reactionsWithUsers
  */
-#[ObservedBy(MessageObserver::class), UseFactory(MessageFactory::class)]
+#[
+    ObservedBy(MessageObserver::class),
+    UseFactory(MessageFactory::class),
+    UsePolicy(MessagePolicy::class),
+]
 class Message extends Model
 {
     /** @use HasFactory<MessageFactory> */
