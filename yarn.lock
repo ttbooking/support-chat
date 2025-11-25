@@ -3710,6 +3710,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pusher-js@npm:^8.4.0":
+  version: 8.4.0
+  resolution: "pusher-js@npm:8.4.0"
+  dependencies:
+    tweetnacl: "npm:^1.0.3"
+  checksum: 10c0/9241dcaed6dc3a34599248de9c432b88a7d8653eefbb8c4f4b0ab8adee95e7bf5cb3a3c50e4beb2b3e200d11baa16a11db707f27d18bd535219e063aef745046
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -3857,6 +3866,7 @@ __metadata:
     pinia-orm: "npm:^1.10.2"
     prettier: "npm:^3.6.2"
     prettier-plugin-tailwindcss: "npm:^0.7.1"
+    pusher-js: "npm:^8.4.0"
     string-to-color: "npm:^2.2.2"
     tailwindcss: "npm:^4.1.17"
     typescript: "npm:^5.9.3"
@@ -4079,6 +4089,13 @@ __metadata:
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
+  languageName: node
+  linkType: hard
+
+"tweetnacl@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "tweetnacl@npm:1.0.3"
+  checksum: 10c0/069d9df51e8ad4a89fbe6f9806c68e06c65be3c7d42f0701cc43dba5f0d6064686b238bbff206c5addef8854e3ce00c643bff59432ea2f2c639feab0ee1a93f9
   languageName: node
   linkType: hard
 
