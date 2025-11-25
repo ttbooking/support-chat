@@ -42,6 +42,7 @@ import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import { usePreferredColorScheme } from "@vueuse/core";
+import { useTheme } from "vuetify";
 import type { Room as BaseRoom, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
@@ -57,7 +58,8 @@ const model = defineModel<string>();
 
 const props = defineProps<{ roomId?: string; height: number }>();
 
-const theme = usePreferredColorScheme();
+const theme = computed(() => (usePreferredColorScheme().value !== "dark" ? "light" : "dark"));
+useTheme().change(theme.value);
 
 const computedHeight = computed(() => props.height - 35 + "px");
 
