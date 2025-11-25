@@ -31,14 +31,17 @@ class DatabaseSeeder extends Seeder
     {
         /** @var class-string<User> $userModel */
         $userModel = config('support-chat.user_model');
-        $users = $userModel::all()->random(3)->push(...Arr::wrap($this->user()))->unique();
 
-        Room::factory()
-            ->recycle($users)
-            ->hasAttached($users, [], 'users')
-            ->has(RoomTag::factory()->count(3), 'tags')
-            ->has(Message::factory()->recycle($users)->count(10))
-            ->create();
+        for ($i = 0; $i < 10; $i++) {
+            $users = $userModel::all()->random(rand(1, 4))->push(...Arr::wrap($this->user()))->unique();
+
+            Room::factory()
+                ->recycle($users)
+                ->hasAttached($users, [], 'users')
+                ->has(RoomTag::factory()->count(3), 'tags')
+                ->has(Message::factory()->recycle($users)->count(10))
+                ->create();
+        }
     }
 
     protected function user(): ?Authenticatable
