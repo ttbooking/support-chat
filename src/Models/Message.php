@@ -169,7 +169,7 @@ class Message extends Model
     {
         return Attribute::get(
             fn () => new ArrayObject($this->reactions->mapToGroups(
-                static fn (Reaction $reaction) => [$reaction->emoji => $reaction->user_id]
+                static fn (Reaction $reaction) => [$reaction->emoji => (string) $reaction->user_id]
             )->toArray())
         );
     }
