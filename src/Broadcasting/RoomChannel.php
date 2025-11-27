@@ -24,7 +24,8 @@ class RoomChannel
     public function join(Model $user, Room $room): UserResource|false
     {
         if ($room->users()->whereKey($user->getKey())->exists()) {
-            return new UserResource($user);
+            /** @var UserResource */
+            return $user->toResource(UserResource::class);
         }
 
         return false;

@@ -6,7 +6,7 @@ namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use TTBooking\SupportChat\Http\Resources\UserResource;
 
 class UserController
@@ -14,18 +14,17 @@ class UserController
     /**
      * Display a listing of the users.
      */
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(Request $request): ResourceCollection
     {
         /** @var class-string<Model> $model */
         $model = config('support-chat.user_model');
 
-        return UserResource::collection(
-            $model::query()
-                ->when($search = $request->query('search'))
-                ->whereLike('name', '%'.$search.'%')
-                ->orderBy('name')->orderBy('id')
-                ->cursorPaginate()
-        );
+        return $model::query()
+            ->when($search = $request->query('search'))
+            ->whereLike('name', '%'.$search.'%')
+            ->orderBy('name')->orderBy('id')
+            ->cursorPaginate()
+            ->toResourceCollection(UserResource::class);
     }
 
     /**
@@ -36,6 +35,6 @@ class UserController
         /** @var class-string<Model> $model */
         $model = config('support-chat.user_model');
 
-        return new UserResource($model::query()->findOrFail($user));
+        return $model::query()->findOrFail($user)->toResource(UserResource::class);
     }
 }

@@ -22,9 +22,9 @@ class RoomResource extends JsonResource
     {
         return [
             'roomId' => $this->getKey(),
-            'creator' => new UserResource($this->creator),
+            'creator' => $this->creator->toResource(UserResource::class),
             'roomName' => $this->name,
-            'users' => UserResource::collection($this->users),
+            'users' => $this->users->toResourceCollection(UserResource::class),
             'tags' => $this->tags,
             'index' => $this->updated_at,
             'lastMessage' => new MessageResource($this->whenNotNull($this->lastMessage)),
