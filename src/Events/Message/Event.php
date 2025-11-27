@@ -9,7 +9,6 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
-use TTBooking\SupportChat\Http\Resources\MessageResource;
 use TTBooking\SupportChat\Models\Message;
 
 abstract class Event implements ShouldBroadcast
@@ -48,7 +47,7 @@ abstract class Event implements ShouldBroadcast
      */
     public function broadcastWith(): array
     {
-        return (new MessageResource($this->message))->resolve();
+        return $this->message->toResource()->resolve();
     }
 
     /**

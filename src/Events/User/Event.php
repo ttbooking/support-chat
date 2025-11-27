@@ -10,7 +10,6 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
-use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Room;
 
 abstract class Event implements ShouldBroadcast
@@ -49,7 +48,7 @@ abstract class Event implements ShouldBroadcast
      */
     public function broadcastWith(): array
     {
-        return (new RoomResource($this->room))->resolve();
+        return $this->room->toResource()->resolve();
     }
 
     /**
