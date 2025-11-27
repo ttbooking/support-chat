@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
@@ -38,6 +39,7 @@ use TTBooking\SupportChat\SupportChat;
  * @property User $creator
  * @property Collection<int, User> $users
  * @property Collection<int, RoomTag> $tags
+ * @property Collection<int, Model> $subjects
  * @property Collection<int, Message> $messages
  * @property Message|null $lastMessage
  */
@@ -110,7 +112,15 @@ class Room extends Model
      */
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(RoomTag::class, 'chat_room_tag', relatedPivotKey: 'tag_name')->withTimestamps();
+        return $this->belongsToMany(RoomTag::class, 'chat_room_tag', relatedPivotKey: 'tag_id')->withTimestamps();
+    }
+
+    /**
+     * @return HasManyThrough<Model, RoomTag, $this>
+     */
+    public function subjects(): HasManyThrough
+    {
+        return $this->through('tags')->has('subject');
     }
 
     /**

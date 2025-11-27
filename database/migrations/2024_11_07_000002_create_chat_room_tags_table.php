@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chat_room_tags', function (Blueprint $table) {
-            $table->string('name', 32)->primary();
-            $table->string('type', 32)->nullable()->index();
+            $table->id();
+            $table->string('name', 32)->index();
+            $table->string('type', 32)->default('')->index();
             $table->timestamp('created_at')->useCurrent();
+            $table->unique(['name', 'type']);
         });
     }
 

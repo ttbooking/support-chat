@@ -14,11 +14,10 @@ return new class extends Migration
     {
         Schema::create('chat_room_tag', function (Blueprint $table) {
             $table->foreignNanoid('room_id', (new Room)->nanoidSize())->constrained('chat_rooms')->cascadeOnDelete();
-            $table->string('tag_name', 32);
+            $table->foreignId('tag_id')->constrained('chat_room_tags')->cascadeOnDelete();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
-            $table->primary(['room_id', 'tag_name']);
-            $table->foreign('tag_name')->references('name')->on('chat_room_tags')->cascadeOnDelete();
+            $table->primary(['room_id', 'tag_id']);
         });
     }
 
