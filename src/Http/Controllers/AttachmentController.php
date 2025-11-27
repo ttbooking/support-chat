@@ -27,7 +27,8 @@ class AttachmentController extends Controller
 
         broadcast(new Uploaded($attachment))->toOthers();
 
-        return new AttachmentResource($attachment);
+        /** @var AttachmentResource */
+        return $attachment->toResource();
     }
 
     /**

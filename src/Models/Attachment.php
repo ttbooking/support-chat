@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models;
 
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
+use TTBooking\SupportChat\Http\Resources\AttachmentResource;
 
 /**
  * @property int $id
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Storage;
  * @property Message $message
  * @property-read string $attachmentPath
  */
+#[UseResource(AttachmentResource::class)]
 class Attachment extends Model
 {
     protected $table = 'chat_attachments';

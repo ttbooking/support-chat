@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +21,7 @@ use Illuminate\Foundation\Auth\User;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Database\Factories\MessageFactory;
 use TTBooking\SupportChat\Enums\MessageState;
+use TTBooking\SupportChat\Http\Resources\MessageResource;
 use TTBooking\SupportChat\Observers\MessageObserver;
 use TTBooking\SupportChat\Policies\MessagePolicy;
 
@@ -49,6 +51,7 @@ use TTBooking\SupportChat\Policies\MessagePolicy;
     ObservedBy(MessageObserver::class),
     UseFactory(MessageFactory::class),
     UsePolicy(MessagePolicy::class),
+    UseResource(MessageResource::class),
 ]
 class Message extends Model
 {

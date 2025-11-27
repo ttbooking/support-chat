@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Database\Factories\RoomFactory;
+use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Scopes\ParticipantScope;
 use TTBooking\SupportChat\Observers\RoomObserver;
 use TTBooking\SupportChat\Policies\RoomPolicy;
@@ -43,6 +45,7 @@ use TTBooking\SupportChat\Policies\RoomPolicy;
     ScopedBy(ParticipantScope::class),
     UseFactory(RoomFactory::class),
     UsePolicy(RoomPolicy::class),
+    UseResource(RoomResource::class),
 ]
 class Room extends Model
 {

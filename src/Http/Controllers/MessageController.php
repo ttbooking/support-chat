@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -27,9 +27,9 @@ class MessageController extends Controller
     /**
      * Display a listing of the messages in the room.
      */
-    public function index(Room $room): AnonymousResourceCollection
+    public function index(Room $room): ResourceCollection
     {
-        return MessageResource::collection($room->messages);
+        return $room->messages->toResourceCollection();
     }
 
     /**
@@ -52,7 +52,7 @@ class MessageController extends Controller
             return $message;
         });
 
-        return new MessageResource($message->load('files'));
+        return $message->load('files')->toResource();
     }
 
     /**
@@ -60,7 +60,8 @@ class MessageController extends Controller
      */
     public function show(Message $message): MessageResource
     {
-        return new MessageResource($message);
+        /** @var MessageResource */
+        return $message->toResource();
     }
 
     /**
@@ -70,7 +71,8 @@ class MessageController extends Controller
     {
         $message->update($request->validated());
 
-        return new MessageResource($message);
+        /** @var MessageResource */
+        return $message->toResource();
     }
 
     /**

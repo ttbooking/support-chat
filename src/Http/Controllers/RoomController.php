@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use TTBooking\SupportChat\Http\Requests\StoreRoomRequest;
@@ -25,9 +25,9 @@ class RoomController extends Controller
     /**
      * Display a listing of the rooms.
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): ResourceCollection
     {
-        return RoomResource::collection(Room::all());
+        return Room::all()->toResourceCollection();
     }
 
     /**
@@ -39,7 +39,7 @@ class RoomController extends Controller
         $room->users()->sync($request->validated('users.*._id'));
         $room->tags()->sync($request->validated('tags.*.name'));
 
-        return new RoomResource($room);
+        return $room->toResource();
     }
 
     /**
@@ -47,7 +47,8 @@ class RoomController extends Controller
      */
     public function show(Room $room): RoomResource
     {
-        return new RoomResource($room);
+        /** @var RoomResource */
+        return $room->toResource();
     }
 
     /**
@@ -59,7 +60,8 @@ class RoomController extends Controller
         $room->users()->sync($request->validated('users.*._id'));
         $room->tags()->sync($request->validated('tags.*.name'));
 
-        return new RoomResource($room);
+        /** @var RoomResource */
+        return $room->toResource();
     }
 
     /**
