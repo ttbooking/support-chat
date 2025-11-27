@@ -7,6 +7,7 @@ namespace TTBooking\SupportChat\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @mixin Room
@@ -20,11 +21,13 @@ class RoomResource extends JsonResource
      */
     public function toArray(?Request $request = null): array
     {
+        $resourceClass = SupportChat::userResource();
+
         return [
             'roomId' => $this->getKey(),
-            'creator' => $this->creator->toResource(UserResource::class),
+            'creator' => $this->creator->toResource($resourceClass),
             'roomName' => $this->name,
-            'users' => $this->users->toResourceCollection(UserResource::class),
+            'users' => $this->users->toResourceCollection($resourceClass),
             'tags' => $this->tags,
             'index' => $this->updated_at,
             'lastMessage' => new MessageResource($this->whenNotNull($this->lastMessage)),

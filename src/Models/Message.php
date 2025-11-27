@@ -24,6 +24,7 @@ use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Http\Resources\MessageResource;
 use TTBooking\SupportChat\Observers\MessageObserver;
 use TTBooking\SupportChat\Policies\MessagePolicy;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @property string $id
@@ -99,6 +100,7 @@ class Message extends Model
 
     public function nanoidSize(): int
     {
+        /** @var int */
         return config('support-chat.nanoid_size_messages') ?: $this->nanoidSize ?? 21;
     }
 
@@ -115,14 +117,11 @@ class Message extends Model
      */
     public function sender(): BelongsTo
     {
-        /** @var class-string<User> $model */
-        $model = config('support-chat.user_model');
-
-        return $this->belongsTo($model, 'sent_by');
+        return $this->belongsTo(SupportChat::userModel(), 'sent_by');
     }
 
     /**
-     * @return BelongsTo<self, $this>
+     * @return BelongsTo<static, $this>
      */
     public function origin(): BelongsTo
     {
@@ -130,7 +129,7 @@ class Message extends Model
     }
 
     /**
-     * @return HasMany<self, $this>
+     * @return HasMany<static, $this>
      */
     public function replies(): HasMany
     {

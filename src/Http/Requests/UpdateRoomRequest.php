@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Requests;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use TTBooking\SupportChat\Models\Room;
 use TTBooking\SupportChat\Models\RoomTag;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @property-read Room $room
@@ -19,7 +19,7 @@ class UpdateRoomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->room);
+        return $this->user()?->can('update', $this->room) ?? false;
     }
 
     /**
@@ -39,8 +39,7 @@ class UpdateRoomRequest extends FormRequest
      */
     public function rules(): array
     {
-        /** @var class-string<Model> $model */
-        $model = config('support-chat.user_model');
+        $model = SupportChat::userModel();
 
         return [
             'id' => 'sometimes|nanoid|size:'.(new Room)->nanoidSize(),

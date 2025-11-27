@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @extends Factory<Message>
@@ -28,8 +28,7 @@ class MessageFactory extends Factory
      */
     public function definition(): array
     {
-        /** @var class-string<Model> $userModel */
-        $userModel = config('support-chat.user_model');
+        $userModel = SupportChat::userModel();
 
         $room = $this->getRandomRecycledModel(Room::class);
 

@@ -26,6 +26,7 @@ use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Scopes\ParticipantScope;
 use TTBooking\SupportChat\Observers\RoomObserver;
 use TTBooking\SupportChat\Policies\RoomPolicy;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @property string $id
@@ -71,6 +72,7 @@ class Room extends Model
 
     public function nanoidSize(): int
     {
+        /** @var int */
         return config('support-chat.nanoid_size_rooms') ?: $this->nanoidSize ?? 21;
     }
 
@@ -89,10 +91,7 @@ class Room extends Model
      */
     public function creator(): BelongsTo
     {
-        /** @var class-string<User> $model */
-        $model = config('support-chat.user_model');
-
-        return $this->belongsTo($model, 'created_by');
+        return $this->belongsTo(SupportChat::userModel(), 'created_by');
     }
 
     /**
@@ -100,10 +99,7 @@ class Room extends Model
      */
     public function users(): BelongsToMany
     {
-        /** @var class-string<User> $model */
-        $model = config('support-chat.user_model');
-
-        return $this->belongsToMany($model, 'chat_participants')
+        return $this->belongsToMany(SupportChat::userModel(), 'chat_participants')
             ->using(Participant::class)
             ->as('participant')
             ->withTimestamps();

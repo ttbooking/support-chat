@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use TTBooking\SupportChat\Http\Resources\UserResource;
+use TTBooking\SupportChat\SupportChat;
 
 class UserController
 {
@@ -16,25 +16,19 @@ class UserController
      */
     public function index(Request $request): ResourceCollection
     {
-        /** @var class-string<Model> $model */
-        $model = config('support-chat.user_model');
-
-        return $model::query()
+        return SupportChat::userModel()::query()
             ->when($search = $request->query('search'))
             ->whereLike('name', '%'.$search.'%')
             ->orderBy('name')->orderBy('id')
             ->cursorPaginate()
-            ->toResourceCollection(UserResource::class);
+            ->toResourceCollection(SupportChat::userResource());
     }
 
     /**
      * Display the specified user.
      */
-    public function show(int $user): UserResource
+    public function show(int $user): JsonResource
     {
-        /** @var class-string<Model> $model */
-        $model = config('support-chat.user_model');
-
-        return $model::query()->findOrFail($user)->toResource(UserResource::class);
+        return SupportChat::userModel()::query()->findOrFail($user)->toResource(SupportChat::userResource());
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\SupportChat;
 
 return new class extends Migration
 {
@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        /** @var class-string<Model> $userModel */
-        $userModel = config('support-chat.user_model');
-
-        Schema::create('chat_participants', function (Blueprint $table) use ($userModel) {
+        Schema::create('chat_participants', function (Blueprint $table) {
             $table->foreignNanoid('room_id', (new Room)->nanoidSize())->constrained('chat_rooms')->cascadeOnDelete();
-            $table->foreignIdFor($userModel, 'user_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(SupportChat::userModel(), 'user_id')->constrained()->cascadeOnDelete();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->primary(['room_id', 'user_id']);

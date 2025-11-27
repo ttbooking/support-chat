@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use TTBooking\SupportChat\Observers\ReactionObserver;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @property int $id
@@ -52,10 +53,7 @@ class Reaction extends Model
      */
     public function user(): BelongsTo
     {
-        /** @var class-string<User> $model */
-        $model = config('support-chat.user_model');
-
-        return $this->belongsTo($model);
+        return $this->belongsTo(SupportChat::userModel());
     }
 
     public function resolveRouteBindingQuery($query, $value, $field = null): Builder

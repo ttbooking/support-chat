@@ -4,13 +4,33 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat;
 
-use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\HtmlString;
+use TTBooking\SupportChat\Http\Resources\UserResource;
 use TTBooking\ViteManager\Facades\Vite;
 
 class SupportChat
 {
-    public static function standalone(?string $roomId = null): Htmlable
+    /**
+     * @return class-string<User>
+     */
+    public static function userModel(): string
+    {
+        /** @var class-string<User> */
+        return config('support-chat.user_model', 'App\\Models\\User');
+    }
+
+    /**
+     * @return class-string<JsonResource>
+     */
+    public static function userResource(): string
+    {
+        /** @var class-string<JsonResource> */
+        return config('support-chat.user_resource', UserResource::class);
+    }
+
+    public static function standalone(?string $roomId = null): HtmlString
     {
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),
@@ -24,7 +44,7 @@ class SupportChat
         );
     }
 
-    public static function windowed(): Htmlable
+    public static function windowed(): HtmlString
     {
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),

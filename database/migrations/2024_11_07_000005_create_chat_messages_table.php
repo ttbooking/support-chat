@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -8,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\SupportChat;
 
 return new class extends Migration
 {
@@ -18,13 +18,10 @@ return new class extends Migration
     {
         $sqlite = DB::connection()->getDriverName() === 'sqlite';
 
-        /** @var class-string<Model> $userModel */
-        $userModel = config('support-chat.user_model');
-
-        Schema::create('chat_messages', function (Blueprint $table) use ($sqlite, $userModel) {
+        Schema::create('chat_messages', function (Blueprint $table) use ($sqlite) {
             $table->nanoid(length: (new Message)->nanoidSize())->primary();
             $table->foreignNanoid('room_id', (new Room)->nanoidSize())->constrained('chat_rooms')->cascadeOnDelete();
-            $table->foreignIdFor($userModel, 'sent_by')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(SupportChat::userModel(), 'sent_by')->constrained()->cascadeOnDelete();
             $table->nanoid('reply_to', (new Message)->nanoidSize())->nullable()->index();
             $table->text('content')->unless($sqlite)->fulltext();
             $table->json('meta')->nullable();

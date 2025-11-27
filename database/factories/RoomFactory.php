@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @extends Factory<Room>
@@ -28,8 +28,7 @@ class RoomFactory extends Factory
      */
     public function definition(): array
     {
-        /** @var class-string<Model> $userModel */
-        $userModel = config('support-chat.user_model');
+        $userModel = SupportChat::userModel();
 
         return [
             'name' => Str::ucfirst(fake()->words(3, true)),

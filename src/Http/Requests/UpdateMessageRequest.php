@@ -17,7 +17,7 @@ class UpdateMessageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', $this->message);
+        return $this->user()?->can('update', $this->message) ?? false;
     }
 
     /**

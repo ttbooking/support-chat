@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use TTBooking\SupportChat\Enums\MessageState;
 use TTBooking\SupportChat\Models\Message;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @mixin Message
@@ -21,9 +22,7 @@ class MessageResource extends JsonResource
      */
     public function toArray(?Request $request = null): array
     {
-        /** @var class-string<JsonResource> $resource */
-        $resource = config('support-chat.user_resource');
-        $sender = $this->sender->toResource($resource)->resolve($request);
+        $sender = $this->sender->toResource(SupportChat::userResource())->resolve($request);
 
         return [
             '_id' => $this->getKey(),

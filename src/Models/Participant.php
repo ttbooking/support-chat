@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Foundation\Auth\User;
 use TTBooking\SupportChat\Observers\ParticipantObserver;
+use TTBooking\SupportChat\SupportChat;
 
 /**
  * @property string $room_id
@@ -40,9 +41,6 @@ class Participant extends Pivot
      */
     public function user(): BelongsTo
     {
-        /** @var class-string<User> $model */
-        $model = config('support-chat.user_model');
-
-        return $this->belongsTo($model);
+        return $this->belongsTo(SupportChat::userModel());
     }
 }

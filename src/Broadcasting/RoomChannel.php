@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Broadcasting;
 
 use Illuminate\Database\Eloquent\Model;
-use TTBooking\SupportChat\Http\Resources\UserResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\SupportChat;
 
 class RoomChannel
 {
@@ -21,11 +22,10 @@ class RoomChannel
     /**
      * Authenticate the user's access to the channel.
      */
-    public function join(Model $user, Room $room): UserResource|false
+    public function join(Model $user, Room $room): JsonResource|false
     {
         if ($room->users()->whereKey($user->getKey())->exists()) {
-            /** @var UserResource */
-            return $user->toResource(UserResource::class);
+            return $user->toResource(SupportChat::userResource());
         }
 
         return false;
