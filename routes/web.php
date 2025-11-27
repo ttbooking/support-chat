@@ -11,7 +11,7 @@ use TTBooking\SupportChat\Http\Controllers\UserController;
 Route::prefix('api')->group(function () {
     Route::apiResource('users', '\\'.UserController::class, ['only' => ['index', 'show']]);
 
-    Route::apiResource('tags', '\\'.RoomTagController::class, ['only' => ['index']]);
+    Route::apiResource('tags', '\\'.RoomTagController::class, ['only' => ['index', 'destroy']]);
 
     Route::apiResources([
         'rooms' => '\\'.RoomController::class,
