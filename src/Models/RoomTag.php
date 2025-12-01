@@ -6,8 +6,10 @@ namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\ClassMorphViolationException;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -70,6 +72,14 @@ class RoomTag extends Model
                 ];
             }
         );
+    }
+
+    #[Scope]
+    protected function whereLink(Builder $query, string $link): void
+    {
+        [$type, $name] = str_contains($link, ':') ? explode(':', $link, 2) : ['', $link];
+
+        $query->where('type', $type)->where('name', $name);
     }
 
     /**
