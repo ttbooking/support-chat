@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Enumerable;
 use TTBooking\SupportChat\Exceptions\MessageNotFoundException;
 
@@ -16,6 +17,11 @@ interface Room
     public function id(): string;
 
     public function name(): string;
+
+    /**
+     * @return $this
+     */
+    public function tag(string|Model $tag, string|Model ...$tags): static;
 
     /**
      * @return Enumerable<int, string>

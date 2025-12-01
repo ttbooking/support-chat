@@ -36,7 +36,7 @@ class Chat implements Contracts\Chat
         ]);
         $room->users()->syncWithoutDetaching([$this->user->getAuthIdentifier()]);
 
-        return new Room($this, $room);
+        return (new Room($this, $room))->when($tags)->tag(...$tags);
     }
 
     public function room(string $id): Room

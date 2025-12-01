@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Contracts;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Enumerable;
 use TTBooking\SupportChat\Exceptions\RoomNotFoundException;
 
@@ -21,7 +22,7 @@ interface Chat
     public function user(): Authenticatable;
 
     /**
-     * @param  list<string>  $tags
+     * @param  list<string|Model>  $tags
      *
      * @phpstan-return TRoom
      */

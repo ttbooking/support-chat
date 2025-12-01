@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Traits\Conditionable;
 use TTBooking\SupportChat\Exceptions\MessageNotFoundException;
 
 /**
@@ -14,6 +16,8 @@ use TTBooking\SupportChat\Exceptions\MessageNotFoundException;
  */
 class Room implements Contracts\Room
 {
+    use Conditionable;
+
     public function __construct(protected Chat $chat, protected Models\Room $model) {}
 
     public function id(): string
@@ -24,6 +28,15 @@ class Room implements Contracts\Room
     public function name(): string
     {
         return $this->model->name;
+    }
+
+    public function tag(string|Model $tag, string|Model ...$tags): static
+    {
+        foreach ([$tag, ...$tags] as $link) {
+            $this->model->tags()->createOrFirst(compact('link'));
+        }
+
+        return $this;
     }
 
     /**

@@ -42,7 +42,7 @@ class RoomTag extends Model
     /** @var list<string> */
     protected $touches = ['rooms'];
 
-    protected $fillable = ['name', 'type'];
+    protected $fillable = ['name', 'type', 'link'];
 
     /**
      * @return Attribute<string, string|Model>

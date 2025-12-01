@@ -19,7 +19,9 @@ class AddRoomCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'chat:add-room {name? : Room name}';
+    protected $signature = 'chat:add-room
+        {name? : Room name}
+        {--tag=* : Attached tags}';
 
     /**
      * The console command description.
@@ -33,7 +35,7 @@ class AddRoomCommand extends Command
      */
     public function handle(Chat $chat): void
     {
-        $room = $chat->createRoom($this->argument('name'));
+        $room = $chat->createRoom($this->argument('name'), $this->option('tag'));
 
         $this->components->info(sprintf('Room <info>%s</info> successfully added.', $room->id()));
     }
