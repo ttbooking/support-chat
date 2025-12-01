@@ -22,11 +22,11 @@ interface Chat
     public function user(): Authenticatable;
 
     /**
-     * @param  list<string|Model>  $tags
+     * @param  string|Model|list<string|Model>  $tags
      *
      * @phpstan-return TRoom
      */
-    public function createRoom(?string $name = null, array $tags = []): Room;
+    public function createRoom(?string $name = null, string|Model|array $tags = []): Room;
 
     /**
      * @phpstan-return TRoom

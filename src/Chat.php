@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use TTBooking\SupportChat\Exceptions\RoomNotFoundException;
@@ -28,7 +29,7 @@ class Chat implements Contracts\Chat
         return $this->user;
     }
 
-    public function createRoom(?string $name = null, array $tags = []): Room
+    public function createRoom(?string $name = null, string|Model|array $tags = []): Room
     {
         $room = Models\Room::query()->create([
             'name' => $name,
@@ -36,7 +37,7 @@ class Chat implements Contracts\Chat
         ]);
         $room->users()->syncWithoutDetaching([$this->user->getAuthIdentifier()]);
 
-        return (new Room($this, $room))->when($tags)->tag(...$tags);
+        return (new Room($this, $room))->when($tags = (array) $tags)->tag(...$tags);
     }
 
     public function room(string $id): Room
