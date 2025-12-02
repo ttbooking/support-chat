@@ -10,10 +10,9 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use TTBooking\SupportChat\Database\Factories\RoomTagFactory;
 use TTBooking\SupportChat\Http\Resources\RoomTagResource;
@@ -21,12 +20,13 @@ use TTBooking\SupportChat\Support\Tag;
 
 /**
  * @property int $id
+ * @property string $room_id
  * @property string $name
  * @property string $type
  * @property Carbon $created_at
  * @property Tag $tag
  * @property Model|null $subject
- * @property Collection<int, Room> $rooms
+ * @property Room $room
  *
  * @method static Builder whereTag(string|Model|Tag $tag)
  */
@@ -74,10 +74,10 @@ class RoomTag extends Model
     }
 
     /**
-     * @return BelongsToMany<Room, $this>
+     * @return BelongsTo<Room, $this>
      */
-    public function rooms(): BelongsToMany
+    public function room(): BelongsTo
     {
-        return $this->belongsToMany(Room::class, 'chat_room_tag', foreignPivotKey: 'tag_id')->withTimestamps();
+        return $this->belongsTo(Room::class);
     }
 }

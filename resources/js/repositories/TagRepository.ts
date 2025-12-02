@@ -1,8 +1,8 @@
 import { AxiosRepository } from "@pinia-orm/axios";
-import Tag from "@/models/Tag";
+import RoomTag from "@/models/RoomTag";
 
-export default class TagRepository extends AxiosRepository<Tag> {
-    use = Tag;
+export default class TagRepository extends AxiosRepository<RoomTag> {
+    use = RoomTag;
 
     static cursor = null;
 

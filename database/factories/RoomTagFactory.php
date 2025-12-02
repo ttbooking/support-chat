@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use TTBooking\SupportChat\Models\Room;
 use TTBooking\SupportChat\Models\RoomTag;
 
 /**
@@ -27,6 +28,7 @@ class RoomTagFactory extends Factory
     public function definition(): array
     {
         return [
+            'room_id' => Room::factory(),
             'name' => fake()->words(2, true),
         ];
     }

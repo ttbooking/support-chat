@@ -108,11 +108,11 @@ class Room extends Model
     }
 
     /**
-     * @return BelongsToMany<RoomTag, $this>
+     * @return HasMany<RoomTag, $this>
      */
-    public function tags(): BelongsToMany
+    public function tags(): HasMany
     {
-        return $this->belongsToMany(RoomTag::class, 'chat_room_tag', relatedPivotKey: 'tag_id')->withTimestamps();
+        return $this->hasMany(RoomTag::class);
     }
 
     /**

@@ -24,9 +24,9 @@ import stc from "string-to-color";
 import { useRepo } from "pinia-orm";
 import { useSortBy } from "pinia-orm/helpers";
 import TagRepository from "@/repositories/TagRepository";
-import type { Tag } from "@/types";
+import type { RoomTag } from "@/types";
 
-const pickedTags = defineModel<Tag[]>({ default: [] });
+const pickedTags = defineModel<RoomTag[]>({ default: [] });
 
 const search = ref<string>("");
 
@@ -35,7 +35,7 @@ const tags = computed(() =>
     useSortBy(tagRepo.orderBy("link").get(), (tag) => !pickedTags.value.map((tag) => tag.link).includes(tag.link)),
 );
 
-const tagColor = (tag: Tag) => stc(tag.type || tag.name.replace(/ .*/, ""));
+const tagColor = (tag: RoomTag) => stc(tag.type || tag.name.replace(/ .*/, ""));
 
 watchEffect(async () => {
     await tagRepo.fetch(search.value);

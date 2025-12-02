@@ -12,6 +12,7 @@ use TTBooking\SupportChat\Http\Requests\StoreRoomRequest;
 use TTBooking\SupportChat\Http\Requests\UpdateRoomRequest;
 use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\Support\Tag;
 
 class RoomController extends Controller
 {
@@ -37,7 +38,10 @@ class RoomController extends Controller
     {
         $room = Room::query()->create($request->safe()->except('users', 'tags') + ['created_by' => auth()->id()]);
         $room->users()->sync($request->validated('users.*._id'));
-        $room->tags()->sync($request->validated('tags.*.name'));
+
+        foreach ($request->validated('tags.*') as $tag) {
+            $room->tags()->createOrFirst(Tag::from($tag)->toArray());
+        }
 
         return $room->toResource();
     }
@@ -58,7 +62,10 @@ class RoomController extends Controller
     {
         $room->update($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));
-        $room->tags()->sync($request->validated('tags.*.id'));
+
+        foreach ($request->validated('tags.*') as $tag) {
+            $room->tags()->createOrFirst(Tag::from($tag)->toArray());
+        }
 
         /** @var RoomResource */
         return $room->toResource();

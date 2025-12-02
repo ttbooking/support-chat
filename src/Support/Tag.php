@@ -8,9 +8,10 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\ClassMorphViolationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use JsonSerializable;
 use Stringable;
 
-final readonly class Tag implements Arrayable, Stringable
+final readonly class Tag implements Arrayable, JsonSerializable, Stringable
 {
     public function __construct(public string $name, public string $type = '') {}
 
@@ -57,8 +58,13 @@ final readonly class Tag implements Arrayable, Stringable
         ];
     }
 
-    public function __toString(): string
+    public function jsonSerialize(): string
     {
         return ltrim($this->type.':'.$this->name, ':');
+    }
+
+    public function __toString(): string
+    {
+        return $this->jsonSerialize();
     }
 }

@@ -2,7 +2,6 @@ import { Model } from "pinia-orm";
 import { Uid, Attr, Num, Str, BelongsTo, BelongsToMany, HasMany, HasManyBy } from "pinia-orm/decorators";
 import User from "./User";
 import UserStatus from "./UserStatus";
-import Tag from "./Tag";
 import RoomTag from "./RoomTag";
 import Message from "./Message";
 import { useRoomChannel } from "@/composables";
@@ -26,7 +25,7 @@ export default class Room extends Model implements BaseRoom {
 
     @BelongsTo(() => User, "creatorId") declare creator: User;
     @BelongsToMany(() => User, { as: "status", model: () => UserStatus }, "roomId", "userId") declare users: User[];
-    @BelongsToMany(() => Tag, () => RoomTag, "roomId", "tagId") declare tags: Tag[];
+    @HasMany(() => RoomTag, "roomId", "roomId") declare tags: RoomTag[];
     //@HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
     @HasMany(() => Message, "roomId") declare messages: Message[];
 

@@ -1,7 +1,6 @@
 import type { Message, MessageFile, Room as BaseRoom, RoomUser } from "vue-advanced-chat";
 
-export interface Tag {
-    id: number;
+export interface RoomTag {
     name: string;
     type: string;
     link: string;
@@ -9,7 +8,7 @@ export interface Tag {
 
 export interface Room extends BaseRoom {
     creator: RoomUser;
-    tags: Tag[];
+    tags: RoomTag[];
 }
 
 export interface File {
