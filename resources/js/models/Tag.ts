@@ -1,5 +1,5 @@
 import { Model } from "pinia-orm";
-import { Attr, Str, BelongsToMany } from "pinia-orm/decorators";
+import { Uid, Attr, Str, BelongsToMany } from "pinia-orm/decorators";
 import Room from "./Room";
 import RoomTag from "./RoomTag";
 import type { Tag as BaseTag } from "@/types";
@@ -9,7 +9,7 @@ export default class Tag extends Model implements BaseTag {
 
     static primaryKey = "id";
 
-    @Attr() declare id: number;
+    @Uid() declare id: number;
     @Attr() declare name: string;
     @Str("") declare type: string;
     @Str("") declare link: string;
