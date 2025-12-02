@@ -35,7 +35,7 @@ const tags = computed(() =>
     useSortBy(tagRepo.orderBy("link").get(), (tag) => !pickedTags.value.map((tag) => tag.link).includes(tag.link)),
 );
 
-const tagColor = (tag: Tag) => stc(tag.type ?? tag.name.replace(/ .*/, ""));
+const tagColor = (tag: Tag) => stc(tag.type || tag.name.replace(/ .*/, ""));
 
 watchEffect(async () => {
     await tagRepo.fetch(search.value);
