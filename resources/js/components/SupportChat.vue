@@ -90,7 +90,6 @@ const room = computed<BaseRoom>({
         return roomRepo
             .with("creator")
             .with("users")
-            .with("tags")
             .find(currentRoomId.value!)
             ?.$refresh()
             .$toJson() as BaseRoom;

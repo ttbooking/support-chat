@@ -2,7 +2,6 @@ import { Model } from "pinia-orm";
 import { Uid, Attr, Num, Str, BelongsTo, BelongsToMany, HasMany, HasManyBy } from "pinia-orm/decorators";
 import User from "./User";
 import UserStatus from "./UserStatus";
-import RoomTag from "./RoomTag";
 import Message from "./Message";
 import { useRoomChannel } from "@/composables";
 import type { LastMessage, StringNumber } from "vue-advanced-chat";
@@ -21,11 +20,11 @@ export default class Room extends Model implements BaseRoom {
     @Attr(null) declare index?: StringNumber | Date;
     @Attr(null) declare lastMessage?: LastMessage;
     //@Attr(null) declare typingUsers?: string[];
+    @Attr([]) declare tags: string[];
     declare status: UserStatus;
 
     @BelongsTo(() => User, "creatorId") declare creator: User;
     @BelongsToMany(() => User, { as: "status", model: () => UserStatus }, "roomId", "userId") declare users: User[];
-    @HasMany(() => RoomTag, "roomId", "roomId") declare tags: RoomTag[];
     //@HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
     @HasMany(() => Message, "roomId") declare messages: Message[];
 

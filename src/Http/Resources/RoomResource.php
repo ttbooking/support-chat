@@ -28,8 +28,7 @@ class RoomResource extends JsonResource
             'creator' => $this->creator->toResource($resourceClass),
             'roomName' => $this->name,
             'users' => $this->users->toResourceCollection($resourceClass),
-            'tags' => $this->tags->toResourceCollection(),
-            // 'tags' => $this->tags->map->tag,
+            'tags' => $this->tags->map->tag,
             'index' => $this->updated_at,
             'lastMessage' => new MessageResource($this->whenNotNull($this->lastMessage)),
         ];

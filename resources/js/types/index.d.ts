@@ -8,7 +8,7 @@ export interface RoomTag {
 
 export interface Room extends BaseRoom {
     creator: RoomUser;
-    tags: RoomTag[];
+    tags: string[];
 }
 
 export interface File {

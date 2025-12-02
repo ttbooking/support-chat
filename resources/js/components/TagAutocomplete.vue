@@ -1,14 +1,5 @@
 <template>
-    <v-autocomplete
-        v-model="pickedTags"
-        v-model:search="search"
-        multiple
-        chips
-        closable-chips
-        :items="tags"
-        item-title="link"
-        return-object
-    >
+    <v-autocomplete v-model="pickedTags" v-model:search="search" multiple chips closable-chips :items="tags">
         <template #chip="{ props, item }">
             <v-chip v-bind="props" variant="flat" :color="tagColor(item.raw)" />
         </template>
@@ -24,18 +15,17 @@ import stc from "string-to-color";
 import { useRepo } from "pinia-orm";
 import { useSortBy } from "pinia-orm/helpers";
 import TagRepository from "@/repositories/TagRepository";
-import type { RoomTag } from "@/types";
 
-const pickedTags = defineModel<RoomTag[]>({ default: [] });
+const pickedTags = defineModel<string[]>({ default: [] });
 
 const search = ref<string>("");
 
 const tagRepo = useRepo(TagRepository);
 const tags = computed(() =>
-    useSortBy(tagRepo.orderBy("link").get(), (tag) => !pickedTags.value.map((tag) => tag.link).includes(tag.link)),
+    useSortBy(tagRepo.orderBy("link").get(), (tag) => !pickedTags.value.includes(tag.link)).map((tag) => tag.link),
 );
 
-const tagColor = (tag: RoomTag) => stc(tag.type || tag.name.replace(/ .*/, ""));
+const tagColor = (tag: string) => stc(tag.replace(/[ :][^:]*$/, ""));
 
 watchEffect(async () => {
     await tagRepo.fetch(search.value);
