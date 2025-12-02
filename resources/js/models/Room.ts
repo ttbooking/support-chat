@@ -26,7 +26,7 @@ export default class Room extends Model implements BaseRoom {
 
     @BelongsTo(() => User, "creatorId") declare creator: User;
     @BelongsToMany(() => User, { as: "status", model: () => UserStatus }, "roomId", "userId") declare users: User[];
-    @BelongsToMany(() => Tag, () => RoomTag, "roomId", "tagName") declare tags: Tag[];
+    @BelongsToMany(() => Tag, () => RoomTag, "roomId", "tagId") declare tags: Tag[];
     //@HasManyBy(() => User, "typingUsers") declare usersTyping: User[];
     @HasMany(() => Message, "roomId") declare messages: Message[];
 
