@@ -58,7 +58,7 @@ class RoomController extends Controller
     {
         $room->update($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));
-        $room->tags()->sync($request->validated('tags.*.name')); // TODO: !!!
+        $room->tags()->sync($request->validated('tags.*.id'));
 
         /** @var RoomResource */
         return $room->toResource();

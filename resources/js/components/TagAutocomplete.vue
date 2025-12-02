@@ -6,7 +6,7 @@
         chips
         closable-chips
         :items="tags"
-        item-title="name"
+        item-title="link"
         return-object
     >
         <template #chip="{ props, item }">
@@ -32,7 +32,7 @@ const search = ref<string>("");
 
 const tagRepo = useRepo(TagRepository);
 const tags = computed(() =>
-    useSortBy(tagRepo.orderBy("name").get(), (tag) => !pickedTags.value.map((tag) => tag.name).includes(tag.name)),
+    useSortBy(tagRepo.orderBy("link").get(), (tag) => !pickedTags.value.map((tag) => tag.link).includes(tag.link)),
 );
 
 const tagColor = (tag: Tag) => stc(tag.type ?? tag.name.replace(/ .*/, ""));

@@ -1,8 +1,10 @@
 import type { Message, MessageFile, Room as BaseRoom, RoomUser } from "vue-advanced-chat";
 
 export interface Tag {
+    id: number;
     name: string;
-    type?: string;
+    type: string;
+    link: string;
 }
 
 export interface Room extends BaseRoom {

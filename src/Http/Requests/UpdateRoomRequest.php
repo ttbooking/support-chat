@@ -47,8 +47,8 @@ class UpdateRoomRequest extends FormRequest
             'users' => 'sometimes|array',
             'users.*._id' => "sometimes|exists:$model,id",
             'tags' => 'sometimes|array',
-            'tags.*.name' => 'sometimes|exists:'.RoomTag::class.',name', // TODO: !!!
-            'tags.*.type' => 'sometimes|nullable|string|max:32',
+            'tags.*.id' => 'sometimes|exists:'.RoomTag::class,
+            // 'tags.*.type' => 'sometimes|nullable|string|max:32',
         ];
     }
 }

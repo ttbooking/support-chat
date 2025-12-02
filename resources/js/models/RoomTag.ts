@@ -4,8 +4,8 @@ import { Attr } from "pinia-orm/decorators";
 export default class RoomTag extends Model {
     static entity = "roomTag";
 
-    static primaryKey = ["roomId", "tagName"];
+    static primaryKey = ["roomId", "tagId"];
 
     @Attr() declare roomId: string;
-    @Attr() declare tagName: string;
+    @Attr() declare tagId: number;
 }
