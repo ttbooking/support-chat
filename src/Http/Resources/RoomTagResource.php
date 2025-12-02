@@ -21,7 +21,7 @@ class RoomTagResource extends JsonResource
     public function toArray(?Request $request = null): array
     {
         return [
-            'id' => $this->getKey(),
+            // 'id' => $this->getKey(),
             'name' => $this->name,
             'type' => $this->type,
             'link' => (string) $this->tag,

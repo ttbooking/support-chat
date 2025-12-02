@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Response;
 use TTBooking\SupportChat\Models\RoomTag;
 
@@ -15,15 +14,16 @@ class RoomTagController
     /**
      * Display a listing of all the existing rooms' tags.
      */
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(Request $request): ResourceCollection
     {
-        return JsonResource::collection(
-            RoomTag::query()
-                ->when($search = $request->query('search'))
-                ->whereLike('name', '%'.$search.'%')
-                ->orderBy('name')
-                ->cursorPaginate()
-        );
+        return RoomTag::query()
+            ->select('name', 'type')
+            ->distinct()
+            ->when($search = $request->query('search'))
+            ->whereLike('name', '%'.$search.'%')
+            ->orderBy('name')
+            ->cursorPaginate()
+            ->toResourceCollection();
     }
 
     /**

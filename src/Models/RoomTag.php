@@ -44,7 +44,7 @@ class RoomTag extends Model
     const UPDATED_AT = null;
 
     /** @var list<string> */
-    protected $touches = ['rooms'];
+    protected $touches = ['room'];
 
     protected $fillable = ['name', 'type', 'tag'];
 
