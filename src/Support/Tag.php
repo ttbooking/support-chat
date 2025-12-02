@@ -25,7 +25,7 @@ final readonly class Tag implements Arrayable, Stringable
 
     protected static function fromString(string $tag): self
     {
-        return new self(...(str_contains($tag, ':') ? explode(':', $tag, 2) : ['', $tag]));
+        return new self(...array_reverse(str_contains($tag, ':') ? explode(':', $tag, 2) : ['', $tag]));
     }
 
     protected static function fromModel(Model $model): self
