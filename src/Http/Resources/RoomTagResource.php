@@ -24,7 +24,7 @@ class RoomTagResource extends JsonResource
             'id' => $this->getKey(),
             'name' => $this->name,
             'type' => $this->type,
-            'link' => $this->link,
+            'link' => (string) $this->tag,
         ];
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use TTBooking\SupportChat\Exceptions\RoomNotFoundException;
+use TTBooking\SupportChat\Support\Tag;
 
 /**
  * @implements Contracts\Chat<Room>
@@ -29,7 +30,7 @@ class Chat implements Contracts\Chat
         return $this->user;
     }
 
-    public function createRoom(?string $name = null, string|Model|array $tags = []): Room
+    public function createRoom(?string $name = null, string|Model|Tag|array $tags = []): Room
     {
         $room = Models\Room::query()->create([
             'name' => $name,

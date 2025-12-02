@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\ClassMorphViolationException;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
@@ -18,15 +17,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use TTBooking\SupportChat\Database\Factories\RoomTagFactory;
 use TTBooking\SupportChat\Http\Resources\RoomTagResource;
+use TTBooking\SupportChat\Support\Tag;
 
 /**
  * @property int $id
  * @property string $name
  * @property string $type
  * @property Carbon $created_at
- * @property string $link
+ * @property Tag $tag
  * @property Model|null $subject
  * @property Collection<int, Room> $rooms
+ *
+ * @method static Builder whereTag(string|Model|Tag $tag)
  */
 #[
     UseFactory(RoomTagFactory::class),
@@ -44,42 +46,23 @@ class RoomTag extends Model
     /** @var list<string> */
     protected $touches = ['rooms'];
 
-    protected $fillable = ['name', 'type', 'link'];
+    protected $fillable = ['name', 'type', 'tag'];
 
     /**
-     * @return Attribute<string, string|Model>
+     * @return Attribute<Tag, string|Model|Tag>
      */
-    protected function link(): Attribute
+    protected function tag(): Attribute
     {
         return Attribute::make(
-            get: static function (mixed $value, array $attributes) {
-                return ltrim($attributes['type'].':'.$attributes['name'], ':');
-            },
-            set: static function (string|Model $value) {
-                if (is_string($value)) {
-                    [$type, $name] = str_contains($value, ':') ? explode(':', $value, 2) : ['', $value];
-
-                    return compact('type', 'name');
-                }
-
-                if ($value::class === $alias = $value->getMorphClass()) {
-                    throw new ClassMorphViolationException($value);
-                }
-
-                return [
-                    'type' => $alias,
-                    'name' => $value->getKey(),
-                ];
-            }
-        );
+            get: static fn (mixed $value, array $attributes) => new Tag($attributes['name'], $attributes['type']),
+            set: static fn (string|Model|Tag $value) => Tag::from($value)->toArray()
+        )->withoutObjectCaching();
     }
 
     #[Scope]
-    protected function whereLink(Builder $query, string $link): void
+    protected function whereTag(Builder $query, string|Model|Tag $tag): void
     {
-        [$type, $name] = str_contains($link, ':') ? explode(':', $link, 2) : ['', $link];
-
-        $query->where('type', $type)->where('name', $name);
+        $query->where(Tag::from($tag)->toArray());
     }
 
     /**

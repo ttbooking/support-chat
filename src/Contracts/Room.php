@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Enumerable;
 use TTBooking\SupportChat\Exceptions\MessageNotFoundException;
+use TTBooking\SupportChat\Support\Tag;
 
 /**
  * @template TMessage of Message
@@ -21,7 +22,7 @@ interface Room
     /**
      * @return $this
      */
-    public function tag(string|Model $tag, string|Model ...$tags): static;
+    public function tag(string|Model|Tag $tag, string|Model|Tag ...$tags): static;
 
     /**
      * @return Enumerable<int, string>

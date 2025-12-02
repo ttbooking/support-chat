@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
 use TTBooking\SupportChat\Exceptions\MessageNotFoundException;
+use TTBooking\SupportChat\Support\Tag;
 
 /**
  * @implements Contracts\Room<Message>
@@ -30,10 +31,10 @@ class Room implements Contracts\Room
         return $this->model->name;
     }
 
-    public function tag(string|Model $tag, string|Model ...$tags): static
+    public function tag(string|Model|Tag $tag, string|Model|Tag ...$tags): static
     {
-        foreach ([$tag, ...$tags] as $link) {
-            $this->model->tags()->createOrFirst(compact('link'));
+        foreach ([$tag, ...$tags] as $_) {
+            $this->model->tags()->createOrFirst(Tag::from($_)->toArray());
         }
 
         return $this;

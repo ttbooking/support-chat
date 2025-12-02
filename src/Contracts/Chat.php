@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Enumerable;
 use TTBooking\SupportChat\Exceptions\RoomNotFoundException;
+use TTBooking\SupportChat\Support\Tag;
 
 /**
  * @template TRoom of Room
@@ -22,11 +23,11 @@ interface Chat
     public function user(): Authenticatable;
 
     /**
-     * @param  string|Model|list<string|Model>  $tags
+     * @param  string|Model|Tag|list<string|Model|Tag>  $tags
      *
      * @phpstan-return TRoom
      */
-    public function createRoom(?string $name = null, string|Model|array $tags = []): Room;
+    public function createRoom(?string $name = null, string|Model|Tag|array $tags = []): Room;
 
     /**
      * @phpstan-return TRoom
