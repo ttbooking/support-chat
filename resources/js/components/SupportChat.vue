@@ -87,12 +87,7 @@ const currentRoomId = ref<string | null>(null);
 const room = computed<BaseRoom>({
     get(oldRoom) {
         if (currentRoomId.value === oldRoom?.roomId) return oldRoom;
-        return roomRepo
-            .with("creator")
-            .with("users")
-            .find(currentRoomId.value!)
-            ?.$refresh()
-            .$toJson() as BaseRoom;
+        return roomRepo.with("creator").with("users").find(currentRoomId.value!)?.$refresh().$toJson() as BaseRoom;
     },
     set(room) {
         roomRepo.update(room);
