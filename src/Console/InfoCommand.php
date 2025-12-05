@@ -45,7 +45,7 @@ class InfoCommand extends Command
         $tags = $room->tags()->map('strval')->join('</info>, <info>', '</info> and <info>');
         $this->components->info($tags ? sprintf('<info>%s</info>.', $tags) : 'No tags.');
 
-        $users = $room->users()->map->name->join('</info>, <info>', '</info> and <info>');
+        $users = $room->users()->pluck('name')->join('</info>, <info>', '</info> and <info>');
         $this->components->info(sprintf('<info>%s</info>.', $users));
     }
 }
