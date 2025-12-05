@@ -28,6 +28,13 @@ class Participant extends Pivot
     /** @var list<string> */
     protected $touches = ['room'];
 
+    protected static function booted(): void
+    {
+        static::deleted(static function (self $participant) {
+            $participant->room()->whereDoesntHave('users')->delete();
+        });
+    }
+
     /**
      * @return BelongsTo<Room, $this>
      */
