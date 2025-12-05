@@ -30,21 +30,19 @@ interface Room
     public function untag(string|Model|Tag $tag, string|Model|Tag ...$tags): static;
 
     /**
-     * @return Enumerable<int, string>
+     * @return Enumerable<int, Tag>
      */
     public function tags(): Enumerable;
 
     /**
-     * @param  iterable<Authenticatable|string|int>  $users
      * @return $this
      */
-    public function addUsers(iterable $users): static;
+    public function addUser(Authenticatable|string|int $user, Authenticatable|string|int ...$users): static;
 
     /**
-     * @param  iterable<Authenticatable|string|int>  $users
      * @return $this
      */
-    public function kickUsers(iterable $users): static;
+    public function kickUser(Authenticatable|string|int $user, Authenticatable|string|int ...$users): static;
 
     /**
      * @return Enumerable<int, Authenticatable>

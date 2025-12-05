@@ -29,7 +29,7 @@ class WorkbenchServiceProvider extends ServiceProvider
 
         config([
             'support-chat.user_model' => User::class,
-            'support-chat.seeding_credentials.email' => 'test@example.com',
+            'support-chat.user_cred_seed' => 'test@example.com',
         ]);
 
         Broadcast::routes();

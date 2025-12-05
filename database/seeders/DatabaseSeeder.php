@@ -49,7 +49,9 @@ class DatabaseSeeder extends Seeder
             return $this->auth->user();
         }
 
-        $credentials = (array) config('support-chat.seeding_credentials', ['email' => null]);
+        $credentials = [
+            config('support-chat.user_cred_key') => config('support-chat.user_cred_seed'),
+        ];
 
         foreach ($credentials as $credential => &$value) {
             $value ??= $this->command->outputComponents()->ask("Enter user $credential");

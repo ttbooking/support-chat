@@ -34,6 +34,8 @@ return [
 
     'user_model' => App\Models\User::class,
     'user_resource' => TTBooking\SupportChat\Http\Resources\UserResource::class,
+    'user_cred_key' => env('SC_CRED_KEY', 'email'),
+    'user_cred_seed' => env('SC_CRED_SEED'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,15 +53,5 @@ return [
     */
 
     'disk' => env('SC_DISK', 'support-chat'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | User Credentials for Seeding
-    |--------------------------------------------------------------------------
-    */
-
-    'seeding_credentials' => [
-        'email' => env('SC_SEED_EMAIL'),
-    ],
 
 ];

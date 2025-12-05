@@ -50,23 +50,23 @@ class Room implements Contracts\Room
     }
 
     /**
-     * @return Collection<int, string>
+     * @return Collection<int, Tag>
      */
     public function tags(): Collection
     {
-        return collect($this->model->tags->map->name);
+        return collect($this->model->tags->map->tag);
     }
 
-    public function addUsers(iterable $users): static
+    public function addUser(Authenticatable|string|int $user, Authenticatable|string|int ...$users): static
     {
-        $this->model->users()->syncWithoutDetaching(collect($users));
+        $this->model->users()->syncWithoutDetaching([$user, ...$users]);
 
         return $this;
     }
 
-    public function kickUsers(iterable $users): static
+    public function kickUser(Authenticatable|string|int $user, Authenticatable|string|int ...$users): static
     {
-        $this->model->users()->detach(collect($users));
+        $this->model->users()->detach([$user, ...$users]);
 
         return $this;
     }

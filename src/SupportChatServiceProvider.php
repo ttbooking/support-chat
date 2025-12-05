@@ -30,8 +30,11 @@ class SupportChatServiceProvider extends ServiceProvider
      * @var list<class-string<Command>>
      */
     protected array $commands = [
+        Console\AddCommand::class,
         Console\AddRoomCommand::class,
+        Console\InfoCommand::class,
         Console\InitCommand::class,
+        Console\KickCommand::class,
         Console\ListCommand::class,
         Console\PostCommand::class,
         Console\RemoveRoomCommand::class,
@@ -153,7 +156,9 @@ class SupportChatServiceProvider extends ServiceProvider
     protected function registerServices(): void
     {
         $this->app->when(Chat::class)->needs(Authenticatable::class)->give(static function () {
-            $credentials = (array) config('support-chat.seeding_credentials', []);
+            $credentials = [
+                config('support-chat.user_cred_key') => config('support-chat.user_cred_seed'),
+            ];
 
             return Auth::getProvider()->retrieveByCredentials($credentials) ?? new User;
         });
