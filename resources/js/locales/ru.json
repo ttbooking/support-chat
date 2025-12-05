@@ -22,6 +22,7 @@
     "select_messages": "Выбрать",
     "room_configuration": "Настройки комнаты {name}",
     "creator": "Создатель",
+    "room_id": "Идентификатор",
     "room_name": "Имя комнаты",
     "tags": "Теги",
     "participants": "Участники",

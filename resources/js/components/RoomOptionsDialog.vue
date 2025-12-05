@@ -11,35 +11,61 @@
             >
                 <v-card :title="$t('room_configuration', { name: room.roomName })">
                     <v-card-text>
-                        <v-text-field
-                            v-model="model.value.creator.username"
-                            :label="$t('creator')"
-                            variant="plain"
-                            readonly
-                        >
-                            <template #prepend-inner>
-                                <v-avatar size="24" :image="model.value.creator.avatar" />
-                            </template>
-                        </v-text-field>
-                        <v-text-field
-                            v-model="model.value.roomName"
-                            :placeholder="room.roomName"
-                            :label="$t('room_name')"
-                            variant="outlined"
-                            density="compact"
-                        />
-                        <TagAutocomplete
-                            v-model="model.value.tags"
-                            :label="$t('tags')"
-                            variant="outlined"
-                            density="compact"
-                        />
-                        <UserAutocomplete
-                            v-model="model.value.users"
-                            :label="$t('participants')"
-                            variant="outlined"
-                            density="compact"
-                        />
+                        <v-row no-gutters>
+                            <v-col cols="6">
+                                <v-text-field
+                                    v-model="model.value.roomId"
+                                    :label="$t('room_id')"
+                                    variant="plain"
+                                    readonly
+                                    tabindex="-1"
+                                />
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                    v-model="model.value.creator.username"
+                                    :label="$t('creator')"
+                                    variant="plain"
+                                    readonly
+                                    tabindex="-1"
+                                >
+                                    <template #prepend-inner>
+                                        <v-avatar size="24" :image="model.value.creator.avatar" />
+                                    </template>
+                                </v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-row no-gutters>
+                            <v-col>
+                                <v-text-field
+                                    v-model="model.value.roomName"
+                                    :placeholder="room.roomName"
+                                    :label="$t('room_name')"
+                                    variant="outlined"
+                                    density="compact"
+                                />
+                            </v-col>
+                        </v-row>
+                        <v-row no-gutters>
+                            <v-col>
+                                <TagAutocomplete
+                                    v-model="model.value.tags"
+                                    :label="$t('tags')"
+                                    variant="outlined"
+                                    density="compact"
+                                />
+                            </v-col>
+                        </v-row>
+                        <v-row no-gutters>
+                            <v-col>
+                                <UserAutocomplete
+                                    v-model="model.value.users"
+                                    :label="$t('participants')"
+                                    variant="outlined"
+                                    density="compact"
+                                />
+                            </v-col>
+                        </v-row>
                     </v-card-text>
                     <v-card-actions>
                         <v-btn :disabled="isPristine" @click="save">{{ $t("ok") }}</v-btn>

@@ -22,6 +22,7 @@
     "select_messages": "Select",
     "room_configuration": "Room {name} configuration",
     "creator": "Creator",
+    "room_id": "Identifier",
     "room_name": "Room name",
     "tags": "Tags",
     "participants": "Participants",
