@@ -20,9 +20,9 @@
         "string-to-color": "^2.2.2",
         "tailwindcss": "^4.1.17",
         "vue": "^3.5.25",
-        "vue-advanced-chat": "^2.1.0",
+        "vue-advanced-chat": "^2.1.1",
         "vue-i18n": "^11.2.2",
-        "vuetify": "^3.11.1",
+        "vuetify": "^3.11.2",
         "winbox": "0.2.82"
     },
     "devDependencies": {
@@ -36,7 +36,7 @@
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-vue": "^10.6.2",
         "laravel-vite-plugin": "^2.0.1",
-        "prettier": "^3.7.3",
+        "prettier": "^3.7.4",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "pusher-js": "^8.4.0",
         "typescript": "^5.9.3",

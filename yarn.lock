@@ -1548,9 +1548,9 @@ __metadata:
   linkType: hard
 
 "birpc@npm:^2.3.0":
-  version: 2.8.0
-  resolution: "birpc@npm:2.8.0"
-  checksum: 10c0/03441ed726afa79c218c4681574fca231b3571a2f2c702587a656aa47474794483bcbbc2fc48760340f35f71484b19194923786829c00e72da7ade1c11391760
+  version: 2.9.0
+  resolution: "birpc@npm:2.9.0"
+  checksum: 10c0/2462d0d67061f95bae213b0b9b323a6643ff749f7457a25242897c99e31355f1bd522c17f83ecf57506351e3e28b4e38c12a39b8beddee2dd0cbf78f9b9876ce
   languageName: node
   linkType: hard
 
@@ -3670,12 +3670,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.7.3":
-  version: 3.7.3
-  resolution: "prettier@npm:3.7.3"
+"prettier@npm:^3.7.4":
+  version: 3.7.4
+  resolution: "prettier@npm:3.7.4"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/ee86bb06121c74dadc54f30b6f99aff6288966d9b842ce501d6991e20d20c6ce2d45028651b3b0955ca6e5fa89c1bee1e72b6f810243a93cef8bc69737972ef7
+  checksum: 10c0/9675d2cd08eacb1faf1d1a2dbfe24bfab6a912b059fc9defdb380a408893d88213e794a40a2700bd29b140eb3172e0b07c852853f6e22f16f3374659a1a13389
   languageName: node
   linkType: hard
 
@@ -3864,7 +3864,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     pinia: "npm:^3.0.4"
     pinia-orm: "npm:^1.10.2"
-    prettier: "npm:^3.7.3"
+    prettier: "npm:^3.7.4"
     prettier-plugin-tailwindcss: "npm:^0.7.2"
     pusher-js: "npm:^8.4.0"
     string-to-color: "npm:^2.2.2"
@@ -3874,11 +3874,11 @@ __metadata:
     vite: "npm:^7.2.6"
     vite-plugin-vuetify: "npm:^2.1.2"
     vue: "npm:^3.5.25"
-    vue-advanced-chat: "npm:^2.1.0"
+    vue-advanced-chat: "npm:^2.1.1"
     vue-eslint-parser: "npm:^10.2.0"
     vue-i18n: "npm:^11.2.2"
     vue-tsc: "npm:^3.1.5"
-    vuetify: "npm:^3.11.1"
+    vuetify: "npm:^3.11.2"
     winbox: "npm:0.2.82"
   languageName: unknown
   linkType: soft
@@ -4304,14 +4304,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-advanced-chat@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "vue-advanced-chat@npm:2.1.0"
+"vue-advanced-chat@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "vue-advanced-chat@npm:2.1.1"
   dependencies:
     emoji-picker-element: "npm:1.12.1"
     micromark: "npm:^3.1.0"
     micromark-extension-gfm: "npm:^2.0.1"
-  checksum: 10c0/6eab2c2e9c5b7849abafe1e05100ffdc8096e61eb04e86ef8c84b6df25298b148931f48b05dbbf558c018df7fcc6271358c3960d851e0291bb80105e6167a968
+  checksum: 10c0/cdbf5a1353f51cd160ff37b14365382afc44649ef163f751be098b0932e639f7261a28a397795acfc3c5394c66907c526edc90daa51b5b38891c630c83da5f4d
   languageName: node
   linkType: hard
 
@@ -4405,9 +4405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vuetify@npm:^3.11.1":
-  version: 3.11.1
-  resolution: "vuetify@npm:3.11.1"
+"vuetify@npm:^3.11.2":
+  version: 3.11.2
+  resolution: "vuetify@npm:3.11.2"
   peerDependencies:
     typescript: ">=4.7"
     vite-plugin-vuetify: ">=2.1.0"
@@ -4420,7 +4420,7 @@ __metadata:
       optional: true
     webpack-plugin-vuetify:
       optional: true
-  checksum: 10c0/d5d6c362791ad22a4623317c4dd641d511a2beb9271ae1feda7c097c9ab4350c7d4c9e24140d0a8306a88a165a3e57e971d3d422a5d56c21bf82a874f090377f
+  checksum: 10c0/74d04a31317ffc7d492e86ad828aaf541d3006952d51304e09c4bf90684468699d4f1def6be469c6edc156df04e66739324d86051fd1024f4cad10c9e59edae3
   languageName: node
   linkType: hard
 
@@ -4489,12 +4489,12 @@ __metadata:
   linkType: hard
 
 "yaml-eslint-parser@npm:^1.2.2":
-  version: 1.3.1
-  resolution: "yaml-eslint-parser@npm:1.3.1"
+  version: 1.3.2
+  resolution: "yaml-eslint-parser@npm:1.3.2"
   dependencies:
     eslint-visitor-keys: "npm:^3.0.0"
     yaml: "npm:^2.0.0"
-  checksum: 10c0/85ebe072f06890c4b912b18dd8219425975d48f23e63bbcfc3fb828593b158de8645d6b0db7a03eee53269be84888657b4e3299323a8165369ba74b4edd80437
+  checksum: 10c0/c4b84c715f997216208be398c9869a225214b1a88963a7b0234e915b9b56acd7608d7ce06e584296fdbc67a32cdf37e57e94ea92f73278da161eaad9353ae25a
   languageName: node
   linkType: hard
 
