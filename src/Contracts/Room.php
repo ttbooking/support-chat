@@ -25,6 +25,11 @@ interface Room
     public function tag(string|Model|Tag $tag, string|Model|Tag ...$tags): static;
 
     /**
+     * @return $this
+     */
+    public function untag(string|Model|Tag $tag, string|Model|Tag ...$tags): static;
+
+    /**
      * @return Enumerable<int, string>
      */
     public function tags(): Enumerable;

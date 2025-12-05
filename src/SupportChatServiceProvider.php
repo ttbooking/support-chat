@@ -36,6 +36,8 @@ class SupportChatServiceProvider extends ServiceProvider
         Console\PostCommand::class,
         Console\RemoveRoomCommand::class,
         Console\SeedCommand::class,
+        Console\TagCommand::class,
+        Console\UntagCommand::class,
         Console\ViewCommand::class,
     ];
 

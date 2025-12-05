@@ -40,6 +40,15 @@ class Room implements Contracts\Room
         return $this;
     }
 
+    public function untag(string|Model|Tag $tag, string|Model|Tag ...$tags): static
+    {
+        foreach ([$tag, ...$tags] as $_) {
+            $this->model->tags()->whereTag($_)->delete();
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, string>
      */
