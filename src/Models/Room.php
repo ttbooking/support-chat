@@ -6,10 +6,12 @@ namespace TTBooking\SupportChat\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,12 +23,14 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Str;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Database\Factories\RoomFactory;
 use TTBooking\SupportChat\Http\Resources\RoomResource;
 use TTBooking\SupportChat\Models\Scopes\ParticipantScope;
 use TTBooking\SupportChat\Observers\RoomObserver;
 use TTBooking\SupportChat\Policies\RoomPolicy;
+use TTBooking\SupportChat\Support\Tag;
 use TTBooking\SupportChat\SupportChat;
 
 /**
@@ -42,6 +46,11 @@ use TTBooking\SupportChat\SupportChat;
  * @property Collection<int, Model> $subjects
  * @property Collection<int, Message> $messages
  * @property Message|null $lastMessage
+ *
+ * @method static Builder<$this> withDescriptor(string $descriptor, bool $strict = false)
+ * @method static Builder<$this> withRoom(string $qualifier, bool $strict = false)
+ * @method static Builder<$this> withUser(string $qualifier, bool $strict = false)
+ * @method static Builder<$this> withTag(string|Model|Tag $qualifier, bool $strict = false)
  */
 #[
     ObservedBy(RoomObserver::class),
@@ -137,5 +146,66 @@ class Room extends Model
     public function lastMessage(): HasOne
     {
         return $this->hasOne(Message::class)->latestOfMany('created_at');
+    }
+
+    #[Scope]
+    protected function withDescriptor(Builder $query, string $descriptor, bool $strict = false): void
+    {
+        $pattern = '/(?:(room|user|tag):)?(\".+?(?<!\\\)\"|\S+)/';
+        preg_match_all($pattern, $descriptor, $matches, PREG_SET_ORDER | PREG_UNMATCHED_AS_NULL);
+
+        foreach ($matches as [, $realm, $qualifier]) {
+            $qualifier = strtr(Str::unwrap($qualifier, '"'), ['\\"' => '"']);
+            match ($realm) {
+                'user' => $this->withUser($query, $qualifier, $strict),
+                'tag' => $this->withTag($query, $qualifier, $strict),
+                default => $this->withRoom($query, $qualifier, $strict),
+            };
+        }
+    }
+
+    #[Scope]
+    protected function withRoom(Builder $query, string $qualifier, bool $strict = false): void
+    {
+        $query
+            ->whereKey($qualifier)
+            ->when(
+                $strict,
+                static fn (Builder $query) => $query->orWhere('name', $qualifier),
+                static fn (Builder $query) => $query->orWhereLike('name', $qualifier.'%'),
+            );
+    }
+
+    #[Scope]
+    protected function withUser(Builder $query, string $qualifier, bool $strict = false): void
+    {
+        $userCredKey = config('support-chat.user_cred_key');
+
+        $query->whereHas('users', function (Builder $query) use ($qualifier, $strict, $userCredKey) {
+            $query
+                ->whereKey($qualifier)
+                ->when(
+                    $strict,
+                    static fn (Builder $query) => $query->orWhere($userCredKey, $qualifier),
+                    static fn (Builder $query) => $query->orWhereLike($userCredKey, $qualifier.'%'),
+                );
+        });
+    }
+
+    #[Scope]
+    protected function withTag(Builder $query, string|Model|Tag $tag, bool $strict = false): void
+    {
+        $tag = Tag::from($tag);
+
+        $query->whereHas('tags', function (Builder $query) use ($tag, $strict) {
+            $query
+                ->when($tag->type)
+                ->where('type', $tag->type)
+                ->when(
+                    $strict,
+                    static fn (Builder $query) => $query->where('name', $tag->name),
+                    static fn (Builder $query) => $query->whereLike('name', $tag->name.'%'),
+                );
+        });
     }
 }
