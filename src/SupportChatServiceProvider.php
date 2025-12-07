@@ -91,12 +91,12 @@ class SupportChatServiceProvider extends ServiceProvider
      */
     protected function registerBladeDirectives(): void
     {
-        Blade::directive('chat', static function (?string $roomId = null) {
-            return "<?php echo TTBooking\SupportChat\SupportChat::standalone($roomId)->toHtml(); ?>";
+        Blade::directive('chat', static function (string $expression) {
+            return "<?php echo TTBooking\SupportChat\SupportChat::standalone($expression)->toHtml(); ?>";
         });
 
-        Blade::directive('winchat', static function () {
-            return '<?php echo TTBooking\SupportChat\SupportChat::windowed()->toHtml(); ?>';
+        Blade::directive('winchat', static function (string $expression) {
+            return "<?php echo TTBooking\SupportChat\SupportChat::windowed($expression)->toHtml(); ?>";
         });
     }
 

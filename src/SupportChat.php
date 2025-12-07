@@ -30,14 +30,18 @@ class SupportChat
         return config('support-chat.user_resource', UserResource::class);
     }
 
-    public static function standalone(?string $roomId = null): HtmlString
+    /**
+     * @param  array<string, mixed>  $features
+     * @param  array<string, array<string, string>>  $styles
+     */
+    public static function standalone(?string $roomId = null, array $features = [], array $styles = []): HtmlString
     {
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
             'roomId' => $roomId,
-            'features' => config('support-chat.features', []),
-            'styles' => (object) array_filter(config('support-chat.styles', [])),
+            'features' => $features + config('support-chat.features', []),
+            'styles' => (object) array_merge_recursive(array_filter(config('support-chat.styles', [])), $styles),
         ]);
 
         return new HtmlString(
@@ -46,13 +50,17 @@ class SupportChat
         );
     }
 
-    public static function windowed(): HtmlString
+    /**
+     * @param  array<string, mixed>  $features
+     * @param  array<string, array<string, string>>  $styles
+     */
+    public static function windowed(array $features = [], array $styles = []): HtmlString
     {
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
-            'features' => config('support-chat.features', []),
-            'styles' => config('support-chat.styles', []),
+            'features' => $features + config('support-chat.features', []),
+            'styles' => (object) array_merge_recursive(array_filter(config('support-chat.styles', [])), $styles),
         ]);
 
         return new HtmlString(

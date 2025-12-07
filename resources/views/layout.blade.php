@@ -14,7 +14,7 @@
 
         <!-- Scripts -->
         @vite('resources/js/app.js')
-        @chat($roomId)
+        @chat($roomId, $features)
     </head>
     <body class="font-sans antialiased">
         <div id="standalone-chat" v-cloak></div>
