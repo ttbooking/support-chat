@@ -9,10 +9,17 @@ declare global {
             userId: string;
             roomId?: string;
             features: {
-                show_audio: boolean;
-                show_files: boolean;
-                show_emojis: boolean;
                 show_search: boolean;
+                show_add_room: boolean;
+                show_send_icon: boolean;
+                show_files: boolean;
+                show_audio: boolean;
+                audio_bit_rate: number;
+                audio_sample_rate: number;
+                show_emojis: boolean;
+                show_reaction_emojis: boolean;
+                show_new_messages_divider: boolean;
+                show_footer: boolean;
             };
             styles?: Record<string, Record<string, string>>;
         };

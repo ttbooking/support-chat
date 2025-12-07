@@ -61,10 +61,17 @@ return [
     */
 
     'features' => [
-        'show_audio' => env('SC_SHOW_AUDIO', true),
-        'show_files' => env('SC_SHOW_FILES', true),
-        'show_emojis' => env('SC_SHOW_EMOJIS', true),
         'show_search' => env('SC_SHOW_SEARCH', true),
+        'show_add_room' => env('SC_SHOW_ADD_ROOM', true),
+        'show_send_icon' => env('SC_SHOW_SEND_ICON', true),
+        'show_files' => env('SC_SHOW_FILES', true),
+        'show_audio' => env('SC_SHOW_AUDIO', true),
+        'audio_bit_rate' => env('SC_AUDIO_BIT_RATE', 128),
+        'audio_sample_rate' => env('SC_AUDIO_SAMPLE_RATE', 44100),
+        'show_emojis' => env('SC_SHOW_EMOJIS', true),
+        'show_reaction_emojis' => env('SC_SHOW_REACTION_EMOJIS', true),
+        'show_new_messages_divider' => env('SC_SHOW_NEW_MESSAGES_DIVIDER', true),
+        'show_footer' => env('SC_SHOW_FOOTER', true),
     ],
 
     /*

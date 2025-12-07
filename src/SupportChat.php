@@ -41,7 +41,7 @@ class SupportChat
         ]);
 
         return new HtmlString(
-            "<script>window.SupportChat = $scriptVariables</script>".
+            "<script>window.SupportChat = $scriptVariables;</script>".
             Vite::app('support-chat')->toHtml()
         );
     }
@@ -56,7 +56,7 @@ class SupportChat
         ]);
 
         return new HtmlString(
-            "<script>window.SupportChat = $scriptVariables</script>".
+            "<script>window.SupportChat = $scriptVariables;</script>".
             Vite::app('support-chat')->withEntryPoints(['resources/js/win.ts'])->toHtml()
         );
     }
