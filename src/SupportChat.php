@@ -36,6 +36,8 @@ class SupportChat
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
             'roomId' => $roomId,
+            'features' => config('support-chat.features', []),
+            'styles' => config('support-chat.styles', []),
         ]);
 
         return new HtmlString(
@@ -49,6 +51,8 @@ class SupportChat
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
+            'features' => config('support-chat.features', []),
+            'styles' => config('support-chat.styles', []),
         ]);
 
         return new HtmlString(

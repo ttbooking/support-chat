@@ -8,6 +8,13 @@ declare global {
             path: string;
             userId: string;
             roomId?: string;
+            features: {
+                show_audio: boolean;
+                show_files: boolean;
+                show_emojis: boolean;
+                show_search: boolean;
+            };
+            styles?: Record<string, Record<string, string>>;
         };
         axios: AxiosInstance;
         Echo: Echo<"pusher">;
