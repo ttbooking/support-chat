@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'domain' => env('SC_DOMAIN'),
+    'domain' => env('CHAT_DOMAIN'),
 
     /*
     |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'path' => env('SC_PATH', 'support-chat'),
+    'path' => env('CHAT_PATH', 'support-chat'),
 
     /*
     |--------------------------------------------------------------------------
@@ -34,8 +34,8 @@ return [
 
     'user_model' => App\Models\User::class,
     'user_resource' => TTBooking\SupportChat\Http\Resources\UserResource::class,
-    'user_cred_key' => env('SC_CRED_KEY', 'email'),
-    'user_cred_seed' => env('SC_CRED_SEED'),
+    'user_cred_key' => env('CHAT_CRED_KEY', 'email'),
+    'user_cred_seed' => env('CHAT_CRED_SEED'),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,8 +43,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'nanoid_size_rooms' => (int) env('SC_NS_ROOMS', env('SC_NANOID_SIZE')),
-    'nanoid_size_messages' => (int) env('SC_NS_MESSAGES', env('SC_NANOID_SIZE')),
+    'nanoid_size_rooms' => (int) env('CHAT_NS_ROOMS', env('CHAT_NANOID_SIZE')),
+    'nanoid_size_messages' => (int) env('CHAT_NS_MESSAGES', env('CHAT_NANOID_SIZE')),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'disk' => env('SC_DISK', 'support-chat'),
+    'disk' => env('CHAT_DISK', 'support-chat'),
 
     /*
     |--------------------------------------------------------------------------
@@ -61,17 +61,17 @@ return [
     */
 
     'features' => [
-        'show_search' => env('SC_SHOW_SEARCH', true),
-        'show_add_room' => env('SC_SHOW_ADD_ROOM', true),
-        'show_send_icon' => env('SC_SHOW_SEND_ICON', true),
-        'show_files' => env('SC_SHOW_FILES', true),
-        'show_audio' => env('SC_SHOW_AUDIO', true),
-        'audio_bit_rate' => env('SC_AUDIO_BIT_RATE', 128),
-        'audio_sample_rate' => env('SC_AUDIO_SAMPLE_RATE', 44100),
-        'show_emojis' => env('SC_SHOW_EMOJIS', true),
-        'show_reaction_emojis' => env('SC_SHOW_REACTION_EMOJIS', true),
-        'show_new_messages_divider' => env('SC_SHOW_NEW_MESSAGES_DIVIDER', true),
-        'show_footer' => env('SC_SHOW_FOOTER', true),
+        'show_search' => env('CHAT_SHOW_SEARCH', true),
+        'show_add_room' => env('CHAT_SHOW_ADD_ROOM', true),
+        'show_send_icon' => env('CHAT_SHOW_SEND_ICON', true),
+        'show_files' => env('CHAT_SHOW_FILES', true),
+        'show_audio' => env('CHAT_SHOW_AUDIO', true),
+        'audio_bit_rate' => env('CHAT_AUDIO_BIT_RATE', 128),
+        'audio_sample_rate' => env('CHAT_AUDIO_SAMPLE_RATE', 44100),
+        'show_emojis' => env('CHAT_SHOW_EMOJIS', true),
+        'show_reaction_emojis' => env('CHAT_SHOW_REACTION_EMOJIS', true),
+        'show_new_messages_divider' => env('CHAT_SHOW_NEW_MESSAGES_DIVIDER', true),
+        'show_footer' => env('CHAT_SHOW_FOOTER', true),
     ],
 
     /*
