@@ -6,15 +6,15 @@ namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use TTBooking\SupportChat\Http\Requests\ShowChatRequest;
 
 class ChatController extends Controller
 {
     /**
      * Standalone chat view.
      */
-    public function index(Request $request, ?string $roomId = null): Factory|View
+    public function index(ShowChatRequest $request, ?string $roomId = null): Factory|View
     {
         $features = $request->query();
 
