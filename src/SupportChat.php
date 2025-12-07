@@ -37,7 +37,7 @@ class SupportChat
             'userId' => (string) auth()->id(),
             'roomId' => $roomId,
             'features' => config('support-chat.features', []),
-            'styles' => config('support-chat.styles', []),
+            'styles' => (object) array_filter(config('support-chat.styles', [])),
         ]);
 
         return new HtmlString(

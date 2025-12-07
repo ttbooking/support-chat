@@ -81,7 +81,7 @@ return [
     */
 
     'styles' => [
-        /*'general' => [
+        'general' => [
             // 'color' => '#0a0a0a',
             // 'colorButtonClear' => '#1976d2',
             // 'colorButton' => '#fff',
@@ -92,42 +92,42 @@ return [
             // 'colorSpinner' => '#333',
             // 'borderStyle' => '1px solid #e1e4e8',
             // 'backgroundScrollIcon' => '#fff',
-        ],*/
-        /*'container' => [
+        ],
+        'container' => [
             // 'border' => 'none',
             // 'borderRadius' => '4px',
             // 'boxShadow' => '0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
-        ],*/
-        /*'header' => [
+        ],
+        'header' => [
             // 'background' => '#fff',
             // 'colorRoomName' => '#0a0a0a',
             // 'colorRoomInfo' => '#9ca6af',
             // 'position' => 'absolute',
             // 'width' => '100%',
-        ],*/
-        /*'footer' => [
+        ],
+        'footer' => [
             // 'background' => '#f8f9fa',
             // 'borderStyleInput' => '1px solid #e1e4e8',
             // 'borderInputSelected' => '#1976d2',
             // 'backgroundReply' => '#e5e5e6',
             // 'backgroundTagActive' => '#e5e5e6',
             // 'backgroundTag' => '#f8f9fa',
-        ],*/
-        /*'content' => [
+        ],
+        'content' => [
             // 'background' => '#f8f9fa',
-        ],*/
-        /*'sidemenu' => [
+        ],
+        'sidemenu' => [
             // 'background' => '#fff',
             // 'backgroundHover' => '#f6f6f6',
             // 'backgroundActive' => '#e5effa',
             // 'colorActive' => '#1976d2',
             // 'borderColorSearch' => '#e1e5e8',
-        ],*/
-        /*'dropdown' => [
+        ],
+        'dropdown' => [
             // 'background' => '#fff',
             // 'backgroundHover' => '#f6f6f6',
-        ],*/
-        /*'message' => [
+        ],
+        'message' => [
             // 'background' => '#fff',
             // 'backgroundMe' => '#ccf2cf',
             // 'color' => '#0a0a0a',
@@ -165,14 +165,14 @@ return [
             // 'backgroundAudioProgress' => '#455247',
             // 'backgroundAudioProgressSelector' => '#455247',
             // 'colorFileExtension' => '#757e85',
-        ],*/
-        /*'markdown' => [
+        ],
+        'markdown' => [
             // 'background' => 'rgba(239, 239, 239, 0.7)',
             // 'border' => 'rgba(212, 212, 212, 0.9)',
             // 'color' => '#e01e5a',
             // 'colorMulti' => '#0a0a0a',
-        ],*/
-        /*'room' => [
+        ],
+        'room' => [
             // 'colorUsername' => '#0a0a0a',
             // 'colorMessage' => '#67717a',
             // 'colorTimestamp' => '#a2aeb8',
@@ -180,11 +180,11 @@ return [
             // 'colorStateOffline' => '#9ca6af',
             // 'backgroundCounterBadge' => '#0696c7',
             // 'colorCounterBadge' => '#fff',
-        ],*/
-        /*'emoji' => [
+        ],
+        'emoji' => [
             // 'background' => '#fff',
-        ],*/
-        /*'icons' => [
+        ],
+        'icons' => [
             // 'search' => '#9ca6af',
             // 'add' => '#1976d2',
             // 'toggle' => '#0a0a0a',
@@ -213,7 +213,7 @@ return [
             // 'audioPause' => '#455247',
             // 'audioCancel' => '#eb4034',
             // 'audioConfirm' => '#1ba65b',
-        ],*/
+        ],
     ],
 
 ];
