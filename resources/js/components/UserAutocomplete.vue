@@ -13,7 +13,7 @@
             <v-chip v-bind="props" :prepend-avatar="item.raw.avatar" />
         </template>
         <template #item="{ props, item }">
-            <v-list-item v-bind="props" :prepend-avatar="item.raw.avatar" :subtitle="item.raw.email" />
+            <v-list-item v-bind="props" :prepend-avatar="item.raw.avatar" :subtitle="item.raw.credential" />
         </template>
         <template #append-item>
             <v-list-item v-intersect="onIntersect">Loading...</v-list-item>

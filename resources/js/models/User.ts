@@ -12,7 +12,7 @@ export default class User extends Model implements BaseUser {
 
     @Attr() declare _id: string;
     @Str("") declare username: string;
-    @Str("") declare email: string;
+    @Str("") declare credential: string;
     @Str("") declare avatar: string;
     declare status: UserStatus;
 

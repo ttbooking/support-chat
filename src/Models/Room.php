@@ -179,15 +179,21 @@ class Room extends Model
     #[Scope]
     protected function withUser(Builder $query, string $qualifier, bool $strict = false): void
     {
-        $userCredKey = config('support-chat.user_cred_key');
+        $nameKey = config('support-chat.user_name_key');
+        $credKey = config('support-chat.user_cred_key');
 
-        $query->whereHas('users', function (Builder $query) use ($qualifier, $strict, $userCredKey) {
+        $query->whereHas('users', function (Builder $query) use ($qualifier, $strict, $nameKey, $credKey) {
             $query
                 ->whereKey($qualifier)
                 ->when(
                     $strict,
-                    static fn (Builder $query) => $query->orWhere($userCredKey, $qualifier),
-                    static fn (Builder $query) => $query->orWhereLike($userCredKey, $qualifier.'%'),
+                    static fn (Builder $query) => $query->orWhere($nameKey, $qualifier),
+                    static fn (Builder $query) => $query->orWhereLike($nameKey, $qualifier.'%'),
+                )
+                ->when(
+                    $strict,
+                    static fn (Builder $query) => $query->orWhere($credKey, $qualifier),
+                    static fn (Builder $query) => $query->orWhereLike($credKey, $qualifier.'%'),
                 );
         });
     }

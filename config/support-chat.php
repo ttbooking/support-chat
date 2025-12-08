@@ -34,8 +34,9 @@ return [
 
     'user_model' => App\Models\User::class,
     'user_resource' => TTBooking\SupportChat\Http\Resources\UserResource::class,
-    'user_cred_key' => env('CHAT_CRED_KEY', 'email'),
-    'user_cred_seed' => env('CHAT_CRED_SEED'),
+    'user_name_key' => env('CHAT_USER_NAME_KEY', 'name'),
+    'user_cred_key' => env('CHAT_USER_CRED_KEY', 'email'),
+    'user_cred_seed' => env('CHAT_USER_CRED_SEED'),
 
     /*
     |--------------------------------------------------------------------------

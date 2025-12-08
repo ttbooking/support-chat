@@ -30,14 +30,17 @@ class UserResource extends JsonResource
             );
         }
 
-        if (! isset($this->name, $this->email)) {
-            throw new Exception('User model should provide at least "name" and "email" attributes.');
+        $nameKey = config('support-chat.user_name_key', 'name');
+        $credKey = config('support-chat.user_cred_key', 'email');
+
+        if (! isset($this->$nameKey, $this->$credKey)) {
+            throw new Exception("User model should provide at least \"$nameKey\" and \"$credKey\" attributes.");
         }
 
         return [
             '_id' => (string) $this->getKey(),
-            'username' => $this->name,
-            'email' => $this->email,
+            'username' => $this->$nameKey,
+            'credential' => $this->$credKey,
             'avatar' => $this->avatar ?? null,
             'status' => $this->whenHas('participant', static fn ($participant) => [
                 'state' => $participant->online ? 'online' : 'offline',
