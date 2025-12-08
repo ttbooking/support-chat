@@ -167,13 +167,11 @@ class Room extends Model
     #[Scope]
     protected function withRoom(Builder $query, string $qualifier, bool $strict = false): void
     {
-        $query
-            ->whereKey($qualifier)
-            ->when(
-                $strict,
-                static fn (Builder $query) => $query->orWhere('name', $qualifier),
-                static fn (Builder $query) => $query->orWhereLike('name', $qualifier.'%'),
-            );
+        $query->where(static fn (Builder $query) => $query->whereKey($qualifier)->when(
+            $strict,
+            static fn (Builder $query) => $query->orWhere('name', $qualifier),
+            static fn (Builder $query) => $query->orWhereLike('name', $qualifier.'%'),
+        ));
     }
 
     #[Scope]
