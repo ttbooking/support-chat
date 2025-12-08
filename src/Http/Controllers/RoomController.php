@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
@@ -26,9 +27,13 @@ class RoomController extends Controller
     /**
      * Display a listing of the rooms.
      */
-    public function index(): ResourceCollection
+    public function index(Request $request): ResourceCollection
     {
-        return Room::all()->toResourceCollection();
+        $query = $request->query('q');
+
+        return $query
+            ? Room::withDescriptor($request->query('q'))->get()->toResourceCollection()
+            : Room::all()->toResourceCollection();
     }
 
     /**
