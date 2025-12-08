@@ -32,7 +32,7 @@ class SupportChat
 
     /**
      * @param  array<string, mixed>  $features
-     * @param  array<string, array<string, string>>  $styles
+     * @param  array{light?: array<string, array<string, string>>, dark?: array<string, array<string, string>>}  $styles
      */
     public static function standalone(?string $roomId = null, array $features = [], array $styles = []): HtmlString
     {
@@ -41,7 +41,10 @@ class SupportChat
             'userId' => (string) auth()->id(),
             'roomId' => $roomId,
             'features' => $features + config('support-chat.features', []),
-            'styles' => (object) array_merge_recursive(array_filter(config('support-chat.styles', [])), $styles),
+            'styles' => [
+                (object) array_merge_recursive(array_filter(config('support-chat.styles.light', [])), $styles['light'] ?? []),
+                (object) array_merge_recursive(array_filter(config('support-chat.styles.dark', [])), $styles['dark'] ?? []),
+            ],
         ]);
 
         return new HtmlString(
@@ -52,7 +55,7 @@ class SupportChat
 
     /**
      * @param  array<string, mixed>  $features
-     * @param  array<string, array<string, string>>  $styles
+     * @param  array{light?: array<string, array<string, string>>, dark?: array<string, array<string, string>>}  $styles
      */
     public static function windowed(array $features = [], array $styles = []): HtmlString
     {
@@ -60,7 +63,10 @@ class SupportChat
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
             'features' => $features + config('support-chat.features', []),
-            'styles' => (object) array_merge_recursive(array_filter(config('support-chat.styles', [])), $styles),
+            'styles' => [
+                (object) array_merge_recursive(array_filter(config('support-chat.styles.light', [])), $styles['light'] ?? []),
+                (object) array_merge_recursive(array_filter(config('support-chat.styles.dark', [])), $styles['dark'] ?? []),
+            ],
         ]);
 
         return new HtmlString(

@@ -21,7 +21,10 @@ declare global {
                 show_new_messages_divider: boolean;
                 show_footer: boolean;
             };
-            styles?: Record<string, Record<string, string>>;
+            styles: {
+                light: Record<string, Record<string, string>>;
+                dark: Record<string, Record<string, string>>;
+            };
         };
         axios: AxiosInstance;
         Echo: Echo<"pusher">;

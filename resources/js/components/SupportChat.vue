@@ -26,7 +26,7 @@
         :show-reaction-emojis="$env.features.show_reaction_emojis"
         :show-new-messages-divider="$env.features.show_new_messages_divider"
         :show-footer="$env.features.show_footer"
-        :styles.prop="$env.styles"
+        :styles.prop="style"
         @fetch-messages="messageRepo.fetch($event.detail[0])"
         @fetch-more-rooms="roomRepo.fetch"
         @send-message="messageRepo.send($event.detail[0])"
@@ -71,6 +71,7 @@ const model = defineModel<string>();
 const props = defineProps<{ roomId?: string; height: number }>();
 
 const theme = computed(() => (usePreferredColorScheme().value !== "dark" ? "light" : "dark"));
+const style = computed(() => window.SupportChat.styles[theme.value]);
 useTheme().change(theme.value);
 
 const computedHeight = computed(() => props.height - 35 + "px");

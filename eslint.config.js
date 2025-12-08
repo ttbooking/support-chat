@@ -1,5 +1,6 @@
 // @ts-check
 
+import globals from "globals";
 import js from "@eslint/js";
 import ts from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
@@ -13,6 +14,9 @@ export default [
     eslintConfigPrettier,
     {
         languageOptions: {
+            globals: {
+                ...globals.browser,
+            },
             parserOptions: {
                 parser: tsParser,
                 sourceType: "module",
