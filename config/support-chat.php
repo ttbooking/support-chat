@@ -61,17 +61,17 @@ return [
     */
 
     'features' => [
-        'showSearch' => env('CHAT_SHOW_SEARCH', true),
-        'showAddRoom' => env('CHAT_SHOW_ADD_ROOM', true),
-        'showSendIcon' => env('CHAT_SHOW_SEND_ICON', true),
-        'showFiles' => env('CHAT_SHOW_FILES', true),
-        'showAudio' => env('CHAT_SHOW_AUDIO', true),
-        'audioBitRate' => env('CHAT_AUDIO_BIT_RATE', 128),
-        'audioSampleRate' => env('CHAT_AUDIO_SAMPLE_RATE', 44100),
-        'showEmojis' => env('CHAT_SHOW_EMOJIS', true),
-        'showReactionEmojis' => env('CHAT_SHOW_REACTION_EMOJIS', true),
-        'showNewMessagesDivider' => env('CHAT_SHOW_NEW_MESSAGES_DIVIDER', true),
-        'showFooter' => env('CHAT_SHOW_FOOTER', true),
+        'showSearch' => env('CHAT_SHOW_SEARCH'),
+        'showAddRoom' => env('CHAT_SHOW_ADD_ROOM'),
+        'showSendIcon' => env('CHAT_SHOW_SEND_ICON'),
+        'showFiles' => env('CHAT_SHOW_FILES'),
+        'showAudio' => env('CHAT_SHOW_AUDIO'),
+        'audioBitRate' => env('CHAT_AUDIO_BIT_RATE'),
+        'audioSampleRate' => env('CHAT_AUDIO_SAMPLE_RATE'),
+        'showEmojis' => env('CHAT_SHOW_EMOJIS'),
+        'showReactionEmojis' => env('CHAT_SHOW_REACTION_EMOJIS'),
+        'showNewMessagesDivider' => env('CHAT_SHOW_NEW_MESSAGES_DIVIDER'),
+        'showFooter' => env('CHAT_SHOW_FOOTER'),
     ],
 
     /*
