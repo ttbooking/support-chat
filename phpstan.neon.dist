@@ -33,4 +33,11 @@ parameters:
             reportUnmatched: false
         -
             message: '#^Class App\\Models\\User not found\.$#'
+            path: config/support-chat.php
             reportUnmatched: false
+        -
+            message: '#^Method TTBooking\\SupportChat\\Models\\\w+::\w+\(\) invoked with \d+ parameters, \d+\-\d+ required\.$#'
+            identifier: arguments.count
+            path: src/Models/*.php
+            reportUnmatched: false
+
