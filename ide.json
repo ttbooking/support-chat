@@ -7,5 +7,15 @@
                 "namespace": "support-chat"
             }
         ]
+    },
+    "blade": {
+        "directives": [
+            {
+                "name": "chat"
+            },
+            {
+                "name": "winchat"
+            }
+        ]
     }
 }
