@@ -7,6 +7,7 @@ namespace TTBooking\SupportChat\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
+ * @property-read string|null $filter
  * @property-read bool|null $showSearch
  * @property-read bool|null $showAddRoom
  * @property-read bool|null $showSendIcon
@@ -28,6 +29,7 @@ class ShowChatRequest extends FormRequest
     {
         $this->replace(
             array_filter([
+                'filter' => (string) $this->query('filter'),
                 'showSearch' => (bool) $this->query('showSearch'),
                 'showAddRoom' => (bool) $this->query('showAddRoom'),
                 'showSendIcon' => (bool) $this->query('showSendIcon'),
@@ -51,6 +53,7 @@ class ShowChatRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'filter' => 'sometimes|required|string',
             'showSearch' => 'sometimes|required|boolean',
             'showAddRoom' => 'sometimes|required|boolean',
             'showSendIcon' => 'sometimes|required|boolean',

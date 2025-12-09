@@ -122,7 +122,7 @@ const messageActions = ref([
 ]);
 
 onMounted(async () => {
-    roomRepo.filter = window.SupportChat.filter;
+    roomRepo.filter = window.SupportChat.filter ?? null;
     if (props.roomId) {
         await roomRepo.single(props.roomId);
     } else {

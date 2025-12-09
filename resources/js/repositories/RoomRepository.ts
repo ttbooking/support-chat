@@ -10,7 +10,7 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     loaded = ref(false);
 
-    filter: string = "";
+    filter: string | null = null;
 
     single = async (roomId: string) => {
         this.loaded.value = false;
@@ -24,7 +24,7 @@ export default class RoomRepository extends AxiosRepository<Room> {
         this.loaded.value = false;
         this.fresh([]);
         const url = window.SupportChat.path + "/api/rooms";
-        search = this.filter + " " + search;
+        if (this.filter) search = this.filter + " " + search;
         const response = await this.api().get(url, { dataKey: "data", params: { search } });
         this.loaded.value = true;
         return response;

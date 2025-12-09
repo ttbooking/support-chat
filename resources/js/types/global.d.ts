@@ -7,8 +7,8 @@ declare global {
         SupportChat: {
             path: string;
             userId: string;
+            filter?: string;
             roomId?: string;
-            filter: string;
             features: {
                 showSearch?: boolean;
                 showAddRoom?: boolean;
