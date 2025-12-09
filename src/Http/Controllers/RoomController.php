@@ -29,11 +29,11 @@ class RoomController extends Controller
      */
     public function index(Request $request): ResourceCollection
     {
-        $query = $request->query('q');
-
-        return $query
-            ? Room::withDescriptor($request->query('q'))->get()->toResourceCollection()
-            : Room::all()->toResourceCollection();
+        return Room::query()
+            ->when($search = $request->query('search'))
+            ->withDescriptor($search)
+            ->get()
+            ->toResourceCollection();
     }
 
     /**

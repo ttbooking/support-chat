@@ -21,8 +21,9 @@ export default class RoomRepository extends AxiosRepository<Room> {
     search = async ({ roomId, value }: { roomId: string; value: string }) => {
         console.log(`${roomId}: ${value}`);
         this.loaded.value = false;
-        const url = window.SupportChat.path + "/api/rooms?q=" + value;
-        const response = await this.api().get(url, { dataKey: "data" });
+        this.fresh([]);
+        const url = window.SupportChat.path + "/api/rooms";
+        const response = await this.api().get(url, { dataKey: "data", params: { search: value } });
         this.loaded.value = true;
         return response;
     };
@@ -44,7 +45,8 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     setUsers = (roomId: string, users: RoomUser[]) => {
         console.log("here", roomId, users);
-        const room = this.find(roomId)!;
+        const room = this.find(roomId);
+        if (!room) return;
         room.users = users.map((user) => ({
             ...user,
             status: {
@@ -57,7 +59,8 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     joinUser = (roomId: string, user: RoomUser) => {
         console.log("joining", roomId, user);
-        const room = this.find(roomId)!;
+        const room = this.find(roomId);
+        if (!room) return;
         for (const i in room.users) {
             if (room.users[i]._id === user._id) {
                 room.users[i] = {
@@ -74,7 +77,8 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     leaveUser = (roomId: string, user: RoomUser) => {
         console.log("leaving", roomId, user);
-        const room = this.find(roomId)!;
+        const room = this.find(roomId);
+        if (!room) return;
         for (const i in room.users) {
             if (room.users[i]._id === user._id) {
                 room.users[i] = {
