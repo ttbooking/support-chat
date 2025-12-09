@@ -10,22 +10,28 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     loaded = ref(false);
 
-    fetch = async (roomId?: string) => {
+    filter: string = "";
+
+    single = async (roomId: string) => {
         this.loaded.value = false;
         const url = window.SupportChat.path + "/api/rooms";
-        const response = await this.api().get(roomId ? `${url}/${roomId}` : url, { dataKey: "data" });
+        const response = await this.api().get(`${url}/${roomId}`, { dataKey: "data" });
         this.loaded.value = true;
         return response;
     };
 
-    search = async ({ roomId, value }: { roomId: string; value: string }) => {
-        console.log(`${roomId}: ${value}`);
+    fetch = async (search: string = "") => {
         this.loaded.value = false;
         this.fresh([]);
         const url = window.SupportChat.path + "/api/rooms";
-        const response = await this.api().get(url, { dataKey: "data", params: { search: value } });
+        search = this.filter + " " + search;
+        const response = await this.api().get(url, { dataKey: "data", params: { search } });
         this.loaded.value = true;
         return response;
+    };
+
+    search = async ({ value }: { roomId: string; value: string }) => {
+        return await this.fetch(value);
     };
 
     add = async () => {

@@ -34,12 +34,13 @@ class SupportChat
      * @param  array<string, mixed>  $features
      * @param  array{light?: array<string, array<string, string>>, dark?: array<string, array<string, string>>}  $styles
      */
-    public static function standalone(?string $roomId = null, array $features = [], array $styles = []): HtmlString
+    public static function standalone(string $filter = '', ?string $roomId = null, array $features = [], array $styles = []): HtmlString
     {
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
             'roomId' => $roomId,
+            'filter' => $filter,
             'features' => (object) ($features + array_filter(config('support-chat.features', []), static fn (mixed $value) => ! is_null($value))),
             'styles' => [
                 'light' => (object) array_merge_recursive(array_filter(config('support-chat.styles.light', [])), $styles['light'] ?? []),

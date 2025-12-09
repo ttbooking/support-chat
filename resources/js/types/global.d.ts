@@ -8,6 +8,7 @@ declare global {
             path: string;
             userId: string;
             roomId?: string;
+            filter: string;
             features: {
                 showSearch?: boolean;
                 showAddRoom?: boolean;

@@ -122,7 +122,12 @@ const messageActions = ref([
 ]);
 
 onMounted(async () => {
-    await roomRepo.fetch(props.roomId);
+    roomRepo.filter = window.SupportChat.filter;
+    if (props.roomId) {
+        await roomRepo.single(props.roomId);
+    } else {
+        await roomRepo.fetch();
+    }
 
     window.Echo.private(`support-chat.user.${window.SupportChat.userId}`)
         .listenToAll((event: string, data: unknown) => console.log(`user.${window.SupportChat.userId}`, event, data))
