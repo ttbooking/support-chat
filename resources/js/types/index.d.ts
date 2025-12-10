@@ -82,6 +82,11 @@ export interface AttachmentCallbackArgs {
     progress?: number;
 }
 
+export interface SearchRoomArgs {
+    roomId: string;
+    value: string;
+}
+
 export interface OpenFileArgs {
     message: Message;
     file: {

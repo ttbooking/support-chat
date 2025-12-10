@@ -36,7 +36,7 @@
         @open-file="openFile($event.detail[0])"
         @open-failed-message="messageRepo.trySend($event.detail[0])"
         @add-room="roomRepo.add"
-        @search-room="roomRepo.search($event.detail[0])"
+        @search-room="searchRoom($event.detail[0])"
         @room-action-handler="menuActionHandler($event.detail[0])"
         @menu-action-handler="menuActionHandler($event.detail[0])"
         @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
@@ -55,9 +55,9 @@
 import { ref, computed, watchEffect, onBeforeMount, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
-import { usePreferredColorScheme } from "@vueuse/core";
+import { useDebounceFn, usePreferredColorScheme } from "@vueuse/core";
 import { useTheme } from "vuetify";
-import type { Room as BaseRoom, OpenFileArgs } from "@/types";
+import type { Room as BaseRoom, SearchRoomArgs, OpenFileArgs } from "@/types";
 
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
@@ -140,6 +140,10 @@ onBeforeUnmount(() => {
     window.Echo.leaveChannel(`support-chat.user.${window.SupportChat.userId}`);
 
     roomRepo.destroy(rooms.value.map((room) => room.roomId));
+});
+
+const searchRoom = useDebounceFn(async ({ value }: SearchRoomArgs) => await roomRepo.fetch(value), 500, {
+    maxWait: 1000,
 });
 
 function openFile(args: OpenFileArgs) {

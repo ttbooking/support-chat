@@ -30,10 +30,6 @@ export default class RoomRepository extends AxiosRepository<Room> {
         return response;
     };
 
-    search = async ({ value }: { roomId: string; value: string }) => {
-        return await this.fetch(value);
-    };
-
     add = async () => {
         return await this.api().post(window.SupportChat.path + "/api/rooms", null, { dataKey: "data" });
     };
