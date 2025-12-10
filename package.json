@@ -20,7 +20,7 @@
         "string-to-color": "^2.2.2",
         "tailwindcss": "^4.1.17",
         "vue": "^3.5.25",
-        "vue-advanced-chat": "^2.1.1",
+        "vue-advanced-chat": "https://github.com/advanced-chat/vue-advanced-chat#main",
         "vue-i18n": "^11.2.2",
         "vuetify": "^3.11.2",
         "winbox": "0.2.82"

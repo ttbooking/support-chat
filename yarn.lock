@@ -3866,7 +3866,7 @@ __metadata:
     vite: "npm:^7.2.7"
     vite-plugin-vuetify: "npm:^2.1.2"
     vue: "npm:^3.5.25"
-    vue-advanced-chat: "npm:^2.1.1"
+    vue-advanced-chat: "https://github.com/advanced-chat/vue-advanced-chat#main"
     vue-eslint-parser: "npm:^10.2.0"
     vue-i18n: "npm:^11.2.2"
     vue-tsc: "npm:^3.1.8"
@@ -4296,14 +4296,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-advanced-chat@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "vue-advanced-chat@npm:2.1.1"
+"vue-advanced-chat@https://github.com/advanced-chat/vue-advanced-chat#main":
+  version: 2.0.9
+  resolution: "vue-advanced-chat@https://github.com/advanced-chat/vue-advanced-chat.git#commit=612668a91bbcb31b07c18b880755a2c5e03ea322"
   dependencies:
     emoji-picker-element: "npm:1.12.1"
     micromark: "npm:^3.1.0"
     micromark-extension-gfm: "npm:^2.0.1"
-  checksum: 10c0/cdbf5a1353f51cd160ff37b14365382afc44649ef163f751be098b0932e639f7261a28a397795acfc3c5394c66907c526edc90daa51b5b38891c630c83da5f4d
+  checksum: 10c0/ae779f04c75322e63f56e3766d5d411667637ad6b5f416b12f60a7efe199d84128390ea05c0607fac62a02a022a244dc88fa0faba77e37054d5969c46a1df818
   languageName: node
   linkType: hard
 
