@@ -37,7 +37,7 @@ class MessageFactory extends Factory
             'sent_by' => $this->getRandomRecycledModel($userModel)?->getKey()
                 ?? $room?->users->random()->getKey()
                 ?? $userModel::all()->random()->getKey(),
-            'content' => fake()->sentence(),
+            'content' => fake()->fishSentence(), // @phpstan-ignore method.notFound
         ];
     }
 }

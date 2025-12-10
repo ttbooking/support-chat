@@ -20,7 +20,7 @@
                 @foreach ($users as $user)
                     <a
                         href="{{ route('workbench.login', $user->email) }}"
-                        class="flex items-center gap-2 min-w-60 px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                        class="flex items-center gap-2 min-w-70 px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
                         <div style="background-image: url({{ $user->avatar }})" class="bg-cover bg-center bg-no-repeat bg-[#ddd] h-[28px] w-[28px] min-h-[28px] min-w-[28px] rounded-[50%]"></div>
                         <span>{{ $user->name }}</span>
                     </a>

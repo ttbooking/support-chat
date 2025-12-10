@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
     {
         $userModel = SupportChat::userModel();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $users = $userModel::all()->random(rand(1, 4))->push(...Arr::wrap($this->user()))->unique();
 
             Room::factory()

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat;
 
+use Faker\Generator;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\User;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use TTBooking\SupportChat\Faker\Extension;
 use TTBooking\ViteManager\Facades\Vite;
 
 class SupportChatServiceProvider extends ServiceProvider
@@ -140,6 +142,7 @@ class SupportChatServiceProvider extends ServiceProvider
         $this->configure();
         $this->registerServices();
         $this->registerCommands();
+        $this->registerFakerProviders();
     }
 
     /**
@@ -176,6 +179,13 @@ class SupportChatServiceProvider extends ServiceProvider
         }
 
         $this->commands($this->commands);
+    }
+
+    protected function registerFakerProviders(): void
+    {
+        $this->callAfterResolving(Generator::class,
+            fn ($faker, $app) => Extension::extend($faker, $app['config']['app.faker_locale'] ?? 'en_US')
+        );
     }
 
     /**
