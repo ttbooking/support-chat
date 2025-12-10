@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, watchEffect, onBeforeMount, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import { register, CustomAction, VueAdvancedChat } from "vue-advanced-chat";
 import { usePreferredColorScheme } from "@vueuse/core";
@@ -121,7 +121,7 @@ const messageActions = ref([
     { name: "selectMessages", title: t("select_messages") },
 ]);
 
-onMounted(async () => {
+onBeforeMount(async () => {
     roomRepo.filter = window.SupportChat.filter ?? null;
     if (props.roomId) {
         await roomRepo.single(props.roomId);
