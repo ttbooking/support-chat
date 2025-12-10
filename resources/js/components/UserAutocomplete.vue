@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from "vue";
+import { ref, computed } from "vue";
+import { watchDebounced } from "@vueuse/core";
 import { useRepo } from "pinia-orm";
 import { useSortBy } from "pinia-orm/helpers";
 import UserRepository from "@/repositories/UserRepository";
@@ -40,9 +41,13 @@ const users = computed(() =>
     ),
 );
 
-watchEffect(async () => {
-    await userRepo.fetch(search.value);
-});
+watchDebounced(
+    search,
+    async () => {
+        await userRepo.fetch(search.value);
+    },
+    { debounce: 500, maxWait: 1000 },
+);
 
 async function onIntersect(isIntersecting: boolean) {
     if (isIntersecting) await userRepo.fetch(search.value);

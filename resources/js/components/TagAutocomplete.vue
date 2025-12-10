@@ -10,7 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from "vue";
+import { ref, computed } from "vue";
+import { watchDebounced } from "@vueuse/core";
 import stc from "string-to-color";
 import { useRepo } from "pinia-orm";
 import { useSortBy } from "pinia-orm/helpers";
@@ -27,9 +28,13 @@ const tags = computed(() =>
 
 const tagColor = (tag: string) => stc(tag.replace(/[ :][^:]*$/, ""));
 
-watchEffect(async () => {
-    await tagRepo.fetch(search.value);
-});
+watchDebounced(
+    search,
+    async () => {
+        await tagRepo.fetch(search.value);
+    },
+    { debounce: 500, maxWait: 1000 },
+);
 
 async function onIntersect(isIntersecting: boolean) {
     if (isIntersecting) await tagRepo.fetch(search.value);
