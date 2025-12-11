@@ -22,14 +22,14 @@
         "vue": "^3.5.25",
         "vue-advanced-chat": "https://github.com/advanced-chat/vue-advanced-chat#main",
         "vue-i18n": "^11.2.2",
-        "vuetify": "^3.11.2",
+        "vuetify": "^3.11.3",
         "winbox": "0.2.82"
     },
     "devDependencies": {
         "@intlify/unplugin-vue-i18n": "^11.0.3",
         "@tailwindcss/vite": "^4.1.17",
         "@types/lodash": "^4.17.21",
-        "@types/node": "^24.10.2",
+        "@types/node": "^24.10.3",
         "@types/winbox": "^0.2.6",
         "@vitejs/plugin-vue": "^6.0.2",
         "eslint": "^9.39.1",
