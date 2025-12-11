@@ -14,7 +14,7 @@ export default class RoomRepository extends AxiosRepository<Room> {
 
     single = async (roomId: string) => {
         this.loaded.value = false;
-        const url = window.SupportChat.path + "/api/rooms";
+        const url = window.chat.path + "/api/rooms";
         const response = await this.api().get(`${url}/${roomId}`, { dataKey: "data" });
         this.loaded.value = true;
         return response;
@@ -23,7 +23,7 @@ export default class RoomRepository extends AxiosRepository<Room> {
     fetch = async (search: string = "") => {
         this.loaded.value = false;
         this.fresh([]);
-        const url = window.SupportChat.path + "/api/rooms";
+        const url = window.chat.path + "/api/rooms";
         if (this.filter) search = this.filter + " " + search;
         const response = await this.api().get(url, { dataKey: "data", params: { search } });
         this.loaded.value = true;
@@ -31,15 +31,15 @@ export default class RoomRepository extends AxiosRepository<Room> {
     };
 
     add = async () => {
-        return await this.api().post(window.SupportChat.path + "/api/rooms", null, { dataKey: "data" });
+        return await this.api().post(window.chat.path + "/api/rooms", null, { dataKey: "data" });
     };
 
     update = async (room: BaseRoom) => {
-        return await this.api().put(window.SupportChat.path + `/api/rooms/${room.roomId}`, room, { dataKey: "data" });
+        return await this.api().put(window.chat.path + `/api/rooms/${room.roomId}`, room, { dataKey: "data" });
     };
 
     delete = async (roomId: string) => {
-        return await this.api().delete(window.SupportChat.path + `/api/rooms/${roomId}`, {
+        return await this.api().delete(window.chat.path + `/api/rooms/${roomId}`, {
             delete: 1,
             dataKey: "data",
         });

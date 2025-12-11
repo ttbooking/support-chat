@@ -73,7 +73,7 @@ const model = defineModel<string>();
 const props = defineProps<{ roomId?: string; height: number }>();
 
 const theme = computed(() => (usePreferredColorScheme().value !== "dark" ? "light" : "dark"));
-const style = computed(() => window.SupportChat.styles[theme.value]);
+const style = computed(() => window.chat.styles[theme.value]);
 useTheme().change(theme.value);
 
 const computedHeight = computed(() => props.height - 35 + "px");
@@ -122,22 +122,22 @@ const messageActions = ref([
 ]);
 
 onBeforeMount(async () => {
-    roomRepo.filter = window.SupportChat.filter ?? null;
+    roomRepo.filter = window.chat.filter ?? null;
     if (props.roomId) {
         await roomRepo.single(props.roomId);
     } else {
         await roomRepo.fetch();
     }
 
-    window.Echo.private(`support-chat.user.${window.SupportChat.userId}`)
-        .listenToAll((event: string, data: unknown) => console.log(`user.${window.SupportChat.userId}`, event, data))
+    window.Echo.private(`support-chat.user.${window.chat.userId}`)
+        .listenToAll((event: string, data: unknown) => console.log(`user.${window.chat.userId}`, event, data))
         .error((error: unknown) => console.error(error))
         .listen(".user.invited", (room: BaseRoom) => roomRepo.save(room))
         .listen(".user.kicked", (room: BaseRoom) => roomRepo.destroy(room.roomId));
 });
 
 onBeforeUnmount(() => {
-    window.Echo.leaveChannel(`support-chat.user.${window.SupportChat.userId}`);
+    window.Echo.leaveChannel(`support-chat.user.${window.chat.userId}`);
 
     roomRepo.destroy(rooms.value.map((room) => room.roomId));
 });

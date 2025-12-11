@@ -15,8 +15,10 @@
         <!-- Scripts -->
         @vite('resources/js/app.js')
         @chat($filter, $roomId, $features)
+        @winchat($features)
     </head>
     <body class="font-sans antialiased">
         <div id="standalone-chat" v-cloak></div>
+        <div id="windowed-chat" v-cloak></div>
     </body>
 </html>

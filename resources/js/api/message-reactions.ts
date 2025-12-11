@@ -1,4 +1,4 @@
-const baseUrl = window.SupportChat.path + "/api";
+const baseUrl = window.chat.path + "/api";
 
 export default {
     store(messageId: string, emoji: string) {

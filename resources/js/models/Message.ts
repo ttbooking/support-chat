@@ -12,7 +12,7 @@ export default class Message extends Model implements BaseMessage {
 
     @Uid(7) declare _id: string;
     @Attr() declare roomId: string;
-    @Str(window.SupportChat.userId) declare senderId: string;
+    @Str(window.chat.userId) declare senderId: string;
     @Str(null) declare replyMessageId?: string;
     @Attr(null) declare indexId?: StringNumber;
     @Str(null) declare content?: string;

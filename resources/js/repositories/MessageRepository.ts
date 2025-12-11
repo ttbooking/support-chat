@@ -27,7 +27,7 @@ export default class MessageRepository extends AxiosRepository<Message> {
     fetch = async ({ room }: FetchMessagesArgs) => {
         this.room.value = room;
         this.loaded.value = false;
-        const response = await this.api().get(window.SupportChat.path + `/api/rooms/${room.roomId}/messages`, {
+        const response = await this.api().get(window.chat.path + `/api/rooms/${room.roomId}/messages`, {
             //dataTransformer: ({ data }) => data.data.map((message: BaseMessage) => ({ ...message, room })),
             dataKey: "data",
         });
@@ -43,7 +43,7 @@ export default class MessageRepository extends AxiosRepository<Message> {
     trySend = async ({ roomId, message }: TrySendMessageArgs) => {
         try {
             return await this.api().post(
-                window.SupportChat.path + `/api/rooms/${roomId}/messages`,
+                window.chat.path + `/api/rooms/${roomId}/messages`,
                 {
                     id: message._id,
                     reply_to: message.replyMessage?._id,
@@ -68,7 +68,7 @@ export default class MessageRepository extends AxiosRepository<Message> {
     };
 
     delete = async ({ message }: DeleteMessageArgs) => {
-        return await this.api().delete(window.SupportChat.path + `/api/messages/${message._id}`, {
+        return await this.api().delete(window.chat.path + `/api/messages/${message._id}`, {
             delete: 1,
             dataKey: "data",
         });
@@ -76,10 +76,10 @@ export default class MessageRepository extends AxiosRepository<Message> {
 
     sendReaction = async ({ messageId, reaction, remove }: SendMessageReactionArgs) => {
         if (remove) {
-            this.reactionRemoved({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
+            this.reactionRemoved({ messageId, userId: window.chat.userId, emoji: reaction.unicode });
             await api.messageReactions.destroy(messageId, reaction.unicode);
         } else {
-            this.reactionLeft({ messageId, userId: window.SupportChat.userId, emoji: reaction.unicode });
+            this.reactionLeft({ messageId, userId: window.chat.userId, emoji: reaction.unicode });
             await api.messageReactions.store(messageId, reaction.unicode);
         }
     };

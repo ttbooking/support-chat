@@ -12,7 +12,6 @@
         >
             <SupportChat v-model="window.value.title" :height="window.value.height" />
         </VueWinBox>
-        <v-fab class="fixed" icon="$vuetify" color="primary" @click="createWindow" />
     </div>
 </template>
 
@@ -24,13 +23,6 @@ import { useWindowManager } from "@/composables";
 import icon from "../images/favicon.svg";
 
 const { windows, createWindow, closeWindow } = useWindowManager();
-</script>
 
-<style scoped>
-.fixed {
-    position: fixed;
-    right: 64px;
-    bottom: 64px;
-    z-index: 5000;
-}
-</style>
+window.chat.open = createWindow;
+</script>

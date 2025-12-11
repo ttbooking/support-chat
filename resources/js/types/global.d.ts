@@ -4,7 +4,7 @@ import en from "../locales/en.json";
 
 declare global {
     interface Window {
-        SupportChat: {
+        chat: {
             path: string;
             userId: string;
             filter?: string;
@@ -26,6 +26,7 @@ declare global {
                 light: Record<string, Record<string, string>>;
                 dark: Record<string, Record<string, string>>;
             };
+            open?: () => void;
         };
         axios: AxiosInstance;
         Echo: Echo<"pusher">;
@@ -34,7 +35,7 @@ declare global {
 
 declare module "vue" {
     interface ComponentCustomProperties {
-        $env: typeof window.SupportChat;
+        $env: typeof window.chat;
     }
 }
 
