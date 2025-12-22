@@ -21,7 +21,7 @@
         "tailwindcss": "^4.1.18",
         "vue": "^3.5.26",
         "vue-advanced-chat": "^2.1.2",
-        "vue-i18n": "^11.2.2",
+        "vue-i18n": "^11.2.7",
         "vuetify": "^3.11.4",
         "winbox": "0.2.82"
     },
@@ -44,7 +44,7 @@
         "vite": "^7.3.0",
         "vite-plugin-vuetify": "^2.1.2",
         "vue-eslint-parser": "^10.2.0",
-        "vue-tsc": "^3.1.8"
+        "vue-tsc": "^3.2.0"
     },
     "packageManager": "yarn@4.12.0"
 }
