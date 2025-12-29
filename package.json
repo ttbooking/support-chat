@@ -13,7 +13,7 @@
         "@pinia-orm/axios": "^1.10.2",
         "@vueuse/core": "^14.1.0",
         "axios": "^1.13.2",
-        "laravel-echo": "^2.2.6",
+        "laravel-echo": "^2.2.7",
         "lodash": "^4.17.21",
         "pinia": "^3.0.4",
         "pinia-orm": "^1.10.2",
@@ -22,7 +22,7 @@
         "vue": "^3.5.26",
         "vue-advanced-chat": "^2.1.2",
         "vue-i18n": "^11.2.7",
-        "vuetify": "^3.11.4",
+        "vuetify": "^3.11.5",
         "winbox": "0.2.82"
     },
     "devDependencies": {
@@ -40,11 +40,11 @@
         "prettier-plugin-tailwindcss": "^0.7.2",
         "pusher-js": "^8.4.0",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.50.0",
+        "typescript-eslint": "^8.50.1",
         "vite": "^7.3.0",
         "vite-plugin-vuetify": "^2.1.2",
         "vue-eslint-parser": "^10.2.0",
-        "vue-tsc": "^3.2.0"
+        "vue-tsc": "^3.2.1"
     },
     "packageManager": "yarn@4.12.0"
 }
