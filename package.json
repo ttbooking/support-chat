@@ -12,7 +12,7 @@
         "@mdi/font": "^7.4.47",
         "@pinia-orm/axios": "^1.10.2",
         "@vueuse/core": "^14.1.0",
-        "axios": "^1.13.2",
+        "axios": "^1.13.3",
         "laravel-echo": "^2.3.0",
         "lodash": "^4.17.23",
         "pinia": "^3.0.4",
