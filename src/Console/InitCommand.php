@@ -38,7 +38,6 @@ class InitCommand extends Command
         'chat_attachments',
         'chat_messages',
         'chat_participants',
-        'chat_room_tag',
         'chat_room_tags',
         'chat_rooms',
     ];

@@ -7,7 +7,7 @@ namespace TTBooking\SupportChat\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\Reaction;
 
@@ -18,9 +18,15 @@ class ReactionController extends Controller
      */
     public function store(Request $request, Message $message): \Illuminate\Http\Response
     {
+        if (! $emoji = grapheme_extract($request->getContent(), 10, GRAPHEME_EXTR_MAXCHARS)) {
+            throw ValidationException::withMessages([
+                'emoji' => __('validation.emoji'),
+            ]);
+        }
+
         $message->reactions()->firstOrCreate([
             'user_id' => auth()->id(),
-            'emoji' => Str::substr($request->getContent(), 0, 1),
+            'emoji' => $emoji,
         ]);
 
         return Response::noContent();

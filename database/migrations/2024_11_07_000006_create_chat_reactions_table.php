@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id();
             $table->foreignNanoid('message_id', (new Message)->nanoidSize())->constrained('chat_messages')->cascadeOnDelete();
             $table->foreignIdFor(SupportChat::userModel(), 'user_id')->constrained()->cascadeOnDelete();
-            $table->char('emoji', 1)->collation($sqlite ? 'binary' : 'utf8mb4_bin');
+            $table->char('emoji', 10)->collation($sqlite ? 'binary' : 'utf8mb4_bin');
             $table->timestamp('created_at')->useCurrent();
             $table->index(['message_id', 'user_id']);
             $table->unique(['message_id', 'user_id', 'emoji']);

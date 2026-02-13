@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat;
 
+use Illuminate\Container\Attributes\Authenticated;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -16,7 +17,7 @@ use TTBooking\SupportChat\Support\Tag;
  */
 class Chat implements Contracts\Chat
 {
-    public function __construct(protected Authenticatable $user) {}
+    public function __construct(#[Authenticated] protected Authenticatable $user) {}
 
     public function as(Authenticatable $user): static
     {
