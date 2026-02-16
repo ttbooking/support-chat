@@ -23,17 +23,15 @@ jobs:
           package-manager-cache: false
 
       - name: Update dependencies
-        env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: false
         run: |
           corepack enable
-          yarn set version stable
+          corepack use pnpm@latest-10
           npx npm-check-updates -u --target semver
-          rm yarn.lock
-          yarn install
+          rm pnpm-lock.yaml
+          pnpm install
 
       - name: Commit updated files
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: Update dependencies
-          file_pattern: 'package.json yarn.lock'
+          file_pattern: 'package.json pnpm-lock.yaml'

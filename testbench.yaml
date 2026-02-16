@@ -47,7 +47,7 @@ workbench:
   build:
     # - sync-skeleton
     # - view-cache
-    - yarn-build
+    - pnpm-build
     - asset-publish
     - create-sqlite-db
     - db-wipe

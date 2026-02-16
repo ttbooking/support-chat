@@ -17,6 +17,6 @@ public/*.map binary
 phpstan.neon.dist export-ignore
 phpunit.xml.dist export-ignore
 pint.json export-ignore
+pnpm-lock.yaml export-ignore
 testbench.yaml export-ignore
 workbench.run.xml export-ignore
-yarn.lock export-ignore

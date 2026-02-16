@@ -11,11 +11,3 @@ composer.lock
 .phpunit.result.cache
 .DS_Store
 *.local
-
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions

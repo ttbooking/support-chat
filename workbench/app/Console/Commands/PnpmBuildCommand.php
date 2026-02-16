@@ -8,17 +8,17 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(
-    name: 'yarn:build',
+    name: 'pnpm:build',
     description: 'Build workbench assets',
 )]
-class YarnBuildCommand extends Command
+class PnpmBuildCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'yarn:build';
+    protected $name = 'pnpm:build';
 
     /**
      * The console command description.
@@ -32,7 +32,7 @@ class YarnBuildCommand extends Command
      */
     public function handle(): int
     {
-        passthru('cd workbench && yarn install && yarn build', $result);
+        passthru('cd workbench && pnpm install && pnpm build', $result);
 
         return $result;
     }

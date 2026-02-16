@@ -27,10 +27,10 @@ jobs:
       - name: Install dependencies
         run: |
           corepack enable
-          yarn install
+          pnpm install
 
       - name: Compile assets
-        run: yarn build
+        run: pnpm build
 
       - name: Commit compiled files
         uses: stefanzweifel/git-auto-commit-action@v6
