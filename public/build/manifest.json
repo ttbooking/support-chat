@@ -23,21 +23,21 @@
     "file": "assets/vuetify-cNi1Wn5r.css",
     "src": "_vuetify-cNi1Wn5r.css"
   },
-  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
+  "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
     "file": "assets/materialdesignicons-webfont-CSr8KVlo.eot",
-    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
+    "src": "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
   },
-  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf": {
+  "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf": {
     "file": "assets/materialdesignicons-webfont-B7mPwVP_.ttf",
-    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf"
+    "src": "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf"
   },
-  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff": {
+  "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff": {
     "file": "assets/materialdesignicons-webfont-PXm3-2wK.woff",
-    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff"
+    "src": "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff"
   },
-  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2": {
+  "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2": {
     "file": "assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
-    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
+    "src": "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
   },
   "resources/images/favicon.svg": {
     "file": "assets/favicon-DXKRda58.svg",
@@ -54,7 +54,7 @@
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-C7nmB9pk.js",
+    "file": "assets/win-BkAXYLFP.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
