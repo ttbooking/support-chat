@@ -96,12 +96,14 @@ class Room implements Contracts\Room
         }
     }
 
-    public function post(string $content, ?Contracts\Message $replyTo = null): Message
+    public function post(string $content, ?Contracts\Message $replyTo = null, ?array $meta = null, int $flags = 0): Message
     {
         return new Message($this, $this->model->messages()->create([
             'sent_by' => $this->chat->user()->getAuthIdentifier(),
             'reply_to' => $replyTo?->id(),
             'content' => $content,
+            'meta' => $meta,
+            'flags' => $flags,
         ]));
     }
 

@@ -61,7 +61,7 @@ interface Room
      */
     public function message(string $id): Message;
 
-    public function post(string $content, ?Message $replyTo = null): Message;
+    public function post(string $content, ?Message $replyTo = null, ?array $meta = null, int $flags = 0): Message;
 
     /**
      * @return $this

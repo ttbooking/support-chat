@@ -66,7 +66,7 @@ class Message extends Model
     /** @var list<string> */
     protected $touches = ['room'];
 
-    protected $fillable = ['id', 'sent_by', 'reply_to', 'content', 'meta'];
+    protected $fillable = ['id', 'sent_by', 'reply_to', 'content', 'meta', 'flags'];
 
     /** @var array<string, mixed> */
     protected $attributes = [
