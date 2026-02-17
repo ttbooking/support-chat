@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
@@ -23,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Database\Factories\RoomFactory;

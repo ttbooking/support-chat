@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
@@ -14,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
 use TTBooking\SupportChat\Database\Factories\RoomTagFactory;
 use TTBooking\SupportChat\Http\Resources\RoomTagResource;
 use TTBooking\SupportChat\Support\Tag;

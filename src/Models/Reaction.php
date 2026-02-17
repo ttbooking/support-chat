@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models;
 
-use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use TTBooking\SupportChat\Observers\ReactionObserver;
 use TTBooking\SupportChat\SupportChat;

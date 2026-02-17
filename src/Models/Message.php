@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Models;
 
 use ArrayObject;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
@@ -18,6 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 use TTBooking\Nanoid\Concerns\HasNanoids;
 use TTBooking\SupportChat\Database\Factories\MessageFactory;
 use TTBooking\SupportChat\Enums\MessageState;
@@ -96,6 +97,11 @@ class Message extends Model
                 $message->replies()->forceDelete();
             }
         });
+    }
+
+    public function freshTimestamp(): Carbon
+    {
+        return Date::now();
     }
 
     public function nanoidSize(): int
