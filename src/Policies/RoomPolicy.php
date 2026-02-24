@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Policies;
 
 use Illuminate\Auth\Access\Response;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use TTBooking\SupportChat\Models\Room;
@@ -24,6 +25,10 @@ class RoomPolicy
      */
     public function view(Authenticatable&Model $user, Room $room): Response
     {
+        if ($user instanceof Authorizable && $user->can('viewForeignRooms')) {
+            return Response::allow();
+        }
+
         return $room->users()->whereKey($user->getAuthIdentifier())->exists()
             ? Response::allow()
             : Response::denyAsNotFound();

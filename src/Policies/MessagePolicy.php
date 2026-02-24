@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Policies;
 
 use Illuminate\Auth\Access\Response;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,10 @@ class MessagePolicy
      */
     public function viewAny(Authenticatable&Model $user, Room $room): Response
     {
+        if ($user instanceof Authorizable && $user->can('viewForeignRooms')) {
+            return Response::allow();
+        }
+
         return $room->users()->whereKey($user->getAuthIdentifier())->exists()
             ? Response::allow()
             : Response::denyAsNotFound();
@@ -28,6 +33,10 @@ class MessagePolicy
      */
     public function view(Authenticatable&Model $user, Message $message): bool
     {
+        if ($user instanceof Authorizable && $user->can('viewForeignRooms')) {
+            return true;
+        }
+
         return $message->room()->whereHas('users', function (Builder $query) use ($user) {
             $query->whereKey($user->getAuthIdentifier());
         })->exists();
