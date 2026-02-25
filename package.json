@@ -23,7 +23,7 @@
         "vue": "^3.5.29",
         "vue-advanced-chat": "^2.1.2",
         "vue-i18n": "^11.2.8",
-        "vuetify": "^3.12.1",
+        "vuetify": "^4.0.0",
         "winbox": "0.2.82"
     },
     "devDependencies": {
