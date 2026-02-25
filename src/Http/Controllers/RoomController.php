@@ -44,7 +44,7 @@ class RoomController extends Controller
         $room = Room::query()->create($request->safe()->except('users', 'tags') + ['created_by' => auth()->id()]);
         $room->users()->sync($request->validated('users.*._id'));
 
-        foreach ($request->validated('tags.*') as $tag) {
+        foreach ($request->validated('tags.*') ?? [] as $tag) {
             $room->tags()->createOrFirst(Tag::from($tag)->toArray());
         }
 
@@ -68,7 +68,7 @@ class RoomController extends Controller
         $room->update($request->safe()->except('users', 'tags'));
         $room->users()->sync($request->validated('users.*._id'));
 
-        foreach ($request->validated('tags.*') as $tag) {
+        foreach ($request->validated('tags.*') ?? [] as $tag) {
             $room->tags()->createOrFirst(Tag::from($tag)->toArray());
         }
 
