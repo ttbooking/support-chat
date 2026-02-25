@@ -1,7 +1,7 @@
 <template>
     <v-autocomplete v-model="pickedTags" v-model:search="search" multiple chips closable-chips :items="tags">
         <template #chip="{ props, item }">
-            <v-chip v-bind="props" variant="flat" :color="tagColor(item.raw)" />
+            <v-chip v-bind="props" variant="flat" :color="tagColor(item)" />
         </template>
         <template #append-item>
             <v-list-item v-intersect="onIntersect">Loading...</v-list-item>

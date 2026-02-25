@@ -10,10 +10,10 @@
         return-object
     >
         <template #chip="{ props, item }">
-            <v-chip v-bind="props" :prepend-avatar="item.raw.avatar" />
+            <v-chip v-bind="props" :prepend-avatar="item.avatar" />
         </template>
         <template #item="{ props, item }">
-            <v-list-item v-bind="props" :prepend-avatar="item.raw.avatar" :subtitle="item.raw.credential" />
+            <v-list-item v-bind="props" :prepend-avatar="item.avatar" :subtitle="item.credential" />
         </template>
         <template #append-item>
             <v-list-item v-intersect="onIntersect">Loading...</v-list-item>
