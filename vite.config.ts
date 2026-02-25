@@ -40,6 +40,9 @@ export default defineConfig({
         }),
         vuetify({
             autoImport: true,
+            styles: {
+                configFile: "resources/css/settings.scss",
+            },
         }),
     ],
 });
