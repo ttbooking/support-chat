@@ -28,10 +28,10 @@
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
-        "@intlify/unplugin-vue-i18n": "^11.0.7",
+        "@intlify/unplugin-vue-i18n": "^11.1.0",
         "@tailwindcss/vite": "^4.2.1",
         "@types/lodash": "^4.17.24",
-        "@types/node": "^24.10.13",
+        "@types/node": "^24.10.14",
         "@types/winbox": "^0.2.6",
         "@typescript-eslint/parser": "^8.56.1",
         "@vitejs/plugin-vue": "^6.0.4",
