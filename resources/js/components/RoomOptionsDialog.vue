@@ -12,7 +12,7 @@
                 <v-card :title="$t('room_configuration', { name: room.roomName })">
                     <v-card-text>
                         <v-row no-gutters>
-                            <v-col cols="6">
+                            <v-col cols="4">
                                 <v-text-field
                                     v-model="model.value.roomId"
                                     :label="$t('room_id')"
@@ -21,7 +21,7 @@
                                     tabindex="-1"
                                 />
                             </v-col>
-                            <v-col cols="6">
+                            <v-col cols="8">
                                 <v-text-field
                                     v-model="model.value.creator.username"
                                     :label="$t('creator')"
