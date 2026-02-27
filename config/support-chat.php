@@ -57,6 +57,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Vue Advanced Chat default window configuration
+    |--------------------------------------------------------------------------
+    */
+
+    'window_defaults' => [
+        'class' => 'modern',
+        'minwidth' => 250,
+        'minheight' => 400,
+        'overflow' => true,
+        'title' => 'My Window',
+        'index' => 1000,
+        'x' => 100,
+        'y' => 100,
+        'width' => 500,
+        'height' => 400,
+        'min' => false,
+        'max' => false,
+        'full' => false,
+        'hidden' => false,
+        'focused' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Vue Advanced Chat feature flags
     |--------------------------------------------------------------------------
     */

@@ -1,6 +1,7 @@
 import { AxiosInstance } from "axios";
 import Echo from "laravel-echo";
 import en from "../locales/en.json";
+import type { WinBoxProps, WinBoxModel } from "@/types/winbox";
 
 declare global {
     interface Window {
@@ -9,6 +10,7 @@ declare global {
             userId: string;
             filter?: string;
             roomId?: string;
+            windowDefaults: Partial<WinBoxProps & WinBoxModel>;
             features: {
                 showSearch?: boolean;
                 showAddRoom?: boolean;

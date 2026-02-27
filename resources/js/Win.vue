@@ -5,9 +5,10 @@
             :key="id"
             v-model="window.value"
             :icon="icon"
-            class="modern"
-            minwidth="300"
-            minheight="450"
+            :class="defaults.class"
+            :minwidth="defaults.minwidth"
+            :minheight="defaults.minheight"
+            :overflow="defaults.overflow"
             @close="closeWindow"
         >
             <SupportChat v-model="window.value.title" :height="window.value.height" />
@@ -22,7 +23,7 @@ import { useWindowManager } from "@/composables";
 
 import icon from "../images/favicon.svg";
 
-const { windows, createWindow, closeWindow } = useWindowManager();
+const { defaults, windows, createWindow, closeWindow } = useWindowManager(window.chat.windowDefaults);
 
 window.chat.open = createWindow;
 </script>

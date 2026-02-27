@@ -1,3 +1,11 @@
+export interface WinBoxProps {
+    icon?: string;
+    class?: string | string[];
+    minheight?: string | number;
+    minwidth?: string | number;
+    overflow?: boolean;
+}
+
 export interface WinBoxModel {
     id: string;
     title: string;

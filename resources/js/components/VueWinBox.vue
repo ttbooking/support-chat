@@ -5,26 +5,17 @@
 <script setup lang="ts">
 import { ref, watchEffect, onBeforeMount, onScopeDispose, toRaw } from "vue";
 import "winbox";
-import type { WinBoxModel } from "@/types/winbox";
+import type { WinBoxProps, WinBoxModel } from "@/types/winbox";
 
 const winbox = ref<WinBox | null>(null);
 
-const props = withDefaults(
-    defineProps<{
-        icon?: string;
-        class?: string | string[];
-        minheight?: string | number;
-        minwidth?: string | number;
-        overflow?: boolean;
-    }>(),
-    {
-        icon: undefined,
-        class: "modern",
-        minwidth: 250,
-        minheight: 400,
-        overflow: true,
-    },
-);
+const props = withDefaults(defineProps<WinBoxProps>(), {
+    icon: undefined,
+    class: "modern",
+    minwidth: 250,
+    minheight: 400,
+    overflow: true,
+});
 
 const model = defineModel<WinBoxModel>({
     required: true,

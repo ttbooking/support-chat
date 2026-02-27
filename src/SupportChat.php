@@ -63,6 +63,7 @@ class SupportChat
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
+            'windowDefaults' => config('support-chat.window_defaults', []),
             'features' => (object) ($features + array_filter(config('support-chat.features', []), static fn (mixed $value) => ! is_null($value))),
             'styles' => [
                 'light' => (object) array_merge_recursive(array_filter(config('support-chat.styles.light', [])), $styles['light'] ?? []),
