@@ -11,7 +11,11 @@
             :overflow="defaults.overflow"
             @close="closeWindow"
         >
-            <SupportChat v-model="window.value.title" :height="window.value.height" />
+            <SupportChat
+                v-model="window.value.title"
+                :height="window.value.height"
+                :index="window.value.index + 1000"
+            />
         </VueWinBox>
     </div>
 </template>

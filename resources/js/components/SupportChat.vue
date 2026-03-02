@@ -41,14 +41,13 @@
         @menu-action-handler="menuActionHandler($event.detail[0])"
         @send-message-reaction="messageRepo.sendReaction($event.detail[0])"
     />
-    <Teleport to="body">
-        <RoomOptionsDialog
-            v-if="room"
-            v-show="roomOptionsDialogOpened"
-            v-model="room"
-            v-model:show="roomOptionsDialogOpened"
-        />
-    </Teleport>
+    <RoomOptionsDialog
+        v-if="room"
+        v-show="roomOptionsDialogOpened"
+        v-model="room"
+        v-model:show="roomOptionsDialogOpened"
+        :z-index="index"
+    />
 </template>
 
 <script setup lang="ts">
@@ -70,7 +69,10 @@ register();
 
 const model = defineModel<string>();
 
-const props = defineProps<{ roomId?: string; height: number }>();
+const props = withDefaults(defineProps<{ roomId?: string | null; height: number; index?: number }>(), {
+    roomId: null,
+    index: 2000,
+});
 
 const theme = computed(() => (usePreferredColorScheme().value !== "dark" ? "light" : "dark"));
 const style = computed(() => window.chat.styles[theme.value]);

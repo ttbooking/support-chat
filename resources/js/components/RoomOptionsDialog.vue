@@ -1,6 +1,6 @@
 <template>
     <v-confirm-edit v-model="room" @save="show = false" @cancel="show = false">
-        <template #default="{ model, actions, save, cancel, isPristine }">
+        <template #default="{ model, save, cancel, isPristine }">
             <v-dialog
                 v-model="show"
                 persistent
