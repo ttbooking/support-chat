@@ -114,19 +114,19 @@ class SupportChatServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/support-chat.php' => $this->app->configPath('support-chat.php'),
-        ], ['support-chat-config', 'support-chat', 'config']);
+        ], ['ttbooking-config', 'support-chat-config', 'support-chat', 'config']);
 
         $this->publishes([
             __DIR__.'/../database/migrations' => $this->app->databasePath('migrations'),
-        ], ['support-chat-migrations', 'support-chat', 'migrations']);
+        ], ['ttbooking-migrations', 'support-chat-migrations', 'support-chat', 'migrations']);
 
         $this->publishes([
             __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/support-chat'),
-        ], ['support-chat-views', 'support-chat', 'views']);
+        ], ['ttbooking-views', 'support-chat-views', 'support-chat', 'views']);
 
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/support-chat'),
-        ], ['support-chat-assets', 'support-chat', 'assets']);
+        ], ['ttbooking-assets', 'support-chat-assets', 'support-chat', 'assets']);
     }
 
     protected function registerMigrations(): void
