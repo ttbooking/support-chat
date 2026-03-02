@@ -3,6 +3,7 @@
         <template #default="{ model, save, cancel, isPristine }">
             <v-dialog
                 v-model="show"
+                v-bind="$attrs"
                 persistent
                 width="auto"
                 min-width="600"
@@ -81,6 +82,8 @@
 import UserAutocomplete from "@/components/UserAutocomplete.vue";
 import TagAutocomplete from "@/components/TagAutocomplete.vue";
 import type { Room as BaseRoom } from "@/types";
+
+defineOptions({ inheritAttrs: false });
 
 const room = defineModel<BaseRoom>({ required: true });
 const show = defineModel<boolean>("show", { default: false });
