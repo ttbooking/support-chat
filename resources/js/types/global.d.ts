@@ -29,8 +29,10 @@ declare global {
                 light: Record<string, Record<string, string>>;
                 dark: Record<string, Record<string, string>>;
             };
-            roomInfo?: (room: Room) => void;
             open?: () => void;
+        };
+        chatHandlers?: {
+            roomInfo?: (room: Room) => void;
         };
         axios: AxiosInstance;
         Echo: Echo<"pusher">;
@@ -39,7 +41,7 @@ declare global {
 
 declare module "vue" {
     interface ComponentCustomProperties {
-        $env: typeof window.chat;
+        $env: typeof window.chat & typeof window.chatHandlers;
     }
 }
 

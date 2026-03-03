@@ -30,4 +30,4 @@ window.Echo = new Echo({
     enabledTransports: ["ws"],
 });
 
-window.chat.roomInfo = console.log;
+window.chatHandlers = { roomInfo: console.log };
