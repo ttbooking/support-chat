@@ -1,6 +1,7 @@
 import { AxiosInstance } from "axios";
 import Echo from "laravel-echo";
 import en from "../locales/en.json";
+import Room from "@/models/Room";
 import type { WinBoxProps, WinBoxModel } from "@/types/winbox";
 
 declare global {
@@ -28,6 +29,7 @@ declare global {
                 light: Record<string, Record<string, string>>;
                 dark: Record<string, Record<string, string>>;
             };
+            roomInfo?: (room: Room) => void;
             open?: () => void;
         };
         axios: AxiosInstance;

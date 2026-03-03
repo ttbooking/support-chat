@@ -29,3 +29,5 @@ window.Echo = new Echo({
     forceTLS: false,
     enabledTransports: ["ws"],
 });
+
+window.chat.roomInfo = console.log;
