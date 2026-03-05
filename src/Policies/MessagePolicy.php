@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace TTBooking\SupportChat\Policies;
 
 use Illuminate\Auth\Access\Response;
-use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use TTBooking\SupportChat\Models\Message;
 use TTBooking\SupportChat\Models\Room;
+use TTBooking\SupportChat\SupportChat;
 
 class MessagePolicy
 {
@@ -19,7 +19,7 @@ class MessagePolicy
      */
     public function viewAny(Authenticatable&Model $user, Room $room): Response
     {
-        if ($user instanceof Authorizable && $user->can('viewForeignRooms')) {
+        if (SupportChat::canViewForeignRooms($user)) {
             return Response::allow();
         }
 
@@ -33,7 +33,7 @@ class MessagePolicy
      */
     public function view(Authenticatable&Model $user, Message $message): bool
     {
-        if ($user instanceof Authorizable && $user->can('viewForeignRooms')) {
+        if (SupportChat::canViewForeignRooms($user)) {
             return true;
         }
 

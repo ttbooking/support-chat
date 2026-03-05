@@ -24,7 +24,7 @@ class RoomChannel
      */
     public function join(Model $user, Room $room): JsonResource|false
     {
-        if ($room->users()->whereKey($user->getKey())->exists()) {
+        if ($room->users()->whereKey($user->getKey())->exists() || SupportChat::canViewForeignRooms($user)) {
             return $user->toResource(SupportChat::userResource());
         }
 

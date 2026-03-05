@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat\Models\Scopes;
 
-use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
+use TTBooking\SupportChat\SupportChat;
 
 class ParticipantScope implements Scope
 {
@@ -16,7 +16,7 @@ class ParticipantScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        if (! ($user = auth()->user()) || $user instanceof Authorizable && $user->can('viewForeignRooms')) {
+        if (! ($user = auth()->user()) || SupportChat::canViewForeignRooms($user)) {
             return;
         }
 

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace TTBooking\SupportChat;
 
+use Illuminate\Contracts\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\HtmlString;
@@ -28,6 +31,11 @@ class SupportChat
     {
         /** @var class-string<JsonResource> */
         return config('support-chat.user_resource', UserResource::class);
+    }
+
+    public static function canViewForeignRooms(Authenticatable|Model $user): bool
+    {
+        return $user instanceof Authorizable && $user->can('viewForeignRooms');
     }
 
     /**
