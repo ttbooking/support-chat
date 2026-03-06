@@ -1,14 +1,14 @@
 import { useRepo } from "pinia-orm";
 import RoomRepository from "@/repositories/RoomRepository";
 import MessageRepository from "@/repositories/MessageRepository";
-import Room from "@/models/Room";
 import type { Message, RoomUser } from "vue-advanced-chat";
+import type { Room as BaseRoom } from "@/types";
 
 export function useRoomChannel() {
     const roomRepo = useRepo(RoomRepository);
     const messageRepo = useRepo(MessageRepository);
 
-    const join = (room: Room) =>
+    const join = (room: BaseRoom) =>
         window.Echo.join(`support-chat.room.${room.roomId}`)
             .here((users: RoomUser[]) => roomRepo.setUsers(room.roomId, users))
             .joining((user: RoomUser) => roomRepo.joinUser(room.roomId, user))
@@ -25,7 +25,7 @@ export function useRoomChannel() {
             .listen(".reaction.left", messageRepo.reactionLeft)
             .listen(".reaction.removed", messageRepo.reactionRemoved);
 
-    const leave = (room: Room) => window.Echo.leaveChannel(`support-chat.room.${room.roomId}`);
+    const leave = (room: BaseRoom) => window.Echo.leaveChannel(`support-chat.room.${room.roomId}`);
 
     return { join, leave };
 }

@@ -33,7 +33,7 @@ class SupportChat
         return config('support-chat.user_resource', UserResource::class);
     }
 
-    public static function canViewForeignRooms(Authenticatable|Model $user): bool
+    public static function canViewForeignRooms(Authenticatable|Model|null $user): bool
     {
         return $user instanceof Authorizable && $user->can('viewForeignRooms');
     }
@@ -49,6 +49,9 @@ class SupportChat
             'userId' => (string) auth()->id(),
             'roomId' => $roomId,
             'filter' => $filter,
+            'permissions' => [
+                'viewForeignRooms' => static::canViewForeignRooms(auth()->user()),
+            ],
             'features' => (object) ($features + array_filter(config('support-chat.features', []), static fn (mixed $value) => ! is_null($value))),
             'styles' => [
                 'light' => (object) array_merge_recursive(array_filter(config('support-chat.styles.light', [])), $styles['light'] ?? []),
@@ -71,6 +74,9 @@ class SupportChat
         $scriptVariables = json_encode([
             'path' => config('support-chat.path'),
             'userId' => (string) auth()->id(),
+            'permissions' => [
+                'viewForeignRooms' => static::canViewForeignRooms(auth()->user()),
+            ],
             'windowDefaults' => config('support-chat.window_defaults', []),
             'features' => (object) ($features + array_filter(config('support-chat.features', []), static fn (mixed $value) => ! is_null($value))),
             'styles' => [

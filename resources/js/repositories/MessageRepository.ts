@@ -2,6 +2,7 @@ import { ref } from "vue";
 import { AxiosRepository } from "@pinia-orm/axios";
 import Message from "@/models/Message";
 import api from "@/api";
+import { useRoomChannel } from "@/composables";
 import type { Message as BaseMessage, MessageFile } from "vue-advanced-chat";
 import type {
     FetchMessagesArgs,
@@ -26,6 +27,7 @@ export default class MessageRepository extends AxiosRepository<Message> {
 
     fetch = async ({ room }: FetchMessagesArgs) => {
         this.room.value = room;
+        useRoomChannel().join(room);
         this.loaded.value = false;
         const response = await this.api().get(window.chat.path + `/api/rooms/${room.roomId}/messages`, {
             //dataTransformer: ({ data }) => data.data.map((message: BaseMessage) => ({ ...message, room })),

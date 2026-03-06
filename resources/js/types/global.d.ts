@@ -11,6 +11,9 @@ declare global {
             userId: string;
             filter?: string;
             roomId?: string;
+            permissions: {
+                viewForeignRooms: boolean;
+            };
             windowDefaults: Partial<WinBoxProps & WinBoxModel>;
             features: {
                 showSearch?: boolean;
