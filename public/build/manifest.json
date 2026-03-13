@@ -1,16 +1,25 @@
 {
-  "_advanced-chat-CT6x4KUD.js": {
-    "file": "assets/advanced-chat-CT6x4KUD.js",
+  "_advanced-chat-BvkVwfny.js": {
+    "file": "assets/advanced-chat-BvkVwfny.js",
     "name": "advanced-chat"
   },
-  "_vuetify-BagvFx2Q.js": {
-    "file": "assets/vuetify-BagvFx2Q.js",
+  "_rolldown-runtime-XQCOJYun.js": {
+    "file": "assets/rolldown-runtime-XQCOJYun.js",
+    "name": "rolldown-runtime"
+  },
+  "_vuetify-8qkQSl1E.css": {
+    "file": "assets/vuetify-8qkQSl1E.css",
+    "src": "_vuetify-8qkQSl1E.css"
+  },
+  "_vuetify-BBer-0Ms.js": {
+    "file": "assets/vuetify-BBer-0Ms.js",
     "name": "vuetify",
     "imports": [
-      "_advanced-chat-CT6x4KUD.js"
+      "_rolldown-runtime-XQCOJYun.js",
+      "_advanced-chat-BvkVwfny.js"
     ],
     "css": [
-      "assets/vuetify-CXZwcl8E.css"
+      "assets/vuetify-8qkQSl1E.css"
     ],
     "assets": [
       "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -18,10 +27,6 @@
       "assets/materialdesignicons-webfont-PXm3-2wK.woff",
       "assets/materialdesignicons-webfont-B7mPwVP_.ttf"
     ]
-  },
-  "_vuetify-CXZwcl8E.css": {
-    "file": "assets/vuetify-CXZwcl8E.css",
-    "src": "_vuetify-CXZwcl8E.css"
   },
   "node_modules/.pnpm/@mdi+font@7.4.47/node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
     "file": "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -44,23 +49,23 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-C9WrO5SI.js",
+    "file": "assets/app-9FnZ-wfw.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-BagvFx2Q.js",
-      "_advanced-chat-CT6x4KUD.js"
+      "_vuetify-BBer-0Ms.js",
+      "_advanced-chat-BvkVwfny.js"
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-DF_sBZK4.js",
+    "file": "assets/win-CRy3JaD_.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-BagvFx2Q.js",
-      "_advanced-chat-CT6x4KUD.js"
+      "_vuetify-BBer-0Ms.js",
+      "_advanced-chat-BvkVwfny.js"
     ],
     "assets": [
       "assets/favicon-DXKRda58.svg"
