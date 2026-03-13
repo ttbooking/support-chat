@@ -9,10 +9,14 @@ import path from "path";
 export default defineConfig({
     build: {
         chunkSizeWarningLimit: 600,
-        rollupOptions: {
+        rolldownOptions: {
             output: {
-                manualChunks: {
-                    "advanced-chat": ["vue-advanced-chat"],
+                manualChunks: (id) => {
+                    if (id.includes("vue-advanced-chat")) {
+                        return "advanced-chat";
+                    }
+
+                    return null;
                 },
             },
         },
@@ -40,9 +44,6 @@ export default defineConfig({
         }),
         vuetify({
             autoImport: true,
-            styles: {
-                configFile: "resources/css/settings.scss",
-            },
         }),
     ],
 });
