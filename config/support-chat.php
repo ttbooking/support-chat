@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use TTBooking\SupportChat\Http\Resources\UserResource;
+
 return [
 
     /*
@@ -32,8 +35,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'user_model' => App\Models\User::class,
-    'user_resource' => TTBooking\SupportChat\Http\Resources\UserResource::class,
+    'user_model' => User::class,
+    'user_resource' => UserResource::class,
     'user_name_key' => env('CHAT_USER_NAME_KEY', 'name'),
     'user_cred_key' => env('CHAT_USER_CRED_KEY', 'email'),
     'user_cred_seed' => env('CHAT_USER_CRED_SEED'),

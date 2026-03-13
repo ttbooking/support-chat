@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use TTBooking\SupportChat\Models\Participant;
 use TTBooking\SupportChat\Models\Room;
+use Workbench\Database\Factories\UserFactory;
 
 /**
  * @property int $id
@@ -27,7 +28,7 @@ use TTBooking\SupportChat\Models\Room;
  */
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Workbench\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
