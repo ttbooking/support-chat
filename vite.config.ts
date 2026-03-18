@@ -32,6 +32,7 @@ export default defineConfig({
         laravel({
             input: ["resources/js/app.ts", "resources/js/win.ts"],
             refresh: true,
+            //assets: "../images/**",
         }),
         tailwindcss(),
         vue({

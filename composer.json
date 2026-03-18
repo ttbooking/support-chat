@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^12.24",
+        "laravel/framework": "^12.24 || ^13.0",
         "ttbooking/laravel-nanoid": "^1.0",
         "ttbooking/vite-manager": "^1.2"
     },
@@ -27,7 +27,7 @@
         "laravel/pint": "^1.17",
         "laravel/reverb": "^1.0",
         "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^10.5",
+        "orchestra/testbench": "^10.5 || ^11.0",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-laravel": "^4.0"
     },
