@@ -1,25 +1,25 @@
 {
-  "_advanced-chat-BvkVwfny.js": {
-    "file": "assets/advanced-chat-BvkVwfny.js",
+  "_advanced-chat--FI6REdx.js": {
+    "file": "assets/advanced-chat--FI6REdx.js",
     "name": "advanced-chat"
   },
   "_rolldown-runtime-XQCOJYun.js": {
     "file": "assets/rolldown-runtime-XQCOJYun.js",
     "name": "rolldown-runtime"
   },
-  "_vuetify-Bj8H6YL7.css": {
-    "file": "assets/vuetify-Bj8H6YL7.css",
-    "src": "_vuetify-Bj8H6YL7.css"
+  "_vuetify-B1hNL5Rc.css": {
+    "file": "assets/vuetify-B1hNL5Rc.css",
+    "src": "_vuetify-B1hNL5Rc.css"
   },
-  "_vuetify-yNEtFWK7.js": {
-    "file": "assets/vuetify-yNEtFWK7.js",
+  "_vuetify-BBJULGyI.js": {
+    "file": "assets/vuetify-BBJULGyI.js",
     "name": "vuetify",
     "imports": [
       "_rolldown-runtime-XQCOJYun.js",
-      "_advanced-chat-BvkVwfny.js"
+      "_advanced-chat--FI6REdx.js"
     ],
     "css": [
-      "assets/vuetify-Bj8H6YL7.css"
+      "assets/vuetify-B1hNL5Rc.css"
     ],
     "assets": [
       "assets/materialdesignicons-webfont-CSr8KVlo.eot",
@@ -49,23 +49,23 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-ZjXI8ysz.js",
+    "file": "assets/app-BSoxljsC.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-yNEtFWK7.js",
-      "_advanced-chat-BvkVwfny.js"
+      "_vuetify-BBJULGyI.js",
+      "_advanced-chat--FI6REdx.js"
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-DS8edDB9.js",
+    "file": "assets/win-AjYU6OXy.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-yNEtFWK7.js",
-      "_advanced-chat-BvkVwfny.js"
+      "_vuetify-BBJULGyI.js",
+      "_advanced-chat--FI6REdx.js"
     ],
     "assets": [
       "assets/favicon-DXKRda58.svg"
