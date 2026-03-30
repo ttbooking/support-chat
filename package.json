@@ -12,7 +12,7 @@
         "@mdi/font": "^7.4.47",
         "@pinia-orm/axios": "^1.10.2",
         "@vueuse/core": "^14.2.1",
-        "axios": "^1.13.6",
+        "axios": "^1.14.0",
         "laravel-echo": "^2.3.1",
         "lodash": "^4.17.23",
         "nanoid": "^5.1.7",
@@ -20,10 +20,10 @@
         "pinia-orm": "^1.10.2",
         "string-to-color": "^2.2.2",
         "tailwindcss": "^4.2.2",
-        "vue": "^3.5.30",
+        "vue": "^3.5.31",
         "vue-advanced-chat": "^2.1.2",
         "vue-i18n": "^11.3.0",
-        "vuetify": "^4.0.3",
+        "vuetify": "^4.0.4",
         "winbox": "0.2.82"
     },
     "devDependencies": {
@@ -33,7 +33,7 @@
         "@types/lodash": "^4.17.24",
         "@types/node": "^24.12.0",
         "@types/winbox": "^0.2.6",
-        "@typescript-eslint/parser": "^8.57.1",
+        "@typescript-eslint/parser": "^8.57.2",
         "@vitejs/plugin-vue": "^6.0.5",
         "eslint": "^10.1.0",
         "eslint-config-prettier": "^10.1.8",
@@ -46,11 +46,11 @@
         "sass": "^1.98.0",
         "sass-loader": "^16.0.7",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.57.1",
-        "vite": "^8.0.1",
+        "typescript-eslint": "^8.57.2",
+        "vite": "^8.0.3",
         "vite-plugin-vuetify": "^2.1.3",
         "vue-eslint-parser": "^10.4.0",
         "vue-tsc": "^3.2.6"
     },
-    "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
+    "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
 }
