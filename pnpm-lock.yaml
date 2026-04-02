@@ -21,11 +21,11 @@ importers:
         specifier: ^1.14.0
         version: 1.14.0
       laravel-echo:
-        specifier: ^2.3.1
-        version: 2.3.1(pusher-js@8.4.3)(socket.io-client@4.8.3)
+        specifier: ^2.3.3
+        version: 2.3.3(pusher-js@8.5.0)(socket.io-client@4.8.3)
       lodash:
-        specifier: ^4.17.23
-        version: 4.17.23
+        specifier: ^4.18.1
+        version: 4.18.1
       nanoid:
         specifier: ^5.1.7
         version: 5.1.7
@@ -51,8 +51,8 @@ importers:
         specifier: ^11.3.0
         version: 11.3.0(vue@3.5.31(typescript@6.0.2))
       vuetify:
-        specifier: ^4.0.4
-        version: 4.0.4(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2))
+        specifier: ^4.0.5
+        version: 4.0.5(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2))
       winbox:
         specifier: 0.2.82
         version: 0.2.82
@@ -94,8 +94,8 @@ importers:
         specifier: ^17.4.0
         version: 17.4.0
       laravel-vite-plugin:
-        specifier: ^3.0.0
-        version: 3.0.0(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))
+        specifier: ^3.0.1
+        version: 3.0.1(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -103,8 +103,8 @@ importers:
         specifier: ^0.7.2
         version: 0.7.2(prettier@3.8.1)
       pusher-js:
-        specifier: ^8.4.3
-        version: 8.4.3
+        specifier: ^8.5.0
+        version: 8.5.0
       sass:
         specifier: ^1.98.0
         version: 1.98.0
@@ -122,7 +122,7 @@ importers:
         version: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3)
       vite-plugin-vuetify:
         specifier: ^2.1.3
-        version: 2.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.4)
+        version: 2.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.5)
       vue-eslint-parser:
         specifier: ^10.4.0
         version: 10.4.0(eslint@10.1.0(jiti@2.6.1))
@@ -1341,15 +1341,15 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  laravel-echo@2.3.1:
-    resolution: {integrity: sha512-o6oD1oR+XklU9TO7OPGeLh/G9SjcZm+YrpSdGkOaAJf5HpXwZKt+wGgnULvKl5I8xUuUY/AAvqR24+y8suwZTA==}
+  laravel-echo@2.3.3:
+    resolution: {integrity: sha512-Var2noA9is+ZF3wjfwxWNSRW2kQUDePjJbZGxR4baGfa//a+WtcVm1s8/yRqjvpw3SyAF1tPzFuki+838tq9mA==}
     engines: {node: '>=20'}
     peerDependencies:
       pusher-js: '*'
       socket.io-client: '*'
 
-  laravel-vite-plugin@3.0.0:
-    resolution: {integrity: sha512-eO6B/IPH448XNjyA5OmJsFAeJH3MeQGWodNMzejx44+rhV44cs0op05t4yku9ifaRnikDkSHLOLXszJL0tiW3w==}
+  laravel-vite-plugin@3.0.1:
+    resolution: {integrity: sha512-Bx8sVcLIaZT1d0eisABcmjQ1GZdJpaXcV66A8RhXGp9JgR3iL8jDnvakVDXuH87Tn5S9KNx3VOhmJZW1CSexOg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1446,8 +1446,8 @@ packages:
   lodash.words@4.2.0:
     resolution: {integrity: sha512-mXxqd8Yx9BGPij3lZKFSdOsjOTbL4krbCCp9slEozaN4EMppA2dFmK/f8HeohodprY6W0vOdiQ5WFgPaTI75xQ==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -1726,8 +1726,8 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  pusher-js@8.4.3:
-    resolution: {integrity: sha512-MYnVYhKxq2Oeg3HmTQxnKDj1oAZjqJCkEcYj8hYbH1Rw5pT0g8KtgOYVUKDRnyrPtwRvA9QR4wunwJW5xIbq0Q==}
+  pusher-js@8.5.0:
+    resolution: {integrity: sha512-V7uzGi9bqOOOyM/6IkJdpFyjGZj7llz1v0oWnYkZKcYLvbz6VcHVLmzKqkvegjuMumpfIEKGLmWHwFb39XFCpw==}
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -1987,8 +1987,8 @@ packages:
       typescript:
         optional: true
 
-  vuetify@4.0.4:
-    resolution: {integrity: sha512-sO2ux9RG0C1HKaP1HqDMro3+vbbmUJwzcKXuzaxQmUERAT/0FR0yfbwnj4PrMwWy1qc2WPJq01h4cr86FmNrFA==}
+  vuetify@4.0.5:
+    resolution: {integrity: sha512-pFysKOHuY3dROTVh9PdlhVz50ZR0E5/goY5ecTXc8F8tajUA2ee3xZ8Lqs1WtEw/X3w93wx/LogyjgaQCAL/Ig==}
     peerDependencies:
       typescript: '>=4.7'
       vite-plugin-vuetify: '>=2.1.0'
@@ -2730,11 +2730,11 @@ snapshots:
 
   '@vue/shared@3.5.31': {}
 
-  '@vuetify/loader-shared@2.1.2(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.4)':
+  '@vuetify/loader-shared@2.1.2(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.5)':
     dependencies:
       upath: 2.0.1
       vue: 3.5.31(typescript@6.0.2)
-      vuetify: 4.0.4(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2))
+      vuetify: 4.0.5(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2))
 
   '@vueuse/core@14.2.1(vue@3.5.31(typescript@6.0.2))':
     dependencies:
@@ -3157,12 +3157,12 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  laravel-echo@2.3.1(pusher-js@8.4.3)(socket.io-client@4.8.3):
+  laravel-echo@2.3.3(pusher-js@8.5.0)(socket.io-client@4.8.3):
     dependencies:
-      pusher-js: 8.4.3
+      pusher-js: 8.5.0
       socket.io-client: 4.8.3
 
-  laravel-vite-plugin@3.0.0(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3)):
+  laravel-vite-plugin@3.0.1(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3)):
     dependencies:
       picocolors: 1.1.1
       tinyglobby: 0.2.15
@@ -3233,7 +3233,7 @@ snapshots:
 
   lodash.words@4.2.0: {}
 
-  lodash@4.17.23: {}
+  lodash@4.18.1: {}
 
   magic-string@0.30.21:
     dependencies:
@@ -3537,7 +3537,7 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  pusher-js@8.4.3:
+  pusher-js@8.5.0:
     dependencies:
       tweetnacl: 1.0.3
 
@@ -3711,14 +3711,14 @@ snapshots:
       picocolors: 1.1.1
       picomatch: 2.3.2
 
-  vite-plugin-vuetify@2.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.4):
+  vite-plugin-vuetify@2.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.5):
     dependencies:
-      '@vuetify/loader-shared': 2.1.2(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.4)
+      '@vuetify/loader-shared': 2.1.2(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.5)
       debug: 4.4.3
       upath: 2.0.1
       vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3)
       vue: 3.5.31(typescript@6.0.2)
-      vuetify: 4.0.4(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2))
+      vuetify: 4.0.5(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -3789,12 +3789,12 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.2
 
-  vuetify@4.0.4(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2)):
+  vuetify@4.0.5(typescript@6.0.2)(vite-plugin-vuetify@2.1.3)(vue@3.5.31(typescript@6.0.2)):
     dependencies:
       vue: 3.5.31(typescript@6.0.2)
     optionalDependencies:
       typescript: 6.0.2
-      vite-plugin-vuetify: 2.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.4)
+      vite-plugin-vuetify: 2.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(sass@1.98.0)(yaml@2.8.3))(vue@3.5.31(typescript@6.0.2))(vuetify@4.0.5)
 
   webpack-virtual-modules@0.6.2: {}
 
