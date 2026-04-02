@@ -23,9 +23,6 @@ importers:
       laravel-echo:
         specifier: ^2.3.3
         version: 2.3.3(pusher-js@8.5.0)(socket.io-client@4.8.3)
-      lodash:
-        specifier: ^4.18.1
-        version: 4.18.1
       nanoid:
         specifier: ^5.1.7
         version: 5.1.7
@@ -1445,9 +1442,6 @@ packages:
 
   lodash.words@4.2.0:
     resolution: {integrity: sha512-mXxqd8Yx9BGPij3lZKFSdOsjOTbL4krbCCp9slEozaN4EMppA2dFmK/f8HeohodprY6W0vOdiQ5WFgPaTI75xQ==}
-
-  lodash@4.18.1:
-    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -3232,8 +3226,6 @@ snapshots:
   lodash.trimstart@4.5.1: {}
 
   lodash.words@4.2.0: {}
-
-  lodash@4.18.1: {}
 
   magic-string@0.30.21:
     dependencies:
