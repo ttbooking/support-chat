@@ -4,9 +4,9 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <link rel="shortcut icon" href="{{ Vite::app('support-chat')->asset('resources/images/favicon.svg') }}" />
+        <link rel="shortcut icon" href="{{ Vite::app('advanced-chat')->asset('resources/images/favicon.svg') }}" />
 
-        <title>Support Chat - {{ config('app.name', 'Laravel') }}</title>
+        <title>Advanced Chat - {{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net" />

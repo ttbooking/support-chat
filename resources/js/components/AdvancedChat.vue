@@ -132,7 +132,7 @@ onBeforeMount(async () => {
         await roomRepo.fetch();
     }
 
-    window.Echo.private(`support-chat.user.${window.chat.userId}`)
+    window.Echo.private(`advanced-chat.user.${window.chat.userId}`)
         .listenToAll((event: string, data: unknown) => console.log(`user.${window.chat.userId}`, event, data))
         .error((error: unknown) => console.error(error))
         .listen(".user.invited", (room: BaseRoom) => roomRepo.save(room))
@@ -140,7 +140,7 @@ onBeforeMount(async () => {
 });
 
 onBeforeUnmount(() => {
-    window.Echo.leaveChannel(`support-chat.user.${window.chat.userId}`);
+    window.Echo.leaveChannel(`advanced-chat.user.${window.chat.userId}`);
 
     roomRepo.destroy(rooms.value.map((room) => room.roomId));
 });
