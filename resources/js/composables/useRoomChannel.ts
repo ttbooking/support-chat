@@ -9,7 +9,7 @@ export function useRoomChannel() {
     const messageRepo = useRepo(MessageRepository);
 
     const join = (room: BaseRoom) =>
-        window.Echo.join(`advanced-chat.room.${room.roomId}`)
+        window.Echo.join(`support-chat.room.${room.roomId}`)
             .here((users: RoomUser[]) => roomRepo.setUsers(room.roomId, users))
             .joining((user: RoomUser) => roomRepo.joinUser(room.roomId, user))
             .leaving((user: RoomUser) => roomRepo.leaveUser(room.roomId, user))
@@ -25,7 +25,7 @@ export function useRoomChannel() {
             .listen(".reaction.left", messageRepo.reactionLeft)
             .listen(".reaction.removed", messageRepo.reactionRemoved);
 
-    const leave = (room: BaseRoom) => window.Echo.leaveChannel(`advanced-chat.room.${room.roomId}`);
+    const leave = (room: BaseRoom) => window.Echo.leaveChannel(`support-chat.room.${room.roomId}`);
 
     return { join, leave };
 }

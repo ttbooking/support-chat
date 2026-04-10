@@ -23,7 +23,7 @@ export function useWindowManager(windowDefaults: Partial<WinBoxProps & WinBoxMod
         ...windowDefaults,
     };
 
-    const windows = useStorage<Map<string, ShallowRef<WinBoxModel>>>("advanced-chat", new Map(), storage, {
+    const windows = useStorage<Map<string, ShallowRef<WinBoxModel>>>("support-chat", new Map(), storage, {
         listenToStorageChanges: true,
         serializer: {
             read: (raw) =>
