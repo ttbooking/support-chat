@@ -1,0 +1,2 @@
+import{a as e,c as t,d as n,h as r,i,n as a,o,r as s,t as c,v as l}from"./vuetify-CZ5mlKpR.js";var u=r({__name:`App`,setup(t,{expose:n}){n();let r={AdvancedChat:e};return Object.defineProperty(r,`__isScriptSetup`,{enumerable:!1,value:!0}),r}});function d(e,t,r,i,a,o){return l(),n(i.AdvancedChat,{"room-id":e.$env.roomId,height:960},null,8,[`room-id`])}t(o(u,[[`render`,d],[`__file`,`App.vue`]])).use(i).use(s).use(a).use(c).mount(`#standalone-chat`);
+//# sourceMappingURL=app-DJwrFnUl.js.map
