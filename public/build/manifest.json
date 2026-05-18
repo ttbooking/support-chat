@@ -7,8 +7,8 @@
     "file": "assets/rolldown-runtime-CpWojdLp.js",
     "name": "rolldown-runtime"
   },
-  "_vuetify-CcxjdbwM.js": {
-    "file": "assets/vuetify-CcxjdbwM.js",
+  "_vuetify-B7pYRWQS.js": {
+    "file": "assets/vuetify-B7pYRWQS.js",
     "name": "vuetify",
     "imports": [
       "_rolldown-runtime-CpWojdLp.js",
@@ -49,21 +49,21 @@
     "src": "resources/images/favicon.svg"
   },
   "resources/js/app.ts": {
-    "file": "assets/app-DPqjHaZy.js",
+    "file": "assets/app-BDa5DjuX.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-CcxjdbwM.js"
+      "_vuetify-B7pYRWQS.js"
     ]
   },
   "resources/js/win.ts": {
-    "file": "assets/win-CsBOa5g8.js",
+    "file": "assets/win-uLn5qQN5.js",
     "name": "win",
     "src": "resources/js/win.ts",
     "isEntry": true,
     "imports": [
-      "_vuetify-CcxjdbwM.js"
+      "_vuetify-B7pYRWQS.js"
     ],
     "assets": [
       "assets/favicon-DXKRda58.svg"
